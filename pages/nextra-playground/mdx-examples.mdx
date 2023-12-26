@@ -1,0 +1,76 @@
+
+# MDX Examples
+
+## Code extensions
+
+```` 
+```js filename="demo.js" {3} copy
+let a = 1;
+
+console.log(a);
+```
+````
+
+Remarked line 3. Top with file name.
+
+```js filename="demo.js" {3} copy
+let a = 1;
+
+console.log(a);
+```
+
+## Component
+
+This is the actual code:
+
+```js
+import { useState } from 'react'
+
+{/* Import CSS modules */}
+import styles from '../..//components/counters.module.css'
+
+export const Counter = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)} className={styles.counter}>Clicked {count} times</button>
+    </div>
+  );
+};
+
+<Counter/>
+```
+
+And this the result:
+
+import { useState } from 'react'
+
+{/* Import CSS modules */}
+import styles from '../..//components/counters.module.css'
+
+export const Counter = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)} className={styles.counter}>Clicked {count} times</button>
+    </div>
+  );
+};
+
+<Counter/>
+
+## External Component
+
+This is the actual code:
+
+```js
+import Counters from '../../components/counters'
+
+<Counters />
+```
+
+And this is the result:
+
+import Counters from '../../components/counters'
+
+<Counters />

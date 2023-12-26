@@ -1,8 +1,9 @@
 {
   "index": "Introduction",
-  "another": "Another Page",
-  "labs": "Labs (A Folder)",
-  "clases": "Classes (A Folder)",
+  "clases": "Classes",
+  "labs": "Labs",
+  "topics": "Topics",
+  "nextra-playground": "Learning Nextra SSG",
   "about": {
     "title": "About",
     "type": "page"

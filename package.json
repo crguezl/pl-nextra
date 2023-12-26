@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "save": "git add . && git commit -m 'Update' && git push -u crguezl main; git push -u origin main"
+    "save": "git add . && git commit -m 'Update' && git push -u crguezl main; git push -u origin main",
+    "deploy": "next build && npm run save"
   },
   "engines": {
     "node": ">=18.x"
