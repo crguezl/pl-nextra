@@ -1,6 +1,6 @@
 {
   "name": "pl-nextra",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "PL notes in Nextra",
   "scripts": {
     "dev": "next dev",
@@ -9,7 +9,7 @@
     "save": "git add . && git commit -m 'Update' && git push -u crguezl main; git push -u origin main"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=18.x"
   },
   "repository": {
     "type": "git",
