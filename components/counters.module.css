@@ -4,3 +4,16 @@
   padding: 2px 6px;
   margin: 12px 0 0;
 }
+
+.snowfall {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.snowfall-bar {
+  flex-basis: 0;
+  flex-grow: 1;
+  margin: calc(0.125 * (1em + 1ex));
+  background-color: var(--fg);
+}

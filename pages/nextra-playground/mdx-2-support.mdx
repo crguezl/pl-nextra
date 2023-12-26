@@ -1,0 +1,79 @@
+## Reference
+
+We are following the tutorial:
+
+[Nextra 2 – Next.js Static Site Generator](https://the-guild.dev/blog/nextra-2). Tuesday, Jan 24th 2023
+by Dimitri POSTOLOV and Shu Ding
+
+## MDX 2.0
+
+Migration to [MDX 2](https://mdxjs.com/blog/v2) comes with improved performance, supporting any JSX runtime and JavaScript expression inside your markdown pages.
+
+The following code:
+
+```jsx
+import Hero from "../../components/hero"
+ 
+<Hero/>
+ 
+Current year - {new Date().getFullYear()}
+
+🧑‍💻 JavaScript expressions {2 * Math.PI}
+```
+
+Looks like:
+
+___
+import Hero from "../../components/hero"
+ 
+<Hero/>
+ 
+Current year - {new Date().getFullYear()}
+
+🧑‍💻 JavaScript expressions {2 * Math.PI} 
+
+___
+
+and the following code:
+
+```jsx
+import {Chart} from '../../components/snowfall.jsx'
+export const year = 2023
+
+### Last year’s snowfall
+
+In {year}, the snowfall was above average.
+It was followed by a warm spring which caused
+flood conditions in many of the nearby rivers.
+
+<Chart year={year} color="#fcb32c" />
+```
+
+Is converted into:
+
+import {Chart} from '../../components/snowfall.jsx'
+export const year = 2023
+
+### Last year’s snowfall
+
+In {year}, the snowfall was above average.
+It was followed by a warm spring which caused
+flood conditions in many of the nearby rivers.
+
+<Chart year={year} color="#fcb32c" />
+
+## Markdown Import
+
+The following mdx code:
+
+```mdx
+import TaskList from '../includes/task-list.mdx'
+ 
+<TaskList />
+```
+
+Inserts the markdowm file in `'../includes/task-list.mdx'` into the page:
+
+import TaskList from '../includes/task-list.mdx'
+ 
+<TaskList />
