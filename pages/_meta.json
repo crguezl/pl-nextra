@@ -1,15 +1,22 @@
 {
   "index": "Introduction",
   "another": "Another Page",
-  "advanced": "Advanced (A Folder)",
+  "labs": "Labs (A Folder)",
+  "clases": "Classes (A Folder)",
   "about": {
     "title": "About",
     "type": "page"
   },
   "contact": {
-    "title": "Contact ↗",
+    "title": "Tutoring schedule ↗",
     "type": "page",
-    "href": "https://twitter.com/shuding_",
+    "href": "https://www.ull.es/apps/guias/guias/view_guide_course/2324/835941105/3/",
+    "newWindow": true
+  },
+  "campus": {
+    "title": "Campus virtual ↗",
+    "type": "page",
+    "href": "https://campusingenieriaytecnologia2324.ull.es/course/view.php?id=2324090147",
     "newWindow": true
   }
 }
