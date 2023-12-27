@@ -17,3 +17,35 @@
   margin: calc(0.125 * (1em + 1ex));
   background-color: var(--fg);
 }
+
+.myList {
+  margin: 0;
+  padding: 0;
+  list-style: decimal;
+  justify-content: left;
+}
+
+.link {
+  color: blue;
+}
+
+/* unvisited link */
+.link:link {
+  color: blue;
+}
+
+/* visited link */
+.link:visited {
+  color: red;
+}
+
+/* mouse over link */
+.link:hover {
+  color: rgb(227, 87, 157);
+  text-decoration: underline;
+}
+
+/* selected link */
+.link:active {
+  color: rgb(97, 173, 203);
+}
