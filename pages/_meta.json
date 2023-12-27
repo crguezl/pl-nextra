@@ -19,5 +19,17 @@
     "type": "page",
     "href": "https://campusingenieriaytecnologia2324.ull.es/course/view.php?id=2324090147",
     "newWindow": true
+  },
+  "vercel": {
+    "title": "Vercel ↗",
+    "type": "page",
+    "href": "https://ull-pl.vercel.app/",
+    "newWindow": true
+  },
+  "netlify": {
+    "title": "Netlify ↗",
+    "type": "page",
+    "href": "https://ull-pl.netlify.app/",
+    "newWindow": true
   }
 }

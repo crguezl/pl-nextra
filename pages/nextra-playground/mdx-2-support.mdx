@@ -79,9 +79,41 @@ import TaskList from '../includes/task-list.mdx'
  
 <TaskList />
 
+## Youtube component
+
+```jsx
+import Youtube from '../../components/youtube';
+
+<Youtube id="a_2vXCeW21I" title="Arggg" />
+```
+
+import Youtube from '../../components/youtube';
+
+<Youtube id="a_2vXCeW21I" title="Arggg" />
+
 ## Support Next.js 13
 
 Nextra 2 comes with support for the latest Next.js 13 version and also up to Next.js 9!
 
 ## Remote MDX!!
+
+## Bleed
+
+See [Bleed example](/nextra-playground/bleed)
+
+## Iframe example: Youtube video
+
+export const YourVideoID = "a_2vXCeW21I"
+
+{YourVideoID}
+
+<iframe 
+width="560" 
+height="315" 
+src="https://www.youtube.com/embed/a_2vXCeW21I" 
+title="YouTube video player" 
+frameBorder="0" 
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+allowFullScreen>
+</iframe>
 

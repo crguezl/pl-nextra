@@ -22,10 +22,10 @@ const data = [6, 5, 2, 4.5, 1.5, 2.5, 2, 2.5, 1.5, 2.5, 3.5, 7]
 export function Chart(props) {
   return (
     <div className={styles.snowfall}>
-      {data.map(function (d) {
+      {data.map(function (d,i) {
         return (
           <div
-            key={d}
+            key={i}
             className={styles["snowfall-bar"]}
             style={{
               backgroundColor: props.color,
