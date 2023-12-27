@@ -9,7 +9,7 @@ export function CollectionPage({ path }) {
     getPagesUnderRoute(path),
     locale, defaultLocale
   ).map(page => {
-      // console.log(page.frontMatter?.title)
+      console.log(page.frontMatter?.title)
       return (
         <li key={page.route}>
           <Link href={page.route}>{page.meta.title || page.frontMatter?.title || page.name}</Link>
