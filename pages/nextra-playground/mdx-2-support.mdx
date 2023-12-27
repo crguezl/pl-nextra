@@ -1,3 +1,9 @@
+---
+title: MDX 2 Support
+description: Casiano's research notes on Nextra
+password: 42
+---
+
 ## Reference
 
 We are following tutorials:
@@ -79,6 +85,19 @@ import TaskList from '../includes/task-list.mdx'
  
 <TaskList />
 
+## frontmatter
+
+import { useConfig } from 'nextra-theme-docs'
+
+export const getFrontMatter = () => {
+    return useConfig().frontMatter
+}
+
+- The frontmatter **title** is: **{getFrontMatter().title}**
+- The frontmatter **description** is: **{getFrontMatter().description}**
+- The frontmatter **password** is: **{getFrontMatter().password}**
+
+  
 ## Youtube component
 
 ```jsx
