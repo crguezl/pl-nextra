@@ -5,42 +5,63 @@
   "topics": "Topics",
   "schedules": "Schedules",
   "nextra-playground": "Learning Nextra SSG",
-  "Guía": {
-    "title": "Guía Docente ↗",
-    "type": "page",
-    "href": "https://www.ull.es/apps/guias/guias/view_guide/36785/",
-    "newWindow": true
+  "ull": {
+    "title": "ULL",
+    "type": "menu",
+    "items": {
+      "Guía": {
+        "title": "Guía Docente ↗",
+        "href": "https://www.ull.es/apps/guias/guias/view_guide/36785/",
+        "newWindow": true
+      },
+      "contact": {
+        "title": "Teacher ↗",
+        "href": "https://www.ull.es/apps/guias/guias/view_teacher_niu/1049/crguezl/",
+        "newWindow": true
+      },
+      "campus": {
+        "title": "Campus virtual ↗",
+        "href": "https://campusingenieriaytecnologia2324.ull.es/course/view.php?id=2324090147",
+        "newWindow": true
+      }
+    }
   },
-  "contact": {
-    "title": "Teacher ↗",
-    "type": "page",
-    "href": "https://www.ull.es/apps/guias/guias/view_teacher_niu/1049/crguezl/",
-    "newWindow": true
+  "github": {
+    "title": "GitHub",
+    "type": "menu",
+    "items": {      
+      "classroom": {
+        "title": "GitHub Classroom ↗",
+        "href": "https://classroom.github.com/classrooms/153934884-ull-esit-pl-2324",
+        "newWindow": true
+       },
+       "template-org": {
+        "title": "ULL-ESIT-PL ↗",
+        "href": "https://github.com/ULL-ESIT-PL",
+        "newWindow": true
+       },
+       "teams": {
+        "title": "Teams ↗",
+        "href": "https://github.com/orgs/ULL-ESIT-PL-2324/teams",
+        "newWindow": true
+       }
+    }
   },
-  "campus": {
-    "title": "Campus virtual ↗",
-    "type": "page",
-    "href": "https://campusingenieriaytecnologia2324.ull.es/course/view.php?id=2324090147",
-    "newWindow": true
-  },
-  "classroom": {
-    "title": "GitHub Classroom ↗",
-    "type": "page",
-    "href": "https://classroom.github.com/classrooms/153934884-ull-esit-pl-2324",
-    "newWindow": true
-  },
-  "vercel": {
-    "title": "Vercel ↗",
-    "type": "page",
-    "href": "https://ull-pl.vercel.app/",
-    "newWindow": true
-  },
-  "netlify": {
-    "title": "Netlify ↗",
-    "type": "page",
-    "href": "https://ull-pl.netlify.app/",
-    "newWindow": true,
-    "display": "normal"
+  "deploys": {
+    "title": "Deploys",
+    "type": "menu",
+    "items": {
+      "vercel": {
+        "title": "Vercel ↗",
+        "href": "https://ull-pl.vercel.app/",
+        "newWindow": true
+      },
+      "netlify": {
+        "title": "Netlify ↗",
+        "href": "https://ull-pl.netlify.app/",
+        "newWindow": true
+      }
+    }
   },
   "pl-includes": {
     "title": "____",
