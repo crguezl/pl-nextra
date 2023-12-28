@@ -8,7 +8,7 @@ develop: false
 sidebar: auto
 ---
 
-## Horario
+## Schedules
 
 ### Google Calendar
 
@@ -21,23 +21,24 @@ frameborder="0"
 scrolling="yes">
 </iframe>
 
-### Horarios en la Escuela
+### School Schedules
 
 [![/images/horarios-tercero-escuela.png](/images/horarios-tercero-escuela.png)](https://www.ull.es/grados/ingenieria-informatica/informacion-academica/horarios-y-calendario-examenes/#tercero)
 
-## Calendario Académico
+## Academic Calendar
 
-[![Calendario Académico](https://www.ull.es/estudios-docencia/wp-content/uploads/sites/7/2023/12/Calendario-Academico-23_24_pages-to-jpg-0001.jpg)](https://www.ull.es/estudios-docencia/calendario-academico/)
+[![Academic Calendar](https://www.ull.es/estudios-docencia/wp-content/uploads/sites/7/2023/12/Calendario-Academico-23_24_pages-to-jpg-0001.jpg)](https://www.ull.es/estudios-docencia/calendario-academico/)
 
-### Distribución de las Clases Prácticas
+### Labs Schedule
 
 * Las clases prácticas serán impartidas por los profesores [Israel López Plata](https://www.ull.es/apps/guias/guias/view_teacher_niu/1049/ilopezpl/) y [Casiano Rodríguez León](https://www.ull.es/apps/guias/guias/view_teacher_niu/1049/crguezl/).
 
-## Exámenes
+## Exam Dates
 
 [![](/images/calendarios-examenes.png)](https://www.ull.es/grados/ingenieria-informatica/informacion-academica/horarios-y-calendario-examenes/) 
 
 
-- 20 de Mayo de 2024, 9:00, aula 1.2
-- 13 de Junio de 2024, 9:00, aula 1.1
-- 2 de Julio de 2024, 9:30, aula 1.1
+- March 11, 2024, 8:30, proposed date for the training exam
+- May 20, 2024, 9:00, classroom 1.2
+- June 13, 2024, 9:00, classroom 1.1
+- July 2, 2024, 9:30, classroom 1.1

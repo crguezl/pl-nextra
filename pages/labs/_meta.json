@@ -1,4 +1,7 @@
 {
-    "arith2js": "Translating Arithmetic Expressions to JavaScript",
-    "hello-compiler": "Hello Compiler"
+    "hello-compiler": "Hello Compiler",
+    "arith2js": {
+      "title": "Translating Arithmetic Expressions to JavaScript",
+      "display": "hidden"
+    }
 }

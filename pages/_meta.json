@@ -28,7 +28,6 @@
     "href": "https://classroom.github.com/classrooms/153934884-ull-esit-pl-2324",
     "newWindow": true
   },
-
   "vercel": {
     "title": "Vercel ↗",
     "type": "page",
@@ -39,6 +38,14 @@
     "title": "Netlify ↗",
     "type": "page",
     "href": "https://ull-pl.netlify.app/",
-    "newWindow": true
+    "newWindow": true,
+    "display": "hidden"
+  },
+  "schedules": {
+    "title": "Schedules"
+  },
+  "pl-includes": {
+    "title": "____",
+    "display": "hidden"
   }
 }
