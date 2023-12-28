@@ -1,0 +1,127 @@
+import { Callout } from 'nextra-theme-docs'
+
+# Using Components in mdx
+
+You can find the code for the components used as examples in this chapter at file [ULL-ESIT-PL-2324/pl-nextra/tree/main/components](https://github.com/ULL-ESIT-PL-2324/pl-nextra/tree/main/components)
+
+## Counter Component internal to the mdx file
+
+This is the actual code inserted in the mdx file:
+
+```js
+import { useState } from 'react'
+
+{/* Import CSS modules */}
+import styles from '../..//components/counters.module.css'
+
+export const Counter = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)} className={styles.counter}>Clicked {count} times</button>
+    </div>
+  );
+};
+
+<Counter/>
+```
+
+And this the result:
+
+import { useState } from 'react'
+
+{/* Import CSS modules */}
+import styles from '../..//components/counters.module.css'
+
+export const Counter = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)} className={styles.counter}>Clicked {count} times</button>
+    </div>
+  );
+};
+
+<Counter/>
+
+## External Counter Component
+
+This is the actual code:
+
+```js
+import Counters from '../../components/counters'
+
+<Counters />
+```
+
+We import the component from `../../components/counters` and insert it in the mdx file.
+This is the result:
+
+<Callout>
+import Counters from '../../components/counters'
+
+<Counters />
+</Callout>
+
+## Hero component example
+
+Migration to [MDX 2](https://mdxjs.com/blog/v2) comes with improved performance, supporting any JSX runtime and JavaScript expression inside your markdown pages.
+
+The following code:
+
+```jsx
+import Hero from "../../components/hero"
+ 
+<Hero/>
+```
+
+Looks like:
+
+<Callout>
+import Hero from "../../components/hero"
+ 
+<Hero/>
+
+</Callout>
+
+## Youtube component
+
+```jsx
+import Youtube from '../../components/youtube';
+
+<Youtube id="a_2vXCeW21I" title="Arggg" />
+```
+
+import Youtube from '../../components/youtube';
+
+<Youtube id="a_2vXCeW21I" title="Arggg" />
+
+## Snowfall component example
+
+The following code:
+
+```jsx
+import {Chart} from '../../components/snowfall.jsx'
+export const year = 2023
+
+### Last year’s snowfall
+
+In {year}, the snowfall was above average.
+It was followed by a warm spring which caused
+flood conditions in many of the nearby rivers.
+
+<Chart year={year} color="#fcb32c" />
+```
+
+Is converted into:
+
+import {Chart} from '../../components/snowfall.jsx'
+export const year = 2023
+
+### Last year’s snowfall
+
+In {year}, the snowfall was above average.
+It was followed by a warm spring which caused
+flood conditions in many of the nearby rivers.
+
+<Chart year={year} color="#fcb32c" />

@@ -1,6 +1,6 @@
 ---
 title: Calendarios, Horarios y Exámenes
-permalink: /horarios
+permalink: /schedules
 testVar: "https://www.google.com"
 msg:  "<a href=\"https://www.google.com\">hello</a>"
 google: "https://www.google.com"

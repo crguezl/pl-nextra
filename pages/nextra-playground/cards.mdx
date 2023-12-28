@@ -1,0 +1,64 @@
+# Cards
+
+import { Callout } from 'nextra-theme-docs'
+
+The following code:
+
+```jsx
+import { Cards, Card } from 'nextra/components'
+import { CardsIcon, OneIcon, WarningIcon } from '../../components/icons'
+
+<Cards>
+  <Card icon={<WarningIcon />} title="Callout" href="https://nextra.site/docs/guide/built-ins/callout" />
+  <Card icon={<CardsIcon />} title="Tabs" href="https://nextra.site/docs/guide/built-ins/tabs" />
+  <Card icon={<OneIcon />} title="Steps" href="https://nextra.site/docs/guide/built-ins/steps" />
+</Cards>
+```
+
+looks like this:
+
+
+import { Cards, Card } from 'nextra/components'
+import { CardsIcon, OneIcon, WarningIcon } from '../../components/icons'
+import Image from 'next/image'
+
+<Cards>
+  <Card 
+    icon={<WarningIcon />} 
+    title="Callout" 
+    href="https://nextra.site/docs/guide/built-ins/callout" />
+  <Card 
+    icon={<CardsIcon />} 
+    title="Tabs" 
+    href="https://nextra.site/docs/guide/built-ins/tabs" 
+    image="true" />
+  <Card 
+    icon={<OneIcon/>} 
+    title="Steps" 
+    href="https://nextra.site/docs/guide/built-ins/steps" 
+    image="true"
+    arrow="true" />
+   
+</Cards>
+
+
+Here is the declaration of the `Cards` component at [shuding/nextra/packages/nextra/src/components/cards.tsx](https://github.com/shuding/nextra/blob/main/packages/nextra/src/components/cards.tsx):
+
+```ts
+export function Card({
+  children,
+  title,
+  icon,
+  image,
+  arrow,
+  href,
+  ...props
+}: {
+  children: ReactNode
+  title: string
+  icon: ReactNode
+  image?: boolean
+  arrow?: boolean
+  href: string
+}) 
+```

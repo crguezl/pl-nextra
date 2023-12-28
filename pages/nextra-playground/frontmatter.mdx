@@ -1,0 +1,46 @@
+---
+title: "Satori"
+description: "Satori (悟り) is a Japanese Buddhist term for awakening, comprehension, understanding"
+password: "Irotas"
+---
+import { Callout } from 'nextra-theme-docs'
+
+# frontmatter
+
+Given the following frontmatter:
+
+```yml
+---
+title: "Satori"
+description: "Satori (悟り) is a Japanese Buddhist term for awakening, comprehension, understanding"
+password: "Irotas"
+---
+```
+
+and the following code:
+
+```js 
+import { useConfig } from 'nextra-theme-docs'
+
+export const getFrontMatter = () => {
+    return useConfig().frontMatter
+}
+
+- The frontmatter **title** is: **{getFrontMatter().title}**
+- The frontmatter **description** is: **{getFrontMatter().description}**
+- The frontmatter **password** is: **{getFrontMatter().password}**
+```
+
+the rendering becomes:
+
+import { useConfig } from 'nextra-theme-docs'
+
+export const getFrontMatter = () => {
+    return useConfig().frontMatter
+}
+
+<Callout>
+- The frontmatter **title** is: **{getFrontMatter().title}**
+- The frontmatter **description** is: **{getFrontMatter().description}**
+- The frontmatter **password** is: **{getFrontMatter().password}**
+</Callout>

@@ -1,0 +1,48 @@
+import { Callout } from 'nextra/components'
+
+## The Callout Component
+
+The Callout component is a simple component that can be used to highlight
+important information. See [Documentation>Guide>Built-ins>Callout](https://nextra.site/docs/guide/built-ins/callout):
+
+```mdx
+import { Callout } from 'nextra/components'
+
+<Callout type="info" emoji="ℹ️">
+  More about translators can be found
+  [here](/labs/arith2js).
+</Callout>
+```
+
+<Callout type="info" emoji="ℹ️">
+  More about translators can be found
+  [here](/labs/arith2js).
+</Callout>
+
+## Example
+
+```
+<Callout type="error" emoji="️🎓">
+  Any `.md` or `.mdx` file will turn into a doc page and be displayed in
+  sidebar. You can also create a `meta.json` file to customize the page order
+  and title. <br /> Check the source code: https://github.com/shuding/nextra for
+  more information.
+</Callout>
+
+<Callout type="warning">
+You can also use [`<style jsx>`](https://nextjs.org/docs/basic-features/built-in-css-support#css-in-js) to style elements inside `theme.config.js`.
+</Callout>
+```
+Becomes:
+
+<Callout type="error" emoji="️🎓">
+  Any `.md` or `.mdx` file will turn into a doc page and be displayed in
+  sidebar. You can also create a `meta.json` file to customize the page order
+  and title. <br /> Check the source code: https://github.com/shuding/nextra for
+  more information.
+</Callout>
+
+<Callout type="warning">
+You can also use [`<style jsx>`](https://nextjs.org/docs/basic-features/built-in-css-support#css-in-js) to style elements inside `theme.config.js`.
+</Callout>
+

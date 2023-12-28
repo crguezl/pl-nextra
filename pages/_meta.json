@@ -3,6 +3,7 @@
   "clases": "Classes",
   "labs": "Labs",
   "topics": "Topics",
+  "schedules": "Schedules",
   "nextra-playground": "Learning Nextra SSG",
   "Guía": {
     "title": "Guía Docente ↗",
@@ -40,9 +41,6 @@
     "href": "https://ull-pl.netlify.app/",
     "newWindow": true,
     "display": "normal"
-  },
-  "schedules": {
-    "title": "Schedules"
   },
   "pl-includes": {
     "title": "____",
