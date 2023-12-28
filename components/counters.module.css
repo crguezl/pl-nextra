@@ -19,10 +19,11 @@
 }
 
 .myList {
-  margin: 0;
+  margin: 1em;
   padding: 0;
   list-style: decimal;
   justify-content: left;
+  
 }
 
 .link {

@@ -17,7 +17,7 @@ const Hero = () => {
     return (
         <div>
             <h2>What you'll learn</h2>
-            <ul>
+            <ul className={styles.myList}>
                 {outcomes.map((i) => (
                     <li key={i}>{i}</li>
                 ))}

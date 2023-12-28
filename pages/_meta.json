@@ -4,14 +4,16 @@
   "labs": "Labs",
   "topics": "Topics",
   "nextra-playground": "Learning Nextra SSG",
-  "about": {
-    "title": "About",
-    "type": "page"
+  "Guía": {
+    "title": "Guía Docente ↗",
+    "type": "page",
+    "href": "https://www.ull.es/apps/guias/guias/view_guide/36785/",
+    "newWindow": true
   },
   "contact": {
-    "title": "Tutoring schedule ↗",
+    "title": "Teacher ↗",
     "type": "page",
-    "href": "https://www.ull.es/apps/guias/guias/view_guide_course/2324/835941105/3/",
+    "href": "https://www.ull.es/apps/guias/guias/view_teacher_niu/1049/crguezl/",
     "newWindow": true
   },
   "campus": {
@@ -20,6 +22,13 @@
     "href": "https://campusingenieriaytecnologia2324.ull.es/course/view.php?id=2324090147",
     "newWindow": true
   },
+  "classroom": {
+    "title": "GitHub Classroom ↗",
+    "type": "page",
+    "href": "https://classroom.github.com/classrooms/153934884-ull-esit-pl-2324",
+    "newWindow": true
+  },
+
   "vercel": {
     "title": "Vercel ↗",
     "type": "page",

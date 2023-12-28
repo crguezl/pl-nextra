@@ -1,0 +1,43 @@
+---
+title: Calendarios, Horarios y Exámenes
+permalink: /horarios
+testVar: "https://www.google.com"
+msg:  "<a href=\"https://www.google.com\">hello</a>"
+google: "https://www.google.com"
+develop: false
+sidebar: auto
+---
+
+## Horario
+
+### Google Calendar
+
+<iframe 
+src="https://calendar.google.com/calendar/b/2/embed?mode=WEEK&amp;height=500&amp;wkst=2&amp;hl=es&amp;bgcolor=%23cc33cc&amp;src=ull.edu.es_8hcqtfr5u2h3o1v2smnmcqqu50%40group.calendar.google.com&amp;color=%238C500B&amp;ctz=Atlantic%2FCanary" 
+style="border-width:0" 
+width="600" 
+height="500" 
+frameborder="0" 
+scrolling="yes">
+</iframe>
+
+### Horarios en la Escuela
+
+[![/images/horarios-tercero-escuela.png](/images/horarios-tercero-escuela.png)](https://www.ull.es/grados/ingenieria-informatica/informacion-academica/horarios-y-calendario-examenes/#tercero)
+
+## Calendario Académico
+
+[![Calendario Académico](https://www.ull.es/estudios-docencia/wp-content/uploads/sites/7/2023/12/Calendario-Academico-23_24_pages-to-jpg-0001.jpg)](https://www.ull.es/estudios-docencia/calendario-academico/)
+
+### Distribución de las Clases Prácticas
+
+* Las clases prácticas serán impartidas por los profesores [Israel López Plata](https://www.ull.es/apps/guias/guias/view_teacher_niu/1049/ilopezpl/) y [Casiano Rodríguez León](https://www.ull.es/apps/guias/guias/view_teacher_niu/1049/crguezl/).
+
+## Exámenes
+
+[![](/images/calendarios-examenes.png)](https://www.ull.es/grados/ingenieria-informatica/informacion-academica/horarios-y-calendario-examenes/) 
+
+
+- 20 de Mayo de 2024, 9:00, aula 1.2
+- 13 de Junio de 2024, 9:00, aula 1.1
+- 2 de Julio de 2024, 9:30, aula 1.1
