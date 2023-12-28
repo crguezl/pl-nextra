@@ -8,10 +8,14 @@ const config: DocsThemeConfig = {
     width="24"
     fill="none" 
     viewBox="0 0 24 24" 
-    stroke-width="1.5" 
+    strokeWidth="1.5" 
     stroke="currentColor" 
-    class="w-6 h-6">
-    <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+    className="w-6 h-6">
+      <path 
+        strokeLinecap="round" 
+        strokeLinejoin="round" 
+        d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" 
+      />
     </svg>
   </span>,
   project: {
@@ -24,8 +28,14 @@ const config: DocsThemeConfig = {
              fill="none" 
              width="20"
              viewBox="0 0 24 24" 
-             stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-             <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z" />
+             strokeWidth="1.5" 
+             stroke="currentColor" 
+             className="w-6 h-6">
+             <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z" 
+             />
           </svg>
   },
   docsRepositoryBase: 'https://github.com/ULL-ESIT-PL-2324/pl-nextra/blob/main/',

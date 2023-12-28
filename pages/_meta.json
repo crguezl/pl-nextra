@@ -39,7 +39,7 @@
     "type": "page",
     "href": "https://ull-pl.netlify.app/",
     "newWindow": true,
-    "display": "hidden"
+    "display": "normal"
   },
   "schedules": {
     "title": "Schedules"

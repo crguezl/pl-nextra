@@ -31,14 +31,14 @@ scrolling="yes">
 
 ### Labs Schedule
 
-* Las clases prácticas serán impartidas por los profesores [Israel López Plata](https://www.ull.es/apps/guias/guias/view_teacher_niu/1049/ilopezpl/) y [Casiano Rodríguez León](https://www.ull.es/apps/guias/guias/view_teacher_niu/1049/crguezl/).
+* Las clases prácticas serán impartidas por los profesores [Israel López Plata](https://www.ull.es/apps/guias/guias/view_teacher_niu/1049/ilopezpl/) y [Casiano Rodríguez León](https://www.ull.es/apps/guias/guias/view_teacher_niu/1049/crguezl/). La distribución de responsabilidades  está por determinar.
 
 ## Exam Dates
 
 [![](/images/calendarios-examenes.png)](https://www.ull.es/grados/ingenieria-informatica/informacion-academica/horarios-y-calendario-examenes/) 
 
 
-- March 11, 2024, 8:30, proposed date for the training exam
+- March 11, 2024, May be from 12:00 to 14:00 (classroom to be assigned) if approved by the School or from 8:30-9:30, proposed date for the training exam
 - May 20, 2024, 9:00, classroom 1.2
 - June 13, 2024, 9:00, classroom 1.1
 - July 2, 2024, 9:30, classroom 1.1
