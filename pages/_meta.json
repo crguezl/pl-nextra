@@ -63,6 +63,12 @@
       }
     }
   },
+  "ast-explorer": {
+    "title": "ASTex",
+    "type": "page",
+    "href": "https://astexplorer.net/",
+    "newWindow": true
+  },
   "pl-includes": {
     "title": "____",
     "display": "hidden"
