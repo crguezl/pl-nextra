@@ -1,0 +1,8 @@
+{
+    "login": {
+      "title": "Login",
+      "theme": {
+        "layout": "raw"
+      }
+    }
+  }

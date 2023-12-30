@@ -11,6 +11,8 @@
     "iframe": "iframe",
     "mermaid": "mermaid",
     "steps": "Steps component",
+    "accessing-configuration": "Accesing Configuration",
     "useConfig": "useConfig",
+    "authorization": "Authorization",
     "references": "References"
 }
