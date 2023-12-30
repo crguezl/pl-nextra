@@ -1,0 +1,103 @@
+import { Callout } from 'nextra-theme-docs'
+
+# Auth.js tutorial for Next.js with GitHub
+
+These are my random notes about the tutorial [OAuth tutorial](https://authjs.dev/getting-started/providers/oauth-tutorial) that teaches how setting Auth.js in a web application to be able to log in with GitHub.
+
+## Configuring Auth.js
+
+To add Auth.js to your project:
+
+## Installing NextAuth.js
+
+```bash npm2yarn
+npm install next-auth
+```
+
+## Middleware
+
+See section [Middleware](https://next-auth.js.org/configuration/nextjs#middleware)
+
+
+https://next-auth.js.org/configuration/nextjs#basic-usage
+
+## Creating the server config
+
+Create the following [API route](https://nextjs.org/docs/api-routes/dynamic-api-routes#catch-all-api-routes) file. This route contains the necessary configuration for NextAuth.js, as well as the dynamic route handler:
+
+```js filename="pages/api/auth/[...nextauth].js"
+import NextAuth from "next-auth"
+import GithubProvider from "next-auth/providers/github"
+
+export default NextAuth({
+  providers: [
+    GithubProvider({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+    }),
+  ],
+})
+```
+
+<Callout type="info">
+
+Behind the scenes, this creates all the relevant OAuth API routes within `/api/auth/*` so that auth API requests to:
+
+- [GET `/api/auth/signin`](https://authjs.dev/reference/rest-api#get--apiauthsignin)
+- [POST `/api/auth/signin/:provider`](https://authjs.dev/reference/rest-api#post--apiauthsigninprovider)
+- [GET/POST `/api/auth/callback/:provider`](https://authjs.dev/reference/rest-api#get--post--apiauthcallbackprovider)
+- [GET `/api/auth/signout`](https://authjs.dev/reference/rest-api#get--apiauthsignout)
+- [POST `/api/auth/signout`](https://authjs.dev/reference/rest-api#post--apiauthsignout)
+- [GET `/api/auth/session`](https://authjs.dev/reference/rest-api#get--apiauthsession)
+- [GET `/api/auth/csrf`](https://authjs.dev/reference/rest-api#get--apiauthcsrf)
+  - **[CSRF](/nextra-playground/authorization/csrf)** stands for Cross-Site Request Forgery, which is a type of security threat in web applications. It's not directly a part of authorization mechanisms but rather a vulnerability that can occur when proper authorization controls are not in place or are circumvented. 
+- [GET `/api/auth/providers`](https://authjs.dev/reference/rest-api#get--apiauthproviders)
+
+can be handled by NextAuth.js. In this way, NextAuth.js stays in charge of the whole application's authentication request/response flow.
+
+NextAuth.js is customizable. The [NextAuth guides](https://authjs.dev/guides) teaches you how to set it up to handle auth in different ways. All the possible configuration options are [listed here](https://authjs.dev//reference/core#authconfig).
+</Callout>
+
+## Adding environment variables
+
+Notice we are using environment variables in the code example above. 
+We take the value of `GITHUB_ID` and `GITHUB_SECRET` from the GitHub Developer OAuth Portal. 
+See [Configuring OAuth Provider](https://authjs.dev/getting-started/providers/oauth-tutorial#2-configuring-oauth-provider) section on how to get those.
+
+In your project root, create a `.env.local` file and add the `NEXTAUTH_SECRET` environment variable:
+
+```bash filename=".env.local" copy {1}
+NEXTAUTH_SECRET="This is an example"
+```
+
+`NEXTAUTH_SECRET` is a random string used by the library to encrypt tokens and email verification hashes,
+ and **it's mandatory to keep things secure**! 🔥 🔐 . You can use:
+
+```bash copy {1}
+openssl rand -base64 32
+```
+
+or https://generate-secret.vercel.app/32 to generate a random value for it.
+
+
+follow at 
+https://authjs.dev/getting-started/providers/oauth-tutorial#2-configuring-oauth-provider
+
+
+http://localhost:3000/api/auth/callback/github
+
+## signOut()
+
+- Client Side: Yes
+- Server Side: No
+
+In order to logout, use the `signOut()` method to ensure the user ends back on the page they started on after completing the sign out flow. It also handles [CSRF](/nextra-playground/authorization/csrf) tokens for you automatically.
+
+It reloads the page in the browser when complete.
+
+```js
+import { signOut } from "next-auth/react"
+
+export default () => <button onClick={() => signOut()}>Sign out</button>
+
+```

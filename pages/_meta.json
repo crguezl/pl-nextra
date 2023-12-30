@@ -5,6 +5,12 @@
   "topics": "Topics",
   "schedules": "Schedules",
   "nextra-playground": "Learning Nextra SSG",
+  "logout": {
+    "title": "Logout",
+    "type": "page",
+    "href": "/auth/logout",
+    "newWindow": false
+  },
   "ull": {
     "title": "ULL",
     "type": "menu",

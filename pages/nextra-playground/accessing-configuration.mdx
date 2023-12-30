@@ -49,3 +49,26 @@ import Config from '../../theme.config'
 ### Accessing chat.icon
 
 {Config.chat.icon}
+
+## Modifying configuration
+
+```js
+
+import { useConfig } from 'nextra-theme-docs'
+
+export const chat = (value) => {
+    let config = useConfig()
+    config.chat.icon = value
+}
+
+Look at the chat icon above! {chat("CHAT")}
+```
+
+import { useConfig } from 'nextra-theme-docs'
+
+export const chat = (value) => {
+    let config = useConfig()
+    config.chat.icon = value
+}
+
+Look at the chat icon above! {chat("CHAT")}
