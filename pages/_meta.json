@@ -71,6 +71,12 @@
   },
   "pl-includes": {
     "title": "____",
+    "type": "page",
+    "display": "hidden"
+  },
+  "auth": {
+    "title": "Auth",
+    "type": "page",
     "display": "hidden"
   }
 }

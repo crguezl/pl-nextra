@@ -1,0 +1,52 @@
+import { Callout } from 'nextra-theme-docs'
+
+# Auth.js tutorial for Next.js with GitHub
+
+These are my random notes about the tutorial [OAuth tutorial](https://authjs.dev/getting-started/providers/oauth-tutorial) that teaches how setting Auth.js in a web application to be able to log in with GitHub.
+
+## 1. Configuring Auth.js
+
+To add Auth.js to your project:
+
+### Installing NextAuth.js
+
+```bash npm2yarn
+npm install next-auth
+```
+
+### Creating the server config
+
+Create the following [API route](https://nextjs.org/docs/api-routes/dynamic-api-routes#catch-all-api-routes) file. This route contains the necessary configuration for NextAuth.js, as well as the dynamic route handler:
+
+```js file="pages/api/auth/[...nextauth].js"
+import NextAuth from "next-auth"
+import GithubProvider from "next-auth/providers/github"
+
+export default NextAuth({
+  providers: [
+    GithubProvider({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+    }),
+  ],
+})
+```
+
+<Callout type="info">
+
+Behind the scenes, this creates all the relevant OAuth API routes within `/api/auth/*` so that auth API requests to:
+
+- [GET `/api/auth/signin`](https://authjs.dev/reference/rest-api#get--apiauthsignin)
+- [POST `/api/auth/signin/:provider`](https://authjs.dev/reference/rest-api#post--apiauthsigninprovider)
+- [GET/POST `/api/auth/callback/:provider`](https://authjs.dev/reference/rest-api#get--post--apiauthcallbackprovider)
+- [GET `/api/auth/signout`](https://authjs.dev/reference/rest-api#get--apiauthsignout)
+- [POST `/api/auth/signout`](https://authjs.dev/reference/rest-api#post--apiauthsignout)
+- [GET `/api/auth/session`](https://authjs.dev/reference/rest-api#get--apiauthsession)
+- [GET `/api/auth/csrf`](https://authjs.dev/reference/rest-api#get--apiauthcsrf)
+  - **[CSRF](/nextra-playground/authorization/csrf)** stands for Cross-Site Request Forgery, which is a type of security threat in web applications. It's not directly a part of authorization mechanisms but rather a vulnerability that can occur when proper authorization controls are not in place or are circumvented. 
+- [GET `/api/auth/providers`](https://authjs.dev/reference/rest-api#get--apiauthproviders)
+
+can be handled by NextAuth.js. In this way, NextAuth.js stays in charge of the whole application's authentication request/response flow.
+
+NextAuth.js is fully customizable - [our guides section](/guides) teaches you how to set it up to handle auth in different ways. All the possible configuration options are [listed here](/reference/core#authconfig).
+</Callout>

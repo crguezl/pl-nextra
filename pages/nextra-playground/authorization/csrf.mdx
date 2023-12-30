@@ -1,0 +1,26 @@
+# Cross-Site Request Forgery (CSRF)
+
+CSRF stands for Cross-Site Request Forgery, which is a type of security threat in web applications. It's not directly a part of authorization mechanisms but rather a vulnerability that can occur when proper authorization controls are not in place or are circumvented. Here's a breakdown of what CSRF is and how it relates to web security:
+
+### Understanding CSRF:
+
+1. **The Threat**: CSRF attacks exploit the trust that a web application has in the user's browser. Essentially, the attacker tricks the user's browser into sending a request to a server that performs some action on behalf of the user without their consent. This could be anything from changing the user's email address to transferring funds.
+
+2. **How it Works**: Suppose a user is logged into a website, such as their bank, and has a valid session cookie. If the user then visits a malicious site, that site can send a request back to the bank site using the user's credentials (like cookies) that are still authenticated. Since the bank site trusts the user's browser, it thinks the request is legitimate and performs the action.
+
+### CSRF in the Context of Authorization:
+
+- **Authorization Bypass**: CSRF attacks can bypass user authorization if the application assumes that all requests from a logged-in user are intentional and legitimate. It exploits the fact that the site doesn't verify whether the user intended to send the request.
+
+- **Targeting State-Changing Requests**: CSRF typically targets state-changing requests, not data theft, because the attacker doesn't see the response to the forged request. Therefore, actions like changing a password, transferring funds, or updating an email address are common targets.
+
+### Preventing CSRF:
+
+1. **Anti-CSRF Tokens**: One common mitigation technique is to use anti-CSRF tokens. Each form or state-changing request from the client includes a unique token that the server checks. Since the attacker can't know this token, they can't forge a valid request.
+
+2. **Same-Site Cookies**: Modern browsers support a `SameSite` attribute for cookies, which can help prevent CSRF by asserting that cookies should only be sent with requests initiated from the same domain.
+
+3. **Checking the Referer Header**: Some applications check the `Referer` header of incoming requests to see if they are coming from an allowed domain. However, this method isn't foolproof and can be bypassed.
+
+4. **Custom Headers**: Since sites can't set arbitrary custom headers in cross-origin requests (due to the CORS policy), requiring a custom header for state-changing requests can also protect against CSRF.
+

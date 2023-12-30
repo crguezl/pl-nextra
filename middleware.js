@@ -1,3 +1,4 @@
+
 import { NextResponse } from 'next/server'
  
 // This function can be marked `async` if using `await` inside
@@ -20,8 +21,9 @@ export function middleware(request) {
   return response // because is a "nextResponse" it continues to the next middleware
   // return NextResponse.redirect(new URL('/', request.url))
 }
- 
+
 // See https://nextjs.org/docs/pages/building-your-application/routing/middleware
 export const config = {
   matcher: ['/labs/:path*'],
 }
+
