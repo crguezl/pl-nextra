@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "save": "git add . && git commit -m 'Update' && git push -u crguezl main; git push -u origin main"
+    "save": "git add . && git commit -m 'Update' && git push -u crguezl main; git push",
+    "next_auth_secret": "echo \"NEXTAUTH_SECRET=$(openssl rand -base64 32)\""
   },
   "engines": {
     "node": ">=18.x"
