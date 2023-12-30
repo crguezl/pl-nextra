@@ -1,0 +1,54 @@
+# Authorization in Nextra
+
+Search in  nextra/discussions forum for `authentication`:
+
+* [nextra/discussions: authentication](https://github.com/shuding/nextra/discussions?discussions_q=is%3Aopen+authentication)
+
+the discussion [Authentication for Nextra Doc Theme #2446](https://github.com/shuding/nextra/discussions/2446) has some tip:
+
+
+```js
+/*
+ * This file is responsbile for all the auth magic for the documentation.
+ * It ensures that the user has a session before we show them anything on the page.
+ *
+ * This is all done server-side.
+ *
+ * Useful links:
+ * @see https://nextjs.org/docs/app/building-your-application/routing/middleware
+ * @see https://next-auth.js.org/configuration/nextjs#basic-usage
+ */
+
+import { withAuth } from 'next-auth/middleware';
+
+export default withAuth({
+    callbacks: {
+        authorized({ token }) {
+            // If we are in dev mode, don't require auth.
+            if (process.env.NODE_ENV === 'development') return true;
+
+            // If there is a session token, allow login
+            if (token) return true;
+
+            // By default, don't allow login.
+            return false;
+        },
+    },
+});
+```
+
+### next-auth and Auth.js
+
+The npm module [next-auth](https://github.com/nextauthjs/next-auth) is used to implement authentication in Next.js and its docs can be found at [https://authjs.dev/](https://authjs.dev/getting-started/introduction). It seems they are changing their name to [Auth.js](https://x.com/balazsorban44/status/1603082914362986496?s=20)
+
+The [OAuth tutorial](https://authjs.dev/getting-started/providers/oauth-tutorial) teaches how setting Auth.js in a web application to be able to log in with GitHub. 
+
+Here [are my notes about the tutorial](/nextra-playground/next-auth-tutorial)
+
+### NODE_ENV
+
+`NODE_ENV` is an environment variable made popular by the express web server framework. When a node application is run, it can check the value of the environment variable and do different things based on the value. `NODE_ENV` specifically is used (by convention) to state whether a particular environment is a production or a development environment. A common use-case is running additional debugging or logging code if running in a development environment.
+
+```
+NODE_ENV=development npm run dev
+```
