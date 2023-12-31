@@ -8,7 +8,7 @@
   "logout": {
     "title": "Logout",
     "type": "page",
-    "href": "/auth/logout",
+    "href": "/api/auth/signout",
     "newWindow": false
   },
   "ull": {
