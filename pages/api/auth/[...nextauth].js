@@ -3,20 +3,19 @@ import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 import { URL } from "url"
 import { inspect } from "util"
+import { config, auth} from "@/src/auth"
 
-let authHandler = NextAuth({
-  providers: [
-    GithubProvider({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
-    }),
-  ],
-})
+export const authOptions = {
+  // your configs
+  tutu: 4
+}
+
+let authHandler = NextAuth( config )
 
 let wrapper = async function (req, res) {
   let url = new URL(req.url, "http://localhost:3000")
   
-  log(inspect(url, { depth: 10 })) 
+  //log(inspect(url, { depth: 10 })) 
   /* 
     "http://localhost:3000/api/auth/csrf"
     [next-auth][warn][NEXTAUTH_URL] 
@@ -28,12 +27,16 @@ let wrapper = async function (req, res) {
   */
 
   const { body, cookies, headers, method, query } = req
-  log(inspect({ body, cookies, method, query }, { depth: 1 })) 
 
-  let result = authHandler(req, res) /* Promise { <pending>,
-    [Symbol(async_id_symbol)]: 788747, [Symbol(trigger_async_id_symbol)]: 788737, [Symbol(kResourceStore)]: undefined
-  } */
-  log(inspect(result, { depth: 10 })) // If we insert an "await" for result is undefined for all urls
+  /* Promise { <pending>,  [Symbol(async_id_symbol)]: 788747, [Symbol(trigger_async_id_symbol)]: 788737, [Symbol(kResourceStore)]: undefined  } */
+  let result = await authHandler(req, res) 
+    log(inspect({ body, cookies, method, query }, { depth: 1 })) 
+    /*  cookies: {
+    'next-auth.csrf-token': '5c5a425421b243ab9643d9d19eb73637347dd4e16c5b98cb924a9a8f56be2fea|b2211844feff364586eb8459a1ef357bf4b2ebfdea9ffbe80c6b87d2632c85df',
+    'next-auth.callback-url': 'http://localhost:3000/',
+    'next-auth.state': 'eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..v6uSSVnJnyiH9_d7.8gJWUsWMmuxprEWGSIEqAMmPTiEl0AEw5lApi0e91E5l1yLJCNV4SHpUIubvJL5E9ZPMTtD9rZX9SQXjWGl3telR_2in19bw7FqUfGagnyMLKlICyo58h6hHPSpQp67I6xKXxlHojTAruGX2c8vGxcAhoLBN-E1e23A_pvqgRS-HlwPrso8.kO9OVVz3DHPi3
+    */
+    // If we insert an "await" for result is undefined for all urls
   return result
 }
 export default wrapper 
