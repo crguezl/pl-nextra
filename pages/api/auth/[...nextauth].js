@@ -7,7 +7,8 @@ import { config, auth} from "@/src/auth"
 
 export const authOptions = {
   // your configs
-  tutu: 4
+  tutu: 4,
+  cookie: null
 }
 
 let authHandler = NextAuth( config )
