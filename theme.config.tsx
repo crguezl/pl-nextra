@@ -1,6 +1,7 @@
 import React from 'react'
 import { DocsThemeConfig } from 'nextra-theme-docs'
 import { useConfig } from 'nextra-theme-docs'
+import { SessionProvider } from "next-auth/react"
 
 const config: DocsThemeConfig = {
   logo: <span>
@@ -47,6 +48,7 @@ const config: DocsThemeConfig = {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const { frontMatter } = useConfig();
     return (
+      <SessionProvider>
       <main className="">
         <h1 className="nx-mt-2 nx-text-4xl nx-font-bold nx-tracking-tight">
           {frontMatter?.title}
@@ -54,8 +56,14 @@ const config: DocsThemeConfig = {
         <p>{frontMatter?.description}</p>
         <div className="">{children}</div>
       </main>
+      </SessionProvider>
     );
   },
+  /*
+  components: { // See https://nextra.site/docs/docs-theme/theme-configuration#mdx-components
+    SessionProvider, //????XXXX
+  }
+  */
 }
 
 export default config
