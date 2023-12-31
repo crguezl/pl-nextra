@@ -1,5 +1,5 @@
 ---
-title: Calendarios, Horarios y Exámenes
+title: Calendars, Schedules and Exams
 permalink: /schedules
 testVar: "https://www.google.com"
 msg:  "<a href=\"https://www.google.com\">hello</a>"
