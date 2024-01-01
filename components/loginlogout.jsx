@@ -1,5 +1,6 @@
 import { signIn, useSession } from "next-auth/react"
 
+
 const SignInButton = () => <button onClick={() => signIn()}>Sign in</button>
 export default function RenderAuthButtons() {
     const { session, loading } = useSession()

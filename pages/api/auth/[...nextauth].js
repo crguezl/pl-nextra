@@ -14,19 +14,6 @@ export const authOptions = {
 let authHandler = NextAuth( config )
 
 let wrapper = async function (req, res) {
-  let url = new URL(req.url, location.origin)
-  
-  //log(inspect(url, { depth: 10 })) 
-  /* 
-    "http://localhost:3000/api/auth/csrf"
-    [next-auth][warn][NEXTAUTH_URL] 
-    https://next-auth.js.org/warnings#nextauth_url
-    "http://localhost:3000/api/auth/signout"
-    "http://localhost:3000/api/auth/signin?callbackUrl=%2Fauth%2Flogout" %2F is /
-    "http://localhost:3000/api/auth/signin/github"
-    "http://localhost:3000/api/auth/callback/github?code=b416fe08a4-the-code-that-will-be-exchanged-for-the-session-0"
-  */
-
   const { body, cookies, headers, method, query } = req
 
   /* Promise { <pending>,  [Symbol(async_id_symbol)]: 788747, [Symbol(trigger_async_id_symbol)]: 788737, [Symbol(kResourceStore)]: undefined  } */
