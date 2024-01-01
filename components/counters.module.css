@@ -26,6 +26,14 @@
   
 }
 
+.uList {
+  margin: 1em;
+  padding: 0;
+  list-style: circle;
+  justify-content: left;
+  
+}
+
 .link {
   color: blue;
 }
@@ -65,6 +73,13 @@
   padding: 2px 6px;
   margin: 12px 0 0;
   margin-bottom: 1ex;
+}
+
+.container {
+  height: 60vh; /* Full height of the viewport */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 }
 
 .button {

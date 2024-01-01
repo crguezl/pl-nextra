@@ -1,5 +1,7 @@
 import React from 'react'
 import { DocsThemeConfig } from 'nextra-theme-docs'
+import { useConfig } from 'nextra-theme-docs'
+import { SessionProvider } from "next-auth/react"
 
 const config: DocsThemeConfig = {
   logo: <span>
@@ -41,7 +43,27 @@ const config: DocsThemeConfig = {
   docsRepositoryBase: 'https://github.com/ULL-ESIT-PL-2324/pl-nextra/blob/main/',
   footer: {
     text: 'Notes for the Computer Science degree ULL 23/24 course on Programming Languages',
+  },
+  main: ({ children }) => { // See https://github.com/shuding/nextra/discussions/1508#discussioncomment-4990229
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { frontMatter } = useConfig();
+    return (
+      <SessionProvider>
+      <main className="">
+        <h1 className="nx-mt-2 nx-text-4xl nx-font-bold nx-tracking-tight">
+          {frontMatter?.title}
+        </h1>
+        <p>{frontMatter?.description}</p>
+        <div className="">{children}</div>
+      </main>
+      </SessionProvider>
+    );
+  },
+  /*
+  components: { // See https://nextra.site/docs/docs-theme/theme-configuration#mdx-components
+    SessionProvider, //????XXXX
   }
+  */
 }
 
 export default config

@@ -5,6 +5,18 @@
   "topics": "Topics",
   "schedules": "Schedules",
   "nextra-playground": "Learning Nextra SSG",
+  "logout": {
+    "title": "Logout",
+    "type": "page",
+    "href": "/api/auth/signout",
+    "newWindow": false
+  },
+  "user": {
+    "title": "User",
+    "type": "page",
+    "href": "/user",
+    "newWindow": false
+  },
   "ull": {
     "title": "ULL",
     "type": "menu",
@@ -71,6 +83,12 @@
   },
   "pl-includes": {
     "title": "____",
+    "type": "page",
+    "display": "hidden"
+  },
+  "auth": {
+    "title": "Auth",
+    "type": "page",
     "display": "hidden"
   }
 }
