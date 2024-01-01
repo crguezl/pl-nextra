@@ -14,7 +14,7 @@ export const authOptions = {
 let authHandler = NextAuth( config )
 
 let wrapper = async function (req, res) {
-  let url = new URL(req.url, "http://localhost:3000")
+  let url = new URL(req.url, location.origin)
   
   //log(inspect(url, { depth: 10 })) 
   /* 
