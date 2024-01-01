@@ -11,6 +11,12 @@
     "href": "/api/auth/signout",
     "newWindow": false
   },
+  "user": {
+    "title": "User",
+    "type": "page",
+    "href": "/user",
+    "newWindow": false
+  },
   "ull": {
     "title": "ULL",
     "type": "menu",

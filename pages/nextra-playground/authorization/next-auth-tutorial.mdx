@@ -16,10 +16,13 @@ npm install next-auth
 
 ## Middleware
 
-See section [Middleware](https://next-auth.js.org/configuration/nextjs#middleware)
+```js filename="middleware.js"
+export { default } from "next-auth/middleware"
+//export const config = { matcher: ["/clases", "/labs"] }
+```
 
-
-https://next-auth.js.org/configuration/nextjs#basic-usage
+- See the section [Middleware](https://next-auth.js.org/configuration/nextjs#middleware) on the Next.js docs
+- See also https://next-auth.js.org/configuration/nextjs#basic-usage
 
 ## Creating the server config
 
@@ -104,8 +107,12 @@ export default () => <button onClick={() => signOut()}>Sign out</button>
 
 ## Wrapping with SessionProvider
 
+The `main` fields defines a React Functional component `React.FC<{ children: React.ReactNode }>`. Here we use it
+to add a `title` and `description` and wrap the children with a `SessionProvider` component. I've got the idea from [this discussion](https://github.com/shuding/nextra/discussions/1508#discussioncomment-4990229).
 
-```ts
+
+
+```ts filename="theme.config.tsx" /SessionProvider/ /main/
 
 const config: DocsThemeConfig = {
   logo: <span>
@@ -170,3 +177,7 @@ const config: DocsThemeConfig = {
   */
 }
 ```
+
+## References
+
+* [nextauthjs/docs](https://github.com/nextauthjs/docs) repo with the docs

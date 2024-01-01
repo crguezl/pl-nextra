@@ -7,7 +7,7 @@ export default function AuthForm({ handleSubmit }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  console.log("AuthForm", email, password)
+  console.error("AuthForm", email, password)
   return (
     <form onSubmit={(e) => handleSubmit(e, email, password)} className={ styles.form}>
       <label className={ styles.label}>

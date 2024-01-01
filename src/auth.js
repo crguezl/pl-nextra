@@ -9,6 +9,7 @@ export const config = {
     GithubProvider({
         clientId: process.env.GITHUB_ID,
         clientSecret: process.env.GITHUB_SECRET,
+        allowDangerousEmailAccountLinking: true // https://next-auth.js.org/configuration/providers/oauth#allowdangerousemailaccountlinking-option
       }),
     /*
     TwitterProvider({
