@@ -7,8 +7,8 @@ export default function User({ logo }) {
   let config = useConfig()
 
   if (status === "authenticated") {
-    console.error("***********Session***********")
-    console.error(session)
+    //console.error("***********Session***********")
+    //console.error(session)
     config.chat.icon = (session.user.name)
     return <p>
         <ul className={styles.uList}>
