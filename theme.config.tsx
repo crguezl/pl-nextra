@@ -57,7 +57,7 @@ const config: DocsThemeConfig = {
         <div className="">{children}</div>
       </main>
       </SessionProvider>
-    );
+    ); 
   },
   /*
   components: { // See https://nextra.site/docs/docs-theme/theme-configuration#mdx-components
