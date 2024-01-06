@@ -61,10 +61,11 @@ can be handled by NextAuth.js. In this way, NextAuth.js stays in charge of the w
 NextAuth.js is customizable. The [NextAuth guides](https://authjs.dev/guides) teaches you how to set it up to handle auth in different ways. All the possible configuration options are [listed here](https://authjs.dev//reference/core#authconfig).
 </Callout>
 
-## Adding environment variables
+## Adding environment variables: Development
 
 Notice we are using environment variables in the code example above. 
 We take the value of `GITHUB_ID` and `GITHUB_SECRET` from the GitHub Developer OAuth Portal. 
+
 See [Configuring OAuth Provider](https://authjs.dev/getting-started/providers/oauth-tutorial#2-configuring-oauth-provider) section on how to get those.
 
 In your project root, create a `.env.local` file and add the `NEXTAUTH_SECRET` environment variable:
@@ -88,6 +89,22 @@ https://authjs.dev/getting-started/providers/oauth-tutorial#2-configuring-oauth-
 
 
 http://localhost:3000/api/auth/callback/github
+
+## Adding environment variables: Production. Vercel
+
+In production, you can set environment variables in your hosting dashboard. For example, on Vercel, you can set them in the [Environment Variables ↗️](https://vercel.com/docs/environment-variables) section of your project's settings.
+
+When setting the variables for vercel it is easy to copy-paste the values from the `.env.local` file. This leads to easily copy the protocol as 'http' for the **Authorization callback URL** instead of 'https'. Make sure to use the correct values:
+
+<Callout type="error">
+https://ull-pl.vercel.app/api/auth/callback/github
+</Callout>
+
+## Adding environment variables: Production. Netlify
+
+In production, you can set environment variables in your hosting dashboard. For example, on Netlify, you can set them in the [Environment Variables ↗️](https://docs.netlify.com/configure-builds/environment-variables/) section of your project's settings.
+
+See https://authjs.dev/reference/core/providers/netlify#resources
 
 ## signOut()
 
