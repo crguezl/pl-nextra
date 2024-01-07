@@ -1,0 +1,1 @@
+./get-commits.sh | jq 'sort_by(.total) | [ .[] | { name: .name, total: .total} ] | reverse'

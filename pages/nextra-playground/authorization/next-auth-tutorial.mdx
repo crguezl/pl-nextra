@@ -4,6 +4,20 @@ import { Callout } from 'nextra-theme-docs'
 
 These are my random notes about the tutorial [OAuth tutorial](https://authjs.dev/getting-started/providers/oauth-tutorial) that teaches how setting Auth.js in a web application to be able to log in with GitHub.
 
+## Introduction. The concepts
+
+Without going into too much detail, the OAuth flow generally has 6 parts:
+
+1. The application requests authorization to access service resources from the user
+2. If the user authorized the request, the application receives an authorization grant
+3. The application requests an access token from the authorization server (API) by presenting authentication of its own **identity**, and the **authorization grant**
+4. If the application identity is authenticated and the authorization grant is valid, the authorization server (API) issues an **access token** to the application. Authorization is complete.
+5. The application requests the resource from the resource server (API) and presents the access token for authentication
+6. If the access token is valid, the resource server (API) serves the resource to the application
+
+
+![](/images/oauth.png)
+
 ## Configuring Auth.js
 
 To add Auth.js to your project:
@@ -194,6 +208,179 @@ const config: DocsThemeConfig = {
   */
 }
 ```
+
+## Scopes
+
+See 
+
+1. https://next-auth.js.org/configuration/providers/oauth#authorization-option
+2. https://github.com/nextauthjs/next-auth/discussions/4557
+
+  ```js
+  authorization: {
+    url: "https://example.com/oauth/authorization",
+    params: { scope: "email" }
+  }
+  ```
+
+### next-auth/providers/github.ts
+
+The  next-auth code for the types of the GitHub provider is at https://github.com/nextauthjs/next-auth/blob/v4/packages/next-auth/src/providers/github.ts 
+   
+```ts
+export interface GithubProfile extends Record<string, any> {
+  login: string
+  id: number
+  node_id: string
+  ...
+  email: string | null
+}
+
+export default function Github<P extends GithubProfile>(options: OAuthUserConfig<P>): OAuthConfig<P> {
+  return {
+    id: "github",
+    name: "GitHub",
+    type: "oauth",
+    authorization: {
+      url: "https://github.com/login/oauth/authorize",
+      params: { scope: "read:user user:email" },
+    },
+    token: "https://github.com/login/oauth/access_token",
+    userinfo: {
+      url: "https://api.github.com/user",
+      async request({ client, tokens }) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const profile = await client.userinfo(tokens.access_token!)
+
+        if (!profile.email) {
+          // If the user does not have a public email, get another via the GitHub API
+          // See https://docs.github.com/en/rest/users/emails#list-public-email-addresses-for-the-authenticated-user
+          const res = await fetch("https://api.github.com/user/emails", {
+            headers: { Authorization: `token ${tokens.access_token}` },
+          })
+
+          if (res.ok) {
+            const emails: GithubEmail[] = await res.json()
+            profile.email = (emails.find((e) => e.primary) ?? emails[0]).email
+          }
+        }
+
+        return profile
+      },
+    },
+    profile(profile) {
+      return {
+        id: profile.id.toString(),
+        name: profile.name ?? profile.login,
+        email: profile.email,
+        image: profile.avatar_url,
+      }
+    },
+    style: { logo: "/github.svg", bg: "#24292f", text: "#fff" },
+    options,
+}
+```
+
+Whenever you configure a custom or a built-in OAuth provider, you have the following options available:
+
+```ts
+interface OAuthConfig {
+  /**
+   * OpenID Connect (OIDC) compliant providers can configure
+   * this instead of `authorize`/`token`/`userinfo` options
+   * without further configuration needed in most cases.
+   * You can still use the `authorize`/`token`/`userinfo`
+   * options for advanced control.
+   *
+   * [Authorization Server Metadata](https://datatracker.ietf.org/doc/html/rfc8414#section-3)
+   */
+  wellKnown?: string
+  /**
+   * The login process will be initiated by sending the user to this URL.
+   *
+   * [Authorization endpoint](https://datatracker.ietf.org/doc/html/rfc6749#section-3.1)
+   */
+  authorization: EndpointHandler<AuthorizationParameters>
+  /**
+   * Endpoint that returns OAuth 2/OIDC tokens and information about them.
+   * This includes `access_token`, `id_token`, `refresh_token`, etc.
+   *
+   * [Token endpoint](https://datatracker.ietf.org/doc/html/rfc6749#section-3.2)
+   */
+  token: EndpointHandler<
+    UrlParams,
+    {
+      /**
+       * Parameters extracted from the request to the `/api/auth/callback/:providerId` endpoint.
+       * Contains params like `state`.
+       */
+      params: CallbackParamsType
+      /**
+       * When using this custom flow, make sure to do all the necessary security checks.
+       * This object contains parameters you have to match against the request to make sure it is valid.
+       */
+      checks: OAuthChecks
+    },
+    { tokens: TokenSet }
+  >
+  /**
+   * When using an OAuth 2 provider, the user information must be requested
+   * through an additional request from the userinfo endpoint.
+   *
+   * [Userinfo endpoint](https://www.oauth.com/oauth2-servers/signing-in-with-google/verifying-the-user-info)
+   */
+  userinfo?: EndpointHandler<UrlParams, { tokens: TokenSet }, Profile>
+  type: "oauth"
+  /**
+   * Used in URLs to refer to a certain provider.
+   * @example /api/auth/callback/twitter // where the `id` is "twitter"
+   */
+  id: string
+  version: string
+  profile(profile: P, tokens: TokenSet): Awaitable<User>
+  checks?: ChecksType | ChecksType[]
+  clientId: string
+  clientSecret: string
+  /**
+   * If set to `true`, the user information will be extracted
+   * from the `id_token` claims, instead of
+   * making a request to the `userinfo` endpoint.
+   *
+   * `id_token` is usually present in OpenID Connect (OIDC) compliant providers.
+   *
+   * [`id_token` explanation](https://www.oauth.com/oauth2-servers/openid-connect/id-tokens)
+   */
+  idToken?: boolean
+  region?: string
+  issuer?: string
+  client?: Partial<ClientMetadata>
+  allowDangerousEmailAccountLinking?: boolean
+  /**
+   * Object containing the settings for the styling of the providers sign-in buttons
+   */
+  style: ProviderStyleType
+}
+```
+
+### Authorization option
+
+Configure how to construct the request to the [Authorization endpoint ↗](https://datatracker.ietf.org/doc/html/rfc6749#section-3.1).
+
+There are two ways to use this option:
+
+1. You can either set authorization to be a full URL, like `"https://example.com/oauth/authorization?scope=email"`.
+2. Use an object with `url` and `params` like so
+
+  ```js
+  authorization: {
+    url: "https://example.com/oauth/authorization",
+    params: { scope: "email" }
+  }
+  ```
+
+<callout>
+If your Provider is OpenID Connect (OIDC) compliant, we recommend using the **wellKnown** option instead.
+</callout>
 
 ## References
 
