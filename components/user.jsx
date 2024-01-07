@@ -1,15 +1,15 @@
-import { useSession, signOut } from "next-auth/react"
+import { useSession, signOut } from "next-auth/react" // https://next-auth.js.org/getting-started/client#usesession
 import { useConfig } from 'nextra-theme-docs'
 import styles from './counters.module.css'
 
 
-export default function User({ logo }) {
+export default function User() {
   const { data: session, status } = useSession()
   let config = useConfig()
 
   if (status === "authenticated") {
-    //console.error("***********Session***********")
-    //console.error(session)
+    console.error("***********Session***********")
+    console.error(session)
     config.chat.icon = (session.user.name)
     return (<div>
           <ul className={styles.uList}>
