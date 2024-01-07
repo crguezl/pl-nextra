@@ -15,5 +15,6 @@
     "useConfig": "useConfig",
     "authorization": "Authorization",
     "stars": "fetch from mdx",
+    "teams": "fetch with variable server",
     "references": "References"
 }
