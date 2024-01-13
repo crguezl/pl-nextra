@@ -136,12 +136,32 @@ export default () => <button onClick={() => signOut()}>Sign out</button>
 
 ```
 
-## Wrapping with SessionProvider
+## Nextra: Wrapping with SessionProvider
 
-The `main` fields defines a React Functional component `React.FC<{ children: React.ReactNode }>`. Here we use it
-to add a `title` and `description` and wrap the children with a `SessionProvider` component. I've got the idea from [this discussion](https://github.com/shuding/nextra/discussions/1508#discussioncomment-4990229).
+The `main` fields defines a React Functional component `React.FC<{ children: React.ReactNode }>`. 
+Here we use the `main` entry to add a `title` and `description` and wrap the children with a `SessionProvider` component:
 
+```jsx  filename="theme.config.tsx" /SessionProvider/ /main/
+  main: ({ children }) => { // See https://github.com/shuding/nextra/discussions/1508#discussioncomment-4990229
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { frontMatter } = useConfig();
+    return (
+      <SessionProvider>
+      <main className="">
+        <h1 className="nx-mt-2 nx-text-4xl nx-font-bold nx-tracking-tight">
+          {frontMatter?.title}
+        </h1>
+        <p>{frontMatter?.description}</p>
+        <div className="">{children}</div>
+      </main>
+      </SessionProvider>
+    );
+  },
+```
 
+I've got the idea from [this discussion](https://github.com/shuding/nextra/discussions/1508#discussioncomment-4990229) at the Nextra github repo.
+
+Here is the  full code of `theme.config.tsx`:
 
 ```ts filename="theme.config.tsx" /SessionProvider/ /main/
 

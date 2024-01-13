@@ -59,6 +59,24 @@ const config: DocsThemeConfig = {
       </SessionProvider>
     ); 
   },
+  sidebar: {
+    toggleButton: true,
+    /*titleComponent({ title, type }) {
+      if (type === 'separator') {
+        return (
+          <div style={{ background: 'cyan', textAlign: 'center' }}>{title}</div>
+        )
+      }
+      if (title === 'About') {
+        return <>❓ {title}</>
+      }
+      return <>👉 {title}</>
+    }*/
+  },
+  faviconGlyph: '🇵🇱',
+  search: {
+    placeholder: "Search PL 23/24 site"
+  },
   /*
   components: { // See https://nextra.site/docs/docs-theme/theme-configuration#mdx-components
     SessionProvider, //????XXXX
