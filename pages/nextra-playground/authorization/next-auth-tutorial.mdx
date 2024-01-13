@@ -1,6 +1,6 @@
 import { Callout } from 'nextra-theme-docs'
 
-# Auth.js tutorial for Next.js with GitHub
+# Auth.js tutorial for Nextra and Next.js with GitHub
 
 These are my random notes about the tutorial [OAuth tutorial](https://authjs.dev/getting-started/providers/oauth-tutorial) that teaches how setting Auth.js in a web application to be able to log in with GitHub.
 
@@ -18,9 +18,6 @@ Without going into too much detail, the OAuth flow generally has 6 parts:
 
 ![](/images/oauth.png)
 
-## Configuring Auth.js
-
-To add Auth.js to your project:
 
 ## Installing NextAuth.js
 
@@ -98,11 +95,9 @@ openssl rand -base64 32
 or https://generate-secret.vercel.app/32 to generate a random value for it.
 
 
-follow at 
+The source of this section is at  authjs section:  
 https://authjs.dev/getting-started/providers/oauth-tutorial#2-configuring-oauth-provider
 
-
-http://localhost:3000/api/auth/callback/github
 
 ## Adding environment variables: Production. Vercel
 
@@ -119,22 +114,6 @@ https://ull-pl.vercel.app/api/auth/callback/github
 In production, you can set environment variables in your hosting dashboard. For example, on Netlify, you can set them in the [Environment Variables ↗️](https://docs.netlify.com/configure-builds/environment-variables/) section of your project's settings.
 
 See https://authjs.dev/reference/core/providers/netlify#resources
-
-## signOut()
-
-- Client Side: Yes
-- Server Side: No
-
-In order to logout, use the `signOut()` method to ensure the user ends back on the page they started on after completing the sign out flow. It also handles [CSRF](/nextra-playground/authorization/csrf) tokens for you automatically.
-
-It reloads the page in the browser when complete.
-
-```js
-import { signOut } from "next-auth/react"
-
-export default () => <button onClick={() => signOut()}>Sign out</button>
-
-```
 
 ## Nextra: Wrapping with SessionProvider
 
@@ -229,7 +208,27 @@ const config: DocsThemeConfig = {
 }
 ```
 
+## The signOut() method
+
+- Client Side: Yes
+- Server Side: No
+
+In order to logout, use the `signOut()` method to ensure the user ends back on the page they started on after completing the sign out flow. It also handles [CSRF](/nextra-playground/authorization/csrf) tokens for you automatically.
+
+It reloads the page in the browser when complete.
+
+```js
+import { signOut } from "next-auth/react"
+
+export default () => <button onClick={() => signOut()}>Sign out</button>
+
+```
+
+See an example in this repo at page [user.mdx](https://github.com/crguezl/pl-nextra/blob/main/pages/user.mdx) and the component [user.jsx](https://github.com/crguezl/pl-nextra/blob/main/components/user.jsx)
+
 ## Scopes
+
+One of my goals is to get from GitHub additional information aboout the user. Help is needed here.
 
 See 
 
@@ -243,7 +242,7 @@ See
   }
   ```
 
-### next-auth/providers/github.ts
+### File next-auth/providers/github.ts
 
 The  next-auth code for the types of the GitHub provider is at https://github.com/nextauthjs/next-auth/blob/v4/packages/next-auth/src/providers/github.ts 
    
