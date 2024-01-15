@@ -1,0 +1,54 @@
+# How are going to be the programming languages of the future?
+
+I asked ChatGPT 4 "How do you think the advances in LLMs and NLP will influence the compiler's technology? How are going to be the programming languages of the future?"
+
+Here is the answer:
+
+Advances in Large Language Models (LLMs) and Natural Language Processing (NLP) are poised to significantly influence compiler technology and the future of programming languages in several ways:
+
+1. **Improved Code Understanding and Generation**: LLMs are getting better at understanding and generating code. This means future compilers could potentially accept high-level, natural language instructions and translate them into efficient, low-level code. This could make programming more accessible to non-experts and increase productivity for experienced developers.
+
+2. **Advanced Error Correction and Debugging**: Future compilers might leverage LLMs to provide more intelligent error messages and suggestions. They could automatically suggest code fixes, optimization strategies, and even identify logical errors, going beyond the syntax and runtime errors that current compilers detect.
+
+3. **Customized Programming Languages**: There could be a move towards more customizable or user-defined programming languages. LLMs could allow developers to define their own syntax or coding styles which the compiler would then understand and convert into standard programming language code. This could lead to highly personalized or domain-specific programming environments.
+
+4. **Enhanced Code Optimization**: LLMs could contribute to smarter compilers that perform more advanced code optimizations. They could predict the most efficient algorithms or data structures for a given task based on the context or even the specific hardware it's meant to run on.
+
+5. **Interactive Programming Environments**: The future might see the emergence of more interactive programming environments, where developers have a dialogue with the compiler, iteratively refining their code with the help of AI suggestions. This could make programming more intuitive and less error-prone.
+
+6. **Language Agnostic Development**: As LLMs and NLP improve, we might see a rise in tools that allow developers to write in one language, and then seamlessly translate their code into another. This could lead to a more unified view of programming languages, focusing more on the underlying concepts rather than syntax.
+
+7. **Security and Compliance**: Future compilers, powered by LLMs, could automatically check code for security vulnerabilities and compliance with industry standards. This would be a significant step forward in developing secure and reliable software.
+
+8. **Educational Tools and Resources**: LLMs could power advanced educational tools for programming, offering personalized learning experiences, instant feedback, and interactive coding challenges, thus democratizing access to programming education.
+
+In summary, the advances in LLMs and NLP are likely to make programming more intuitive, efficient, and accessible, potentially leading to a paradigm shift in how we think about and interact with programming languages and compilers.
+
+## LLM as a Compiler
+
+See [LLM as Compiler](https://medium.com/redsquirrel-tech/llm-as-compiler-2a2f79d30f0b) Dave Hoover. Oct 3, 2023
+
+1. Specify the high-level behavior using something like Cucumber’s Gherkin.
+2. Specify in more technical detail, using programming by wishful thinking, using something like Cucumber’s Step Definitions. A GitHub-Copilot-like tool could assist in writing these step definitions in one’s preferred “Perl and friends” language.
+3. Feed steps 1 & 2 to the specialized LLM, which acts as a compiler and generates the resulting codebase.
+4. The resulting codebase can be executed by the appropriate “Perl and friends” runtime.
+Manually verify the behavior of the code.
+1. If the behavior needs to change, goto step 1.
+
+  > ... Soon someone who can specify the behavior of a software system in something like Cucumber, will be an order of magnitude more productive than someone writing in "Perl and friends".
+
+  The typical way that people are boosting their productivity is “LLM as Teammate”, which already works via tools like GitHub Copilot and ChatGPT. The Compiler vs Teammate approaches are not mutually exclusive, and are actually quite complementary.
+
+See [LLMS are compilers](https://news.ycombinator.com/item?id=34964619)
+
+> LLMs may change the way programming looks over the next many years, but they should not be thought of as compilers. Compilers have extremely formal requirements, well understood design, and can be tested deeply to ensure correctness. You can be confident that a compiler will express your program in the way you want in ways that you simply cannot be with a LLM.
+
+See [Do LLMs eliminate the need for programming languages?(https://www.modular.com/blog/do-llms-eliminate-the-need-for-programming-languages)
+
+> ... It becomes even more critical to design a language to be read, not just written by other humans, so **we humans can review and approve generated code**. 
+>  Let’s consider some examples: 
+> if you prompted an LLM to build you a mobile app that processes online purchases, would you ship that without reviewing the source code to make sure it does billing right? Or, more extreme yet, 
+> would you want to send humans to the moon with code written by an LLM?
+> While no one knows the future, we think humans will need to be in the loop for quite some time for many applications – particularly where the error margins are low, and resulting costs are high.
+
+See [The Rise Of Prompt Engineering: Could LLMs Become A New Programming Paradigm?](https://stefanini.com/en/insights/articles/the-rise-of-prompt-engineering-could-llms-become-a-new-programming-paradigm)
