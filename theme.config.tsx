@@ -42,7 +42,15 @@ const config: DocsThemeConfig = {
   },
   docsRepositoryBase: 'https://github.com/ULL-ESIT-PL-2324/pl-nextra/blob/main/',
   footer: {
-    text: 'Notes for the Computer Science degree ULL 23/24 course on Programming Languages',
+    text: (
+      <span>
+        MIT {new Date().getFullYear()} ©{' '}
+        <a href="https://campusingenieriaytecnologia2324.ull.es/course/view.php?id=2324090147" target="_blank">
+        Notes for the Computer Science degree ULL 23/24 course on Programming Languages
+        </a>
+        .
+      </span>
+    )
   },
   main: ({ children }) => { // See https://github.com/shuding/nextra/discussions/1508#discussioncomment-4990229
     // eslint-disable-next-line react-hooks/rules-of-hooks

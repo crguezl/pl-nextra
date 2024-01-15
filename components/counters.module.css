@@ -36,11 +36,13 @@
 
 .link {
   color: blue;
+  text-decoration-line: underline;
 }
 
 /* unvisited link */
 .link:link {
-  color: blue;
+  /*color: blue;*/
+  color: hsl(var(--nextra-primary-hue)var(--nextra-primary-saturation)45%/var(--tw-text-opacity));
 }
 
 /* visited link */
