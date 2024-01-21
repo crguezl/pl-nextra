@@ -1,0 +1,63 @@
+---
+title: GitHub Project Board
+date:
+delivery:
+campus: https://campusingenieriaytecnologia2223.ull.es/mod/assign/view.php?id=20499
+published: true
+key: github-project-board
+layout: Practica
+order: 3
+prev: github-campus-expert.md
+next: visual-studio-code.html
+rubrica:
+  - "Proyecto Kanban creado para la práctica"
+  - "Lo estoy usando para informar del avance en mis prácticas"
+  - "Convierto las notas en issues"
+  - La visibilidad de mis projects boards es correcta
+  - "Informe elaborado correcto"
+---
+
+import { Link, frontmatter} from '@/src/frontmatter'
+import { Callout } from 'nextra/components'
+import Rubric from '@/components/rubric'
+
+## A Project Board for each Lab
+
+* Para cada práctica/asignación se creará un tablero kanban (GitHub Project Automated Kanban) enlazado al repo de la práctica
+
+  ![](/images/github-project-board-example.png)
+* En este tablero de repo se crean inicialmente en la columna `TODO` al menos tantas incidencias como requisitos tiene la práctica
+* Cuando en la corrección el profesor comenta que el requisito  esta cumplido **la cerramos**. Si el profesor indica que algo esta mal debe crearse una nueva incidencia que deberá ir a `TODO`.  Cuando crea que la haya arreglado la mueve a `done` y creará una incidencia mencionando al profesor. 
+* **En algunos casos, cuando sea razonable y los profesores se lo indiquen, el GitHub Project Automated Kanban podrá estar enlazado a varios repos. Es el caso para estas primeras Prácticas Básicas**
+
+## Project Board Visibility
+
+<Callout type="error" emoji="️🎓"> 
+
+Cuidado!
+
+Asegúrese de tener configurados como privados sus project boards. Además proceda a ocultarlos a los miembros de la organización que no sean usted siguiendo estos pasos:
+
+1. Estando en el project board, haga click en el botón `...` y seleccione `Settings`
+ 
+  ![/images/github-project-boards/project-board-visibilit
+y-1.png](/images/github-project-boards/project-board-visibility-1.png)
+2. En el panel de la izquierda seleccione `Manage access`
+ 
+  ![/images/github-project-boards/project-board-visibility-2.png](/images/github-project-boards/project-board-visibility-2.png)
+
+3. Cambie el valor de `Base Role`a `no access`
+   
+  ![/images/github-project-boards/project-board-visibility-3.png](/images/github-project-boards/project-board-visibility-3.png)
+
+4. Ahora si otros miembros de la organización navegan  a su board obtendrán un 404:
+   
+  ![/images/github-project-boards/project-board-visibility-4.png](/images/github-project-boards/project-board-visibility-4.png)
+
+</Callout>
+
+## References
+
+* [GitHub Docs: About project boards](https://docs.github.com/en/github/managing-your-work-on-github/about-project-boards)
+
+
