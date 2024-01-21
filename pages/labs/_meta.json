@@ -1,7 +1,14 @@
 {
   "github-alu-form": {
     "title": "Fill the form",
-    "display": "normal"
+    "display": "normal",
+    "theme": {
+      "breadcrumb": true,
+      "footer": true,
+      "sidebar": true,
+      "toc": true,
+      "pagination": true
+    }
   },
   "github-campus-expert": {
     "title": "GitHub Campus Expert",

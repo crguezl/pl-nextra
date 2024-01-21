@@ -11,6 +11,7 @@ export function CollectionPage({ path }) {
     locale, defaultLocale
   ).map(page => {
       console.error(page.frontMatter?.title)
+      if (page.frontMatter?.display === 'hidden') return null
       return (
         <li key={page.route}>
           <Link className={styles.link} href={page.route}>{page.meta.title || page.frontMatter?.title || page.name}</Link>
