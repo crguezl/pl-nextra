@@ -1,7 +1,18 @@
 {
-    "hello-compiler": "Hello Compiler",
-    "arith2js": {
-      "title": "Translating Arithmetic Expressions to JavaScript",
-      "display": "hidden"
-    }
+  "github-alu-form": {
+    "title": "Fill the form",
+    "display": "normal"
+  },
+  "github-campus-expert": {
+    "title": "GitHub Campus Expert",
+    "display": "normal"
+  },
+  "hello-compiler": {
+    "title": "Hello Compiler",
+    "display": "hidden"
+  },
+  "arith2js": {
+    "title": "Translating Arithmetic Expressions to JavaScript",
+    "display": "hidden"
+  }
 }
