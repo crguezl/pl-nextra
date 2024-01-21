@@ -6,19 +6,19 @@ next: 2023-01-31-leccion.md
 labs: [ 'github-alu-form', 'github-campus-expert']
 temas: 
   - text: "Guía Docente y Metodología"
-    href: "/temas/introduccion-a-pl/guia-docente.html"
+    href: "/"
   - text: "Referencias"
-    href: "/referencias/index.html"
+    href: "/referencias"
   - text: "Using IAs in the Classroom"
-    href: "/temas/introduccion-a-pl/using-ias-in-the-classroom"
+    href: "/topics/introduction-to-pl/using-ias-in-the-classroom"
   - text: "GitHub Classroom Intro"
-    href: /temas/introduccion-a-pl/github-classroom
+    href: /topics/introduction-to-pl/github-classroom
   - text: "Aprender Markdown"
-    href: "/tema0-introduccion/practicas/aprender-markdown/#aprender-markdown"
+    href: "https://ull-mfp-aet.netlify.app/tema0-introduccion/practicas/aprender-markdown/#aprender-markdown"
   - text: "CodeSpaces"
-    href: "/temas/introduccion-a-javascript/codespaces"
+    href: "/topics/introduction-to-javascript/codespaces"
   - text: "GitPod"
-    href: "/temas/introduccion-a-javascript/gitpod"
+    href: "/topics/introduction-to-javascript/gitpod"
 video: "https://youtu.be/l4xWwcUH_5I"
 ---
 
@@ -35,3 +35,9 @@ import { Callout } from 'nextra/components'
 import RelatedLabs from '@/components/related-labs'
 
 <RelatedLabs labs={ frontmatter().labs }/>
+
+## Related topics
+
+import RelatedTopics from '@/components/related-topics'
+
+<RelatedTopics topics={ frontmatter().temas }/>
