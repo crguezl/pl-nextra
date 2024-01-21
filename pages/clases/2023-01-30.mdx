@@ -26,8 +26,12 @@ import Presentation from '../index.mdx'
 
 <Presentation />
 
-## Video
+import { Link, frontmatter} from '@/src/frontmatter'
+import { Callout } from 'nextra/components'
 
 
 ## Related labs
 
+import RelatedLabs from '@/components/related-labs'
+
+<RelatedLabs labs={ frontmatter().labs }/>
