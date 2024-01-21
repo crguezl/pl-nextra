@@ -95,6 +95,27 @@
       }
     }
   },
+  "Grado II": {
+    "type": "menu",
+    "items": {
+      "Ingeniería Informática": { 
+        "href": "https://www.ull.es/grados/ingenieria-informatica/", 
+        "newWindow": true 
+      },
+      "Horarios y Exámenes":  { 
+        "href": "https://www.ull.es/grados/ingenieria-informatica/informacion-academica/horarios-y-calendario-examenes/", 
+        "newWindow": true 
+      },
+      "Normativa": { 
+        "href": "https://www.ull.es/grados/ingenieria-informatica/informacion-academica/normativa-y-reglamentos/",
+        "newWindow": true 
+      },
+      "Evaluación": {
+        "href": "https://www.ull.es/portal/normativa/categorias/evaluacion-y-calificacion/",
+        "newWindow": true 
+      }
+    }
+  },
   "ast-explorer": {
     "title": "ASTex",
     "type": "page",

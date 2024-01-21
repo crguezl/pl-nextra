@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "save": "git add . && git commit -m 'Update' && git push -u crguezl; git push",
-    "next_auth_secret": "echo \"NEXTAUTH_SECRET=$(openssl rand -base64 32)\""
+    "next_auth_secret": "echo \"NEXTAUTH_SECRET=$(openssl rand -base64 32)\"",
+    "deploy": "vercel -e NODE_ENV=production; echo 'remember to  promote to production'",
+    "deploy-netlify": "netlify deploy --prod"
   },
   "engines": {
     "node": ">=18.x"
