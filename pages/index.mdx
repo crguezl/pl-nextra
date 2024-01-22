@@ -25,7 +25,20 @@ import { Callout } from 'nextra/components'
 * Superadas las partes: prácticas, tfa y las pruebas objetivas  la nota es la media ponderada de las partes:
   $$0,4 \times practicas + 0,5 \times objetivas + 0,1 \times tfa$$
 
-![/images/evaluacion.png](/images/evaluacion.png)
+```mermaid
+graph TD
+  subgraph "Assesment"
+    A((Nota))--> B((objetivas<br/>0,5))
+
+    A-->D((prácticas<br/>0,5))
+
+    B--> F(("Primer<br/>exámen<br/>0,05"))
+    B--> M(("Segundo<br/>exámen<br/> 0,45"))
+
+    D-->G(("prácticas<br/>0,4"))
+    D-->H(("TFA 0,1"))
+  end
+```
 
 ### Corrección de las Prácticas
 
@@ -43,14 +56,14 @@ En el curso 23/24 "**El alumnado podrá optar a la evaluación única comunicán
 * El TFA suma el 10% de la nota final
 * La prueba objetiva final es el 40% de la nota final
 * La prueba objetiva parcial es el 10% de la nota final
-* El porcentaje del 40% puede incrementarse en la Guía Docente de PL hasta un 60% en cuyo caso la forma de no superar el umbral en PL sería no presentarse a la prueba objetiva final
+* El porcentaje del 40% puede incrementarse en la Guía Docente de hasta un 60% 
 
 ## Tareas Iniciales
 
 ### Rellenar Cuestionario 
 
 Rellena el Cuestionario 
-[Relación GitHub-AluXXXX](https://campusingenieriaytecnologia2324.ull.es/mod/assign/view.php?id\=20497)  
+[Relación GitHub-AluXXXX](https://campusingenieriaytecnologia2324.ull.es/mod/assign/view.php?id=1984)  
 
 * Puedes poner un correo distinto del de la ULL si lo prefieres
 * Pon los usuarios GitHub (si tienes mas de uno) con los que vayas a hacer los commits en las prácticas de la asignatura
