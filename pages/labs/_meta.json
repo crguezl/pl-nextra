@@ -14,6 +14,18 @@
     "title": "GitHub Campus Expert",
     "display": "normal"
   },
+  "github-project-board": {
+    "title": "GitHub Project Board",
+    "display": "normal"
+  },
+  "visual-studio-code": {
+    "title": "Visual Studio Code and Gitpod",
+    "display": "normal"
+  },
+  "iaas": {
+    "title": "IAAS",
+    "display": "normal"
+  },
   "hello-compiler": {
     "title": "Hello Compiler",
     "display": "hidden"
