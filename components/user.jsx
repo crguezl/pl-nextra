@@ -21,5 +21,5 @@ export default function User() {
         </div>)
   }
 
-  return <a href="/api/auth/signin">Sign in</a>
+  return <a href="/api/auth/signin" className={ styles.button}>Sign in</a>
 }
