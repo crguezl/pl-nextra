@@ -11,7 +11,7 @@
     "deploy": "cp .env.vercel.local .env.production.local && vercel -e NODE_ENV=production --prod; echo 'remember to  promote to production'",
     "deploy-netlify": "cp .env.netlify.local .env.production.local && npm run build && netlify deploy --prod"
   },
-  "engines": {
+  "engines": { 
     "node": ">=18.x"
   },
   "repository": {
