@@ -134,7 +134,7 @@
     }
   },
   "ast-explorer": {
-    "title": "ASTex",
+    "title": "/\\",
     "type": "page",
     "href": "https://astexplorer.net/",
     "newWindow": true
