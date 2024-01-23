@@ -3,6 +3,10 @@ export default function handler(req, res) {
   res.status(200).send("hello") // json({ message: 'Hello from Next.js!' })
 }
 */
+
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "./auth/[...nextauth]"
+
 import { graphql } from "@octokit/graphql";
 import { log } from "console"
 import { inspect } from "util"
@@ -39,6 +43,12 @@ export default async function getTeams(req, res) {
   //const { body, cookies, headers, method, query } = req
   //log(inspect({ body, cookies, method, query }, { depth: 1 })) 
 
+  const session = await getServerSession(req, res, authOptions)
+
+  console.error("session", session)
+
+  if (session && session?.user?.email === "crguezl@ull.edu.es") {
+    console.error("session", session)
     const graphqlWithAuth = graphql.defaults({
         headers: {
           authorization: `token ${process.env.GITHUB_TOKEN}`,
@@ -48,10 +58,13 @@ export default async function getTeams(req, res) {
 
     const r = await graphqlWithAuth(teamsQuery,
         {
-            organization:"ULL-ESIT-PL-2223",
+            organization:"ULL-ESIT-PL-2324",
             //alu: "gcruz174"
         });    
 
     //res.status(200).json({ message: 'Hello from Next.js!' })
     res.status(200).json({ teams: r })
+      } else {
+        res.status(200).json({ error: 'Not authorized.' })
+      }
 }

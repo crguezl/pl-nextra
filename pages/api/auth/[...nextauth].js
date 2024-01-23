@@ -18,7 +18,7 @@ let wrapper = async function (req, res) {
 
   /* Promise { <pending>,  [Symbol(async_id_symbol)]: 788747, [Symbol(trigger_async_id_symbol)]: 788737, [Symbol(kResourceStore)]: undefined  } */
   let result = await authHandler(req, res) 
-    log(inspect({ body, cookies, method, query }, { depth: 1 })) 
+    //log(inspect({ body, cookies, method, query }, { depth: 1 })) 
     /*  cookies: {
     'next-auth.csrf-token': '5c5a425421b243ab9643d9d19eb73637347dd4e16c5b98cb924a9a8f56be2fea|b2211844feff364586eb8459a1ef357bf4b2ebfdea9ffbe80c6b87d2632c85df',
     'next-auth.callback-url': 'http://localhost:3000/',

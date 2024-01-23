@@ -46,27 +46,27 @@
   "github": {
     "title": "GitHub",
     "type": "menu",
-    "items": {      
+    "items": {
       "classroom": {
         "title": "GitHub Classroom ↗",
         "href": "https://classroom.github.com/classrooms/153934884-ull-esit-pl-2324",
         "newWindow": true
-       },
-       "template-org": {
+      },
+      "template-org": {
         "title": "ULL-ESIT-PL ↗",
         "href": "https://github.com/ULL-ESIT-PL",
         "newWindow": true
-       },
-       "teams": {
+      },
+      "teams": {
         "title": "Teams ↗",
         "href": "https://github.com/orgs/ULL-ESIT-PL-2324/teams",
         "newWindow": true
-       },
-       "resources": {
-          "title": "Github Resources ",
-          "href": "/resources#recursos-github",
-          "newWindow": false
-       }
+      },
+      "resources": {
+        "title": "Github Resources ",
+        "href": "/resources#recursos-github",
+        "newWindow": false
+      }
     }
   },
   "deploys": {
@@ -96,41 +96,81 @@
     }
   },
   "Grado II": {
+    "title": "Grado II",
     "type": "menu",
     "items": {
-      "Ingeniería Informática": { 
-        "href": "https://www.ull.es/grados/ingenieria-informatica/", 
-        "newWindow": true 
+      "Ingeniería Informática": {
+        "title": "Ingeniería Informática ↗",
+        "href": "https://www.ull.es/grados/ingenieria-informatica/",
+        "newWindow": true
       },
-      "Horarios y Exámenes":  { 
-        "href": "https://www.ull.es/grados/ingenieria-informatica/informacion-academica/horarios-y-calendario-examenes/", 
-        "newWindow": true 
+      "Horarios y Exámenes": {
+        "title": "Horarios y Exámenes ↗",
+        "href": "https://www.ull.es/grados/ingenieria-informatica/informacion-academica/horarios-y-calendario-examenes/",
+        "newWindow": true
       },
-      "Normativa": { 
+      "Normativa": {
+        "title": "Normativa y Reglamentos ↗",
         "href": "https://www.ull.es/grados/ingenieria-informatica/informacion-academica/normativa-y-reglamentos/",
-        "newWindow": true 
+        "newWindow": true
       },
       "Evaluación": {
+        "title": "Evaluación y Calificación ↗",
         "href": "https://www.ull.es/portal/normativa/categorias/evaluacion-y-calificacion/",
-        "newWindow": true 
+        "newWindow": true
       }
     }
   },
   "Google": {
+    "title": "Google",
     "type": "menu",
     "items": {
-      "PL Meet":{ "href": "https://meet.google.com/eha-yfij-zmo", "newWindow": true },
-      "Google Chat": { "href": "https://mail.google.com/chat/u/1/#chat/welcome", "newWindow": true },
-      "Google Spreadsheets": { "href": "https://docs.google.com/spreadsheets/u/1/?tgif=d", "newWindow": true }
+      "PL Meet": {
+        "title": "PL Meet",
+        "href": "https://meet.google.com/eha-yfij-zmo",
+        "newWindow": true
+      },
+      "Google Chat": {
+        "title": "Google Chat",
+        "href": "https://mail.google.com/chat/u/1/#chat/welcome",
+        "newWindow": true
+      },
+      "Google Spreadsheets": {
+        "title": "Google Spreadsheets",
+        "href": "https://docs.google.com/spreadsheets/u/1/?tgif=d",
+        "newWindow": true
       }
+    }
   },
   "Vídeos": {
+    "title": "Vídeos",
     "type": "menu",
     "items": {
-      "Curso 22/23": { "href": "https://www.youtube.com/playlist?list=PLuPGCp-dfrUQ1SMSQWaW-PDeoxJpk2uzh", "newWindow": true },
-      "Curso 21/22": { "href": "https://youtube.com/playlist?list=PLuPGCp-dfrUQbbnbT_8qHK1WQYurYwBEY", "newWindow": true },
-      "Curso 20/21": { "href": "https://www.youtube.com/playlist?list=PLuPGCp-dfrUTzN_o2beArY1QoFUTGH-yd", "newWindow": true },
-      "Curso 19/20": { "href": "https://youtube.com/playlist?list=PLuPGCp-dfrUTByhC5b9vInei9OzdYSBs7", "newWindow": true }
+      "Curso 23/24": { 
+        "title": "Curso 23/24",
+        "href": "https://youtu.be/IggSUWTiS5M?si=HDTYv9zO1OJoqvhQ", 
+        "newWindow": true 
+      },
+      "Curso 22/23": {
+        "title": "Curso 22/23",
+        "href": "https://www.youtube.com/playlist?list=PLuPGCp-dfrUQ1SMSQWaW-PDeoxJpk2uzh",
+        "newWindow": true
+      },
+      "Curso 21/22": {
+        "title": "Curso 21/22",
+        "href": "https://youtube.com/playlist?list=PLuPGCp-dfrUQbbnbT_8qHK1WQYurYwBEY",
+        "newWindow": true
+      },
+      "Curso 20/21": {
+        "title": "Curso 20/21",
+        "href": "https://www.youtube.com/playlist?list=PLuPGCp-dfrUTzN_o2beArY1QoFUTGH-yd",
+        "newWindow": true
+      },
+      "Curso 19/20": {
+        "title": "Curso 19/20",
+        "href": "https://youtube.com/playlist?list=PLuPGCp-dfrUTByhC5b9vInei9OzdYSBs7",
+        "newWindow": true
+      }
     }
   },
   "ast-explorer": {
