@@ -217,16 +217,33 @@ undefined
 ### El Objeto AST generado por el parser de Espree
 
 Ves que el objeto está compuesto de objetos de la clase `Node`. Si te concentras sólo en los campos `type` del objeto queda 
-mas evidente como el objeto describe la jerarquía AST construída para la frase `answer = 42`. En las etiquetas de las aristas he puesto los nombres de los atributos y el tipo (`[Node]` para indicar array de objetos `Node`)
+mas evidente como el objeto describe la jerarquía AST construída para la frase `answer = 42`. 
+Puedes instalar el script [compast](https://www.npmjs.com/package/compact-js-ast) en [ULL-ESIT-PL/compact-js-ast](https://github.com/ULL-ESIT-PL/compact-js-ast) para ver un resumen del AST:
+
+```js
+➜  esprima-pegjs-jsconfeu-talk git:(master) ✗ compast -p 'const answer = 42' 
+[
+  'Program',
+  [
+    'VariableDeclaration',
+    [
+      'VariableDeclarator',
+      [ 'Identifier', 'answer' ],
+      [ 'Literal', 42 ]
+    ]
+  ]
+]
+```
+
+que se corresponde con el siguiente diagrama:
 
 ```mermaid
-graph TB
-  subgraph AST for 'answer = 42'
-    A((Program))-->|"body [Node]"| B((VariableDeclaration))
-    B-->|"declarations [Node]"| C((VariableDeclarator))
-    C-->|"id Node"| D(("id name='answer'"))
-    C-->|"init Node"| E(("Literal value=42"))
-  end
+graph TD
+    A[Program]
+    A -->|body| B[VariableDeclaration]
+    B -->|declarations| C[VariableDeclarator]
+    C -->|id| D[Identifier]
+    C -->|init| E[Literal]
 ```
 
 ### Tipos de Nodos y nombres de los hijos

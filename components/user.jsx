@@ -1,7 +1,8 @@
+"use client"
+
 import { useSession, signOut } from "next-auth/react" // https://next-auth.js.org/getting-started/client#usesession
 import { useConfig } from 'nextra-theme-docs'
 import styles from './counters.module.css'
-
 
 export default function User() {
   const { data: session, status } = useSession()

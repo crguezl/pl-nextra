@@ -4,7 +4,7 @@ import styles from './counters.module.css'
 
 export default function RelatedTopics({ topics} ) {
   let topicsJSX = topics.map(topic => {
-        return <li><Link href={topic.href} key={topic.href}>{topic.text}</Link></li>
+        return <li  key={topic.href}><Link href={topic.href}>{topic.text}</Link></li>
   })
   return (
     <ul className={ styles.myList}>

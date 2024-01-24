@@ -45,26 +45,40 @@ export default async function getTeams(req, res) {
 
   const session = await getServerSession(req, res, authOptions)
 
-  console.error("session", session)
+  //console.error("session", session)
+  let email = session?.user?.email;
+  if (email) {
+    let [id, domain] = email.split("@");
+    //console.error(`id=${id} domain=${domain}`)
 
-  if (session && session?.user?.email === "crguezl@ull.edu.es") {
-    console.error("session", session)
     const graphqlWithAuth = graphql.defaults({
-        headers: {
-          authorization: `token ${process.env.GITHUB_TOKEN}`,
-        },
-      });
-      
+      headers: {
+        authorization: `token ${process.env.GITHUB_TOKEN}`,
+      },
+    });
 
     const r = await graphqlWithAuth(teamsQuery,
-        {
-            organization:"ULL-ESIT-PL-2324",
-            //alu: "gcruz174"
-        });    
+      {
+        organization: "ULL-ESIT-PL-2324",
+        //alu: "gcruz174"
+      });
 
     //res.status(200).json({ message: 'Hello from Next.js!' })
-    res.status(200).json({ teams: r })
-      } else {
-        res.status(200).json({ error: 'Not authorized.' })
-      }
+    //console.error("r\n", JSON.stringify(r, null, 2))
+    let teams = r?.organization?.teams
+    // TODO: check if teams has a value
+    if (email === 'crguezl@ull.edu.es') {
+      teams = teams.edges.map(n => n.node)
+    }
+    else {
+      teams = teams.edges.filter(n => n?.node?.name?.includes(id)).map(n => n.node)
+      //console.error("alu\n",JSON.stringify(teams, null, 2))
+    }
+    res.status(200).json({
+      totalCount: r?.organization?.teams?.totalCount,
+      teams
+    })
+  } else {
+    res.status(200).json({ error: 'Not authorized. Login first' })
+  }
 }

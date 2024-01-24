@@ -11,7 +11,7 @@
     "deploy": "cp .env.vercel.local .env.production.local && vercel -e NODE_ENV=production --prod; echo 'remember to  promote to production'",
     "deploy-netlify": "cp .env.netlify.local .env.production.local && npm run build && netlify deploy --prod"
   },
-  "engines": { 
+  "engines": {
     "node": ">=18.x"
   },
   "repository": {
@@ -34,7 +34,8 @@
     "nextra-theme-docs": "^2.13.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-youtube": "^10.1.0"
+    "react-youtube": "^10.1.0",
+    "swr": "^2.2.4"
   },
   "devDependencies": {
     "@types/node": "18.11.10",
