@@ -188,9 +188,20 @@
         "type": "page",
         "href": "https://www.npmjs.com/package/compact-js-ast",
         "newWindow": true
+      },
+      "espree": {
+        "title": "Espree",
+        "type": "page",
+        "href": "https://github.com/eslint/espree",
+        "newWindow": true
+      },
+      "nextra": {
+        "title": "Nextra",
+        "type": "page",
+        "href": "https://nextra.vercel.app/",
+        "newWindow": true
       }
     }
-  }
 },
 "pl-includes": {
   "title": "____",
