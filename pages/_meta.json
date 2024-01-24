@@ -146,10 +146,10 @@
     "title": "Vídeos",
     "type": "menu",
     "items": {
-      "Curso 23/24": { 
+      "Curso 23/24": {
         "title": "Curso 23/24",
-        "href": "https://youtu.be/IggSUWTiS5M?si=HDTYv9zO1OJoqvhQ", 
-        "newWindow": true 
+        "href": "https://youtu.be/IggSUWTiS5M?si=HDTYv9zO1OJoqvhQ",
+        "newWindow": true
       },
       "Curso 22/23": {
         "title": "Curso 22/23",
@@ -173,20 +173,33 @@
       }
     }
   },
-  "ast-explorer": {
-    "title": "/\\",
-    "type": "page",
-    "href": "https://astexplorer.net/",
-    "newWindow": true
-  },
-  "pl-includes": {
-    "title": "____",
-    "type": "page",
-    "display": "hidden"
-  },
-  "auth": {
-    "title": "Auth",
-    "type": "page",
-    "display": "hidden"
+  "Tools": {
+    "title": "Tools",
+    "type": "menu",
+    "items": {
+      "ast-explorer": {
+        "title": "AST Explorer",
+        "type": "page",
+        "href": "https://astexplorer.net/",
+        "newWindow": true
+      },
+      "compact-js-ast": {
+        "title": "Compact JS AST",
+        "type": "page",
+        "href": "https://www.npmjs.com/package/compact-js-ast",
+        "newWindow": true
+      }
+    }
   }
+},
+"pl-includes": {
+  "title": "____",
+  "type": "page",
+  "display": "hidden"
+},
+"auth": {
+  "title": "Auth",
+  "type": "page",
+  "display": "hidden"
+}
 }
