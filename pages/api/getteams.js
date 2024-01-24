@@ -4,6 +4,9 @@ export default function handler(req, res) {
 }
 */
 
+const ORGANIZATION = "ULL-ESIT-PL-2324"
+const TEACHEREMAIL = 'crguezl@ull.edu.es'
+
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "./auth/[...nextauth]"
 
@@ -59,7 +62,7 @@ export default async function getTeams(req, res) {
 
     const r = await graphqlWithAuth(teamsQuery,
       {
-        organization: "ULL-ESIT-PL-2324",
+        organization: ORGANIZATION,
         //alu: "gcruz174"
       });
 
@@ -67,13 +70,30 @@ export default async function getTeams(req, res) {
     //console.error("r\n", JSON.stringify(r, null, 2))
     let teams = r?.organization?.teams
     // TODO: check if teams has a value
-    if (email === 'crguezl@ull.edu.es') {
+    if (email === TEACHEREMAIL) {
       teams = teams.edges.map(n => n.node)
     }
     else {
       teams = teams.edges.filter(n => n?.node?.name?.includes(id)).map(n => n.node)
       //console.error("alu\n",JSON.stringify(teams, null, 2))
     }
+    teams = teams.sort((f1,f2) => {
+      let [name1, ape11, ape12, alu1] = f1.name.split("-")
+      let [name2, ape21, ape22, alu2] = f2.name.split("-")
+
+      if (!alu1) alu1 = ape12
+      if (!alu2) alu2 = ape22
+
+      if (ape11 < ape21) return -1
+      if (ape11 > ape21) return 1
+      if (ape12 < ape22) return -1
+      if (ape12 > ape22) return 1
+      if (name1 < name2) return -1
+      if (name1 > name2) return 1
+      if (alu1 < alu2) return -1
+      if (alu1 > alu2) return 1
+      return 0
+    })
     res.status(200).json({
       totalCount: r?.organization?.teams?.totalCount,
       teams
