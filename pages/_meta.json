@@ -5,12 +5,6 @@
   "topics": "Topics",
   "schedules": "Schedules",
   "nextra-playground": "Learning Nextra SSG",
-  "logout": {
-    "title": "Logout",
-    "type": "page",
-    "href": "/api/auth/signout",
-    "newWindow": false
-  },
   "user": {
     "title": "User",
     "type": "page",

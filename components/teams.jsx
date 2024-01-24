@@ -10,9 +10,9 @@ export default function Teams() {
     if (error) return <div>Failed to load</div>
     if (!data) return <div>Loading...</div>
 
-    if (data?.teams?.length === 0) return (
+    if (data?.teams?.length) return (
         <div>
-            <p>{data.teams.length} Teams</p>)
+            <p>{data.teams.length} Teams</p>
             <ul className={styles.uList}>
                 {data.teams.map(t => (<li key={t.name}><Link href={t.url}>{t.name}</Link></li>))}
             </ul>
