@@ -6,5 +6,9 @@
     "introduction-to-javascript": {
         "type": "page",
         "title": "Basics"
+    },
+    "syntax-analysis": {
+        "type": "page",
+        "title": "Syntax Analysis"
     }
 }
