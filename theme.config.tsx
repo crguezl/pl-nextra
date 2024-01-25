@@ -81,6 +81,10 @@ const config: DocsThemeConfig = {
       return <>👉 {title}</>
     }*/
   },
+  toc: {
+    float: true,
+    title: "On this page"
+  },
   faviconGlyph: '🇵🇱',
   search: {
     placeholder: "Search PL 23/24 site"

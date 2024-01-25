@@ -9,7 +9,7 @@ y [Extending de Egg Interpreter](/practicas/extended-egg-interpreter.html) (TFA-
 * Entregue su trabajo [Extending de Egg Interpreter](/practicas/extended-egg-interpreter.html) en el repo asignado como es habitual.
 * En el repo del TFA se entregan ambas prácticas o la propuesta alternativa. En el caso de ambas prácticas puede 
   1. usar `git submodules` para enlazar los repos de las prácticas con el repo del TFA.  
-lea la sección de los apuntes [Making a Project with the two repos: git submodule](/temas/introduccion-a-javascript/creating-and-publishing-npm-module.html#making-a-project-with-the-two-repos-git-submodule) 
+lea la sección de los apuntes [Making a Project with the two repos: git submodule](/temas/introduction-to-javascript/creating-and-publishing-npm-module.html#making-a-project-with-the-two-repos-git-submodule) 
   1. Poner los trabajos en dos carpetas y usar [npm workspaces](https://docs.npmjs.com/cli/v7/using-npm/workspaces) para publicar los dos paquetes asociados al mismo repo (monorepo). Véase también el [ejemplo de monorepo](https://github.com/ULL-ESIT-DMSI/npm-workspaces-learning).
   Workspaces is a generic term that refers to the set of features in the npm cli that provides support to managing multiple packages from your local file system from within a singular top-level, root package. This set of features makes up for a much more streamlined workflow handling linked packages from the local file system. Automating the linking process as part of npm install and avoiding manually having to use `npm link` in order to add references to packages that should be symlinked into the current node_modules folder.
 

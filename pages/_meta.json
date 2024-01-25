@@ -173,29 +173,66 @@
     "items": {
       "ast-explorer": {
         "title": "AST Explorer",
-        "type": "page",
         "href": "https://astexplorer.net/",
         "newWindow": true
       },
       "compact-js-ast": {
         "title": "Compact JS AST",
-        "type": "page",
         "href": "https://www.npmjs.com/package/compact-js-ast",
         "newWindow": true
       },
       "espree": {
         "title": "Espree",
-        "type": "page",
         "href": "https://github.com/eslint/espree",
+        "newWindow": true
+      },
+      "jison": {
+        "title": "Jison",
+        "href": "https://gerhobbelt.github.io/jison/docs/",
         "newWindow": true
       },
       "nextra": {
         "title": "Nextra",
-        "type": "page",
         "href": "https://nextra.vercel.app/",
         "newWindow": true
       }
     }
+},
+"PL": {
+  "title": "PL",
+  "type": "menu",
+  "items": {
+    "Classes": {
+      "title": "Classes",
+      "href": "/clases",
+      "newWindow": false
+    },
+    "Labs": {
+      "title": "Labs",
+      "href": "/labs",
+      "newWindow": false
+    },
+    "Topics": {
+      "title": "Topics",
+      "href": "/topics",
+      "newWindow": false
+    },
+    "Schedules": {
+      "title": "Schedules",
+      "href": "/schedules",
+      "newWindow": false
+    },
+    "Resources": {
+      "title": "Resources",
+      "href": "/resources",
+      "newWindow": false
+    },
+    "References": {
+      "title": "References",
+      "href": "/references",
+      "newWindow": false
+    }
+  }
 },
 "pl-includes": {
   "title": "____",

@@ -1,7 +1,12 @@
 
-::: danger Exponentiation is ECMAScript 2016
+import { Callout } from 'nextra/components'
+ 
+<Callout type="error" emoji="👾"> 
+
+**danger Exponentiation is ECMAScript 2016**
+
 New Features in ECMAScript 2016:  JavaScript Exponentiation (**)
-See for instance: <https://www.w3schools.com/js/js_2016.asp> and <https://262.ecma-international.org/7.0/>
+See for instance: https://www.w3schools.com/js/js_2016.asp and https://262.ecma-international.org/7.0/
 
 > ...   This specification also includes support for **a new exponentiation operator** and adds a new method to Array.prototype called **includes**
 
@@ -31,11 +36,13 @@ Uncaught:
 SyntaxError: Unary operator used immediately before exponentiation expression. Parenthesis must be used to disambiguate operator precedence
 > (-2) ** 2  # ... But this code works 
 4
-:::
+```
+</Callout>
+
 
 Therefore, the following  continuation of the former node session suggest the correct translation:
 
-::: tip Use Math.pow
+<Callout>
 ```js
 > let ast5 = espree.parse('Math.pow(-2,2)')
 undefined
@@ -44,4 +51,4 @@ undefined
 > eval(gc)
 4
 ``` 
-:::
+</Callout>

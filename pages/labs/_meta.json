@@ -26,12 +26,19 @@
     "title": "IAAS",
     "display": "normal"
   },
-  "hello-compiler": {
-    "title": "Hello Compiler",
-    "display": "hidden"
-  },
   "arith2js": {
     "title": "Translating Arithmetic Expressions to JavaScript",
+    "display": "normal",
+    "theme": {
+      "breadcrumb": true,
+      "footer": true,
+      "sidebar": true,
+      "toc": true,
+      "pagination": true
+    }
+  },
+  "hello-compiler": {
+    "title": "Hello Compiler",
     "display": "hidden"
   }
 }

@@ -23,8 +23,20 @@ rubrica:
 repo:
   text: "Repo hello-jison"
   href: "https://github.com/ull-esit-pl/hello-jison"
-
 ---
+
+## TOC
+- [TOC](#toc)
+- [Objetivos](#objetivos)
+- [Opciones en línea de comandos](#opciones-en-línea-de-comandos)
+- [Dealing with Ambiguity](#dealing-with-ambiguity)
+- [Unary minus and exponentiation in escodegen](#unary-minus-and-exponentiation-in-escodegen)
+- [Pruebas](#pruebas)
+- [Covering](#covering)
+- [References](#references)
+  - [Essentials for this lab](#essentials-for-this-lab)
+  - [Jison and Syntax Analysis](#jison-and-syntax-analysis)
+  - [Have a look](#have-a-look)
 
 ## Objetivos
 
@@ -72,24 +84,30 @@ Para tratar con los temas de ambigüedad en la gramática,
 puede consultar 
 
 * la sección [Precedencia y Asociatividad](https://crguezl.github.io/pl-html/node57.html) de los viejos apuntes de PL
-* la sección [Dealing with ambiguity](/practicas/hello-compiler.html#dealing-with-ambiguity) de la práctica [hello-compiler](/practicas/hello-compiler.html) y aplíque los conceptos aprendidos a este proyecto.
+* See the examples in the [Repo crguezl/jison-prec](https://github.com/crguezl/jison-prec).
+
 
 ## Unary minus and exponentiation in escodegen
 
-!!!include(includes/unaryminus-exponenciation-escodegen.md)!!!
+import UnaryMinus from "../pl-includes/unaryminus-exponenciation-escodegen.mdx"
+
+
+<UnaryMinus/>
 
 ## Pruebas
 
-Añada pruebas a este proyecto usando [mocha](/temas/introduccion-a-javascript/mocha.html)
+Añada pruebas a este proyecto usando [mocha](/topics/introduction-tojavascript/mocha.html)
 
 
-!!!include(temas/introduccion-a-javascript/mocking-stubbing.md)!!!
+import MockingStubbing from "../topics/introduction-to-javascript/mocking-stubbing.mdx"
+
+<MockingStubbing/>
 
 
 ## Covering 
 
 You can use  [nyc](https://www.npmjs.com/package/nyc) to do the covering of your mocha tests.
-See the notes in [covering](/temas/introduccion-a-javascript/covering). 
+See the notes in [covering](/topics/introduction-to-javascript/covering). 
 
 Activate the GitHub pages of your repo (use the default branch and the `docs` folder) and be sure to include your covering report in the `docs` folder.
 
@@ -131,7 +149,7 @@ All files     |   58.92 |    45.83 |   47.22 |   56.63 |
 
 * See the examples in the repo [crguezl/hello-jison](https://github.com/crguezl/hello-jison)
 * [https://astexplorer.net](https://astexplorer.net)
-* [Tipos de Nodos del AST](/temas/introduccion-a-pl/espree-visitorkeys) y nombres de las propiedades de los hijos
+* [Tipos de Nodos del AST](/topics/introduction-to-pl/espree-visitorkeys) y nombres de las propiedades de los hijos
 * [Escodegen repo en GitHub](https://github.com/estools/escodegen)
   - [Escodegen API Doc](https://github.com/estools/escodegen/wiki/API)
 * [Jison Documentation](https://gerhobbelt.github.io/jison/docs//)
@@ -139,7 +157,7 @@ All files     |   58.92 |    45.83 |   47.22 |   56.63 |
 ### Jison and Syntax Analysis
 
 * [Análisis Sintáctico Ascendente en JavaScript](https://crguezl.github.io/pl-html/node43.html)
-* [Jison](/temas/syntax-analysis/analisis-LR/#introduccion-al-analisis-lr)
+* [Jison](/topics/syntax-analysis/analysis-LR)
 * [Mi primer proyecto utilizando Jison](https://ericknavarro.io/2019/07/21/17-Mi-primer-proyecto-utilizando-Jison-Linux/) por Erick Navarro
 * [Folder jison/examples from the Jison distribution](https://github.com/zaach/jison/tree/master/examples)
 * [Jison Debugger](https://nolanlawson.github.io/jison-debugger/)
@@ -154,6 +172,6 @@ All files     |   58.92 |    45.83 |   47.22 |   56.63 |
 
 ### Have a look
 
-* [JAVASCRIPT AST VISUALIZER](https://resources.jointjs.com/demos/javascript-ast) jointjs demos
+* [JavaScript AST visualizer](https://resources.jointjs.com/demos/javascript-ast) jointjs demos
 * [Espree](https://github.com/eslint/espree)
   * [Options for parse and tokenize methods](https://github.com/eslint/espree#options)

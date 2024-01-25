@@ -23,8 +23,6 @@ rubrica:
   - Se hace integración Continua usando GitHub Actions
 ---
 
-# Hello Compilers
-
 Antes de emprender esta práctica, asegúrese de entender los dos ejemplos de parser generator en el repo [crguezl/hello-jison](https://github.com/crguezl/hello-jison). Los ejemplos incluyen 
 1. Un evaluador de expresiones aritméticas de restas (ficheros `minus-ast.jison`, `minus.l` y `use-ast.js`) y 
 2. Un traductor a JS de expresiones aritméticas de restas (ficheros `minus-ast.jison`, `ast-build.js`, `minus.l` y `use-ast.js`)
@@ -40,7 +38,7 @@ and
 
 $$12 \& 7=\min\{12,7\}=7$$
 
-Extienda  [el traductor de la calculadora](/practicas/arith2js.html) para que admita estas expresiones aritméticas y las traduzca a un programa JavaScript que las compute y las imprima.
+Extienda  [el traductor de la calculadora](https://github.com/crguezl/hello-jison/blob/master/ast/minus-ast.jison) para que admita estas expresiones aritméticas y las traduzca a un programa JavaScript que las compute y las imprima.
 
 **Supondremos que el mínimo `&` tiene mas prioridad que el máximo `@`**. Por ejemplo, la entrada $234 @ 325 \&  57$ podría ser traducida al siguiente código JS:
 
@@ -51,7 +49,7 @@ console.log(max(234, min(325,57)))
 Compared to the other tokens, give  a low priority to the `@` and `&` operators so that 
 an expression `4!@3**2` should be interpreted as `(4!)@(3**2)` and produces a JS code as `max(factorial("4"), pow("3", "2")))`.
 
-Como en la práctica anterior extienda el programa [Jison](/temas/syntax-analysis/analisis-LR/#introduccion-al-analisis-lr) hecho en la práctica anterior con estas dos operaciones para que produzca un AST compatible Espree conteniendo el correspondiente código JS. A continuación utilice [escodegen.generate(ast)](https://github.com/estools/escodegen) para generar el código JS
+Extienda el programa [Jison](/temas/syntax-analysis/analisis-LR/#introduccion-al-analisis-lr) hecho en la práctica anterior con estas dos operaciones para que produzca un AST compatible Espree conteniendo el correspondiente código JS. A continuación utilice [escodegen.generate(ast)](https://github.com/estools/escodegen) para generar el código JS
 
 
 ## Dealing with Ambiguity
@@ -251,21 +249,23 @@ An expression `4+5i&3-2i` should be interpreted as `(4+5i)&(3-2i)` and can produ
 
 ## Pruebas
 
-Añada [pruebas](/temas/introduccion-a-javascript/pruebas) usando [Mocha y Chai](/temas/introduccion-a-javascript/mocha) o [Jest](/temas/introduccion-a-javascript/jest)
+Añada [pruebas](/temas/introduction-to-javascript/pruebas) usando [Mocha y Chai](/temas/introduction-to-javascript/mocha) o [Jest](/temas/introduction-to-javascript/jest)
 
-!!!include(temas/introduccion-a-javascript/mocking-stubbing.md)!!!
+import mockingStubbing from "../topics/introduction-to-javascript/mocking-stubbing.mdx"
+
+<mockingStubbing />
 
 ## Covering 
 
 You can use  [nyc](https://www.npmjs.com/package/nyc) to do the covering of your mocha tests.
-See the notes in [covering](/temas/introduccion-a-javascript/covering). 
+See the notes in [covering](/temas/introduction-to-javascript/covering). 
 
 Activate the GitHub pages of your repo (use the default branch and the `docs` folder) and be sure to include your covering report in the `docs` folder.
 
 ## Continuous Integration
 
 Añada Integración contínua usando GitHub actions.
-Lea la sección [GitHub Actions](/temas/introduccion-a-javascript/github-actions) de los apuntes.
+Lea la sección [GitHub Actions](/temas/introduction-to-javascript/github-actions) de los apuntes.
 
 
 ## References
@@ -274,7 +274,7 @@ Lea la sección [GitHub Actions](/temas/introduccion-a-javascript/github-actions
 
 * See the examples in the repo [crguezl/hello-jison](https://github.com/crguezl/hello-jison)
 * [https://astexplorer.net](https://astexplorer.net)
-* [Tipos de Nodos del AST](/temas/introduccion-a-pl/espree-visitorkeys) y nombres de las propiedades de los hijos
+* [Tipos de Nodos del AST](/temas/introduction-to-pl/espree-visitorkeys) y nombres de las propiedades de los hijos
 * [Escodegen repo en GitHub](https://github.com/estools/escodegen)
   - [Escodegen API Doc](https://github.com/estools/escodegen/wiki/API)
 * [Jison Documentation](https://gerhobbelt.github.io/jison/docs//)

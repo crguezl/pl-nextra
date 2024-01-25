@@ -18,7 +18,7 @@ export async function getServerSideProps() {
     const errorCodeQuote = quoteRes.ok ? false : quoteRes.status
     const data = await quoteRes.json();
     let quote = data.content;
-    console.log(quote);
+    //console.log(quote);
     let author = data.author;
    
     return {
