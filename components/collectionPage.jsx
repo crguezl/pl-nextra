@@ -10,7 +10,7 @@ export function CollectionPage({ path }) {
     getPagesUnderRoute(path),
     locale, defaultLocale
   ).map(page => {
-      console.error(page.frontMatter?.title)
+      //console.error(page.frontMatter?.title)
       if (page.frontMatter?.display === 'hidden') return null
       return (
         <li key={page.route}>
@@ -19,7 +19,7 @@ export function CollectionPage({ path }) {
        )
     })
     return (
-        <ol className={styles.myList}>
+        <ol className={styles.myList} reversed>
             {result}
         </ol>
     )

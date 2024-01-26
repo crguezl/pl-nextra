@@ -1,31 +1,4 @@
 {
-  "github-alu-form": {
-    "title": "Fill the form",
-    "display": "normal",
-    "theme": {
-      "breadcrumb": true,
-      "footer": true,
-      "sidebar": true,
-      "toc": true,
-      "pagination": true
-    }
-  },
-  "github-campus-expert": {
-    "title": "GitHub Campus Expert",
-    "display": "normal"
-  },
-  "github-project-board": {
-    "title": "GitHub Project Board",
-    "display": "normal"
-  },
-  "visual-studio-code": {
-    "title": "Visual Studio Code and Gitpod",
-    "display": "normal"
-  },
-  "iaas": {
-    "title": "IAAS",
-    "display": "normal"
-  },
   "arith2js": {
     "title": "Translating Arithmetic Expressions to JavaScript",
     "display": "normal",
@@ -40,5 +13,32 @@
   "hello-compiler": {
     "title": "Hello Compiler",
     "display": "hidden"
+  },
+  "iaas": {
+    "title": "IAAS",
+    "display": "normal"
+  },
+  "visual-studio-code": {
+    "title": "Visual Studio Code and Gitpod",
+    "display": "normal"
+  },
+  "github-project-board": {
+    "title": "GitHub Project Board",
+    "display": "normal"
+  },
+  "github-campus-expert": {
+    "title": "GitHub Campus Expert",
+    "display": "normal"
+  },
+  "github-alu-form": {
+    "title": "Fill the form",
+    "display": "normal",
+    "theme": {
+      "breadcrumb": true,
+      "footer": true,
+      "sidebar": true,
+      "toc": true,
+      "pagination": true
+    }
   }
 }
