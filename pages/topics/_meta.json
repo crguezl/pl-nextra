@@ -1,14 +1,5 @@
 {
-    "introduction-to-pl": {
-        "type": "page",
-        "title": "Introduction to Programming Languages"
-    },
-    "introduction-to-javascript": {
-        "title": "Fundamentals of Programming",
-        "type": "page"
-    },
-    "syntax-analysis": {
-        "type": "page",
-        "title": "Syntax Analysis"
-    }
+    "introduction-to-pl":  "Introduction to Programming Languages",
+    "introduction-to-javascript": "Fundamentals of Programming",
+    "syntax-analysis":  "Syntax Analysis"
 }
