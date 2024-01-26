@@ -14,7 +14,15 @@ export default function Teams() {
         <div>
             <p>{data.teams.length} Teams</p>
             <ul className={styles.uList}>
-                {data.teams.map(t => (<li key={t.name}><Link href={t.url}>{t.name}</Link></li>))}
+                {
+                   data.teams.map(t => (
+                      <li key={t.name}>
+                          <Link href={t.url}>{t.name}</Link>
+                          <span> - </span>
+                          <Link href={t.url+"/repositories"}>Repos</Link>
+                      </li>)
+                )
+                }
             </ul>
         </div>
     )

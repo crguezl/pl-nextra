@@ -4,8 +4,8 @@
         "title": "Introduction to Programming Languages"
     },
     "introduction-to-javascript": {
-        "type": "page",
-        "title": "Basics"
+        "title": "Fundamentals of Programming",
+        "type": "page"
     },
     "syntax-analysis": {
         "type": "page",

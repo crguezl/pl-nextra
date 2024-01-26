@@ -57,9 +57,14 @@
         "newWindow": true
       },
       "resources": {
-        "title": "Github Resources ",
+        "title": "Github Resources",
         "href": "/resources#recursos-github",
         "newWindow": false
+      },
+      "your issues": {
+        "title": "Your Issues ↗",
+        "href": "https://github.com/issues/assigned",
+        "newWindow": true
       }
     }
   },

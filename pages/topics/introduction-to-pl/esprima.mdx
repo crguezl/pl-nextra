@@ -341,8 +341,39 @@ for (const inputFilename of program.args) {
 }
 ```
 
+To know more about `Estraverse` see the [Estraverse Usage](https://github.com/estools/estraverse/wiki/Usage) and [Estraverse README.md](https://github.com/estools/estraverse)
 
-Examples of executions.
+Call `estraverse.traverse` or `estraverse.replace` with an object that has the following methods:
+
+ * `enter` - Called when entering a node
+ * `leave` - Called when leaving a node
+
+Both of these methods have the following signature: `function(node, parent)`.
+Note that `parent` can be null in some situations.
+
+The `enter` function may control the traversal by returning the
+following values (or calling corresponding methods):
+
+ * `estraverse.VisitorOption.Skip` / `this.skip()` - Skips walking child nodes of this node. The
+                                     `leave` function will *still* be called.
+ * `estraverse.VisitorOption.Break` / `this.break()` - Ends it all
+
+The `leave` function can also control the traversal by returning
+the following values:
+
+ * `estraverse.VisitorOption.Break` / `this.break()` - Ends it all
+
+***
+
+In `estraverse.replace` you can also return one of:
+
+ * new node to replace old one with
+
+ * `estraverse.VisitorOption.Remove` / `this.remove()` - Removes current node from parent array or replaces with `null` if not element of array.
+
+See an example of [estraverse.replace](https://github.com/estools/estraverse/blob/ec3f900528eac270a51f7b079edeae086e7ebce4/test/replace.js#L52-L61)
+
+### Examples of executions
 
 With two input files:
 
@@ -403,10 +434,13 @@ presented in the second half of the [talk Parsing, Compiling, and Static Metapro
   * [Options for parse and tokenize methods](https://github.com/eslint/espree#options)
   * Espree API documentation at [ull-esit-pl.github.io/espree](https://ull-esit-pl.github.io/espree/#/)
 * [Repo ULL-ESIT-GRADOII-PL/esprima-pegjs-jsconfeu-talk](https://github.com/ULL-ESIT-GRADOII-PL/esprima-pegjs-jsconfeu-talk)
+* [ECMA-262, 14th edition, June 2023. ECMAScript® 2023 Language Specification](https://262.ecma-international.org/14.0/?_gl=1*1002c62*_ga*NzU3ODg2OTIxLjE3MDYyNjc4ODY.*_ga_TDCK4DWEPP*MTcwNjI2Nzg4Ni4xLjEuMTcwNjI2NzkxMC4wLjAuMA..&_ga=2.196339244.1625083547.1706267887-757886921.1706267886)
 * Simple examples of AST traversal and transformation [crguezl/ast-traversal](https://github.com/crguezl/ast-traversal)
 * [crguezl/hello-jison](https://github.com/crguezl/hello-jison)
 * [astexplorer.net demo](https://astexplorer.net/)
-* [idgrep.js](https://github.com/ULL-ESIT-GRADOII-PL/esprima-pegjs-jsconfeu-talk/blob/master/idgrep.js)
+* [idgrep.js](https://github.com/ULL-ESIT-GRADOII-PL/esprima-pegjs-jsconfeu-talk/blob/master/examples/idgrep/idgrep.js)
+* [Estraverse Usage](https://github.com/estools/estraverse/wiki/Usage)
+  * [Estraverse README.md](https://github.com/estools/estraverse)
 * [Master the Art of the AST](master-the-art-of-the-ast)
 * [Awesome AST](https://github.com/cowchimp/awesome-ast)  A repo like [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 * ESQuery is a library for querying the AST output by Esprima for patterns of syntax using a CSS style selector system. 
