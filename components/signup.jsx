@@ -8,12 +8,13 @@ import AuthForm from "./AuthForm"
 export default function Signup() {
   const router = useRouter()
   const [error, setError] = useState('')
+  router.reload()
 
-  console.error("Signup")
+  //console.error("Signup")
   const handleSubmit = async (e, email, password) => {
     e.preventDefault()
     setError('')
-    console.error("Signup handleSubmit", email, password)
+    //console.error("Signup handleSubmit", email, password)
 
     /*
     const supabase = createClientComponentClient()
