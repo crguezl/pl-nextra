@@ -45,7 +45,7 @@ Type ".help" for more information.
 
 Cargamos `espree`:
 
-```js
+```js copy
 > const espree = require('espree')
 undefined
 > espree.version
@@ -63,7 +63,7 @@ undefined
 
 Hagamos un análisis léxico:
 
-```js
+```js copy
 > espree.tokenize('answer = /* comment*/ 42', { range: true })
 [
   Token {
@@ -94,7 +94,7 @@ Hagamos un análisis léxico:
 
 Hagamos ahora un análisis sintáctico:
 
-```js
+```js copy
 > espree.parse('const answer = 42', { tokens: true })
 Uncaught [SyntaxError: The keyword 'const' is reserved
 ] {
@@ -108,7 +108,7 @@ La versión ECMA de JS usada por defecto por `espree` es la 5 y esta no admite `
 
 Especifiquemos la versión ECMA que queremos:
 
-```js
+```js copy
 > espree.parse('const answer = 42', 
               { ecmaVersion: espree.latestEcmaVersion, 
                 tokens: true }
@@ -138,7 +138,7 @@ Node {
 
 La opción `comment` nos permite obtener los comentarios:
 
-```js
+```js copy
 > espree.parse('a = /* comment */ 32;', { tokens: true, comment: true })
 Node {
   type: 'Program',
@@ -168,7 +168,7 @@ Observe que el Árbol no aparece completo. El log que usa el bucle REPL de Node 
 Para que nos muestre el árbol vamos a usar el método `util.inspect` del módulo `util` 
 que convierte un objeto en una string:
 
-```js
+```js copy
 > const util = require('util')
 undefined
 > console.log(
@@ -220,7 +220,7 @@ Ves que el objeto está compuesto de objetos de la clase `Node`. Si te concentra
 mas evidente como el objeto describe la jerarquía AST construída para la frase `answer = 42`. 
 Puedes instalar el script [compast](https://www.npmjs.com/package/compact-js-ast) en [ULL-ESIT-PL/compact-js-ast](https://github.com/ULL-ESIT-PL/compact-js-ast) para ver un resumen del AST:
 
-```js
+```js copy
 ➜  esprima-pegjs-jsconfeu-talk git:(master) ✗ compast -p 'const answer = 42' 
 [
   'Program',
@@ -251,7 +251,7 @@ graph TD
 Navegar en el árbol AST es complicado. 
 El atributo [`espree.visitorKeys`](espree-visitorkeys) nos proporciona la lista de nodos y los nombres de  los atributos de sus hijos
 
-```js
+```js copy
 > const typesOfNodes = Object.keys(espree.VisitorKeys)
 undefined
 > typesOfNodes.slice(0,4)
@@ -265,7 +265,7 @@ undefined
 
 El valor nos da los nombres de los atributos que define los hijos:
 
-```js 
+```js copy
 > espree.VisitorKeys.AssignmentExpression
 [ 'left', 'right' ]
 > espree.VisitorKeys.IfStatement
@@ -289,7 +289,7 @@ to do static analysis on JavaScript code.
 
 It provides a function `idgrep` that finds the appearances of identifiers matching a search string inside the input code.
 
-```js showLineNumbers filename="/shared/esprima-pegjs-jsconfeu-talk-labs/esprima-pegjs-jsconfeu-talk/examples/idgrep/idgrep.js" {14-25}
+```js copy showLineNumbers filename="/shared/esprima-pegjs-jsconfeu-talk-labs/esprima-pegjs-jsconfeu-talk/examples/idgrep/idgrep.js" {14-25}
 const esprima = require("espree");
 const program = require("commander");
 const { version } = require("../../package.json");
@@ -349,7 +349,7 @@ Call `estraverse.traverse` or `estraverse.replace` with an object that has the f
  * `leave` - Called when leaving a node
 
 Both of these methods have the following signature: `function(node, parent)`.
-Note that `parent` can be null in some situations.
+Note that `parent` can be `null` in some situations.
 
 The `enter` function may control the traversal by returning the
 following values (or calling corresponding methods):

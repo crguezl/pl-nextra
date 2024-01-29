@@ -42,7 +42,7 @@ Extienda  [el traductor de la calculadora](https://github.com/crguezl/hello-jiso
 
 **Supondremos que el mínimo `&` tiene mas prioridad que el máximo `@`**. Por ejemplo, la entrada $234 @ 325 \&  57$ podría ser traducida al siguiente código JS:
 
-```js
+```js copy
 console.log(max(234, min(325,57)))
 ```
 
@@ -173,7 +173,7 @@ Complex("2").add("3i").abs() < Complex("4").add("5i").abs()
 
 For real floating point numbers, this leads to the comparison of absolute values. For instance `2.3<-4.5` should be 
 
-```js 
+```js copy 
 Complex("2.3").abs() < Complex("4.5").neg().abs()
 ``` 
 
@@ -185,7 +185,7 @@ Since `&` and `@` have a lower priority than `+` and `-`, an expression like `4+
 
 To keep compatibility with the calculator in the previous lab, you can extend the complex class with a factorial method like this: 
 
-```js
+```js copy
 #!/usr/bin/env node
 const Complex = require("complex.js");
 
@@ -231,7 +231,7 @@ Thus your calc translator must be able to generate code for expressions like
 
 that using the complex library augmented with our `factorial` can be ultimately evaluated as:
 
-```js
+```js copy
 Complex(2).factorial().add(Complex(3).pow("2i")).sub(Complex("4i"))
 ```
 

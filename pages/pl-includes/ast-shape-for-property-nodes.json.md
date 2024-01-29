@@ -1,13 +1,13 @@
 ## Source examples/ast-shape-for-property-nodes.egg
 
-```js
+```js copy
 ➜  egg-oop-parser-solution git:(master) cat examples/ast-shape-for-property-nodes.egg 
 [[1,2]][0,1]
 ```
 
 ## JSON examples/ast-shape-for-property-nodes.json
 
-```js
+```js copy
 {
   "type": "property",
   "operator": {

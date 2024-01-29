@@ -28,7 +28,7 @@ x["sub", 1]("length") # 3
 
 Whose JSON looks like:
 
-```json
+```js copyon
 ➜  evm2term git:(master) head -n 4 examples/property.json 
 {
   "type": "apply",
@@ -38,7 +38,7 @@ Whose JSON looks like:
 
 The output of the `evm2term` translator will be:
 
-```js
+```js copy
 ➜  evm2term git:(master) evm2term examples/property.json 
 apply(op:property(op:word{x}, args:[value{sub},value{1}]), args:[value{length}])
 ```

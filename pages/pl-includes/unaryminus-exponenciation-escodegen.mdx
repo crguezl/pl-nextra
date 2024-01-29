@@ -44,7 +44,7 @@ SyntaxError: Unary operator used immediately before exponentiation expression. P
 Therefore, the following  continuation of the former node session suggest the correct translation:
 
 <Callout>
-```js
+```js copy
 > let ast5 = espree.parse('Math.pow(-2,2)')
 undefined
 > gc = escodegen.generate(ast5)
