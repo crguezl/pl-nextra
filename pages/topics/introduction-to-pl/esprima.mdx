@@ -355,7 +355,7 @@ The `enter` function may control the traversal by returning the
 following values (or calling corresponding methods):
 
  * `estraverse.VisitorOption.Skip` / `this.skip()` - Skips walking child nodes of this node. The
-                                     `leave` function will *still* be called.
+                                     `leave` function will *still* be called. See [test/replace.js](https://github.com/estools/estraverse/blob/ec3f900528eac270a51f7b079edeae086e7ebce4/test/replace.js#L360-L398)
  * `estraverse.VisitorOption.Break` / `this.break()` - Ends it all
 
 The `leave` function can also control the traversal by returning
