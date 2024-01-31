@@ -2,7 +2,7 @@ import React from 'react'
 import { DocsThemeConfig } from 'nextra-theme-docs'
 import { useConfig } from 'nextra-theme-docs'
 import { SessionProvider } from "next-auth/react"
-
+import { Link } from 'nextra-theme-docs'
 const config: DocsThemeConfig = {
   logo: <span>
     <svg 
@@ -44,10 +44,10 @@ const config: DocsThemeConfig = {
   footer: {
     text: (
       <span>
-        MIT {new Date().getFullYear()} ©{' '}
-        <a href="https://campusingenieriaytecnologia2324.ull.es/course/view.php?id=2324090147" target="_blank">
-        Notes for the Computer Science degree ULL 23/24 course on Programming Languages
-        </a>
+        ULL {new Date().getFullYear()} ©{' '}
+        <Link href="https://campusingenieriaytecnologia2324.ull.es/course/view.php?id=2324090147" target="_blank">
+        Notes for the 23/24 course on Programming Languages inside the Informática degree at ULL
+        </Link>
         .
       </span>
     )
