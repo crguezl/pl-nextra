@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { getPagesUnderRoute } from 'nextra/context'
 import filterRouteLocale from 'nextra/filter-route-locale'
 import styles from './counters.module.css'
+import LabInfo from '@/components/LabInfo'
 
 const ClassroomAssignments = "https://classroom.github.com/classrooms/153934884-ull-esit-pl-2324/assignments/"
 const Repos = "https://github.com/orgs/ULL-ESIT-PL-2324/repositories?q="
@@ -18,13 +19,7 @@ export function CollectionPage({ path }) {
       return (
         <li key={page.route}>
           <Link className={styles.link} href={page.route}>{page.meta.title || page.frontMatter?.title || page.name}</Link>
-          {path === '/labs' && 
-            <ul className={styles.uList}>
-              <li><Link className={styles.link} href={page.route+"#rubric"}>Rubric</Link></li>
-              <li><Link className={styles.link} href={ClassroomAssignments+ page.frontMatter?.key} target="_blank">Classroom</Link></li>
-              <li><Link className={styles.link} href={Repos+ page.frontMatter?.key} target="_blank">Repos</Link></li>
-            </ul>
-          }
+          {path === '/labs' && <LabInfo page={page} />} 
           {path.startsWith('/clases') &&     
               <ul className={styles.uList}>
                   <li>{page.frontMatter?.summary}</li>
