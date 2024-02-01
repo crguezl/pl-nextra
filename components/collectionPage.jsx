@@ -4,6 +4,9 @@ import { getPagesUnderRoute } from 'nextra/context'
 import filterRouteLocale from 'nextra/filter-route-locale'
 import styles from './counters.module.css'
 
+const ClassroomAssignments = "https://classroom.github.com/classrooms/153934884-ull-esit-pl-2324/assignments/"
+const Repos = "https://github.com/orgs/ULL-ESIT-PL-2324/repositories?q="
+
 export function CollectionPage({ path }) {
   const { locale, defaultLocale } = useRouter()
   let result = filterRouteLocale(
@@ -16,10 +19,18 @@ export function CollectionPage({ path }) {
         <li key={page.route}>
           <Link className={styles.link} href={page.route}>{page.meta.title || page.frontMatter?.title || page.name}</Link>
           {path === '/labs' && 
-            <span> (<Link className={styles.link} href={page.route+"#rubric"}>Rubric</Link>) </span>
+            <ul className={styles.uList}>
+              <li><Link className={styles.link} href={page.route+"#rubric"}>Rubric</Link></li>
+              <li><Link className={styles.link} href={ClassroomAssignments+ page.frontMatter?.key} target="_blank">Classroom</Link></li>
+              <li><Link className={styles.link} href={Repos+ page.frontMatter?.key} target="_blank">Repos</Link></li>
+            </ul>
           }
-          {page.frontMatter?.videos &&
-            <span> (<Link className={styles.link} href={page.route+"#videos"}>Videos</Link>) </span>
+          {path.startsWith('/clases') &&     
+              <ul className={styles.uList}>
+                  <li>{page.frontMatter?.summary}</li>
+                  <li><Link className={styles.link} href={page.route+"#videos"}>Videos</Link></li>
+                  {page.frontMatter?.topics?.map(topic => <li>Topic: <Link className={styles.link} href={topic.href}>{topic.text}</Link></li>)}
+              </ul> 
           }
         </li>
        )
