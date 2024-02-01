@@ -15,6 +15,12 @@ export function CollectionPage({ path }) {
       return (
         <li key={page.route}>
           <Link className={styles.link} href={page.route}>{page.meta.title || page.frontMatter?.title || page.name}</Link>
+          {path === '/labs' && 
+            <span> (<Link className={styles.link} href={page.route+"#rubric"}>Rubric</Link>) </span>
+          }
+          {page.frontMatter?.videos &&
+            <span> (<Link className={styles.link} href={page.route+"#videos"}>Videos</Link>) </span>
+          }
         </li>
        )
     })

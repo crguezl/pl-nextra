@@ -4,7 +4,7 @@ import { Callout } from 'nextra/components'
  
 <Callout type="error" emoji="⚠️"> 
 
-**danger Exponentiation is ECMAScript 2016**
+**Danger: Exponentiation is ECMAScript 2016**
 
 New Features in ECMAScript 2016:  JavaScript Exponentiation (**)
 See for instance: https://www.w3schools.com/js/js_2016.asp and https://262.ecma-international.org/7.0/
@@ -22,9 +22,7 @@ Type ".help" for more information.
 Uncaught [SyntaxError: Unexpected token *
 > let ast3 = espree.parse('(-2)**2', { ecmaVersion: 7}) // no errors. Right AST
 > let escodegen = require('escodegen')
-> escodegen.generate(ast3) // escodegen does not support this feature
-'-2 ** 2;'                 // the code generated is wrong
-> let gc = escodegen.generate(ast3)
+> let gc = escodegen.generate(ast3) // escodegen does not support this feature. The code generated is wrong
 > gc
 '-2 ** 2;'
 > eval(gc) // the evaluation of the code produces errors

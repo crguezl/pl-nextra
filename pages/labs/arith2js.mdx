@@ -34,13 +34,24 @@ Usando Jison generalice el ejemplo en la carpeta `ast` del [Repo hello-jison](ht
 * [ast2js.js](https://github.com/ULL-ESIT-PL/hello-jison/blob/master/ast/ast2js.js)
 
 para escribir un programa que, recibiendo como entrada una cadena que contiene una secuencia de expresiones aritméticas de enteros separados por comas, produzca un AST compatible con el del [parser espree](https://github.com/eslint/espree). 
-Use [escodegen](https://github.com/estools/escodegen) para generar el código JavaScript correspondiente (vea [ast2js.js](https://github.com/ULL-ESIT-PL/hello-jison/blob/master/ast/ast2js.js)). Sigue un ejemplo de una posible ejecución:
+Use [escodegen](https://github.com/estools/escodegen) para generar el código JavaScript correspondiente (vea [ast2js.js](https://github.com/ULL-ESIT-PL/hello-jison/blob/master/ast/ast2js.js)). Sigue un ejemplo de una posible ejecución.
+
+Given an input file like this:
 
 ```bash
 ✗ cat test/data/test1.calc 
-4 - 2 - 1                                                                                       
+4 - 2 - 1                     
+```
+when we run the transpiler `calc2js` we get the following JavaScript code:
+
+```
 ✗ bin/calc2js.mjs test/data/test1.calc 
 console.log(4 - 2 - 1);
+```
+
+using a pipe we can execute the code:
+
+```
 ✗ bin/calc2js.js test/data/test1.calc | node -
 1
 ```
@@ -82,7 +93,7 @@ import UnaryMinus from "../pl-includes/unaryminus-exponenciation-escodegen.mdx"
 
 ## Pruebas
 
-Añada pruebas a este proyecto usando [mocha](/topics/introduction-tojavascript/mocha.html)
+Añada pruebas a este proyecto usando [mocha](/topics/introduction-to-javascript/mocha)
 
 
 import MockingStubbing from "../topics/introduction-to-javascript/mocking-stubbing.mdx"
@@ -129,6 +140,10 @@ All files     |   58.92 |    45.83 |   47.22 |   56.63 |
 --------------|---------|----------|---------|---------|-----------------------------------------
 ```
 
+See also the sections [Testing with Mocha and Chai](/topics/introduction-to-javascript/creating-and-publishing-npm-module#testing-with-mocha-and-chai), [Writing the tests](/topics/introduction-to-javascript/creating-and-publishing-npm-module#writing-the-tests),
+[Running the tests](/topics/introduction-to-javascript/creating-and-publishing-npm-module#running-the-tests),
+[GitHub Actions: an introduction](/topics/introduction-to-javascript/creating-and-publishing-npm-module#github-actions-an-introduction) and
+[Setting CI for our npm module](/topics/introduction-to-javascript/creating-and-publishing-npm-module#setting-ci-for-our-npm-module) in the chapter [Creating and Publishing an npm Module](/topics/introduction-to-javascript/creating-and-publishing-npm-module).
 
 ## Rubric
 
@@ -176,3 +191,12 @@ import ReposForLab from '@/components/repos-for-lab'
 * [JavaScript AST visualizer](https://resources.jointjs.com/demos/javascript-ast) jointjs demos
 * [Espree](https://github.com/eslint/espree)
   * [Options for parse and tokenize methods](https://github.com/eslint/espree#options)
+
+### Testing
+
+* [Testing with Mocha and Chai](/topics/introduction-to-javascript/creating-and-publishing-npm-module#testing-with-mocha-and-chai), 
+* [Writing the tests](/topics/introduction-to-javascript/creating-and-publishing-npm-module#writing-the-tests),
+* [Running the tests](/topics/introduction-to-javascript/creating-and-publishing-npm-module#running-the-tests),
+* [GitHub Actions: an introduction](/topics/introduction-to-javascript/creating-and-publishing-npm-module#github-actions-an-introduction) and
+* [Setting CI for our npm module](/topics/introduction-to-javascript/creating-and-publishing-npm-module#setting-ci-for-our-npm-module) 
+* Chapter [Creating and Publishing an npm Module](/topics/introduction-to-javascript/creating-and-publishing-npm-module).
