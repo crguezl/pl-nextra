@@ -1,0 +1,20 @@
+import { Callout } from 'nextra/components'
+
+These is a simplified version of the rules to resolve conflicts and ambiguities in a Yacc-like parser generator:
+
+<Callout> 
+
+**Precedence Rules**
+
+1. La precedencia de los tokens se hace en la cabecera del programa Jison; esto es: antes del primer `%%` usando la sintáxis `%left token ...` , `%right token ...` o `%nonassoc token ...`
+2. La precedencia de una regla de producción $A \rightarrow \alpha$ es la precedencia del último token que aparece en la parte derecha $\alpha$ de la regla. 
+3. Si no existen tokens en la parte derecha con precedencia asignada o bien si la precedencia por defecto no es la deseada, se puede usar la directiva `%prec` para asignar la precedencia deseada a la regla.
+   * Por ejemplo la precedencia de $e \rightarrow e @ e$ será la precedencia que le demos al token $@$
+4. Cuando el parser detecta un conflicto y ve que hay dos posibles vias de continuar la construcción del árbol: Una que indica que quizá se aplicó la regla $A \rightarrow \alpha$ y otra que indica que quizá se pueda seguir leyendo el token $t$ a la entrada, 
+   1. El parser compara las precedencias del token y de la regla y se queda con el de mas prioridad. 
+   2. Si es el token quien tiene mayor prioridad avanzará en la lectura desplazando el token $t$ y buscando nuevos símbolos (se dice que hace un *shift*; en este caso probablemente el AST se "hundirá" a derechas) y 
+   3. Si es la regla completará el subárbol parcial $\overset{A}{\overset{\triangle}{\alpha}}$ y continuará en su construcción del árbol (se dice que hace un *reduce* y en este caso el árbol construido estará más hundido a izquierdas)
+5. Los tokens declarados en la misma línea mediante una declaración `%left` o `%right` 
+tienen igual precedencia e igual asociatividad. 
+1. La precedencia es mayor cuanto mas abajo su posición en el texto
+</Callout>
