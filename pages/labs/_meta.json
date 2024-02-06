@@ -1,14 +1,45 @@
 {
   "arith2js": {
+    "type": "menu",
     "title": "Translating Arithmetic Expressions to JavaScript",
-    "display": "normal",
-    "theme": {
-      "breadcrumb": true,
-      "footer": true,
-      "sidebar": true,
-      "toc": true,
-      "pagination": true
-    }
+    "items": {
+      "Objetivos": {
+          "title": "Objetivos",
+          "href": "/labs/arith2js#objetivos"
+      },
+      "Opciones en línea de comandos": {
+          "title": "Opciones en línea de comandos",
+          "href": "/labs/arith2js#opciones-en-línea-de-comandos"
+      },
+      "Dealing with Ambiguity": {
+          "title": "Dealing with Ambiguity",
+          "href": "/labs/arith2js#dealing-with-ambiguity"
+      },
+      "Unary minus and exponentiation in escodegen": {
+          "title": "Unary minus and exponentiation in escodegen",
+          "href": "/labs/arith2js#unary-minus-and-exponentiation-in-escodegen"
+      },
+      "Pruebas": {
+          "title": "Pruebas",
+          "href": "/labs/arith2js#pruebas"
+      },
+      "Covering": {
+          "title": "Covering",
+          "href": "/labs/arith2js#covering"
+      },
+      "Rubric": {
+          "title": "Rubric",
+          "href": "/labs/arith2js#rubric"
+      },
+      "Repos": {
+          "title": "Repos",
+          "href": "/labs/arith2js#frontmatterkey-repos"
+      },
+      "References": {
+          "title": "References",
+          "href": "/labs/arith2js#references"
+      }
+  }
   },
   "hello-compiler": {
     "title": "Hello Compiler",

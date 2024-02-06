@@ -13,7 +13,7 @@ order: 6
 rubrica:
    - "Command line options (-o, -V, -h, etc.)"
    - "README.md tutorial
-   - Requirements presented as issues"
+   - Rubric requirements presented as issues"
    - All operators have been implemented (+,-,/,*, parenthesis (), unary minus -, power **, factorial!) with the correct precedences
    - Supports floating point numbers
    - Commander has been used to process the argument line
@@ -26,6 +26,8 @@ repo:
   text: "Repo hello-jison"
   href: "https://github.com/ull-esit-pl/hello-jison"
 ---
+import { Link } from 'nextra-theme-docs'
+
 ## Objetivos
 
 Usando Jison generalice el ejemplo en la carpeta `ast` del [Repo hello-jison](https://github.com/ull-esit-pl/hello-jison) constituido por los ficheros:
@@ -99,7 +101,7 @@ puede consultar
 
 ## Unary minus and exponentiation in escodegen
 
-import UnaryMinus from "../pl-includes/unaryminus-exponenciation-escodegen.mdx"
+import UnaryMinus from "@/pages/pl-includes/unaryminus-exponenciation-escodegen.mdx"
 
 
 <UnaryMinus/>
@@ -108,8 +110,132 @@ import UnaryMinus from "../pl-includes/unaryminus-exponenciation-escodegen.mdx"
 
 Añada pruebas a este proyecto usando [mocha](/topics/introduction-to-javascript/mocha)
 
+The `test` folder contains the `data` folder with the input and expected output files, the `test-description.mjs` and the `test.mjs` files.
 
-import MockingStubbing from "../topics/introduction-to-javascript/mocking-stubbing.mdx"
+```bash
+✗ tree test 
+test
+├── data
+│   ├── correct-out1.txt
+│   ├── correct-out2.txt
+│   ├── correct1.js
+│   ├── correct2.js
+│   ├── test1.calc
+│   └── test2.calc
+├── test-description.mjs
+└── test.mjs
+```
+
+The workflow is that for each feature we add an impit file `test/data/test2.calc`:
+
+```
+➜  arith2js-solution git:(dependencies) ✗ cat test/data/test2.calc 
+9 - 6 - 3 
+```
+then we run the transpiler `calc2js` and check the output:
+
+```
+➜  arith2js-solution git:(dependencies) ✗ bin/calc2js.mjs test/data/test2.calc    
+#!/usr/bin/env node
+console.log(9 - 6 - 3);
+```
+Since it looks good we save it:
+
+```
+➜  arith2js-solution git:(dependencies) ✗ bin/calc2js.mjs test/data/test2.calc -o test/data/correct2.js 
+```
+We then run the output program and check the logged output is what expected:
+
+```
+➜  arith2js-solution git:(dependencies) ✗ node test/data/correct2.js 
+0
+```
+Since it looks good we save it:
+
+```
+➜  arith2js-solution git:(dependencies) ✗ node test/data/correct2.js > test/data/correct-out2.txt 
+```
+
+We add the new test to the `test-description.mjs` file and then run the new test:
+
+```
+➜  arith2js-solution git:(dependencies) ✗ npx mocha --grep 'test2' 
+
+
+  ✔ transpile(test2.calc, out2.js)
+
+  1 passing (14ms)
+```
+
+The tests are in the `test` folder. The file `test.mjs` starts importing the necessary modules and the `test-description.mjs` file: 
+
+```js filename="/practicas/arith2js/arith2js-solution/test/test.mjs"
+import transpile from "../transpile.js";
+import assert from 'assert';
+import * as fs from "fs/promises";
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+import Tst from './test-description.mjs';
+```
+
+We import in `Tst` the module `test-description.mjs` that contains the list of objects describing the tests: `input` file, `expected` javascript output, etc.:
+
+```js filename="/practicas/arith2js/arith2js-solution/test/test-description.mjs"
+export default [
+  {
+    "input": "test1.calc",
+    "output": "out1.js",
+    "expected": "correct1.js",
+    "correctOut": "correct-out1.txt"
+  },
+  ...
+  {
+    "input": "test-power-power.calc",
+    "output": "out-power-power.js",
+    "expected": "correct-power-power.js",
+    "correctOut": "correct-out-power-power.txt"
+  }
+];
+```
+
+```js filename="/practicas/arith2js/arith2js-solution/test/test.mjs"
+const Test = Tst.map(t => ({
+  input: __dirname + '/data/' + t.input,
+  output: __dirname + '/data/' + t.output,
+  expected: __dirname + '/data/' + t.expected,
+  correctOut: __dirname + '/data/' + t.correctOut,
+})
+)
+
+function removeSpaces(s) {
+  return s.replace(/\s/g, '');
+}
+
+for (let i = 0; i < Test.length; i++) {
+  it(`transpile(${Tst[i].input}, ${Tst[i].output})`, async () => {
+
+    // Compile the input and check the output program is what expected
+    await transpile(Test[i].input, Test[i].output);
+    let output = await fs.readFile(Test[i].output, 'utf-8')
+    let expected = await fs.readFile(Test[i].expected, 'utf-8')
+    assert.equal(removeSpaces(output), removeSpaces(expected));
+    await fs.unlink(Test[i].output);
+
+    // Run the output program and check the logged output is what expected
+    let correctOut = await fs.readFile(Test[i].correctOut, 'utf-8')
+    let oldLog = console.log; // mocking console.log
+    let result = "";
+    console.log = function (...s) { result += s.join('') }
+      eval(output);
+      assert.equal(removeSpaces(result), removeSpaces(correctOut))
+    console.log = oldLog;
+  });
+}
+```
+
+import MockingStubbing from "@/pages/topics/introduction-to-javascript/mocking-stubbing.mdx"
 
 <MockingStubbing/>
 
@@ -196,7 +322,7 @@ import ReposForLab from '@/components/repos-for-lab'
 * [Algoritmo de Análisis LR (yacc/bison/jison)](https://crguezl.github.io/pl-html/node55.html)
 * [Repo ULL-ESIT-PL-1718/jison-aSb](https://github.com/ULL-ESIT-PL-1718/jison-aSb)
 * [Repo ULL-ESIT-PL-1718/ull-etsii-grado-pl-jisoncalc](https://github.com/ULL-ESIT-PL-1718/ull-etsii-grado-pl-jisoncalc)
-* <a href="https://medium.com/basecs/leveling-up-ones-parsing-game-with-asts-d7a6fc2400ff" rel="nofollow">Leveling Up One’s Parsing Game With ASTs</a> by <a href="https://twitter.com/vaidehijoshi" rel="nofollow">Vaidehi Joshi</a> <em> 👍</em>
+* <Link href="https://medium.com/basecs/leveling-up-ones-parsing-game-with-asts-d7a6fc2400ff" el="nofollow">Leveling Up One’s Parsing Game With ASTs</Link> by <Link href="https://twitter.com/vaidehijoshi" rel="nofollow">Vaidehi Joshi</Link>👍
 
 
 ### Have a look
