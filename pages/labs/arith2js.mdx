@@ -11,7 +11,7 @@ prev: "iaas.md"
 next: #hello-compiler.md
 order: 6
 rubrica:
-  - "Command line options (-o, -V, -h, etc.)"
+   - "Command line options (-o, -V, -h, etc.)"
    - "README.md tutorial
    - Requirements presented as issues"
    - All operators have been implemented (+,-,/,*, parenthesis (), unary minus -, power **, factorial!) with the correct precedences
@@ -58,7 +58,17 @@ using a pipe we can execute the code:
 1
 ```
 
-Las expresiones aritméticas deben soportar además de suma, resta, multiplicación y división el menos unario `-(2+3)*2`   un operador de factorial `!`, un operador de potencia `**` y paréntesis. Ejemplo: `-(2 + 3) * 4! - 5 ** 6`.
+Las expresiones aritméticas deben soportar además de 
+- suma, 
+- resta, 
+- multiplicación y 
+- división,
+- el menos unario (ej.: `-(2+3)*2`)
+- un operador de factorial `!` (factorial only supports an integer value as argument), 
+- un operador de potencia `**` (ej.: `2!**3!**2!`) y 
+- paréntesis. 
+
+Ejemplo: `-(2 + 3) * 4! - 5 ** 6`.
 
 ## Opciones en línea de comandos
 
@@ -82,6 +92,7 @@ Options:
 Para tratar con los temas de ambigüedad en la gramática,
 puede consultar 
 
+* [Conflict Solving in Yacc](/topics/syntax-analysis/conflicts)
 * la sección [Precedencia y Asociatividad](https://crguezl.github.io/pl-html/node57.html) de los viejos apuntes de PL
 * See the examples in the [Repo crguezl/jison-prec](https://github.com/crguezl/jison-prec).
 
