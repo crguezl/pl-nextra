@@ -17,7 +17,7 @@ rubrica:
   - "Refleja la asociatividad y prioridad de operaciones correcta"
   - Maneja números complejos
   - Se añade correctamente el código de "run time support" en el preámbulo del programa JS
-  - El <code>package.json</code> tiene scripts para ejecutar el programa
+  - El package.json tiene scripts para ejecutar el programa
   - Ha añadido tests suficientes
   - Se añade un estudio de cubrimiento de las pruebas (coverage) y se ha publicado en GitHub pages
   - Se hace integración Continua usando GitHub Actions
@@ -116,16 +116,17 @@ You have also to fix the ambiguity for phrases like `2&3&4` and `3@4@5` favourin
 
 An expression `4+5i&3-2i` should be interpreted as `(4+5i)&(3-2i)` and can produce a JS code as `min(add("4", "5i"), (sub("3", "2i")))`.
 
+
+## Breaking Ambiguity in Jison
+
+import Conflicts from "@/pages/topics/syntax-analysis/conflicts.mdx"
+
 To deal with issues of ambiguity in grammar,
 you can consult
 
 * [Conflict Solving in Yacc](/topics/syntax-analysis/conflicts)
 * the [Precedence and Associativity](https://crguezl.github.io/pl-html/node57.html) section of the old PL notes
 * See the examples in the [Repo ULL-ESIT-PL/jison-prec](https://github.com/ULL-ESIT-PL/jison-prec).
-
-## Breaking Ambiguity in Jison
-
-import Conflicts from "@/pages/topics/syntax-analysis/conflicts.mdx"
 
 <Conflicts />
 
@@ -235,6 +236,19 @@ Activate the GitHub pages of your repo (use the default branch and the `docs` fo
 
 Añada Integración contínua usando GitHub actions.
 Lea la sección [GitHub Actions](/topics/introduction-to-javascript/github-actions) de los apuntes.
+## Rubric
+
+import Rubric from '@/components/rubric'
+
+<Rubric rubric={frontmatter().rubrica} />
+
+## {frontmatter().key} Repos
+
+import { frontmatter} from '@/src/frontmatter'
+import ReposForLab from '@/components/repos-for-lab'
+
+<ReposForLab lab={frontmatter().key} />
+
 
 
 ## References

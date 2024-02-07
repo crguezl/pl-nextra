@@ -32,6 +32,26 @@
         "title": "The translation scheme",
         "href": "/labs/hello-compiler#the-translation-scheme"
       },
+      "Tests": {
+        "title": "Tests",
+        "href": "/labs/hello-compiler#tests"
+      },
+      "Covering": {
+        "title": "Covering",
+        "href": "/labs/hello-compiler#covering"
+      },
+      "Continuous Integration": {
+        "title": "Continuous Integration",
+        "href": "/labs/hello-compiler#continuous-integration"
+      },
+      "Rubric": {
+        "title": "Rubric",
+        "href": "/labs/hello-compiler#rubric"
+      },
+      "hello-compilers Repos": {
+        "title": "hello-compilers Repos",
+        "href": "/labs/hello-compiler#frontmatterkey-repos"
+      },
       "References": {
         "title": "References",
         "href": "/labs/hello-compiler#references"
