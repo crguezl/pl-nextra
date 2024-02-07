@@ -6,7 +6,7 @@ published: true
 date: 2022/02/21
 delivery: "2022/03/03"
 order: 7
-display: "hidden"
+display: "normal"
 layout: Practica
 sidebar: auto
 prev: #"arith2js.md"
@@ -23,9 +23,7 @@ rubrica:
   - Se hace integración Continua usando GitHub Actions
 ---
 
-Antes de emprender esta práctica, asegúrese de entender los dos ejemplos de parser generator en el repo [crguezl/hello-jison](https://github.com/crguezl/hello-jison). Los ejemplos incluyen 
-1. Un evaluador de expresiones aritméticas de restas (ficheros `minus-ast.jison`, `minus.l` y `use-ast.js`) y 
-2. Un traductor a JS de expresiones aritméticas de restas (ficheros `minus-ast.jison`, `ast-build.js`, `minus.l` y `use-ast.js`)
+Antes de emprender esta práctica, asegúrese de entender los ejemplos de parser generator en el repo [ULL-ESIT-PL/hello-jison](https://github.com/ULL-ESIT-PL/hello-jison/tree/master/ast). 
 
 
 ## Two new operators & and @
@@ -38,7 +36,7 @@ and
 
 $$12 \& 7=\min\{12,7\}=7$$
 
-Extienda  [el traductor de la calculadora](https://github.com/crguezl/hello-jison/blob/master/ast/minus-ast.jison) para que admita estas expresiones aritméticas y las traduzca a un programa JavaScript que las compute y las imprima.
+Extienda  [el traductor de la calculadora](https://github.com/ULL-ESIT-PL/hello-jison/blob/master/ast/minus-ast.jison) para que admita estas expresiones aritméticas y las traduzca a un programa JavaScript que las compute y las imprima.
 
 **Supondremos que el mínimo `&` tiene mas prioridad que el máximo `@`**. Por ejemplo, la entrada $234 @ 325 \&  57$ podría ser traducida al siguiente código JS:
 
@@ -49,7 +47,9 @@ console.log(max(234, min(325,57)))
 Compared to the other tokens, give  a low priority to the `@` and `&` operators so that 
 an expression `4!@3**2` should be interpreted as `(4!)@(3**2)` and produces a JS code as `max(factorial("4"), pow("3", "2")))`.
 
-Extienda el programa [Jison](/temas/syntax-analysis/analisis-LR/#introduccion-al-analisis-lr) hecho en la práctica anterior con estas dos operaciones para que produzca un AST compatible Espree conteniendo el correspondiente código JS. A continuación utilice [escodegen.generate(ast)](https://github.com/estools/escodegen) para generar el código JS
+Since `&` and `@` have a lower priority than `+` and `-`, an expression like `4+5i&3-2i` should be interpreted as `(4+5i)&(3-2i)`.
+
+Extienda el programa [Jison](/topics/syntax-analysis/analisis-LR/#introduccion-al-analisis-lr) hecho en la práctica anterior con estas dos operaciones para que produzca un AST compatible Espree conteniendo el correspondiente código JS. A continuación utilice [escodegen.generate(ast)](https://github.com/estools/escodegen) para generar el código JS
 
 
 ## Dealing with Ambiguity
@@ -110,44 +110,26 @@ graph TB
 ```
 that leads to the interpretation `(2&3)@4`.
 
-Read the teacher notes on [precedence and associativity](https://crguezl.github.io/pl-html/node57.html) and see the examples in the [Repo crguezl/jison-prec](https://github.com/crguezl/jison-prec).
-
 To break the ambiguity you  have to set that the precedence of the  token `&` is higher that the one of the token `@`. 
 
 You have also to fix the ambiguity for phrases like `2&3&4` and `3@4@5` favouring a left associativity interpretation, i.e. preferring `(2&3)&4` to `2&(3&4)` and `(3@4)@5` to `3@(4@5)`.
 
-### Breaking Ambiguity in Jison/Eyapp/Yacc/Bison et al. using token precedence 
+An expression `4+5i&3-2i` should be interpreted as `(4+5i)&(3-2i)` and can produce a JS code as `min(add("4", "5i"), (sub("3", "2i")))`.
 
-These is a simplified version of the rules to resolve conflicts and ambiguities in a Yacc-like parser generator:
+To deal with issues of ambiguity in grammar,
+you can consult
 
-::: danger Precedence Rules
-1. La precedencia de los tokens se hace en la cabecera del programa Jison; esto es: antes del primer `%%` usando la sintáxis `%left token ...` , `%right token ...` o `%nonassoc token ...`
-2. La precedencia de una regla de producción $A \rightarrow \alpha$ es la precedencia del último token que aparece en la parte derecha $\alpha$ de la regla
-   * Por ejemplo la precedencia de $e \rightarrow e @ e$ será la precedencia que le demos al token $@$
-3. Cuando el parser detecta un conflicto y ve que hay dos posibles vias de continuar la construcción del árbol: Una que indica que quizá se aplicó la regla $A \rightarrow \alpha$ y otra que indica que quizá se pueda seguir leyendo el token $t$ a la entrada, 
-   1. El parser compara las precedencias del token y de la regla y se queda con el de mas prioridad. 
-   2. Si es el token quien tiene mayor prioridad avanzará en la lectura desplazando el token $t$ y buscando nuevos símbolos (se dice que hace un *shift*; en este caso probablemente el AST se "hundirá" a derechas) y 
-   3. Si es la regla completará el subárbol parcial $\overset{A}{\overset{\triangle}{\alpha}}$ y continuará en su construcción del árbol (se dice que hace un *reduce* y en este caso el árbol construido estará más hundido a izquierdas)
-4. Los tokens declarados en la misma línea mediante una declaración `%left` o `%right` 
-tienen igual precedencia e igual asociatividad. 
-3. La precedencia es mayor cuanto mas abajo su posición en el texto
-:::
+* [Conflict Solving in Yacc](/topics/syntax-analysis/conflicts)
+* the [Precedence and Associativity](https://crguezl.github.io/pl-html/node57.html) section of the old PL notes
+* See the examples in the [Repo ULL-ESIT-PL/jison-prec](https://github.com/ULL-ESIT-PL/jison-prec).
 
-Así, en nuestro ejemplo deberíamos poner:
+## Breaking Ambiguity in Jison
 
-```
-... 
+import Conflicts from "@/pages/topics/syntax-analysis/conflicts.mdx"
 
-%left @
-%left &
-%%
-es: e 
-;
+<Conflicts />
 
-...
-```
-
-## Challenge: Complex Numbers
+## Complex Numbers
 
 Extend the regular expressions in the lexical analyzer to cover both floating point real numbers like `2.53e-2` and floating point imaginary numbers like `2.9e-5i` or `-i`.
 
@@ -163,29 +145,17 @@ The [complex.js](https://github.com/infusion/Complex.js) library provides a cons
 
 Write the code inserting the support functions and the require to [complex.js](https://github.com/infusion/Complex.js) lib in the `preamble` that is concatenated to the generated code.
 
-## Redefining the minimum and maximum operators for complex numbers
+## Redefining the minimum and maximum operators
 
-When comparing Complex Number expressions, compare their modules. For example, the expression `2+3i<4+5i` can be interpreted as 
+Use [lexicographical order](https://en.wikipedia.org/wiki/Lexicographic_order) to compare Complex numbers:
 
-```js
-Complex("2").add("3i").abs() < Complex("4").add("5i").abs()
-``` 
-
-For real floating point numbers, this leads to the comparison of absolute values. For instance `2.3<-4.5` should be 
-
-```js copy 
-Complex("2.3").abs() < Complex("4.5").neg().abs()
-``` 
-
-which is `true`.
-
-Since `&` and `@` have a lower priority than `+` and `-`, an expression like `4+5i&3-2i` should be interpreted as `(4+5i)&(3-2i)`.
+${\displaystyle a+bi\leq a^{\prime }+b^{\prime }i{\text{ if and only if }}a<a^{\prime }{\text{ or }}\left(a=a^{\prime }{\text{ and }}b\leq b^{\prime }\right),}$
 
 ## Redefining the factorial function
 
 To keep compatibility with the calculator in the previous lab, you can extend the complex class with a factorial method like this: 
 
-```js copy
+```js copy filename="hello-compilers/complex-lib/factorial.js"
 #!/usr/bin/env node
 const Complex = require("complex.js");
 
@@ -207,7 +177,7 @@ console.log(Complex(process.argv[2]).factorial());
 
 Here are several executions of the former example:
 
-```
+``` filename="hello-compilers/complex-lib/factorial.js"
 ➜  complex-lib ./factorial.js "3"
 { re: 6, im: 0 }
 ➜  complex-lib ./factorial.js "3+2i"
@@ -244,12 +214,11 @@ sub(add(factorial("2"), pow("3", "2i")), "4i")
 
 which simplifies the AST and thus the translation.
 
-An expression `4+5i&3-2i` should be interpreted as `(4+5i)&(3-2i)` and can produce a JS code as `min(add("4", "5i"), (sub("3", "2i")))`.
 
 
-## Pruebas
+## Tests
 
-Añada [pruebas](/temas/introduction-to-javascript/pruebas) usando [Mocha y Chai](/temas/introduction-to-javascript/mocha) o [Jest](/temas/introduction-to-javascript/jest)
+Añada [pruebas](/topics/introduction-to-javascript/pruebas) usando [Mocha y Chai](/topics/introduction-to-javascript/mocha) o [Jest](/topics/introduction-to-javascript/jest)
 
 import mockingStubbing from "../topics/introduction-to-javascript/mocking-stubbing.mdx"
 
@@ -258,23 +227,23 @@ import mockingStubbing from "../topics/introduction-to-javascript/mocking-stubbi
 ## Covering 
 
 You can use  [nyc](https://www.npmjs.com/package/nyc) to do the covering of your mocha tests.
-See the notes in [covering](/temas/introduction-to-javascript/covering). 
+See the notes in [covering](/topics/introduction-to-javascript/covering). 
 
 Activate the GitHub pages of your repo (use the default branch and the `docs` folder) and be sure to include your covering report in the `docs` folder.
 
 ## Continuous Integration
 
 Añada Integración contínua usando GitHub actions.
-Lea la sección [GitHub Actions](/temas/introduction-to-javascript/github-actions) de los apuntes.
+Lea la sección [GitHub Actions](/topics/introduction-to-javascript/github-actions) de los apuntes.
 
 
 ## References
 
 ### Essentials for this lab
 
-* See the examples in the repo [crguezl/hello-jison](https://github.com/crguezl/hello-jison)
+* See the examples in the repo [ULL-ESIT-PL/hello-jison](https://github.com/ULL-ESIT-PL/hello-jison)
 * [https://astexplorer.net](https://astexplorer.net)
-* [Tipos de Nodos del AST](/temas/introduction-to-pl/espree-visitorkeys) y nombres de las propiedades de los hijos
+* [Tipos de Nodos del AST](/topics/introduction-to-pl/espree-visitorkeys) y nombres de las propiedades de los hijos
 * [Escodegen repo en GitHub](https://github.com/estools/escodegen)
   - [Escodegen API Doc](https://github.com/estools/escodegen/wiki/API)
 * [Jison Documentation](https://gerhobbelt.github.io/jison/docs//)
@@ -282,12 +251,12 @@ Lea la sección [GitHub Actions](/temas/introduction-to-javascript/github-action
 ### Jison and Syntax Analysis
 
 * [Análisis Sintáctico Ascendente en JavaScript](https://crguezl.github.io/pl-html/node43.html)
-* [Jison](/temas/syntax-analysis/analisis-LR/#introduccion-al-analisis-lr)
+* [Jison](/topics/syntax-analysis/analisis-LR/#introduccion-al-analisis-lr)
 * [Mi primer proyecto utilizando Jison](https://ericknavarro.io/2019/07/21/17-Mi-primer-proyecto-utilizando-Jison-Linux/) por Erick Navarro
 * [Folder jison/examples from the Jison distribution](https://github.com/zaach/jison/tree/master/examples)
 * [Jison Debugger](https://nolanlawson.github.io/jison-debugger/)
 * [Precedencia y Asociatividad](https://crguezl.github.io/pl-html/node57.html)
-    - [Repo de ejemplo crguezl/jison-prec](https://github.com/crguezl/jison-prec)
+    - [Repo de ejemplo ULL-ESIT-PL/jison-prec](https://github.com/ULL-ESIT-PL/jison-prec)
 * [Construcción de las Tablas para el Análisis SLR](https://crguezl.github.io/pl-html/node49.html)
 * [Algoritmo de Análisis LR (yacc/bison/jison)](https://crguezl.github.io/pl-html/node55.html)
 * [Repo ULL-ESIT-PL-1718/jison-aSb](https://github.com/ULL-ESIT-PL-1718/jison-aSb)

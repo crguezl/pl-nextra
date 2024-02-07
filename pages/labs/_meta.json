@@ -1,4 +1,43 @@
 {
+  "hello-compiler": {
+    "type": "menu",
+    "title": "Hello Compiler",
+    "display": "normal",
+    "items": {
+      "Two new operators & and @": {
+        "title": "Two new operators & and @",
+        "href": "/labs/hello-compiler#two-new-operators-and"
+      },
+      "Dealing with Ambiguity": {
+        "title": "Dealing with Ambiguity",
+        "href": "/labs/hello-compiler#dealing-with-ambiguity"
+      },
+      "Breaking Ambiguity": {
+        "title": "Breaking Ambiguity in Jison",
+        "href": "/labs/hello-compiler#breaking-ambiguity-in-jison"
+      },
+      "Complex Numbers": {
+        "title": "Complex Numbers",
+        "href": "/labs/hello-compiler#complex-numbers"
+      },
+      "Redefining the minimum and maximum operators": {
+        "title": "Redefining the minimum and maximum operatorss",
+        "href": "/labs/hello-compiler#redefining-the-minimum-and-maximum-operators"
+      },
+      "Redefining the factorial function": {
+        "title": "Redefining the factorial function",
+        "href": "/labs/hello-compiler#redefining-the-factorial-function"
+      },
+      "The translation scheme": {
+        "title": "The translation scheme",
+        "href": "/labs/hello-compiler#the-translation-scheme"
+      },
+      "References": {
+        "title": "References",
+        "href": "/labs/hello-compiler#references"
+      }
+    }
+  },
   "arith2js": {
     "type": "menu",
     "title": "Translating Arithmetic Expressions to JavaScript",
@@ -40,10 +79,6 @@
           "href": "/labs/arith2js#references"
       }
   }
-  },
-  "hello-compiler": {
-    "title": "Hello Compiler",
-    "display": "hidden"
   },
   "iaas": {
     "title": "IAAS",

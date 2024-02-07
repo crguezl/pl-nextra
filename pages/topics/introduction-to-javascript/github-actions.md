@@ -2,6 +2,7 @@
 title:  "GitHub Actions: An Introduction"
 ---
 
+
 Github Actions enables you to create custom software development lifecycle workflows directly in your Github repository. These workflows are made out of different tasks so-called actions that can be run automatically on certain events.
 
 This enables you to include Continues Integration (CI) and continuous deployment (CD) capabilities and many other features directly in your repository.
@@ -54,11 +55,11 @@ jobs:
 
 To manage GitHub Actions from Visual Studio we can install the extension [GitHub Actions](https://marketplace.visualstudio.com/items?itemName=cschleiden.vscode-github-actions)
 
-![](/images/github-actions-vscode-extension.png)
+![](/assets/images/github-actions-vscode-extension.png)
 
 To use it, you have to [authorize the VsCode extension to access your GitHub acount](https://github.com/cschleiden/vscode-github-actions/issues/66)
 
-![](/images/authorizing-vscode-extensions.jpg)
+![](/assets/images/authorizing-vscode-extensions.jpg)
 
 
 We can also use the online GitHub Interface. 
@@ -224,7 +225,7 @@ See also [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)
 
 ### The `release` event
 
-* See [GitHub Releases](/topics/introduction-to-javascript/releases)
+* See [GitHub Releases](/assets/temas/introduccion-a-javascript/releases.html)
 
 ## Runner
 
