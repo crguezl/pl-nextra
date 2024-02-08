@@ -36,6 +36,14 @@
         "title": "Tests",
         "href": "/labs/hello-compiler#tests"
       },
+      "Mocking": {
+        "title": "Mocking",
+        "href": "/labs/hello-compiler#mocking"
+      },
+      "Stubbing": {
+        "title": "Stubbing",
+        "href": "/labs/hello-compiler#stubbing"
+      },
       "Covering": {
         "title": "Covering",
         "href": "/labs/hello-compiler#covering"
