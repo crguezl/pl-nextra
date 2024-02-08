@@ -126,7 +126,7 @@ test
 └── test.mjs
 ```
 
-The workflow is that for each feature we add an impit file `test/data/test2.calc`:
+The workflow is that for each feature we add an input file `test/data/test2.calc`:
 
 ```
 ➜  arith2js-solution git:(dependencies) ✗ cat test/data/test2.calc 
@@ -139,18 +139,19 @@ then we run the transpiler `calc2js` and check the output:
 #!/usr/bin/env node
 console.log(9 - 6 - 3);
 ```
-Since it looks good we save it:
+Since it looks good we save it as a `correctXX.js` file:
 
 ```
 ➜  arith2js-solution git:(dependencies) ✗ bin/calc2js.mjs test/data/test2.calc -o test/data/correct2.js 
 ```
+
 We then run the output program and check the logged output is what expected:
 
 ```
 ➜  arith2js-solution git:(dependencies) ✗ node test/data/correct2.js 
 0
 ```
-Since it looks good we save it:
+Since it looks good we save the output as a `correct-outXX` file:
 
 ```
 ➜  arith2js-solution git:(dependencies) ✗ node test/data/correct2.js > test/data/correct-out2.txt 
@@ -199,6 +200,8 @@ export default [
   }
 ];
 ```
+
+The test file `test.mjs` contains the code to run the tests: traspiles each input file, checks the JS output is the expected and runs the JS output program and checks the logged output is what expected:
 
 ```js filename="/practicas/arith2js/arith2js-solution/test/test.mjs"
 const Test = Tst.map(t => ({
