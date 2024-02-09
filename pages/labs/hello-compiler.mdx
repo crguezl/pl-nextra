@@ -22,8 +22,30 @@ rubrica:
   - Se añade un estudio de cubrimiento de las pruebas (coverage) y se ha publicado en GitHub pages
 ---
 
-Antes de emprender esta práctica, asegúrese de entender los ejemplos de parser generator en el repo [ULL-ESIT-PL/hello-jison](https://github.com/ULL-ESIT-PL/hello-jison/tree/master/ast). 
+## Goals
 
+Before undertaking this lab, make sure you understand the parser generator examples in the [ULL-ESIT-PL/hello-jison](https://github.com/ULL-ESIT-PL/hello-jison/tree/master/repo/ast).
+
+Our goal is to write a parser for a simple calculator that can handle complex numbers and two new operators `@` and `&` that will be interpreted as `max` and `min` respectively. Here is an example of the kind of expressions we want to handle:
+
+
+```plaintext
+➜  hello-compilers-solution git:(essay-2024-02-14) bin/mmt.js '2-3i*5i'
+```
+gives the output:
+
+```js
+const {Complex, factorial, max, min, print } = require("/Users/casianorodriguezleon/campus-virtual/2122/learning/jison-learning/hello-compilers-solution/src/support-lib.js");
+print(Complex('2').sub(Complex('3i').mul(Complex('5i'))));
+```
+We can execute the output with `node`:
+
+```plaintext
+➜  hello-compilers-solution git:(essay-2024-02-14) bin/mmt.js '2-3i*5i' | node -
+17
+➜  hello-compilers-solution git:(essay-2024-02-14) bin/mmt.js '2-3i*5i&9' | node -
+9
+```
 
 ## Two new operators & and @
 
