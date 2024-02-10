@@ -8,7 +8,7 @@ const config: DocsThemeConfig = {
     key: 'arith2js',
     text: (
       <a href="/clases/february/2024-02-14-leccion#videos" target="_blank">
-        👨‍💻 Lab arith2js coming. See last year related videos →
+        👨‍💻 Lab arith2js deadline is 15/02. Watch last year related videos →
       </a>
     )
   },
