@@ -4,6 +4,14 @@ import { useConfig } from 'nextra-theme-docs'
 import { SessionProvider } from "next-auth/react"
 import { Link } from 'nextra-theme-docs'
 const config: DocsThemeConfig = {
+  banner: {
+    key: 'arith2js',
+    text: (
+      <a href="/clases/february/2024-02-14-leccion#videos" target="_blank">
+        👨‍💻 Lab arith2js coming. See last year related videos →
+      </a>
+    )
+  },
   logo: <span>
     <svg 
     xmlns="http://www.w3.org/2000/svg" 
