@@ -47,6 +47,23 @@ We can execute the output with `node`:
 9
 ```
 
+Here is an example of the executable options:
+
+```plaintext
+ hello-compilers-solution git:(main) bin/mmt.js -h
+Usage: mmt [options] [expression]
+
+Arguments:
+  expression            Expression to translate (default: null)
+
+Options:
+  -V, --version         output the version number
+  -f --file <file>      path to the input file with the expression to translate
+  -a --ast <file.json>  path to file with the AST in JSON format
+  -j --js <file>        file to output the resulting javascript
+  -h, --help            display help for command
+```
+
 ## Two new operators & and @
 
 Let us consider a notation of arithmetic in which the `@` and `&` symbols on numbers are defined as the `max` and `min` operations. Thus, with this notation
