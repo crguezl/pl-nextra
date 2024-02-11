@@ -4,9 +4,13 @@
     "title": "Hello Compiler",
     "display": "normal",
     "items": {
+      "Goals": {
+        "title": "Goals",
+        "href": "/labs/hello-compiler#goals"
+      },
       "Two new operators & and @": {
         "title": "Two new operators & and @",
-        "href": "/labs/hello-compiler#two-new-operators-and"
+        "href": "/labs/hello-compiler#two-new-operators--and-"
       },
       "Dealing with Ambiguity": {
         "title": "Dealing with Ambiguity",

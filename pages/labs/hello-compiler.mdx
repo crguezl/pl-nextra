@@ -24,9 +24,7 @@ rubrica:
 
 ## Goals
 
-Before undertaking this lab, make sure you understand the parser generator examples in the [ULL-ESIT-PL/hello-jison](https://github.com/ULL-ESIT-PL/hello-jison/tree/master/repo/ast).
-
-Our goal is to write a parser for a simple calculator that can handle complex numbers and two new operators `@` and `&` that will be interpreted as `max` and `min` respectively. Here is an example of the kind of expressions we want to handle:
+Our goal is to extend the parser of the [previous lab](/labs/arith2js) to a simple calculator that can handle complex numbers and two new operators `@` and `&` that will be interpreted as `max` and `min` respectively. Here is an example of the kind of expressions we want to handle:
 
 
 ```plaintext
@@ -47,7 +45,9 @@ We can execute the output with `node`:
 9
 ```
 
-Here is an example of the executable options:
+The expression `a&b` is equivalent to `min{a,b}` and `&` has smaller priority than the arithmetic operators.
+
+Here is an example of the executable `bin/mmt` options:
 
 ```plaintext
  hello-compilers-solution git:(main) bin/mmt.js -h
