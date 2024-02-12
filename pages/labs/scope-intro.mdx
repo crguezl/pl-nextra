@@ -180,11 +180,32 @@ Read the sections [Testing with Mocha](/topics/introduction-to-javascript/mocha#
 the module incorporating a `README.md` and the exported functions using [JsDoc](/topics/introduction-to-javascript/documentation#jsdoc).
 Read the section [Documenting the JavaScript Sources](/topics/introduction-to-javascript/creating-and-publishing-npm-module#documenting-the-javascript-sources) of the Chapter [Creating and Publishing a Node.js module](/topics/introduction-to-javascript/creating-and-publishing-npm-module)
 
+## Rubric
+
+import Rubric from '@/components/rubric'
+
+<Rubric rubric={frontmatter().rubrica} />
+
+## {frontmatter().key} Repos
+
+import { frontmatter} from '@/src/frontmatter'
+import ReposForLab from '@/components/repos-for-lab'
+
+<ReposForLab lab={frontmatter().key} />
+
 ## References
 
-* [ast-types](/temas/tree-transformations/ast-types)
-* [recast](/temas/tree-transformations/jscodeshift-recast) 
-* More on JSCodeshift in the article [Write Code to Rewrite Your Code: jscodeshift](https://www.toptal.com/javascript/write-code-to-rewrite-your-code) by Jeremy Greer
-* See [Tree  Transformations References](/temas/tree-transformations/tree-transformations-references)
+[npm]: https://www.npmjs.com/
+[Mozilla Parser API]: https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Parser_API
+[recast]: https://github.com/benjamn/recast
+[ast-types]: https://github.com/benjamn/ast-types
+[ast-explorer]: http://astexplorer.net/
+[collections]: https://github.com/facebook/jscodeshift/wiki/jscodeshift-Documentation#collections
+[nodepaths]: https://github.com/facebook/jscodeshift/wiki/jscodeshift-Documentation#nodepaths
+[node]: https://github.com/facebook/jscodeshift/wiki/jscodeshift-Documentation#node-1
+[variableDeclarator]: https://github.com/facebook/jscodeshift/wiki/jscodeshift-Documentation#variabledeclarator
 
-!!!include(includes/jscodeshift-links.md)!!!
+* [ast-types](/topics/tree-transformations/ast-types)
+* [recast](/topics/tree-transformations/jscodeshift-recast) 
+* More on JSCodeshift in the article [Write Code to Rewrite Your Code: jscodeshift](https://www.toptal.com/javascript/write-code-to-rewrite-your-code) by Jeremy Greer
+* See [Tree  Transformations References](/topics/tree-transformations/tree-transformations-references)

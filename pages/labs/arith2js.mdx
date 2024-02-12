@@ -70,7 +70,29 @@ Las expresiones aritméticas deben soportar además de
 - un operador de potencia `**` (ej.: `2!**3!**2!`) y 
 - paréntesis. 
 
-Ejemplo: `-(2 + 3) * 4! - 5 ** 6`.
+El siguiente ejemplo muestra la traducción de una expresión aritmética que incluye los 
+operadores de potencia y factorial:
+ 
+```
+➜  arith2js-solution git:(main) cat test/data/test-exp-fact.calc 
+2**3!                                                                                                                   
+```
+
+La idea es construir una librería de soporte que incluya 
+las funciones necesarias para que el código JavaScript generado pueda ser ejecutado:
+
+```js
+➜  arith2js-solution git:(main) bin/calc2js.mjs test/data/test-exp-fact.calc 
+const {factorial, power } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/arith2js/arith2js-solution/src/support-lib.js");
+console.log(power(2, factorial(3)));
+```
+
+Nótese que el código generado importa las funciones `factorial` y `power` desde un fichero `support-lib.js` que se encuentra en la carpeta `src`  en la que el compilador esté instalado.
+
+```
+➜  arith2js-solution git:(main) bin/calc2js.mjs test/data/test-exp-fact.calc | node -
+64
+```
 
 ## Opciones en línea de comandos
 

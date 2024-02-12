@@ -2,6 +2,8 @@
 prev: /temas/tree-transformations/jscodeshift-recast.md
 next: /temas/tree-transformations/jscodeshift.md
 ---
+import { Callout } from 'nextra/components'
+
 # ast-types
 
 ## Introduction 
@@ -13,9 +15,9 @@ that was leaded by a project called Mozilla Parser API [JavaScript:SpiderMonkey:
 
 ## SpiderMonkey Parser API and estree/estree
 
-::: warning
+<Callout type="error">
 NOTE: The page [JavaScript:SpiderMonkey:Parser API](https://web.archive.org/web/20210314002546/https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Parser_API) describes SpiderMonkey-specific behavior and is incomplete. Visit [ESTree spec](https://github.com/estree/estree) for a community AST standard that includes latest ECMAScript features and is backward-compatible with SpiderMonkey format.
-::: 
+</Callout>
 
 See  the [estree org](https://github.com/estree) and the [estree repo](https://github.com/estree/estree):
 
@@ -44,10 +46,11 @@ import recast from 'recast';
 We have imported the names of the ASTs types in `n` and in `b` the different 
 builders/constructors of AST nodes.
 
-::: danger type: module in your package.json!
+<Callout type="error"> 
+**type: module in your package.json!**
 When using node.js with ES6 modules (in current versions of node)
 you have to add an entry `"type": "module"` to the `package.json`:
-:::
+</Callout>
 
 ```
 ➜  hello-ast-types git:(master) ✗ node --version    
@@ -143,7 +146,7 @@ In general,
 * `path.parent.node` refers to the nearest `Node` ancestor, 
 * `path.parent.parent.node` to the grandparent, and so on.
 
-::: warning
+<Callout type="error">
 Note that `path.node` may not be accessed by a **named** property value of
 `path.parent.node`;  but it might be the case that `path.node` is
 an element of an array that is a direct child of the parent node:
@@ -153,7 +156,7 @@ path.node === path.parent.node.elements[3]
 ```
 
 in whose case the way to access `path.node` from the parent is via an expression.
-:::
+</Callout>
 
 ## Example hello-ast-types.js
 
