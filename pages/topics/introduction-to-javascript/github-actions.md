@@ -225,7 +225,7 @@ See also [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)
 
 ### The `release` event
 
-* See [GitHub Releases](/assets/temas/introduccion-a-javascript/releases.html)
+* See [GitHub Releases](/assets/topics/introduction-to-javascript/releases.html)
 
 ## Runner
 
@@ -577,7 +577,7 @@ The **runner context** contains information about the runner that is executing t
 
 Examples are `runner.os` for the Operating System or `runner.temp` for the path of the temporary directory for the runner. This directory is guaranteed to be empty at the start of each job, even on self-hosted runners.
 
-See an [example of runner context](/assets/temas/introduccion-a-javascript/action-files/debug-action-log#runner_context)
+See an [example of runner context](/assets/topics/introduction-to-javascript/action-files/debug-action-log#runner_context)
 
 ### The Strategy Context
 
@@ -611,7 +611,7 @@ jobs:
               - LINKER: gcc
 ```
 
-Strategy parameters include fail-fast, job-index, job-total, and max-parallel. [Here is the output for the](/assets/temas/introduccion-a-javascript/action-files/debug-action-log#strategy_context)
+Strategy parameters include fail-fast, job-index, job-total, and max-parallel. [Here is the output for the](/assets/topics/introduction-to-javascript/action-files/debug-action-log#strategy_context)
 [Debugging Context to the log](#debugging-context-to-the-log-file) example
 
 ### The Secrets Context
@@ -905,7 +905,7 @@ jobs:
 
 The  calls `toJSON(value)` return a pretty-print JSON representation of `value`. You can use this function to debug the information provided in contexts.
 
-Here is [an example of output](/assets/temas/introduccion-a-javascript/action-files/debug-action-log) of the action above.
+Here is [an example of output](/assets/topics/introduction-to-javascript/action-files/debug-action-log) of the action above.
 
 #### Exercise
 
@@ -981,7 +981,7 @@ See [Publishing packages to GitHub Packages](https://docs.github.com/en/actions/
 
 ## References
 
-* [A quick demo showing how to use GitHub Actions to build, package, and publish Node.js modules to the NPM and GitHub package registries](/assets/temas/introduccion-a-javascript/github-action-npm-publish) 
+* [A quick demo showing how to use GitHub Actions to build, package, and publish Node.js modules to the NPM and GitHub package registries](/assets/topics/introduction-to-javascript/github-action-npm-publish) 
 * [An Introduction to Github Actions](https://gabrieltanner.org/blog/an-introduction-to-github-actions)
 * [Using GitHub Actions](/https://youtu.be/9O2sLm1Boxc) Youtube video explainig how to test and publish an npm module to both GH Registry and npm Registry
 * [About the editor for GitHub Actions](https://github.blog/2019-10-01-new-workflow-editor-for-github-actions/)

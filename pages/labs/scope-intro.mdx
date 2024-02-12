@@ -1,0 +1,190 @@
+---
+title: "Introduction to Scoping"
+key: scope-intro
+published: true
+date:
+delivery:
+campus: "https://campusingenieriaytecnologia2223.ull.es/mod/assign/view.php?id=27580"
+order: 9
+layout: Practica
+sidebar: auto
+prev: "espree-logging.md"
+next: "spread-operator.md"
+rubrica:
+  - "Opciones en línea de comandos (-o, -V, -h, etc.)"
+  - "Traduce correctamente las expresiones fuente a JS"
+  - "Refleja la asociatividad y prioridad de operaciones correcta"
+  - Se añade correctamente el código de "run time support" en el preámbulo del programa JS
+  - Se declaran las variables inicializadas en el preámbulo del programa JS
+  - Da mensajes de error para variables no declaradas
+  - "Maneja números complejos: i, i^2, 2-i^3, etc."
+  - El <code>package.json</code> tiene scripts para ejecutar el programa
+  - Ha añadido tests suficientes
+  - Se añade un estudio de cubrimiento de las pruebas (coverage) y se ha publicado en GitHub pages
+  - Se han documentado el código con JSDoc o similar y publicado en GH-Pages
+  - Se ha añadido el enlace a las GH pages en el "About" del repo
+  - Se hace integración Continua usando GitHub Actions
+---
+
+## Task description
+
+We want to extend our calculator to support comma, identifier, assignment, and `print` operations so that we can process input like this:
+
+```js filename="test/data/input/test-id.calc"
+➜  scope-intro-solution git:(2024) cat test/data/input/test-id.calc 
+a = 4+i, 
+b = 2-2i, 
+print(a*b)
+```
+and now we can transpile this input using `calc2js`:
+
+```js
+➜  scope-intro-solution git:(2024) bin/calc2js.mjs test/data/input/test-id.calc 
+#!/usr/bin/env node
+const { Complex, print } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/scope-intro/scope-intro-solution/src/support-lib.js");  
+let $a, $b;
+($a = Complex("4").add(Complex("i")), $b = Complex("2").sub(Complex("2i"))), print($a.mul($b));
+```
+The output can be executed like this:
+
+```
+➜  scope-intro-solution git:(2024) bin/calc2js.mjs test/data/input/test-id.calc | node -
+10 - 6i
+```
+
+### Analysis of dependencies
+
+The generated JS program imports from the support library `src/support-lib.js` the functions that are necessary for the proper functioning of the source code. We import `Complex` and `print` since these are the only one that are required to work:
+
+```js
+const { Complex, print } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/scope-intro/scope-intro-solution/src/support-lib.js");
+``` 
+
+
+If we consider an example where the factorial is also required:
+
+```js
+➜  scope-intro-solution git:(2024) bin/calc2js.mjs test/data/input/test-exp-fact.calc   
+#!/usr/bin/env node
+const { print, Complex, factorial } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/scope-intro/scope-intro-solution/src/support-lib.js");  
+print(Complex("2").pow(factorial(Complex("3"))));
+```
+
+Notice that `pow` is a method of the  `Complex` objects, not a support function. We can 
+execute the program now:
+
+```
+➜  scope-intro-solution git:(2024) bin/calc2js.mjs test/data/input/test-exp-fact.calc | node -
+64
+```
+
+Also notice the long path to the required `support-lib.js`:
+
+```js
+require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/scope-intro/scope-intro-solution/src/support-lib.js");
+```
+
+That path will change on each installation of the compiler and thus is our job to find out where the support lib is located. We will use `__dirname` for that.
+
+### Analysis of initialized variables
+
+Variables that are initialized in source such as `a` and `b` must be declared as global variables following the supporting code and preceding the generated JS program:
+
+```js
+// ... Support code
+let $a, $b;
+($a = Complex("4").add(Complex("i")), 
+ $b = Complex("2").sub(Complex("2i"))
+), 
+print($a.mul($b));
+```
+
+
+### Avoiding conflicts with reserved words and supporting names
+
+Note also how input program variables are declared with a `$` prefix to avoid conflicts with supporting variables, JS reserved words, etc. that may appear in the generated JS program. 
+For instance, if the input program is `while = 4` the potential conflict with JS's `while` is resolved by translating `$while = 4`.
+
+
+## Declaration of variables
+
+We will assume that in our calculator, similar to what happens in Ruby, as soon as a variable is initialized it is declared (in this case in the only global scope).
+
+A program that contains **use** of an uninitialized/declared variable should give an execution error.
+For example:
+
+```js
+➜  scope-intro-solution git:(2024) ✗ cat test/data/input/test-scope1.calc 
+a = 4+d+i, 
+b = 2-2i, 
+print(c)
+```
+
+will produce output like:
+
+```js
+➜  scope-intro-solution git:(2024) ✗ bin/calc2js.mjs test/data/input/test-scope1.calc
+Not declared variable 'd'
+Not declared variable 'c'
+#!/usr/bin/env node
+const { Complex, print } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/scope-intro/scope-intro-solution/src/support-lib.js");  
+let $a, $b;
+($a = Complex("4").add($d).add(Complex("i")), $b = Complex("2").sub(Complex("2i"))), print($c);
+```
+
+## Calculator Compiler Phases
+
+The compiler can be divided into the following phases:
+
+```js
+#!/usr/bin/env node
+const p = require("./calc").parser;
+const fs = require('fs/promises');
+const { scopeAnalysis, dependencies } = require('./scope.js');
+const codeGen = require('./code-generation.js')
+const writeCode = require('./write-code.js');
+
+module.exports = async function transpile(inputFile, outputFile) {
+  let input = await fs.readFile(inputFile, 'utf-8') // 1. Read the input
+  let ast;
+  try {
+    ast = p.parse(input);                           // 2. Parse the input
+  } catch (e) {
+    let m = e.message
+    console.error(m);
+    return m;
+  }
+
+  ast = dependencies(ast);                          // 3. Find which support functions are being used
+  ast = scopeAnalysis(ast);                         // 4. Create the scope object. Attributes: initialized, used
+
+  let output = codeGen(ast);                        // 5. Generate JS 
+  
+  await writeCode(output, outputFile);              // 6. Write the generated JS in the output file
+  return output;
+}
+```
+For phases 3 and 4 you will need to traverse the AST using `visit` from the [ast-types](/topics/tree-transformations/ast-types) module.
+
+To complete the code for the `dependencies` and `scopeAnalysis` functions use the [recast](/topicsoduccion-a-javascript/tree-transformations/jscodeshift-recast) module for writing `codeGen`.
+
+## Testing, Covering and Continuous Integration
+
+Write the tests, do a coverage study using [c8](https://github.com/bcoe/c8) and add continuous integration using [GitHub Actions](/topics/introduction-to-javascript/github-actions).
+
+Read the sections [Testing with Mocha](/topics/introduction-to-javascript/mocha#mocha) and [Jest](/topics/introduction-to-javascript/jest).
+
+## Documentation
+
+[Document](/topics/introduction-to-javascript/documentation)
+the module incorporating a `README.md` and the exported functions using [JsDoc](/topics/introduction-to-javascript/documentation#jsdoc).
+Read the section [Documenting the JavaScript Sources](/topics/introduction-to-javascript/creating-and-publishing-npm-module#documenting-the-javascript-sources) of the Chapter [Creating and Publishing a Node.js module](/topics/introduction-to-javascript/creating-and-publishing-npm-module)
+
+## References
+
+* [ast-types](/temas/tree-transformations/ast-types)
+* [recast](/temas/tree-transformations/jscodeshift-recast) 
+* More on JSCodeshift in the article [Write Code to Rewrite Your Code: jscodeshift](https://www.toptal.com/javascript/write-code-to-rewrite-your-code) by Jeremy Greer
+* See [Tree  Transformations References](/temas/tree-transformations/tree-transformations-references)
+
+!!!include(includes/jscodeshift-links.md)!!!
