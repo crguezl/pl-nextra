@@ -196,6 +196,11 @@
         "href": "https://gerhobbelt.github.io/jison/docs/",
         "newWindow": true
       },
+      "estraverse": {
+        "title": "Estraverse",
+        "href": "/topics/introduction-to-pl/esprima#traversing-the-ast",
+        "newWindow": true
+      },
       "nextra": {
         "title": "Nextra",
         "href": "https://nextra.vercel.app/",

@@ -1,7 +1,7 @@
 ---
 sidebar: true
 ---
-# Architecture
+# Putout Architecture
 
 **Putout** consists of a couple simple parts, here is a workflow representation:
 

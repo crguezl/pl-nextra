@@ -670,10 +670,12 @@ The `call(arguments, 1)` method calls `Array.prototype.slice`  with the value of
 
 See the code in the file [spread-operator.js in the repo crguezl/hello-ast-types](https://github.com/crguezl/hello-ast-types/blob/master/spread-operator.js)
 
-::: danger AST compatibility
+<Callout type="error"> 
+**AST compatibility**
+
 I have used `espree` to generate the initial AST. It seems to have some incompatibilities with the 
 AST used by `ast-types`.
-::: 
+</Callout>
 
 We load the libs needed:
 
@@ -738,11 +740,13 @@ Node {type: 'MemberExpression',
 }
 ```
 
-::: warning Explanation of the `false` values
+<Callout type="error"> 
+**Explanation of the `false` values**
+
 On a `memberExpression` node (and also in other nodes as well) there is a boolean property called `computed`. If `computed` is `true`, the node corresponds to a computed (`a[b]`) member expression and property is an `Expression`. If `computed` is `false`, the node corresponds to a static (`a.b`) member expression and `property` has to be an `Identifier`. In the AST of `Array.prototype.slice.call` all the `computed` properties are `false` since it is a chain of static member expressions.
 
 See the [ast](https://astexplorer.net/#/gist/13276333fa88b6663fe011ae83e7f7e0/bd4124131535f9bd6fd3bb512147e6d7d4dab354) for `a[b]`
-:::
+</Callout>
 
 
 Let us try our translator with the following input code:
@@ -818,7 +822,9 @@ visit(ast, {
 });
 ```
 
-::: tip Remember that 
+<Callout type="info">
+**Remember that**
+
 * The `path` argument passed to the `visitFunction` function is a `NodePath` object whose `node` property is the `Function` node being visited. 
 
 * `Function` nodes in `ast-types` stand for [all kind of functions](https://github.com/estree/estree/blob/18bd9afbe8c348caca82057f1849614d98d6d0b6/es2015.md#functions): 
@@ -839,16 +845,18 @@ indicate that the traversal need not continue any further down this subtree. An 
   * pre-order, 
   * post-order, 
   * or both
-:::
+</Callout>
 
 ## Checking if a function refers to `this`
 
 These two rules may help to understand the semantics of `this` when used in JS functions: 
 
-::: danger Where the`this` comes from in arrow functions and ordinary functions
+<Callout type="error">
+**Where the `this` comes from in arrow functions and ordinary functions**
+
 1. Arrow functions take their value of "`this`" from the **lexical scope**.
 2. Functions take their value of "`this`" from the **[context object](https://blog.kevinchisholm.com/javascript/context-object-literals/#:~:text=In%20JavaScript%2C%20%E2%80%9Ccontext%E2%80%9D%20refers,the%20function%20is%20executed%20in.)**.
-:::
+</Callout>
 
 The following example [visit/arrow-vs-function/arrow-vs-function-and-this.js](https://github.com/crguezl/hello-ast-types/blob/master/visit/arrow-vs-function/arrow-vs-function-and-this.js) illustsrates these rules:
 

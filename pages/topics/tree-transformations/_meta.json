@@ -1,0 +1,20 @@
+{
+    "index": "AST TRansformations",
+    "ast-types-standard-description": "Understanding the AST Types API",
+    "ast-types": "",
+    "codemod": "Codemods and Code Refactoring",
+    "constant-folding": "",
+    "jscodeshift": "",
+    "jscodeshift-api": "",
+    "jscodeshift-recast": "Recast",
+    "jscodeshift-testing": "Unit Testing jscodeshift Transformations",
+    "jscodeshift-transformation-module": "JSCodeshift: How to write the transformation module",
+    "register-method-examples": "",
+    "master-the-ast-lectures": "Master the AST lecture series",
+    "putout-builtin-transformations": "",
+    "putout": "",
+    "architecture": "Putout Architecture",
+    "putout-plugins": "",
+    "putout-script": "",
+    "tree-transformations-references": ""
+}

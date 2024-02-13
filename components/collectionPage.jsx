@@ -18,7 +18,7 @@ export function CollectionPage({ path }) {
       if (page.frontMatter?.display === 'hidden') return null
       return (
         <li key={page.route}>
-          <Link className={styles.link} href={page.route}>{page.meta.title || page.frontMatter?.title || page.name}</Link>
+          <Link className={styles.link} href={page.route}>{page.meta?.title || page.frontMatter?.title || page?.name}</Link>
           {path === '/labs' && <LabInfo page={page} />} 
           {path.startsWith('/clases') &&     
               <ul className={styles.uList}>
