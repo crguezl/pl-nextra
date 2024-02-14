@@ -137,6 +137,82 @@ import UnaryMinus from "@/pages/pl-includes/unaryminus-exponenciation-escodegen.
 
 <UnaryMinus/>
 
+## Run time support
+
+The run time support library is in the file `src/support-lib.js`: **It is a library that exports those functions that are needed to run the generated code and are not part of the target language**. 
+
+```js filename="/practicas/arith2js/arith2js-solution/src/support-lib.js"
+const power = (n,m) => Math.pow(n, m) 
+const factorial = n => (n === 0) ? 1 : n * factorial(n - 1)
+
+module.exports = {
+  power,
+  factorial,
+};
+```
+The generated code, if needed imports from the library the required functions. For instance, for the input:
+
+```js
+➜  arith2js-solution git:(main) cat test/data/test-fact-fact.calc 
+2!*3!
+```
+we get the following output code:
+
+```js
+➜  arith2js-solution git:(main) bin/calc2js.mjs test/data/test-fact-fact.calc 
+const { factorial } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/arith2js/arith2js-solution/src/support-lib.js");
+console.log(factorial(2) * factorial(3));
+```
+
+and for the input:
+
+```js
+➜  arith2js-solution git:(main) cat test/data/test2.calc            
+9 - 6 - 3
+```
+we get the following output code:
+
+```js                           
+➜  arith2js-solution git:(main) bin/calc2js.mjs test/data/test2.calc
+console.log(9 - 6 - 3);
+```
+Notice how the `require` is not inserted in the output code, since it is not needed.
+
+To achieve this goal we add a template file `src/template.js`:
+
+```js filename="/practicas/arith2js/arith2js-solution/src/template.js"
+➜  arith2js-solution git:(main) cat src/template.js 
+const { {{ dependencies }} } = require("{{root}}/src/support-lib.js");
+{{code}}
+```
+
+the variables `{{ dependencies }}` and `{{ code }}` are replaced  with the required function names and the code generated from the AST.
+The variable `{{ root }}` is replaced with the path to the place where the `arith2js` compiler will be installed.
+
+## Computing the dependencies
+
+We can find the dependencies of the generated code by traversing the AST and collecting the names of the functions that are not part of the target language. We can use [espree.estraverse](/topics/introduction-to-pl/esprima#traversing-the-ast) for that:
+
+```js 
+const findUsedFunctions = function (ast) {
+  const usedSupportFunctions = new Set();
+  estraverse.traverse(ast, {
+    enter: function (node, _ ) {
+      if (node.type === "Identifier" && exportedSupportIdentifiers.includes(node.name)) {
+        usedSupportFunctions.add(node.name)
+      }
+    },
+  });
+  return Array.from(usedSupportFunctions);
+};
+```
+
+Where `exportedSupportIdentifiers` is an array with the names of the functions exported by the support library:
+
+```js
+const exportedSupportIdentifiers = Object.keys(require("./support-lib.js")); // [ power, factorial ]
+```
+
 ## Pruebas
 
 Añada pruebas a este proyecto usando [mocha](/topics/introduction-to-javascript/mocha)

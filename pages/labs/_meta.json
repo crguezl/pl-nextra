@@ -90,6 +90,14 @@
           "title": "Unary minus and exponentiation in escodegen",
           "href": "/labs/arith2js#unary-minus-and-exponentiation-in-escodegen"
       },
+      "Run-time Support": {
+          "title": "Run-time Support",
+          "href": "/labs/arith2js#run-time-support"
+      },
+      "Computing the dependencies": {
+          "title": "Computing the dependencies",
+          "href": "/labs/arith2js#computing-the-dependencies"
+      },
       "Pruebas": {
           "title": "Pruebas",
           "href": "/labs/arith2js#pruebas"
