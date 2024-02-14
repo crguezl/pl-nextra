@@ -25,6 +25,15 @@ rubrica:
 repo:
   text: "Repo hello-jison"
   href: "https://github.com/ull-esit-pl/hello-jison"
+videos: [ "GzYq5ZVJR2k"]
+videos23: [ "XRc5WXjiIUM", "tGeUGBtWpBI", "P9R5myLFlXU"]
+topics: 
+  - text: "Solving Conflicts"
+    href: "/topics/syntax-analysis/conflicts"
+  - text: "Generating an Espree compatible AST"
+    href: "https://github.com/ULL-ESIT-PL/hello-jison/tree/master/ast"
+  - text: "Introduction to Compilers"
+    href: "https://docs.google.com/presentation/d/1N8h99dXzud9HzH8XY6QCZSmATCAWXtZebuqRTiy8qMU/edit?usp=sharing"
 ---
 import { Link } from 'nextra-theme-docs'
 
@@ -311,6 +320,23 @@ Read the chapter [Creating and Publishing an npm Module](/topics/introduction-to
 - [GitHub Actions: an introduction](/topics/introduction-to-javascript/creating-and-publishing-npm-module#github-actions-an-introduction) and
 - [Setting CI for our npm module](/topics/introduction-to-javascript/creating-and-publishing-npm-module#setting-ci-for-our-npm-module) 
 
+## Videos
+
+import Videos from '@/components/videos'
+
+Este vídeo del 14 de Febrero de 2024 explica como hacer parte de la práctica arith2js:
+
+<Videos ids={frontmatter().videos}></Videos>
+
+
+También puede ver los vídeos del 14, 15 y 22 de febrero de 2023 contienen la explicación de la práctica arith2js:
+
+<Videos ids={frontmatter().videos23}></Videos>
+
+## Related topics
+import RelatedTopics from '@/components/related-topics'
+
+<RelatedTopics topics={ frontmatter().topics }/>
 ## Rubric
 
 import Rubric from '@/components/rubric'
