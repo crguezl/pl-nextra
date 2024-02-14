@@ -98,9 +98,9 @@
           "title": "Computing the dependencies",
           "href": "/labs/arith2js#computing-the-dependencies"
       },
-      "Pruebas": {
-          "title": "Pruebas",
-          "href": "/labs/arith2js#pruebas"
+      "Tests": {
+          "title": "Tests",
+          "href": "/labs/arith2js#tests"
       },
       "Covering": {
           "title": "Covering",

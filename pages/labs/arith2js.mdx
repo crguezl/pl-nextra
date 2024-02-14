@@ -345,6 +345,35 @@ for (let i = 0; i < Test.length; i++) {
 }
 ```
 
+### Testing erroneous input files
+
+In an analogous way, you can add testing for **erroneous** input files. 
+
+```
+➜  arith2js-solution git:(main) ls test/*error*
+test/test-error-description.js test/test-error.js
+```
+
+For instance, the file `test/data/test-err.calc` contains an erroneous input:
+
+```
+➜  arith2js-solution git:(main) cat test/data/test-err.calc 
+2*(-3!!
+➜  arith2js-solution git:(main) bin/calc2js.mjs test/data/test-err.calc 
+Parse error on line 1:
+2*(-3!!
+-------^
+Expecting '-', '+', '*', '/', ')', '**', '!', got '1'
+```
+
+Which is tested by the file `test/test-error.js`:
+
+```
+➜  arith2js-solution git:(main) npx mocha --grep err test/test-error.js 
+  ✔ transpile(test-err.calc, outerr.txt)
+  1 passing (8ms)
+```
+
 import MockingStubbing from "@/pages/topics/introduction-to-javascript/mocking-stubbing.mdx"
 
 <MockingStubbing/>
