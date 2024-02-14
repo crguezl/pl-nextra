@@ -191,6 +191,14 @@ const { {{ dependencies }} } = require("{{root}}/src/support-lib.js");
 the variables `{{ dependencies }}` and `{{ code }}` are replaced  with the required function names and the code generated from the AST.
 The variable `{{ root }}` is replaced with the path to the place where the `arith2js` compiler will be installed.
 
+You can implement your own JS templates or use one of the many available:
+
+- [template-file](https://www.npmjs.com/package/template-file)
+- [handlebars.js](https://www.npmjs.com/package/handlebars)
+- [mustache.js](https://www.npmjs.com/package/mustache)
+
+
+
 ## Computing the dependencies
 
 We can find the dependencies of the generated code by traversing the AST and collecting the names of the functions that are not part of the target language. We can use [espree.estraverse](/topics/introduction-to-pl/esprima#traversing-the-ast) for that:
