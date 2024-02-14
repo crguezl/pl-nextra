@@ -16,8 +16,8 @@ rubrica:
    - Rubric requirements presented as issues"
    - All operators have been implemented (+,-,/,*, parenthesis (), unary minus -, power **, factorial!) with the correct precedences
    - Supports floating point numbers
+   - Supports factorial and power operations
    - Commander has been used to process the argument line
-   - Uses both CommonJS and ECMAScript
    - Tests are provided using Mocha
    - A test coverage study is carried out
    - The package.json has scripts to run the program
@@ -37,7 +37,7 @@ Usando Jison generalice el ejemplo en la carpeta `ast` del [Repo hello-jison](ht
 * [minus-ast.l](https://github.com/ULL-ESIT-PL/hello-jison/blob/master/ast/minus-ast.l)
 * [ast2js.js](https://github.com/ULL-ESIT-PL/hello-jison/blob/master/ast/ast2js.js)
 
-para escribir un programa que, recibiendo como entrada una cadena que contiene una secuencia de expresiones aritméticas de enteros separados por comas, produzca un AST compatible con el del [parser espree](https://github.com/eslint/espree). 
+para escribir un programa que, recibiendo como entrada una cadena que contiene una secuencia de expresiones aritméticas de flotantes, produzca un AST compatible con el del [parser espree](https://github.com/eslint/espree). 
 Use [escodegen](https://github.com/estools/escodegen) para generar el código JavaScript correspondiente (vea [ast2js.js](https://github.com/ULL-ESIT-PL/hello-jison/blob/master/ast/ast2js.js)). Sigue un ejemplo de una posible ejecución.
 
 Given an input file like this:
