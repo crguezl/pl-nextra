@@ -21,6 +21,18 @@ rubrica:
   - El package.json tiene scripts para ejecutar el programa
   - Ha añadido tests suficientes
   - Se añade un estudio de cubrimiento de las pruebas (coverage) y se ha publicado en GitHub pages
+
+topics: 
+  - text: "Computing Dependencies"
+    href: "/pl-includes/computing-dependencies" 
+  - text: "Solving Conflicts"
+    href: "/topics/syntax-analysis/conflicts"
+  - text: "Generating an Espree compatible AST"
+    href: "https://github.com/ULL-ESIT-PL/hello-jison/tree/master/ast"
+  - text: "Introduction to Compilers"
+    href: "https://docs.google.com/presentation/d/1N8h99dXzud9HzH8XY6QCZSmATCAWXtZebuqRTiy8qMU/edit?usp=sharing"
+videos23: ["P9R5myLFlXU" ]
+
 ---
 
 ## Goals
@@ -300,6 +312,21 @@ Activate the GitHub pages of your repo (go to settings and use the default branc
 Esta tarea tiene asociada una GitHub Action [education/autograding](https://github.com/education/autograding) para ejecutar los tests proveidos por el profesor.
 Añada tests y compruebe en las  GitHub actions de su repo el estado de las pruebas.
 Lea la sección [GitHub Actions](/topics/introduction-to-javascript/github-actions) de los apuntes.
+
+## Videos
+
+import Videos from '@/components/videos'
+
+Este vídeo del 22/02/2023 puede ayudar con la elaboración de la práctica
+hello-compiler:
+
+<Videos ids={frontmatter().videos23}></Videos>
+
+## Related topics
+
+import RelatedTopics from '@/components/related-topics'
+
+<RelatedTopics topics={ frontmatter().topics }/>
 
 ## Rubric
 

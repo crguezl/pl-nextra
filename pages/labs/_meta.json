@@ -60,6 +60,14 @@
         "title": "Continuous Integration",
         "href": "/labs/hello-compiler#continuous-integration"
       },
+      "Videos": {
+        "title": "Videos",
+        "href": "/labs/hello-compiler#videos"
+      },
+      "Related Topics": {
+        "title": "Related Topics",
+        "href": "/labs/hello-compiler#related-topics"
+      },
       "Rubric": {
         "title": "Rubric",
         "href": "/labs/hello-compiler#rubric"
