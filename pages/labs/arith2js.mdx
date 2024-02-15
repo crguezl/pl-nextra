@@ -199,29 +199,9 @@ You can implement your own JS templates or use one of the many available:
 
 
 
-## Computing the dependencies
+import ComputingDependencies from "@/pages/pl-includes/computing-dependencies.mdx"
 
-We can find the dependencies of the generated code by traversing the AST and collecting the names of the functions that are not part of the target language. We can use [espree.estraverse](/topics/introduction-to-pl/esprima#traversing-the-ast) for that:
-
-```js 
-const findUsedFunctions = function (ast) {
-  const usedSupportFunctions = new Set();
-  estraverse.traverse(ast, {
-    enter: function (node, _ ) {
-      if (node.type === "Identifier" && exportedSupportIdentifiers.includes(node.name)) {
-        usedSupportFunctions.add(node.name)
-      }
-    },
-  });
-  return Array.from(usedSupportFunctions);
-};
-```
-
-Where `exportedSupportIdentifiers` is an array with the names of the functions exported by the support library:
-
-```js
-const exportedSupportIdentifiers = Object.keys(require("./support-lib.js")); // [ power, factorial ]
-```
+<ComputingDependencies/>
 
 ## Tests
 

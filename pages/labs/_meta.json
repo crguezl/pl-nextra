@@ -36,6 +36,10 @@
         "title": "The translation scheme",
         "href": "/labs/hello-compiler#the-translation-scheme"
       },
+      "Computing the dependencies": {
+        "title": "Computing the dependencies",
+        "href": "/labs/hello-compiler#computing-the-dependencies"
+      },
       "Tests": {
         "title": "Tests",
         "href": "/labs/hello-compiler#tests"

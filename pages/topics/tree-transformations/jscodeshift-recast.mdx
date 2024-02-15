@@ -17,9 +17,9 @@ Recast provides methods for
 
 Recast exposes two essential interfaces, one for parsing JavaScript code (`require("recast").parse`) and the other for reprinting modified syntax trees (`require("recast").print`).
 
-See the example in [/crguezl/hello-jscodeshift/hello-recast.js](https://github.com/crguezl/hello-jscodeshift/blob/master/hello-recast.js)
+See the example in [/ULL-ESIT-PL/hello-jscodeshift/hello-recast.js](https://github.com/ULL-ESIT-PL/hello-jscodeshift/blob/master/hello-recast.js)
 
-This [code example](https://github.com/crguezl/hello-jscodeshift/blob/master/hello-recast.js) takes as input the code 
+This [code example](https://github.com/ULL-ESIT-PL/hello-jscodeshift/blob/master/hello-recast.js) takes as input the code 
 
 ```js 
   function add(a, b) {
@@ -73,9 +73,7 @@ ast.program.body[0] = B.variableDeclaration("const", [
 
 ### How to write a builder
 
-::: tip How to write a builder
-See section [How to write a builder](ast-types-standard-description) for an explanation of how the APi works.
-:::
+See section [How to write a builder](ast-types-standard-description) for an explanation of how the API works.
 
 ### Switching the parameters
 
@@ -118,8 +116,15 @@ Continue now reading the sections
 ## References
 
 * [recast](https://github.com/benjamn/recast)
-More on JSCodeshift in the article [Write Code to Rewrite Your Code: jscodeshift](https://www.toptal.com/javascript/write-code-to-rewrite-your-code) by Jeremy Greer
+* [Write Code to Rewrite Your Code: jscodeshift](https://www.toptal.com/javascript/write-code-to-rewrite-your-code) by Jeremy Greer. 2016
+* See [Tree  Transformations References](/topics/tree-transformations/tree-transformations-references)
 
-See [Tree  Transformations References](/temas/tree-transformations/tree-transformations-references)
-
-!!!include(includes/jscodeshift-links.md)!!!
+[npm]: https://www.npmjs.com/
+[Mozilla Parser API]: https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Parser_API
+[recast]: https://github.com/benjamn/recast
+[ast-types]: https://github.com/benjamn/ast-types
+[ast-explorer]: http://astexplorer.net/
+[collections]: https://github.com/facebook/jscodeshift/wiki/jscodeshift-Documentation#collections
+[nodepaths]: https://github.com/facebook/jscodeshift/wiki/jscodeshift-Documentation#nodepaths
+[node]: https://github.com/facebook/jscodeshift/wiki/jscodeshift-Documentation#node-1
+[variableDeclarator]: https://github.com/facebook/jscodeshift/wiki/jscodeshift-Documentation#variabledeclarator

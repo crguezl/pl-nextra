@@ -164,7 +164,7 @@ module.exports = async function transpile(inputFile, outputFile) {
   return output;
 }
 ```
-For phases 3 and 4 you will need to traverse the AST using `visit` from the [ast-types](/topics/tree-transformations/ast-types) module.
+For phases 3 and 4 you will need to traverse the AST but instead of `estraverse` this time we will use the [visit](https://github.com/benjamn/ast-types?tab=readme-ov-file#ast-traversal) method from the [ast-types](/topics/tree-transformations/ast-types) module.
 
 To complete the code for the `dependencies` and `scopeAnalysis` functions use the [recast](/topicsoduccion-a-javascript/tree-transformations/jscodeshift-recast) module for writing `codeGen`.
 

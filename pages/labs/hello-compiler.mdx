@@ -9,7 +9,7 @@ order: 7
 display: "normal"
 layout: Practica
 sidebar: auto
-prev: #"arith2js.md"
+prev: "arith2js.md"
 next: #"npm-module"
 rubrica:
   - "Opciones en línea de comandos (-o, -V, -h, etc.)"
@@ -17,6 +17,7 @@ rubrica:
   - "Refleja la asociatividad y prioridad de operaciones correcta"
   - Maneja números complejos
   - Se añade correctamente el código de "run time support" en el preámbulo del programa JS
+  - Se importan sólo los símbolos necesarios del "run time support"
   - El package.json tiene scripts para ejecutar el programa
   - Ha añadido tests suficientes
   - Se añade un estudio de cubrimiento de las pruebas (coverage) y se ha publicado en GitHub pages
@@ -274,6 +275,9 @@ sub(add(factorial("2"), pow("3", "2i")), "4i")
 
 which simplifies the AST and thus the translation.
 
+import ComputingDependencies from "@/pages/pl-includes/computing-dependencies.mdx"
+
+<ComputingDependencies/>
 
 
 ## Tests

@@ -201,6 +201,11 @@
         "href": "/topics/introduction-to-pl/esprima#traversing-the-ast",
         "newWindow": true
       },
+      "estree/ES5": {
+        "title": "ESTree/ES5",
+        "href": "https://github.com/estree/estree/blob/master/es5.md",
+        "newWindow": true
+      },
       "nextra": {
         "title": "Nextra",
         "href": "https://nextra.vercel.app/",

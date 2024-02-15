@@ -15,24 +15,25 @@ that was leaded by a project called Mozilla Parser API [JavaScript:SpiderMonkey:
 
 ## SpiderMonkey Parser API and estree/estree
 
+SpiderMonkey is the name of the JavaScript engine used in Mozilla Firefox and various other Mozilla projects. The SpiderMonkey engine is responsible for parsing, interpreting, and executing JavaScript code within the Firefox browser. It is written in C++, Rust and JavaScript. You can embed it into C++ and Rust projects, and it can be run as a stand-alone shell. 
+
 <Callout type="error">
-NOTE: The page [JavaScript:SpiderMonkey:Parser API](https://web.archive.org/web/20210314002546/https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Parser_API) describes SpiderMonkey-specific behavior and is incomplete. Visit [ESTree spec](https://github.com/estree/estree) for a community AST standard that includes latest ECMAScript features and is backward-compatible with SpiderMonkey format.
+NOTE: The page [JavaScript:SpiderMonkey:Parser API](https://web.archive.org/web/20210314002546/https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Parser_API) describes SpiderMonkey-specific behavior and is incomplete. Visit [ESTree spec](https://github.com/estree/estree) for a community AST standard that includes latest ECMAScript features and is backward-compatible with SpiderMonkey format. Namely, visit the [es5.md](https://github.com/estree/estree/blob/master/es5.md) file inside the repo to see the specification for the core ESTree AST node types that support the ES5 grammar.
 </Callout>
 
 See  the [estree org](https://github.com/estree) and the [estree repo](https://github.com/estree/estree):
 
-> Once upon a time, an [unsuspecting Mozilla engineer](https://calculist.org) created an API in Firefox that exposed the SpiderMonkey engine's JavaScript parser as a JavaScript API. Said engineer [documented the format it produced](https://web.archive.org/web/20210314002546/https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Parser_API), and this format caught on as a lingua franca for tools that manipulate JavaScript source code.
+> Once upon a time (2010?), a [Mozilla engineer](https://youtu.be/hs6tF-RDX4U?si=_iaR3FlN5HySScw3) created an API in Firefox that exposed the SpiderMonkey engine's JavaScript parser as a JavaScript API. Said engineer [documented the format it produced](https://web.archive.org/web/20210314002546/https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Parser_API), and this format caught on as a lingua franca for tools that manipulate JavaScript source code.
 
-> Meanwhile JavaScript is evolving. [This site](https://github.com/estree/estree/blob/master/README.md) will serve as a community standard for people involved in building and using these tools to help evolve this format to keep up with the evolution of the JavaScript language.
+JavaScript is evolving. The repo [estree/estree/](https://github.com/estree/estree/blob/master/README.md) intends to serve as a community standard for people involved in building JS compilers and aims to keep up with the evolution of the JavaScript language.
 
 See also the video lecture [SpiderMonkey Parser API: A Standard For Structured JS Representations](https://www.infoq.com/presentations/spidermonkey-parser-api/) by Michael Ficarra 2014 at InfoQ. 
 
 ## Simple Example
 
-The repo [crguezl/hello-ast-types](https://github.com/crguezl/hello-ast-types) contains  examples to learn  `ast-types`.
+The repo [ULL.ESIT-PL/hello-ast-types](https://github.com/ULL-ESIT-PL/hello-ast-types) forked from [crguezl/hello-ast-types](https://github.com/crguezl/hello-ast-types) contains  examples to learn  `ast-types`.
 
-The program in file [index.js](https://github.com/crguezl/hello-ast-types/blob/master/index.js) contains a simple example
-of usage of [ast-types](https://github.com/benjamn/ast-types):
+The program in file [index.js](https://github.com/ULL-ESIT-PL/hello-ast-types/blob/master/introduction/index.js) contains a simple example of usage of [ast-types](https://github.com/benjamn/ast-types):
 
 ```js
 import assert from "assert";
@@ -50,7 +51,6 @@ builders/constructors of AST nodes.
 **type: module in your package.json!**
 When using node.js with ES6 modules (in current versions of node)
 you have to add an entry `"type": "module"` to the `package.json`:
-</Callout>
 
 ```
 ➜  hello-ast-types git:(master) ✗ node --version    
@@ -61,6 +61,7 @@ v16.0.0
   "ast-types": "^0.14.2"
 }
 ```
+</Callout>
 
 let us build a identifier node and an ifStatement node:
 
@@ -160,12 +161,12 @@ in whose case the way to access `path.node` from the parent is via an expression
 
 ## Example hello-ast-types.js
 
-See file [/crguezl/hello-ast-types/hello-ast-types.js](https://github.com/crguezl/hello-ast-types/blob/master/hello-ast-types.js):
+See file [ULL-ESIT-PL/hello-ast-types/introduction/hello-ast-types.js](https://github.com/ULL-ESIT-PL/hello-ast-types/blob/master/introduction/hello-ast-types.js):
 
 ```js
 import { parse } from "espree";
 import { NodePath } from "ast-types";
-import deb from "./deb.js";
+import deb from "../deb.js";
 
 var programPath = new NodePath(parse("x = 1; y = 2"));
 
@@ -185,6 +186,10 @@ console.log(deb(xAssignmentExpression.node));
 console.log(deb(yAssignmentExpression.node));
 ```
 
+Note that `xExpressionStatement.node` is not  accessed by a **named** property value of
+`xExpressionStatement.parent.node`;  but it is the case that `xExpressionStatement.node` is
+the 0 element of the `body` array of the parent node (`Program`).
+
 ```
 ➜  hello-ast-types git:(master) ✗ node --inspect-brk hello-ast-types.js 
 ```
@@ -199,7 +204,7 @@ You should know that `path.parentPath` provides
 finer-grained access to the complete path of objects (not just the `Node`
 ones) from the root of the AST:
 
-In reality, path.parent is the grandparent of path:
+In reality, `path.parent` is the *grandparent* of path:
 
 ```js
 path.parentPath.parentPath === path.parent
@@ -295,7 +300,7 @@ path.get("elements", 2).replace(
 );
 ```
 
-Here is the code of the example [replace.js](https://github.com/crguezl/hello-ast-types/blob/master/replace.js)
+Here is the code of the example [replace.js](https://github.com/ULL-ESIT-PL/hello-ast-types/blob/master/replace.js)
 
 ```js
 import recast from "recast";
@@ -423,7 +428,7 @@ that represents the scope in which the node appears. The `Scope` object
 provides a number of useful methods for inspecting the scope chain and
 looking up variables.
 
-Here is the code of the example [scope.js](https://github.com/crguezl/hello-ast-types/blob/master/scope/scope.js):
+Here is the code of the example [scope.js](https://github.com/ULL-ESIT-PL/hello-ast-types/blob/master/scope/scope.js):
 
 ```js
 import util from 'util';
@@ -538,7 +543,7 @@ Visiting BinaryExpression node. Is this the global scope? path.scope.isGlobal= f
   ```
 
 ### Example: scope-catch.js 
-File [crguezl/hello-ast-types/scope-catch.js](https://github.com/crguezl/hello-ast-types/blob/master/scope-catch.js)
+File [ULL-ESIT-PL/hello-ast-types/scope-catch.js](https://github.com/ULL-ESIT-PL/hello-ast-types/blob/master/scope-catch.js)
 
 [See the AST](https://astexplorer.net/#/gist/f00452c960b249ed36aacc08cacaaa34/646c9796cf42772a97f8b6448a12e99f7610838c) for the input source.
 
@@ -613,7 +618,7 @@ The 5th edition of ECMAScript (ES5) [forbids its use](https://developer.mozilla.
 
 The goal of this code example: you want to detect uses of this old trick to update the code.
 
-See [crguezl/hello-ast-types/visitmemberexpression.js](https://github.com/crguezl/hello-ast-types/blob/master/visit/visitmemberexpression.js) for a solution
+See [ULL-ESIT-PL/hello-ast-types/visitmemberexpression.js](https://github.com/ULL-ESIT-PL/hello-ast-types/blob/master/visit/visitmemberexpression.js) for a solution
 
 ## Translating the ES6 spread operator ... to ES5
 
@@ -668,7 +673,7 @@ Since `arguments` is not an array, we can't use directly the `slice` method (`ar
 
 The `call(arguments, 1)` method calls `Array.prototype.slice`  with the value of `this` set to `arguments`.
 
-See the code in the file [spread-operator.js in the repo crguezl/hello-ast-types](https://github.com/crguezl/hello-ast-types/blob/master/spread-operator.js)
+See the code in the file [spread-operator.js in the repo ULL-ESIT-PL/hello-ast-types](https://github.com/ULL-ESIT-PL/hello-ast-types/blob/master/spread-operator.js)
 
 <Callout type="error"> 
 **AST compatibility**
@@ -858,7 +863,7 @@ These two rules may help to understand the semantics of `this` when used in JS f
 2. Functions take their value of "`this`" from the **[context object](https://blog.kevinchisholm.com/javascript/context-object-literals/#:~:text=In%20JavaScript%2C%20%E2%80%9Ccontext%E2%80%9D%20refers,the%20function%20is%20executed%20in.)**.
 </Callout>
 
-The following example [visit/arrow-vs-function/arrow-vs-function-and-this.js](https://github.com/crguezl/hello-ast-types/blob/master/visit/arrow-vs-function/arrow-vs-function-and-this.js) illustsrates these rules:
+The following example [visit/arrow-vs-function/arrow-vs-function-and-this.js](https://github.com/ULL-ESIT-PL/hello-ast-types/blob/master/visit/arrow-vs-function/arrow-vs-function-and-this.js) illustsrates these rules:
 
 ```js
 let g = {
@@ -888,11 +893,11 @@ foo
 g
 ```
 
-See also the examples in the folder [visit/arrow-vs-function](https://github.com/crguezl/hello-ast-types/tree/master/visit/arrow-vs-function) of the repo `crguezl/hello-ast-types` and read the blog [context object literals](https://blog.kevinchisholm.com/javascript/context-object-literals/#:~:text=In%20JavaScript%2C%20%E2%80%9Ccontext%E2%80%9D%20refers,the%20function%20is%20executed%20in.).
+See also the examples in the folder [visit/arrow-vs-function](https://github.com/ULL-ESIT-PL/hello-ast-types/tree/master/visit/arrow-vs-function) of the repo `ULL-ESIT-PL/hello-ast-types` and read the blog [context object literals](https://blog.kevinchisholm.com/javascript/context-object-literals/#:~:text=In%20JavaScript%2C%20%E2%80%9Ccontext%E2%80%9D%20refers,the%20function%20is%20executed%20in.).
 
 If we are considering to rewrite some function as an arrow function, a conservative policy will be to be sure that the function does not refer in any way to the context object `this`.
 
-The traversing of the AST at [crguezl/hello-ast-types/visit/arrow-vs-function/check-this-usage.js](https://github.com/crguezl/hello-ast-types/blob/master/visit/arrow-vs-function/check-this-usage.js) attempts to detect when `this` (or `super()` or something like `super.meth()`) is used inside the body of a function. 
+The traversing of the AST at [ULL-ESIT-PL/hello-ast-types/visit/arrow-vs-function/check-this-usage.js](https://github.com/ULL-ESIT-PL/hello-ast-types/blob/master/visit/arrow-vs-function/check-this-usage.js) attempts to detect when `this` (or `super()` or something like `super.meth()`) is used inside the body of a function. 
 
 ```js
 ➜  visit git:(master) ✗ node check-this-usage.js 
@@ -962,7 +967,7 @@ Continue now reading the sections
 * [estree org](https://github.com/estree) 
   * [estree repo](https://github.com/estree/estree) with the ESTree Specification
   * [estree formal](https://github.com/estree/formal). This is a simple ESTree spec parser from Markdown files and formal JSON generator.
-* Repo [crguezl/hello-ast-types](https://github.com/crguezl/hello-ast-types)
+* Repo [ULL.ESIT-PL/hello-ast-types](https://github.com/ULL-ESIT-PL/hello-ast-types) forked from [crguezl/hello-ast-types](https://github.com/crguezl/hello-ast-types)
 * Video lecture [SpiderMonkey Parser API: A Standard For Structured JS Representations](https://www.infoq.com/presentations/spidermonkey-parser-api/) by Michael Ficarra 2014 at InfoQ
 * [arguments.callee](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments/callee)
 * [Understanding Scope in JavaScript](https://blog.kevinchisholm.com/javascript/scope/)

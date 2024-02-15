@@ -1,26 +1,23 @@
 ---
-title: Tree Transformations
+title: AST Transformations
 ---
-
-# AST Transformations 
-
 ## Constant Folding
 
-See chapter [Constant Folding](/topics/tree-transformations/constant-folding)
+See  an example of [Constant Folding](/topics/tree-transformations/constant-folding) using espree and estraverse.
 
 ## Master the AST Lectures
 
-See chapter [Master the AST lecture series](/topics/tree-transformations/master-the-ast-lectures.md)
+See a set of lectures about AST transformations "[Master the AST lecture series](/topics/tree-transformations/master-the-ast-lectures.md)" by Yonatan Mevorach
 
 ## Codemods
 
-See chapter [Codemods](/topics/tree-transformations/codemod.md)
+[Codemods](/topics/tree-transformations/codemod.md) was a tool/library developed by FaceBook to assist with large-scale codebase refactors that can be partially automated but still require human oversight and occasional intervention. It is now deprecated and archived.
 
 ## ast-types 
 
 See chapter [ast-types](/topics/tree-transformations/ast-types.md)
 
-## JSCodeshift and Recast
+## Recast
 
 See chapter [JSCodeshift and Recast](/topics/tree-transformations/jscodeshift-recast.md)
 
