@@ -276,6 +276,12 @@ const { print,gamma,Complex } = require("/Users/casianorodriguezleon/campus-virt
 print(gamma(Complex('3')));
 ➜  hello-compilers-solution git:(main) ✗ bin/mmt.js '3!' | node -
 2.000000000000001
+
+➜  hello-compilers-solution git:(main) ✗ bin/mmt.js '(3+2i)!'    
+const { print,gamma,Complex } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/hello-compilers/hello-compilers-solution/src/support-lib.js");
+print(gamma(Complex('3').add(Complex('2i'))));
+➜  hello-compilers-solution git:(main) ✗ bin/mmt.js '(3+2i)!' | node -
+-0.4226372863112039 + 0.871814255696508i
 ```
 
 ## The translation scheme
