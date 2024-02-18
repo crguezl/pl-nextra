@@ -225,7 +225,7 @@ See also [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)
 
 ### The `release` event
 
-* See [GitHub Releases](/assets/topics/introduction-to-javascript/releases.html)
+* See [GitHub Releases](/assets/topics/introduction-to-javascript/releases)
 
 ## Runner
 
