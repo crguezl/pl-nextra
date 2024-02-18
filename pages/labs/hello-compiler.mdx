@@ -227,7 +227,9 @@ ${\displaystyle a+bi\leq a^{\prime }+b^{\prime }i{\text{ if and only if }}a<a^{\
 
 ## Redefining the factorial function
 
-To keep compatibility with the calculator in the previous lab, you can extend the complex class with a factorial method like this: 
+To keep compatibility with the calculator in the previous lab, you can extend the complex class with a factorial method.
+
+You can either constrain the factorial to natural numbers like this: 
 
 ```js copy filename="hello-compilers/complex-lib/factorial.js"
 #!/usr/bin/env node
@@ -264,6 +266,7 @@ Error: Not an Integer number -3.2
 
 The new version of the `factorial` function has to be added in the `preamble` of the generated code.
 
+Or you can extend the factorial to complex numbers using the [gamma function](https://en.wikipedia.org/wiki/Gamma_function) and the [reflection formula](https://en.wikipedia.org/wiki/Gamma_function#Reflection_formula) for negative numbers. See an example of the implementation in [ULL-ESIT-PL/hello-complex.js/gamma.js](https://github.com/ULL-ESIT-PL/hello-complex.js/blob/main/gamma.js)
 
 ## The translation scheme
 
