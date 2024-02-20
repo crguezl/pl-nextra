@@ -1,4 +1,47 @@
 {
+  "scope-intro": {
+    "type": "menu",
+    "title": "Scope Intro",
+    "display": "normal",
+    "items": {
+      "Task Description": {
+        "title": "Task Description",
+        "href": "/labs/scope-intro#task-description"
+      },
+      "Analysis of dependencies": {
+        "title": "Analysis of dependencies",
+        "href": "/labs/scope-intro#analysis-of-dependencies"
+      },
+      "Analysis of initialized variables": {
+        "title": "Analysis of initialized variables",
+        "href": "/labs/scope-intro#analysis-of-initialized-variables"
+      },
+      "Declaration of variables": {
+        "title": "Declaration of variables",
+        "href": "/labs/scope-intro#declaration-of-variables"
+      },
+      "Videos": {
+        "title": "Videos",
+        "href": "/labs/scope-intro#videos"
+      },
+      "Related Topics": {
+        "title": "Related Topics",
+        "href": "/labs/scope-intro#related-topics"
+      },
+      "Rubric": {
+        "title": "Rubric",
+        "href": "/labs/scope-intro#rubric"
+      },
+      "scope-intros Repos": {
+        "title": "scope-intros Repos",
+        "href": "/labs/scope-intro#frontmatterkey-repos"
+      },
+      "References": {
+        "title": "References",
+        "href": "/labs/scope-intro#references"
+      }
+    }
+  },
   "hello-compiler": {
     "type": "menu",
     "title": "Hello Compiler",
