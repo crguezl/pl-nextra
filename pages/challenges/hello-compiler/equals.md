@@ -3,6 +3,7 @@ practica: scope-intro
 grupo: PE101
 date: 2023/03/09
 time: 8:30
+navigation: false
 ---
 # Añada  `==` al lenguaje
 

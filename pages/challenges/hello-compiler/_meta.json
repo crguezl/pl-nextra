@@ -1,0 +1,14 @@
+{
+    "abs": {
+        "title": "abs",
+        "display": "hidden"
+    },
+    "angle": {
+        "title": "angle",
+        "display": "hidden"
+    },
+    "equals": {
+        "title": "equals",
+        "display": "hidden"
+    }
+}
