@@ -20,6 +20,10 @@
         "title": "Declaration of variables",
         "href": "/labs/scope-intro#declaration-of-variables"
       },
+      "Calculator Compiler Phases": {
+        "title": "Calculator Compiler Phases",
+        "href": "/labs/scope-intro#calculator-compiler-phases"
+      },
       "Videos": {
         "title": "Videos",
         "href": "/labs/scope-intro#videos"
@@ -88,14 +92,17 @@
         "href": "/labs/hello-compiler#tests"
       },
       "Mocking": {
+        "display": "hidden",
         "title": "Mocking",
         "href": "/labs/hello-compiler#mocking"
       },
       "Stubbing": {
+        "display": "hidden",
         "title": "Stubbing",
         "href": "/labs/hello-compiler#stubbing"
       },
       "Covering": {
+        "display": "hidden",
         "title": "Covering",
         "href": "/labs/hello-compiler#covering"
       },

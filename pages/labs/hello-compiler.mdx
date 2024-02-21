@@ -320,13 +320,23 @@ import MockingStubbing from "@/pages/topics/introduction-to-javascript/mocking-s
 
 ### Tips
 
-During code generation, use a comment with a string in the template to separate the preamble from the generated code:
+Probably you have experienced that when you change the computer you develop on or you make changes in the preamble
+the tests that check the generated code fail. For instance, the `require` mentions the specific path of the support lib in your computer:
 
-```js file="src/template.js.txt"
+```js {3} 
+➜  hello-compilers-solution git:(main) ✗ bin/mmt.js -f test/input/fact.calc
+const { print,gamma,Complex } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/hello-compilers/hello-compilers-solution/src/support-lib.js");
+print(gamma(Complex('3')));
+```
+
+To fix this weakness, use a comment with a string in the template to separate the preamble from the generated code:
+
+```js {2} filename="src/template.js.txt"
 const { {{ dependencies }} } = require("{{root}}/src/support-lib.js");
 /* end of preamble of generated code */
 {{code}}
 ```
+
 
 Then you can use an easy regular expression to remove the preamble from the generated code and check that the expected 
 code and the actual code are equal.
@@ -340,7 +350,7 @@ $ npx mocha -g 'factorial'
 
 Also, [you can use the `only` methods of `describe` and `it`](https://mochajs.org/#exclusive-tests) to run only the tests that are failing or simply use a conditional to skip the tests that are failing. For instance if the `&` and `@` operators are not yet implemented, you can skip the tests that use them:
 
-```js
+```js {3} filename="test/test.js"
 describe('Testing hello maxmin translator', () => {
   for (let c of Checks) {
     if (c.text.match(/[&@]+/)) continue;

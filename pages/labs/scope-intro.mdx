@@ -31,10 +31,19 @@ rubrica:
 
 ## Task description
 
-Using the [ast-types](/topics/tree-transformations/ast-types) module and namely the 
+Using 
+1. The [ast-types](/topics/tree-transformations/ast-types) module and namely the 
 [visit](https://github.com/benjamn/ast-types?tab=readme-ov-file#ast-traversal) methods of the module to traverse the AST
-and  the [recast](https://github.com/benjamn/recast) module for code generation (see section [recast](/topicsoduccion-a-javascript/tree-transformations/jscodeshift-recast) in this notes), 
-extend the calculator we have implemented in previous labs to support comma, identifier, assignment, and `print` operations so that we can process input like this:
+and  
+2. The [recast](https://github.com/benjamn/recast) module for code generation (see section [recast](/topicsoduccion-a-javascript/tree-transformations/jscodeshift-recast) in this notes), 
+   
+extend the calculator we have implemented in previous labs to support 
+1. comma, 
+2. identifier, 
+3. assignment, and 
+4. `print` 
+   
+operations so that we can process input like this:
 
 ```js filename="test/data/input/test-id.calc"
 ➜  scope-intro-solution git:(2024) cat test/data/input/test-id.calc 
