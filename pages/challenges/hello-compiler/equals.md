@@ -43,6 +43,8 @@ y cuando se ejecuta el anterior programa produce la siguiente salida:
 true
 ```
 
+## Prioridad
+
 **Establezca para el `==` la misma prioridad que tiene en el lenguaje JS**. 
 
 
