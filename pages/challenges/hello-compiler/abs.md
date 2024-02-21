@@ -1,0 +1,39 @@
+---
+practica: scope-intro
+grupo: PE102
+date: 2023/03/10
+time: 8:30
+---
+# Añada  La norma/módulo de un complejo al lenguaje
+
+## Objetivo 
+
+Añada una notación para el módulo de un número complejo, de manera que el siguiente programa de entrada:
+
+```
+➜  hello-compilers-solution git:(challenges) ✗ cat test/input/abs.calc 
+|-3!-2i|                                                  
+```
+
+que cuando se compila produce una salida como:
+
+```
+➜  hello-compilers-solution git:(challenges) ✗ bin/mmt.js -f test/input/abs.calc -j test/actualjs/abs.js 
+➜  hello-compilers-solution git:(challenges) ✗ cat test/actualjs/abs.js 
+```
+```js {/abs/}
+const { print,gamma,Complex } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/hello-compilers/hello-compilers-solution/src/support-lib.js");
+/* end of preamble of generated code */
+print(gamma(Complex('3')).neg().sub(Complex('2i')).abs());
+```
+
+que cuando se ejecuta produce la siguiente salida:
+
+```js
+➜  hello-compilers-solution git:(challenges) ✗ node test/actualjs/abs.js 
+6.324555320336762
+```
+
+## Pruebas
+
+Añada pruebas para la nueva funcionalidad.

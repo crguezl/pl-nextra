@@ -254,6 +254,11 @@
   "type": "page",
   "display": "hidden"
 },
+"challenges": {
+  "title": "Challenges",
+  "type": "page",
+  "display": "hidden"
+},
 "auth": {
   "title": "Auth",
   "type": "page",
