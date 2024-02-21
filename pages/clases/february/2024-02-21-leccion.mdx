@@ -12,7 +12,8 @@ topics:
     href: "/labs/hello-compiler#tips"
   - text: "Introduction to Compilers"
     href: "https://docs.google.com/presentation/d/1N8h99dXzud9HzH8XY6QCZSmATCAWXtZebuqRTiy8qMU/edit?usp=sharing"
-videos: ["P9R5myLFlXU" ]
+videos: ["QhbLlax8-Hs", "P9R5myLFlXU"]
+videoHoy: [ "boTBEUBAr78" ]
 ---
 import {Link, frontmatter} from '@/src/frontmatter'
 import RelatedLabs from '@/components/related-labs'
@@ -38,8 +39,13 @@ Prácticas en curso:
 
 ## Videos
 
-Este vídeo del 22/02/2023 puede ayudar con la elaboración de la práctica
+Calse de {frontmatter().title}:
+
+<Videos ids={frontmatter().videoHoy}></Videos>
+
+Estos vídeos del 19/02/2024 y del 22/02/2023 pueden ayudar con la elaboración de la práctica
 hello-compiler:
+
 
 <Videos ids={frontmatter().videos}></Videos>
 
