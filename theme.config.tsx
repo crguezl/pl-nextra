@@ -5,10 +5,10 @@ import { SessionProvider } from "next-auth/react"
 import { Link } from 'nextra-theme-docs'
 const config: DocsThemeConfig = {
   banner: {
-    key: 'arith2js',
+    key: 'scope-intro',
     text: (
-      <a href="/clases/february/2024-02-19-leccion#videos" target="_blank">
-        💪🏼💼👷🏽‍♀️ Lab hello-compiler deadline is 22/02. Watch related videos →
+      <a href="/labs/scope-intro#videos" target="_blank">
+        📄🖍️ Lab scope-intro deadline is 29/02. Watch related videos →
       </a>
     )
   },
