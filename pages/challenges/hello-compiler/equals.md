@@ -5,7 +5,7 @@ date: 2023/03/09
 time: 8:30
 navigation: false
 ---
-# Añada  `==` al lenguaje
+# Cahllenge: Añada  `==` al lenguaje
 
 ## Objetivo 
 
@@ -22,17 +22,19 @@ produzca una salida como:
 ```
 ➜  hello-compilers-solution git:(challenges) ✗ bin/mmt.js -f test/input/equals.calc -j test/actualjs/equals.js
 ``` 
-```js 
+```js {5}
 ➜  hello-compilers-solution git:(challenges) ✗ cat test/actualjs/equals.js 
 const { print,Complex } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/hello-compilers/hello-compilers-solution/src/support-lib.js");
 /* end of preamble of generated code */
-print(Complex('2').add(Complex('3i')).equals(
-    Complex('4').div(Complex('2')).add(
+print(
+    Complex('2').add(Complex('3i')).
+    equals(
+      Complex('4').div(Complex('2')).add(
         Complex('6').div(Complex('2')).mul(
             Complex('i')
         )
+      )
     )
-  )
 );
 ```
 
