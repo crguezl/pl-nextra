@@ -8,10 +8,10 @@ export default function LabInfo({page}) {
     return (
         <div>
             <ul className={styles.uList}>
-                <li><Link className={styles.link} href={page.route + "#rubric"}>Rubric</Link></li>
-                <li><Link className={styles.link} href={ClassroomAssignments + page.frontMatter?.key} target="_blank">Classroom</Link></li>
-                <li><Link className={styles.link} href={Repos + page.frontMatter?.key} target="_blank">Repos</Link></li>
-                <li><Link className={styles.link} href={page.route + "#videos"} target="_blank">Videos</Link></li>
+                <li key="rubric"><Link className={styles.link} href={page.route + "#rubric"}>Rubric</Link></li>
+                <li key="classroom"><Link className={styles.link} href={ClassroomAssignments + page.frontMatter?.key} target="_blank">Classroom</Link></li>
+                <li key="repos"><Link className={styles.link} href={Repos + page.frontMatter?.key} target="_blank">Repos</Link></li>
+                <li key="videos"><Link className={styles.link} href={page.route + "#videos"} target="_blank">Videos</Link></li>
             </ul>
         </div>
     )
