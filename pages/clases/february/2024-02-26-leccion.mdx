@@ -18,15 +18,13 @@ topics:
     href: "/topics/introduction-to-javascript/github-actions"
   - text: "Introduction to Compilers"
     href: "https://docs.google.com/presentation/d/1N8h99dXzud9HzH8XY6QCZSmATCAWXtZebuqRTiy8qMU/edit?usp=sharing"
-videos23: [ "kHncLcKuXLc", "2rNPRfn15Aw", "w6_JqrGxFi4"]
-videos: [ "NfC74pLH0yA" ]
 ---
 import {Link, frontmatter} from '@/src/frontmatter'
 import RelatedLabs from '@/components/related-labs'
 import RelatedTopics from '@/components/related-topics'
 import Videos from '@/components/videos'
 
-
+import { videos, videos23} from '@/pages/labs/.shared/scope-intro.js'
 
 ## Related topics
 
@@ -40,9 +38,9 @@ import Videos from '@/components/videos'
 
 Grabación de la clase del 26/02/2024:
 
-<Videos ids={frontmatter().videos}></Videos>
+<Videos ids={videos}></Videos>
 
 Vídeos del 01/03/2023, 06/03/2023 y 07/03/2023:
 
-<Videos ids={frontmatter().videos23}></Videos>
+<Videos ids={videos23}></Videos>
 

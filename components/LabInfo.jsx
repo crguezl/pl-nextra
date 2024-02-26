@@ -11,6 +11,7 @@ export default function LabInfo({page}) {
                 <li><Link className={styles.link} href={page.route + "#rubric"}>Rubric</Link></li>
                 <li><Link className={styles.link} href={ClassroomAssignments + page.frontMatter?.key} target="_blank">Classroom</Link></li>
                 <li><Link className={styles.link} href={Repos + page.frontMatter?.key} target="_blank">Repos</Link></li>
+                <li><Link className={styles.link} href={page.route + "#videos"} target="_blank">Videos</Link></li>
             </ul>
         </div>
     )

@@ -10,8 +10,6 @@ layout: Practica
 sidebar: auto
 prev: "espree-logging.md"
 next: "spread-operator.md"
-videos: []
-videos23: [ "kHncLcKuXLc", "2rNPRfn15Aw", "w6_JqrGxFi4"]
 #  https://youtu.be/kHncLcKuXLc 01/03/2023
 # video: https://youtu.be/2rNPRfn15Aw 06/03
 # video: "https://youtu.be/w6_JqrGxFi4" 07/03
@@ -31,6 +29,7 @@ rubrica:
   - Se ha añadido el enlace a las GH pages en el "About" del repo
   - Se hace integración Continua usando GitHub Actions
 ---
+import { videos, videos23} from '@/pages/labs/.shared/scope-intro.js'
 
 ## Task description
 
@@ -208,11 +207,11 @@ import RelatedTopics from '@/components/related-topics'
 
 import Videos from '@/components/videos'
 
-<Videos ids={frontmatter().videos}></Videos>
+<Videos ids={videos}></Videos>
 
 Vídeos del 01/03/2023, 06/03/2023 y 07/03/2023:
 
-<Videos ids={frontmatter().videos23}></Videos>
+<Videos ids={videos23}></Videos>
 
 ## Rubric
 
