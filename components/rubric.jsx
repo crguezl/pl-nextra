@@ -6,7 +6,7 @@ export default function Rubrica({ rubric }) {
         return (
           <div key={index}>
             <input type="checkbox" id={index} name={index} value={index} className={styles.input}/>
-            <label htmlFor={index}>{item}</label><br />
+            <label htmlFor={index} dangerouslySetInnerHTML={{__html: item}}></label><br />
           </div>
         )
       })
