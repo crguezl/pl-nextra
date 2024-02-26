@@ -92,17 +92,14 @@
         "href": "/labs/hello-compiler#tests"
       },
       "Mocking": {
-        "display": "hidden",
         "title": "Mocking",
         "href": "/labs/hello-compiler#mocking"
       },
       "Stubbing": {
-        "display": "hidden",
         "title": "Stubbing",
         "href": "/labs/hello-compiler#stubbing"
       },
       "Covering": {
-        "display": "hidden",
         "title": "Covering",
         "href": "/labs/hello-compiler#covering"
       },
