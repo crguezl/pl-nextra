@@ -1,17 +1,43 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { getPagesUnderRoute } from 'nextra/context'
-import filterRouteLocale from 'nextra/filter-route-locale'
-import styles from './counters.module.css'
-import LabInfo from '@/components/LabInfo'
+## getPagesUnderRoute
 
-const ClassroomAssignments = "https://classroom.github.com/classrooms/153934884-ull-esit-pl-2324/assignments/"
-const Repos = "https://github.com/orgs/ULL-ESIT-PL-2324/repositories?q="
+The function is in file [nextra/context.js](https://github.com/shuding/nextra/blob/29086aa11874dcf2701b99a2fe4db512de83f8de/packages/nextra/src/context.ts#L87)
+
+
+```ts
+export function getPagesUnderRoute(route: string): Page[] {
+  const { pageMap } = getContext('getPagesUnderRoute')
+  return filter(pageMap, route).activeLevelPages
+}
+```
+it returns an array of Page objects that are under the route passed as argument.
+
+
+```ts
+export type Page = (MdxFile | Folder<Page>) & {
+  meta?: Exclude<Meta, string>
+}
+```
+
+```ts
+export type FrontMatter = GrayMatterFile<string>['data']
+export type Meta = string | Record<string, any>
+
+export type MdxFile<FrontMatterType = FrontMatter> = {
+  kind: 'MdxPage'
+  name: string
+  route: string
+  locale?: string
+  frontMatter?: FrontMatterType
+}
+```
+
+```jsx
+import { getPagesUnderRoute } from 'nextra/context'
 
 export function CollectionPage({ path }) {
   const { locale, defaultLocale } = useRouter()
   const pages = getPagesUnderRoute(path)
-  //console.error(pages)
+  console.error(pages)
   let result = filterRouteLocale(pages,locale, defaultLocale).map(page => {
       //console.error(page.frontMatter?.title)
       if (page.frontMatter?.display === 'hidden') return null
@@ -35,3 +61,4 @@ export function CollectionPage({ path }) {
         </ol>
     )
 }
+```
