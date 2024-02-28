@@ -24,6 +24,23 @@ rubrica:
   - Ha añadido tests suficientes, documentación y cubrimiento
   - "Se publica la documentación usando un static generator, API docs y Covering" 
   - Se ha añadido el enlace a las GH pages en el "About" del repo
+
+video20230308:
+  date: "08/03/2023"
+  description: "Clase del 08/03/2023. Se describe el soporte para scopes de ast-types"
+  id: "CR_GI81TFt0"
+
+video20230313:
+  date: "13/03/2023"
+  description: "Clase del 13/03/2023. Se describe el soporte de ast-types para el recorrrido y modificación de nodos (Métodos visit)"
+  url: "https://youtu.be/CR_GI81TFt0"
+  id: "CR_GI81TFt0"
+
+video20230322:
+  date: "22/03/2023"
+  description: "Clase del 22/03/2023. Hasta el minuto 25 se explica como realizar el examen parcial del curso 22/23. Le será muy útil para preparar  examenes. A partir del minuto 25 se explican las bases para la práctica functions"
+  url: "https://youtu.be/SfAIHgAqSuQ"
+  id: "SfAIHgAqSuQ"
 ---
 import { Callout } from 'nextra/components'
 import Videos from '@/components/videos'
@@ -531,6 +548,46 @@ In this lab, the decision to adopt on the combinations of operations and types i
 
 In any case, remember that you must ensure that the error messages issued must be as explanatory as possible.
 
+## Videos
+import {frontmatter} from '@/src/frontmatter'
+
+{frontmatter().video20230322.description}:
+
+<Videos ids={[frontmatter().video20230322.id]}></Videos>
+
+
+### Vídeos sobre manejo del AST con ast-types
+
+En los cuestionarios relacionados se incluirán preguntas sobre el manejo de ast-types. Se recomienda ver los videos que se describen a continuación.
+
+{frontmatter().video20230313.description}:
+
+<Videos ids={[frontmatter().video20230313.id]}></Videos>
+
+
+El vídeo está enfocado a mostrar como usar ast-types en la resolución del problema planteado en la práctica [ast types: spread operator](https://ull-esit-pl-2223.github.io/practicas/spread-operator.html#frontmatter-title) desarrollada durante el curso 22/23.
+
+{frontmatter().video20230308.description}:
+
+<Videos ids={[frontmatter().video20230308.id]}></Videos>
+
+
+
+### Vídeos sobre manejo del AST con ast-types
+
+En los próximos cuestionarios se incluirán preguntas sobre el manejo de ast-types. Se recomienda ver los videos que se describen a continuación.
+
+{frontmatter().video20230313.description}:
+
+<Videos ids={[frontmatter().video20230313.id]}></Videos>
+
+
+El vídeo está enfocado a mostrar como usar ast-types en la resolución del problema planteado en la práctica [ast types: spread operator](https://ull-esit-pl-2223.github.io/practicas/spread-operator.html#frontmatter-title) desarrollada durante el curso 22/23.
+
+{frontmatter().video20230308.description}:
+
+<Videos ids={[frontmatter().video20230308.id]}></Videos>
+
 
 ## Smells, The Open Closed Principle, the Switch Smell and the Strategy pattern
 
@@ -542,6 +599,45 @@ See section [The Open Closed Principle and the Strategy Pattern](/temas/introduc
 Escriba las pruebas, haga un estudio de cubrimiento usando [c8](https://github.com/bcoe/c8) y añada integración continua usando [GitHub Actions](/temas/introduccion-a-javascript/github-actions.html).
 
 Lea las secciones [Testing with Mocha](/temas/introduccion-a-javascript/mocha.html#mocha) y [Jest](/temas/introduccion-a-javascript/jest).
+
+### Avoiding the preamble in the tests
+
+In your template for the code generation, use a special string like `\n/* End of support code */\n\n` to mark the end of the preamble and the beginning of the generated code. 
+
+```js
+const { {{ dependencies }} } = require("{{root}}/src/support-lib.js");
+
+/* End of support code */
+
+{{code}}
+```
+
+Then in your tests, use a funtion like the following to remove the preamble by 
+using a regexp that removes from the beginning to the from the generated code:
+
+```js
+function removeDependencies(s) {
+  const REGULAR_SEPARATION = /^(.|\n)*\n\/\* End of support code \*\/\n\n/
+  const pruned = s.replace(REGULAR_SEPARATION, '')
+
+  return removeSpaces(pruned);
+}
+```
+
+then you can use it in your tests removing the preamble from both the expected and the actual output:
+
+```js
+for (let i = 0; i < Test.length; i++) {
+  it(`transpile(${Tst[i].input}, ${Tst[i].actualjs}) (No errors: ${Boolean(Tst[i].expectedout)})`, async () => {
+    let actualjs = await transpile(Test[i].input, Test[i].actualjs);  
+    let expectedjs = fs.readFileSync(Test[i].expectedjs, 'utf-8')
+
+    let trimActualJS = removeDependencies(actualjs)
+    let trimExpectedJS = removeDependencies(expectedjs)
+    assert.equal(trimActualJS, trimExpectedJS);
+  });
+}
+```
 
 ## Documentación
 
