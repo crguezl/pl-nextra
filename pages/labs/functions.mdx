@@ -25,7 +25,7 @@ rubrica:
   - "Se publica la documentación usando un static generator, API docs y Covering" 
   - Se ha añadido el enlace a las GH pages en el "About" del repo
 ---
-
+import { Callout } from 'nextra/components'
 import Videos from '@/components/videos'
 
 ## Añadiendo funciones a la calculadora
@@ -77,10 +77,14 @@ let $x, $f, $b;
 ), 
 print($x);
 ``` 
-::: tip Ámbitos
+
+<Callout type="info" emoji="ℹ️"> 
+
+**Ámbitos**
+
 Observe como declaramos como globales `$x`, `$f` y `$b` pero la función tiene como locales
 el binding del parámetro `$a`y el binding de la variable `$x` que oculta al nombre `$x` global.
-:::
+</Callout>
 
 ## Las funciones son expresiones
 
@@ -170,9 +174,12 @@ y cuando la ejecutamos obtenemos:
 
 ### Encadenamiento de llamadas
 
-::: danger Encadenamiento de llamadas
+<Callout type="error" emoji="️🎓"> 
+
+**Encadenamiento de llamadas**
+
 Estos dos ejemplos ilustran que puesto que las funciones retornan funciones es por lo que **se solicita soportar una sintáxis que permita llamadas encadenadas del tipo `f(a)(b)()(c)()`** 
-:::
+</Callout>
 
 ## Comentarios con "#"
 
@@ -200,13 +207,16 @@ fact = fun(n) {
 print(fact(5))
 ``` 
 
-::: tip Short Circuit and if then else
+<Callout type="info" emoji="ℹ️"> 
+
+Short Circuit and if then else
+
 Nótese que:
 
 * `b && c` implica `if (b) then c`
 * `b || c` implica `if (!b) then c`
 * `b && c || d` implica `if b then (if c then ; else d) else d`
-:::
+</Callout>
 
 Que cuando se compile dará:
 
@@ -238,9 +248,12 @@ y cuando se ejecute dará:
 Type checking is the process of verifying and enforcing constraints of types in values.
 The language type-checker determines whether these values are used appropriately or not.
 
-::: danger On the complexity of type checking
+<Callout type="error" emoji="️🎓"> 
+
+**On the complexity of type checking**
+
 In non-typed languages such as the one we are using here, the complexity in handling types moves from the compilation phase to the execution/interpretation phase.
-:::
+</Callout>
 
 Now our language has several types:
 
@@ -251,11 +264,14 @@ Now our language has several types:
    - functions that return logical values, `(*) → (Boolean)`, etc.
 - Booleans
  
-::: tip Questions
+<Callout type="info" emoji="ℹ️"> 
+
+**Questions**
+
 * What to do if the booleans are subjected to arithmetic operations? 
 * What if the same is done with functions? 
 * What if you add a number with a function? 
-::: 
+</Callout>
 
 For each operation, there are numerous possible type combinations and decisions need to be made about them.
 
@@ -327,7 +343,10 @@ which when executed could give:
 
 ### New Semantic needs New Syntax
 
-:::tip Rethink your Syntax
+<Callout type="info" emoji="️🎓"> 
+
+**Rethink your Syntax**
+
 Another fact of interest is that the extension of the operations can lead to rethinking the syntax. For example, why not extend the call syntax to allow calls of the form `(f+g*h)(x)(y)`?
 
 For example, given the login program:
@@ -366,11 +385,13 @@ Which when executed gives rise to:
   -
 { re: 9, im: 0 }
 ```
-:::
+</Callout>
 
 ### Type Promotion
 
-::: tip Promoting types
+<Callout type="info" emoji="ℹ️">
+
+**Promoting types**
 A strategy that can help if you choose to extend the behaviors of our types
 is to establish a line of promotion/extension from the simplest to the most complex types: 
 1. a boolean when operated with a number can be seen as a number, (`false` is coerced to`0` and `true`to `1`)
@@ -380,7 +401,7 @@ So, for instance,
 * if `f` is a function $\mathbb{C}$ → $\mathbb{C}$  then `(true + f)(x) = (1 + f)(x) = 1 + f(x)`  
 * if `f` is a function $\mathbb{C}$ → ($\mathbb{C}$ → $\mathbb{C}$)  then 
   `(true +f)(x)(y) = (1+f)(x)(y) = (1 + f(x))(y) = 1 + f(x)(y)`  
-:::
+</Callout>
 
 For instance, considere the following example:
 
@@ -410,11 +431,14 @@ print(
 Notice how the function `$f` has now a method `add` that is called with argument `Complex(2)`. The run time library support is inserting this new behavior to the funcion `$f`. 
 it can be considered an example of **Duck Typing**.
 
-::: tip Duck Typing
+<Callout type="info" emoji="ℹ️"> 
+
+**Duck Typing**
+
 Duck typing is usual in dynamically typed languages: the set of methods and properties of the object determine the validity of its use. That is: two objects belong to the same duck-type if they implement/support the same interface *regardless of whether or not they have a relationship in the inheritance hierarchy*.
 
 The term refers to the so-called duck test: **If it waddles like a duck, and quacks like a duck, it's a duck!**
-:::
+</Callout>
 
 this way, via the run time support injecting behavior as `.add` to the functions objects we can make the JS interpreter to produce this output:
 
@@ -426,11 +450,14 @@ this way, via the run time support injecting behavior as `.add` to the functions
 
 ### Language Symmetry
 
-::: tip Symmetry
+<Callout type="info" emoji="ℹ️"> 
+
+**Symmetry**
+
 If such a decision is chosen, it is convenient to maintain **symmetry**.
 That is, that `someFunction + someNumber`
 provide the same value as `someNumber + someFunction`.
-:::
+</Callout>
 
 This implies that if we add the `add` method to the **Function**s so that it takes a complex number as an argument
 `SomeFunction.add(someComplexNumber)` should also be extended to `add` for complex numbers to support functions as arguments
@@ -474,9 +501,11 @@ JS is quite famous for this:
 
 [![](https://dlabs.ai/wp-content/uploads/2021/10/36716123_2077835782484342_36801779463094272_n.png)](https://dlabs.ai/blog/javascript-is-weird-and-thats-why-we-love-it/)
 
-::: danger Simplify and do not extend
+<Callout type="error" emoji="️🎓"> 
+
+**Simplify and do not extend**
 An alternative option is to *block* most extensions and produce appropriate error messages for disallowed operations. Another not so radical would be to allow some operations to fail and others not.
-:::
+</Callout>
 
 For example, we could
 decide that two logical values can be checked for equal but cannot be added,
