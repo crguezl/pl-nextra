@@ -32,7 +32,7 @@ import Videos from '@/components/videos'
 
 Queremos extender nuestra calculadora para que soporte funciones con una sintáxis como la de este ejemplo:
 
-```js
+```js showLineNumbers {2-5,6}
 x = 10,     # This x is global
 f = fun (a) {
   x = a+2i, # This x is local
@@ -45,7 +45,7 @@ print(x)  # 10
 
 Vamos a hacerlo teniendo en cuenta las siguientes consideraciones:
 
-1. Limitaremos las funciones a que reciban 0 o 1 parámetros 
+1. **Limitaremos las funciones a que reciban 0 o 1 parámetros**
 2. El cuerpo de la función es una expresión entre llaves `{ e }`
 3. Las funciones retornan el valor evaluado para `e`.
 4. Las funciones crean un nuevo ámbito: tanto los parámetros como las variables iniciadas dentro de la expresión de una función serán locales a la función
@@ -54,7 +54,7 @@ Vamos a hacerlo teniendo en cuenta las siguientes consideraciones:
 
 Cuando se llame a nuestro transpiler con la entrada anterior, se debe generar un programa JS equivalente a este:
 
-```js
+```js {5,12} /($a)/ showLineNumbers
 ✗ bin/calc2js.mjs test/data/input/test-fun-scop2.calc
 #!/usr/bin/env node
 const Complex = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/complex.js");  
@@ -92,7 +92,7 @@ el binding del parámetro `$a`y el binding de la variable `$x` que oculta al nom
 
 Las funciones que introduzca podrán recibir como argumento una función y también pueden retornar funciones. En el siguiente ejemplo `sum` es una función que retorna una función:
 
-```js
+```js showLineNumbers {2,4}
 sum = fun (n) {
   fun(x) { n+x } 
 },
@@ -101,7 +101,7 @@ print(r) # 9
 ```
 cuya traducción podría ser:
 
-```js{5,12}
+```js {8-13} showLineNumbers
 ➜  functions-solution git:(functions) ✗ bin/calc2js.mjs test/data/input/test-fun3.calc              
 #!/usr/bin/env node
 const Complex = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/complex.js");  
@@ -123,7 +123,7 @@ print($r);
 
 En este otro ejemplo, la función `add` recibe una función `f`  y retorna otra función que a su vez espera como argumento otra función `g` la cual retorna una función que es la función que suma a su argumento `x` los valores de la primera `f(x)` y la segunda `g(x)`:
 
-```js
+```js showLineNumbers 
 add = fun(f) {
   fun(g) { 
     fun(x) { 
@@ -138,7 +138,7 @@ print(add(square)(double)(4)) # 24+0i
 
 Cuando la compilamos 
 
-```js
+```js {9-15} showLineNumbers
 ✗ bin/calc2js.mjs test/data/input/test-fun4.calc         
 #!/usr/bin/env node
 const Complex = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/complex.js");  
@@ -181,9 +181,9 @@ y cuando la ejecutamos obtenemos:
 Estos dos ejemplos ilustran que puesto que las funciones retornan funciones es por lo que **se solicita soportar una sintáxis que permita llamadas encadenadas del tipo `f(a)(b)()(c)()`** 
 </Callout>
 
-## Comentarios con "#"
+## Comentarios
 
-Como se ve en los ejemplos anteriores se deberán admitir comentarios de una línea que van desde la aparición del carácter `#` hasta el final de la línea
+Como se ve en los ejemplos anteriores se deberán admitir comentarios de una línea que van desde la aparición del carácter `#` hasta el final de la línea. Soporte también comentarios multilínea a la manera de JavaScript: `/* ... */`.
 
 ## Operadores Lógicos y de Comparación
 
@@ -200,7 +200,7 @@ La interpretación de estos operadores se hará como en JavaScript:
 valores distintos de cero en un contexto lógico se evaluan a `true`, etc. 
 Además las evaluaciones se harán en circuito corto (*short-circuit*) de manera que el siguiente programa calcula el factorial de un número natural:
 
-```js
+```go showLineNumbers {2}
 fact = fun(n) {
   !(n == 0) && n * fact(n - 1) || 1
 },
@@ -220,7 +220,7 @@ Nótese que:
 
 Que cuando se compile dará:
 
-```js
+```js {7-11} showLineNumbers
 ✗ bin/calc2js.mjs test/data/input/test-recursive2.calc         
 #!/usr/bin/env node
 const Complex = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/complex.js");  
@@ -237,7 +237,7 @@ print($fact(Complex("5")));
 
 y cuando se ejecute dará:
 
-```
+```js {2}
 ✗ bin/calc2js.mjs test/data/input/test-recursive2.calc | node -
 { re: 120, im: 0 }
 ```
@@ -253,17 +253,19 @@ The language type-checker determines whether these values are used appropriately
 **On the complexity of type checking**
 
 In non-typed languages such as the one we are using here, the complexity in handling types moves from the compilation phase to the execution/interpretation phase.
+Now our language has changed radically: from one single type, the `Complex` it has gone to infinite types:
+
+- **Complex numbers**,
+- **Functions** of various types:
+   - functions without arguments that return a complex, **`() → (Complex)`**
+   - functions with complex argument that return a complex **`(Complex) → (Complex)`**,
+   - functions with complex argument that return a function **`(Complex) → (* → *)`**[^1],
+   - functions that return logical values, **`(*) → (Boolean)`**, etc.
+- **Booleans**
 </Callout>
-
-Now our language has several types:
-
-- Complex numbers,
-- Functions of various types:
-   - functions without arguments that return a complex, `() → (Complex)`
-   - functions with complex argument that return a function `(Complex) → (* → *)` ,
-   - functions that return logical values, `(*) → (Boolean)`, etc.
-- Booleans
  
+[^1]: The notation`*` means "any type" and so `(*) → (* → *)` means that the function takes any type  and returns a function.
+
 <Callout type="info" emoji="ℹ️"> 
 
 **Questions**
@@ -279,7 +281,7 @@ In either case, a guidance error message should be issued for any operation that
 
 ### Type Checking: Basic concepts
 
-For an introduction to the basic concepts on type checking see the section [Type Checking: Basic Concepts](/temas/type-checking/basic-concepts.html)
+For an introduction to the basic concepts on type checking see the section [Type Checking: Basic Concepts](/topics/type-checking/basic-concepts)
 
 ### Function Arithmetic
 
