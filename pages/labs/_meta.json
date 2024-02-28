@@ -1,4 +1,11 @@
 {
+  "functions": {
+    "type": "menu",
+    "title": "Functions",
+    "display": "normal",
+    "items": {
+    }
+  },
   "scope-intro": {
     "type": "menu",
     "title": "Scope Intro",
