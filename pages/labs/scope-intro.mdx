@@ -192,6 +192,46 @@ Write the tests, do a coverage study using [c8](https://github.com/bcoe/c8) and 
 
 Read the sections [Testing with Mocha](/topics/introduction-to-javascript/mocha#mocha) and [Jest](/topics/introduction-to-javascript/jest).
 
+
+### Avoiding the preamble in the tests
+
+In your template for the code generation, use a special string like `\n/* End of support code */\n\n` to mark the end of the preamble and the beginning of the generated code. 
+
+```js
+const { {{ dependencies }} } = require("{{root}}/src/support-lib.js");
+
+/* End of support code */
+
+{{code}}
+```
+
+Then in your tests, use a funtion like the following to remove the preamble by 
+using a regexp that removes from the beginning to the from the generated code:
+
+```js
+function removeDependencies(s) {
+  const REGULAR_SEPARATION = /^(.|\n)*\n\/\* End of support code \*\/\n\n/
+  const pruned = s.replace(REGULAR_SEPARATION, '')
+
+  return removeSpaces(pruned);
+}
+```
+
+then you can use it in your tests removing the preamble from both the expected and the actual output:
+
+```js
+for (let i = 0; i < Test.length; i++) {
+  it(`transpile(${Tst[i].input}, ${Tst[i].actualjs}) (No errors: ${Boolean(Tst[i].expectedout)})`, async () => {
+    let actualjs = await transpile(Test[i].input, Test[i].actualjs);  
+    let expectedjs = fs.readFileSync(Test[i].expectedjs, 'utf-8')
+
+    let trimActualJS = removeDependencies(actualjs)
+    let trimExpectedJS = removeDependencies(expectedjs)
+    assert.equal(trimActualJS, trimExpectedJS);
+  });
+}
+```
+
 ## Documentation
 
 [Document](/topics/introduction-to-javascript/documentation)
