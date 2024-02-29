@@ -77,12 +77,11 @@
         "href": "/labs/functions#videos"
       },
       "Vídeos sobre manejo del AST con ast-types": {
-        "href": "/labs/functions#vídeos-sobre-manejo-del-ast-con-ast-types"
-      },
-      "Vídeos sobre manejo del AST con ast-types": {
+        "title": "Vídeos sobre manejo del AST con ast-types",
         "href": "/labs/functions#vídeos-sobre-manejo-del-ast-con-ast-types-1"
       },
       "Smells, The Open Closed Principle, the Switch Smell and the Strategy pattern": {
+        "title": "Smells, The Open Closed Principle, the Switch Smell and the Strategy pattern",
         "href": "/labs/functions#smells-the-open-closed-principle-the-switch-smell-and-the-strategy-pattern"
       },
       "Pruebas, Covering e Integración Continua": {
