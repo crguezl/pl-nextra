@@ -45,6 +45,7 @@ video20230322:
 import { Callout } from 'nextra/components'
 import Videos from '@/components/videos'
 
+
 ## Añadiendo funciones a la calculadora
 
 Queremos extender nuestra calculadora para que soporte funciones con una sintáxis como la de este ejemplo:
@@ -304,7 +305,7 @@ For an introduction to the basic concepts on type checking see the section [Type
 
 For example, we might decide to generalize to support arithmetic operations on functions whenever they make sense, so that a program like this:
 
-```js
+```js showLineNumbers {4-6}
 f = fun(x) { 2*x },
 g = fun(x) { 3*x },
 r = fun(y) { 3*y },
@@ -314,6 +315,32 @@ e = g == r,
 print(h(1+i)), # 5 + 5i
 print(k(2-i)), # 18 - 24i
 print(e(1))  # true
+```
+
+To achieve that we would need to extend the arithmetic operations to JS functions. Something like this:
+  
+```js showLineNumbers filename="src/monkey-patch-case.js"
+let Operators = {
+  add: '+',  mul: '*',  div: '/',  equals: '==',  pow: '**',  neg: '-' // ... etc.
+};
+
+for (let op in Operators) {
+  Boolean.prototype[op] = function (other) { /* ... */   };
+  Function.prototype[op] = function (other) {
+    switch (typeof other) {
+      case 'boolean':  return (...x) => this(...x)[op](Number(other))
+      case 'object': /* ... */
+      case 'function':
+        try {
+          return (...x) => this(...x)[op](other(...x))
+        } catch (e) {
+          throw new Error(`Unsupported ${op} for function ${other}`)
+        }
+      default:
+        throw new Error(`Unsupported ${op} for type ${typeof other}`)
+    }
+  }
+}
 ```
 
 will work resulting in an execution like this:
@@ -329,7 +356,7 @@ true
 
 But we may also want to allow functions to be operated on numbers (by extending a number as the function constant on that number):
 
-```js
+```js showLineNumbers {2}
 f = fun(x) { 2*x },
 h = f + 3, # 3 is the constant function f(x) = 3 for all x
 print(h(1+i)) # 5 + 2i
@@ -347,7 +374,7 @@ It would also be possible to extend addition/subtraction etc. to a function with
 
 One possible interpretation would be to promote the boolean value `true` to `1+0i` and `false` to `0`:
 
-```js
+```js showLineNumbers {2}
 f = fun(x) { 2*x },
 h = f + true,
 print(h(1+i)) # 3 + 2i
@@ -370,7 +397,7 @@ Another fact of interest is that the extension of the operations can lead to ret
 
 For example, given the login program:
 
-```js
+```js showLineNumbers {3}
 f = fun(x) { x+1 },
 g = fun(x) { x+2 },
 print((f+g)(3)) # 9
@@ -378,7 +405,7 @@ print((f+g)(3)) # 9
 
 This would be the expected behavior:
 
-```js
+```js showLineNumbers {16}
 ➜ functions-solution git:(extendedcalls) ✗ bin/calc2js.mjs test/data/input/test-fun-call.calc
 #!/usr/bin/env node
 const Complex = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/complex.js");

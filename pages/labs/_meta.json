@@ -4,6 +4,103 @@
     "title": "Functions",
     "display": "normal",
     "items": {
+      "Añadiendo funciones a la calculadora": {
+        "title": "Añadiendo funciones a la calculadora",
+        "href": "/labs/functions#añadiendo-funciones-a-la-calculadora"
+      },
+      "Las funciones son expresiones": {
+        "title": "Las funciones son expresiones",
+        "href": "/labs/functions#las-funciones-son-expresiones"
+      },
+      "Funciones que retornan funciones": {
+        "title": "Funciones que retornan funciones",
+        "href": "/labs/functions#funciones-que-retornan-funciones"
+      },
+      "Funciones que reciben funciones y retornan funciones": {
+        "title": "Funciones que reciben funciones y retornan funciones",
+        "href": "/labs/functions#funciones-que-reciben-funciones-y-retornan-funciones"
+      },
+      "Encadenamiento de llamadas": {
+        "title": "Encadenamiento de llamadas",
+        "href": "/labs/functions#encadenamiento-de-llamadas"
+      },
+      "Comentarios": {
+        "title": "Comentarios",
+        "href": "/labs/functions#comentarios"
+      },
+      "Operadores Lógicos y de Comparación": {
+        "title": "Operadores Lógicos y de Comparación",
+        "href": "/labs/functions#operadores-lógicos-y-de-comparación"
+      },
+      "Short Circuit Evaluation and if then else": {
+        "title": "Short Circuit Evaluation and if then else",
+        "href": "/labs/functions#short-circuit-evaluation-and-if-then-else"
+      },
+      "Type Handling in Dynamic Languages": {
+        "title": "Type Handling in Dynamic Languages",
+        "href": "/labs/functions#type-handling-in-dynamic-languages"
+      },
+      "Type Checking: Basic concepts": {
+        "title": "Type Checking: Basic concepts",
+        "href": "/labs/functions#type-checking-basic-concepts"
+      },
+      "Function Arithmetic": {
+        "title": "Function Arithmetic",
+        "href": "/labs/functions#function-arithmetic"
+      },
+      "Arithmetic of Functions ad numbers": {
+        "title": "Arithmetic of Functions ad numbers",
+        "href": "/labs/functions#arithmetic-of-functions-ad-numbers"
+      },
+      "Arithmetic of Functions and Booleans": {
+        "title": "Arithmetic of Functions and Booleans",
+        "href": "/labs/functions#arithmetic-of-functions-and-booleans"
+      },
+      "New Semantic needs New Syntax": {
+        "title": "New Semantic needs New Syntax",
+        "href": "/labs/functions#new-semantic-needs-new-syntax"
+      },
+      "Type Promotion": {
+        "title": "Type Promotion",
+        "href": "/labs/functions#type-promotion"
+      },
+      "Language Symmetry": {
+        "title": "Language Symmetry",
+        "href": "/labs/functions#language-symmetry"
+      },
+      "Be bold in your designs but keep them simple.": {
+        "title": "Be bold in your designs but keep them simple.",
+        "href": "/labs/functions#be-bold-in-your-designs-but-keep-them-simple"
+      },
+      "Videos": {
+        "title": "Videos",
+        "href": "/labs/functions#videos"
+      },
+      "Vídeos sobre manejo del AST con ast-types": {
+        "href": "/labs/functions#vídeos-sobre-manejo-del-ast-con-ast-types"
+      },
+      "Vídeos sobre manejo del AST con ast-types": {
+        "href": "/labs/functions#vídeos-sobre-manejo-del-ast-con-ast-types-1"
+      },
+      "Smells, The Open Closed Principle, the Switch Smell and the Strategy pattern": {
+        "href": "/labs/functions#smells-the-open-closed-principle-the-switch-smell-and-the-strategy-pattern"
+      },
+      "Pruebas, Covering e Integración Continua": {
+        "title": "Pruebas, Covering e Integración Continua",
+        "href": "/labs/functions#pruebas-covering-e-integración-continua"
+      },
+      "Avoiding the preamble in the tests": {
+        "title": "Avoiding the preamble in the tests",
+        "href": "/labs/functions#avoiding-the-preamble-in-the-tests"
+      },
+      "Documentación": {
+        "title": "Documentación",
+        "href": "/labs/functions#documentación"
+      },
+      "References": {
+        "title": "References",
+        "href": "/labs/functions#references"
+      }
     }
   },
   "scope-intro": {
@@ -141,58 +238,58 @@
     "title": "Translating Arithmetic Expressions to JavaScript",
     "items": {
       "Objetivos": {
-          "title": "Objetivos",
-          "href": "/labs/arith2js#objetivos"
+        "title": "Objetivos",
+        "href": "/labs/arith2js#objetivos"
       },
       "Opciones en línea de comandos": {
-          "title": "Opciones en línea de comandos",
-          "href": "/labs/arith2js#opciones-en-línea-de-comandos"
+        "title": "Opciones en línea de comandos",
+        "href": "/labs/arith2js#opciones-en-línea-de-comandos"
       },
       "Dealing with Ambiguity": {
-          "title": "Dealing with Ambiguity",
-          "href": "/labs/arith2js#dealing-with-ambiguity"
+        "title": "Dealing with Ambiguity",
+        "href": "/labs/arith2js#dealing-with-ambiguity"
       },
       "Unary minus and exponentiation in escodegen": {
-          "title": "Unary minus and exponentiation in escodegen",
-          "href": "/labs/arith2js#unary-minus-and-exponentiation-in-escodegen"
+        "title": "Unary minus and exponentiation in escodegen",
+        "href": "/labs/arith2js#unary-minus-and-exponentiation-in-escodegen"
       },
       "Run-time Support": {
-          "title": "Run-time Support",
-          "href": "/labs/arith2js#run-time-support"
+        "title": "Run-time Support",
+        "href": "/labs/arith2js#run-time-support"
       },
       "Computing the dependencies": {
-          "title": "Computing the dependencies",
-          "href": "/labs/arith2js#computing-the-dependencies"
+        "title": "Computing the dependencies",
+        "href": "/labs/arith2js#computing-the-dependencies"
       },
       "Tests": {
-          "title": "Tests",
-          "href": "/labs/arith2js#tests"
+        "title": "Tests",
+        "href": "/labs/arith2js#tests"
       },
       "Covering": {
-          "title": "Covering",
-          "href": "/labs/arith2js#covering"
+        "title": "Covering",
+        "href": "/labs/arith2js#covering"
       },
       "Videos": {
-          "title": "Videos",
-          "href": "/labs/arith2js#videos"
+        "title": "Videos",
+        "href": "/labs/arith2js#videos"
       },
       "Related Topics": {
-          "title": "Related Topics",
-          "href": "/labs/arith2js#related-topics"
+        "title": "Related Topics",
+        "href": "/labs/arith2js#related-topics"
       },
       "Rubric": {
-          "title": "Rubric",
-          "href": "/labs/arith2js#rubric"
+        "title": "Rubric",
+        "href": "/labs/arith2js#rubric"
       },
       "Repos": {
-          "title": "Repos",
-          "href": "/labs/arith2js#frontmatterkey-repos"
+        "title": "Repos",
+        "href": "/labs/arith2js#frontmatterkey-repos"
       },
       "References": {
-          "title": "References",
-          "href": "/labs/arith2js#references"
+        "title": "References",
+        "href": "/labs/arith2js#references"
       }
-  }
+    }
   },
   "iaas": {
     "title": "IAAS",
