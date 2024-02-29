@@ -5,10 +5,10 @@ import { SessionProvider } from "next-auth/react"
 import { Link } from 'nextra-theme-docs'
 const config: DocsThemeConfig = {
   banner: {
-    key: 'scope-intro',
+    key: 'functions',
     text: (
-      <a href="/labs/scope-intro#videos" target="_blank">
-        📄🖍️ Lab scope-intro deadline is 29/02. Watch related videos →
+      <a href="/labs/functions#videos" target="_blank">
+        📄🖍️ Lab functions deadline is 07/03. Watch related videos →
       </a>
     )
   },
