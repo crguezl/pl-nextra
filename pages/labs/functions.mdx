@@ -319,7 +319,7 @@ print(e(1))  # true
 
 To achieve that we would need to extend the arithmetic operations to JS functions. Something like this:
   
-```js showLineNumbers filename="src/monkey-patch-case.js"
+```js showLineNumbers filename="src/monkey-patch-case.js" {11-16}
 let Operators = {
   add: '+',  mul: '*',  div: '/',  equals: '==',  pow: '**',  neg: '-' // ... etc.
 };
@@ -356,15 +356,38 @@ true
 
 But we may also want to allow functions to be operated on numbers (by extending a number as the function constant on that number):
 
-```js showLineNumbers {2}
+```js showLineNumbers {2} filename="test/data/input/test-fun-add1.calc"
 f = fun(x) { 2*x },
 h = f + 3, # 3 is the constant function f(x) = 3 for all x
 print(h(1+i)) # 5 + 2i
 ```
 which would be interpreted as:
 
+```js showLineNumbers filename="src/monkey-patch-case.js" {10-12}
+let Operators = {
+  add: '+',  mul: '*',  div: '/',  equals: '==',  pow: '**',  neg: '-' // ... etc.
+};
+
+for (let op in Operators) {
+  Boolean.prototype[op] = function (other) { /* ... */   };
+  Function.prototype[op] = function (other) {
+    switch (typeof other) {
+      case 'boolean':  return (...x) => this(...x)[op](Number(other))
+      case 'object': if (other instanceof Complex) {
+            return (...x) => this(...x)[op](other)
+        }  else { throw new Error(`Unsupported ${op} for ${other}`) }
+      case 'function': /* ... */
+      default:
+        throw new Error(`Unsupported ${op} for type ${typeof other}`)
+    }
+  }
+}
 ```
-  ✗ bin/calc2js.mjs test/data/input/test-fun-add1.calc | do not give -
+
+That would give rise to the following execution:
+
+```
+  ✗ bin/calc2js.mjs test/data/input/test-fun-add1.calc | node -
 { re: 5, im: 2 }
 ```
 
@@ -374,16 +397,47 @@ It would also be possible to extend addition/subtraction etc. to a function with
 
 One possible interpretation would be to promote the boolean value `true` to `1+0i` and `false` to `0`:
 
-```js showLineNumbers {2}
+```js showLineNumbers {2} filename="test/data/input/test-fun-add2.calc"
 f = fun(x) { 2*x },
 h = f + true,
 print(h(1+i)) # 3 + 2i
 ```
+That implies extending the arithmetic operations to functions and booleans:
 
-which when executed could give:
+```js showLineNumbers filename="src/monkey-patch-case.js" {10-12}
+Function.prototype[op] = function (other) {
+    switch (typeof other) {
+      case 'boolean':
+        return (...x) => this(...x)[op](Number(other))
+      /* ... */
+    }
+}
+```
+
+The former input is compiled to:
+
+```js showLineNumbers {11} filename="test/data/actualjs/test-fun-add2.js"
+➜  functions-solution git:(functions) ✗ bin/calc2js.mjs test/data/input/test-fun-add2.calc         
+#!/usr/bin/env node
+const Complex = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/complex.js");  
+const print = x => { console.log(x); return x; };
+/* End of support code */
+let $f, $h;
+(
+  $f = function($x) {
+    return Complex("2").mul($x);
+  }, 
+  $h = $f.add(true)
+), 
+print(
+  $h(Complex("1").add(Complex("i")))
+);
+```
+
+which when executed gives:
 
 ```
-✗ bin/calc2js.mjs test/data/input/test-fun-add2.calc | do not give -
+✗ bin/calc2js.mjs test/data/input/test-fun-add2.calc | node -
 { re: 3, im: 2 }
 ```
 
@@ -458,7 +512,7 @@ print((f+2)(3)(5)) # 10
 
 When compiled we have to produce something like this translation:
 
-```js{13}
+```js {13}
 ➜  functions-solution git:(functions) ✗ bin/calc2js.mjs test/data/input/test-fun-call2.calc         
 #!/usr/bin/env node
 const Complex = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/complex.js");  
@@ -511,15 +565,14 @@ This implies that if we add the `add` method to the **Function**s so that it tak
 
 That is, if we consider the symmetric of the former example with `2+f` instead of `f+2` it has to work the same way:
 
-```js{3}
-➜  functions-solution git:(extendedcalls) ✗ cat test/data/input/test-fun-call2-symmetric.calc 
+```js {2} filename="test/data/input/test-fun-call2-symmetric.calc" showLineNumbers
 f = fun(x) { fun(y) { x+y} },
 print((2+f)(3)(5)) # 10
 ```
 
 The translation produces a **memberExpression** `Complex("2").add($f)`:
 
-```js
+```js /Complex("2").add($f)/ filename="test/data/actualjs/test-fun-call2-symmetric.js" 
 ➜  functions-solution git:(extendedcalls) ✗ bin/calc2js.mjs test/data/input/test-fun-call2-symmetric.calc        
 #!/usr/bin/env node
 const Complex = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/complex.js");  
@@ -530,7 +583,10 @@ $f = function($x) {
     return function($y) {
         return $x.add($y);
     };
-}, print(Complex("2").add($f)(Complex("3"))(Complex("5")));
+}, 
+print(
+  Complex("2").add($f)(Complex("3"))(Complex("5"))
+);
 ```
 
 If we extend the behavior of **Complex**  appropriately it can work:
@@ -618,7 +674,7 @@ El vídeo está enfocado a mostrar como usar ast-types en la resolución del pro
 
 ## Smells, The Open Closed Principle, the Switch Smell and the Strategy pattern
 
-See section [The Open Closed Principle and the Strategy Pattern](/temas/introduccion-a-javascript/design.html)
+See section [The Open Closed Principle and the Strategy Pattern](/topics/introduction-to-javascript/design)
 
 
 ## Pruebas, Covering e Integración Continua
