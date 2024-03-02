@@ -35,6 +35,18 @@ video20230322:
   description: "Clase del 22/03/2023. Hasta el minuto 25 se explica como realizar el examen parcial del curso 22/23. Le será muy útil para preparar el próximo examen del 11/03. A partir del minuto 25 se explican las bases para la práctica functions"
   url: "https://youtu.be/SfAIHgAqSuQ"
   id: "SfAIHgAqSuQ"
+
+video20230327:
+  date: "27/03/2023"
+  description: "Clase del 27/03/2023. Se continúa la explicación de como realizar la práctica de funciones"
+  url: "https://youtu.be/DRP-_bmTdto"
+  id: "DRP-_bmTdto"
+
+video20230328:
+  date: "28/03/2023"
+  description: "Clase del 28/03/2023. Análisis de tipos en el lab. Lookup en el scope analysis. Soporte a las operaciones para los nuevos tipos. Nueva sintáxis para las calls"
+  url: "https://youtu.be/XpzNZJ-fwx8"
+  id: "XpzNZJ-fwx8"
 ---
 import {Link, frontmatter} from '@/src/frontmatter'
 import RelatedLabs from '@/components/related-labs'
@@ -53,9 +65,20 @@ import { videos, videos23, video20240227 } from '@/src/labs/scope-intro'
 
 ## Videos
 
+### Lab functions
+
 {frontmatter().video20230322.description}:
 
 <Videos ids={[frontmatter().video20230322.id]}></Videos>
+
+{frontmatter().video20230327.description}:
+
+<Videos ids={[frontmatter().video20230327.id]}></Videos>
+
+
+{frontmatter().video20230328.description}:
+
+<Videos ids={[frontmatter().video20230328.id]}></Videos>
 
 
 ### Vídeos sobre manejo del AST con ast-types
