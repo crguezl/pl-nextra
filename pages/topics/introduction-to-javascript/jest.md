@@ -18,6 +18,6 @@ Jest también proporciona [snapshots testing](https://jestjs.io/docs/en/snapshot
 
 ## Example
 
-* Contenidos de [test/build-lexer.test.js](/topics//introduction-to-javascript/jest-build-lexer-example)
+* Contenidos de [test/build-lexer.test.js](/topics/introduction-to-javascript/jest-build-lexer-example)
 * [ULL-ESIT-PL-2122/lexer-generator-solution](https://github.com/ULL-ESIT-PL-2122/lexer-generator-solution) (private)
 * [ULL-ESIT-PL-1920/lexer-generator](https://github.com/ULL-ESIT-PL-1920/lexer-generator) (private)
