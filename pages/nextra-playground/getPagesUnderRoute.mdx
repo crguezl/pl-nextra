@@ -132,7 +132,7 @@ import GetSpecific from '@/components/getSpecific'
 
 The following is the code of the `getSpecific` component:
 
-```jsx
+```jsx showLineNumbers {12}
 import Link from 'next/link'
 import { getPagesUnderRoute } from 'nextra/context'
 import filterRouteLocale from 'nextra/filter-route-locale'
@@ -144,7 +144,7 @@ import React from 'react'
 export default function getSpecific({ path }) {
     const { locale, defaultLocale } = useRouter()
     const pages = getPagesUnderRoute(path)
-    //console.error(pages)
+    console.error(pages)
     let result = filterRouteLocale(pages, locale, defaultLocale).map(page => {
         if (page.frontMatter?.display === 'hidden') return null
         return (
@@ -164,3 +164,110 @@ Here is the output of the former code:
 import GetSpecific from '@/components/getSpecific'
 
 <GetSpecific path="/labs"/>
+
+If I substitute line 12 by  `console.error(pages[0])` I've got the following object as the first page of `/labs`:
+
+```js showLineNumbers {62-92}
+{
+  kind: 'MdxPage',
+  name: 'functions',
+  route: '/labs/functions',
+  frontMatter: {
+    title: 'Adding Functions to the Calculator',
+    key: 'functions',
+    published: true,
+    date: '2023/03/21',
+    delivery: '2023/03/30',
+    campus: 'https://campusingenieriaytecnologia2223.ull.es/mod/assign/view.php?id=28190&forceview=1',
+    order: 12,
+    layout: 'Practica',
+    sidebar: 'auto',
+    prev: 'constant-folding.md',
+    next: null,
+    rubrica: [
+      'El paquete está publicado en GitHub Registry',
+      'Se comprueba que el módulo npm se instala desde el GitHub Registry y funciona',
+      'Probar que el ejecutable queda correctamente instalado, puede ser ejecutado con el nombre publicado y produce salidas correctas',
+      'Opciones en línea de comandos (-o, -V, -h, etc.)',
+      'Traduce correctamente las funciones',
+      'Traduce correctamente las llamadas encadenadas',
+      'Traduce correctamente las expresiones lógicas',
+      'Se declaran las variables inicializadas en el preámbulo de las funciones o del programa',
+      'Da mensajes de error para variables no declaradas',
+      'Los mensajes de error ayudan a la detección de errores',
+      'Ha añadido tests suficientes, documentación y cubrimiento',
+      'Se publica la documentación usando un static generator, API docs y Covering',
+      'Se ha añadido el enlace a las GH pages en el "About" del repo'
+    ],
+    video20230308: {
+      date: '08/03/2023',
+      description: 'Clase del 08/03/2023. Se describe el soporte para scopes de ast-types',
+      id: 'CR_GI81TFt0'
+    },
+    video20230313: {
+      date: '13/03/2023',
+      description: 'Clase del 13/03/2023. Se describe el soporte de ast-types para el recorrrido y modificación de nodos (Métodos visit)',
+      url: 'https://youtu.be/CR_GI81TFt0',
+      id: 'CR_GI81TFt0'
+    },
+    video20230322: {
+      date: '22/03/2023',
+      description: 'Clase del 22/03/2023. Hasta el minuto 25 se explica como realizar el examen parcial del curso 22/23. Le será muy útil para preparar  examenes. A partir del minuto 25 se explican las bases para la práctica functions',
+      url: 'https://youtu.be/SfAIHgAqSuQ',
+      id: 'SfAIHgAqSuQ'
+    },
+    video20230327: {
+      date: '27/03/2023',
+      description: 'Clase del 27/03/2023. Se continúa la explicación de como realizar la práctica de funciones',
+      url: 'https://youtu.be/DRP-_bmTdto',
+      id: 'DRP-_bmTdto'
+    },
+    video20230328: {
+      date: '28/03/2023',
+      description: 'Clase del 28/03/2023. Análisis de tipos en el lab. Lookup en el scope analysis. Soporte a las operaciones para los nuevos tipos. Nueva sintáxis para las calls',
+      url: 'https://youtu.be/XpzNZJ-fwx8',
+      id: 'XpzNZJ-fwx8'
+    }
+  },
+  meta: {
+    type: 'menu',
+    title: 'Functions',
+    display: 'normal',
+    items: {
+      'Añadiendo funciones a la calculadora': [Object],
+      'Las funciones son expresiones': [Object],
+      'Funciones que retornan funciones': [Object],
+      'Funciones que reciben funciones y retornan funciones': [Object],
+      'Encadenamiento de llamadas': [Object],
+      Comentarios: [Object],
+      'Operadores Lógicos y de Comparación': [Object],
+      'Short Circuit Evaluation and if then else': [Object],
+      'Type Handling in Dynamic Languages': [Object],
+      'Type Checking: Basic concepts': [Object],
+      'Function Arithmetic': [Object],
+      'Arithmetic of Functions ad numbers': [Object],
+      'Arithmetic of Functions and Booleans': [Object],
+      'New Semantic needs New Syntax': [Object],
+      'Type Promotion': [Object],
+      'Language Symmetry': [Object],
+      'Be bold in your designs but keep them simple.': [Object],
+      Videos: [Object],
+      'Vídeos sobre manejo del AST con ast-types': [Object],
+      'Smells, The Open Closed Principle, the Switch Smell and the Strategy pattern': [Object],
+      'Pruebas, Covering e Integración Continua': [Object],
+      'Avoiding the preamble in the tests': [Object],
+      'Documentación': [Object],
+      References: [Object]
+    }
+  }
+}
+```
+
+Notice the `meta` attribute of the `MdxPage` object that seems to correspond to the information inside the `_meta.json` file about 
+`page[0]`(lab `functions`). 
+
+## Getting a lab by key
+
+import GetLabByKey from '@/components/getLabByKey'
+
+<GetLabByKey labKey="functions"/>

@@ -9,7 +9,7 @@ import React from 'react'
 export default function getSpecific({ path }) {
     const { locale, defaultLocale } = useRouter()
     const pages = getPagesUnderRoute(path)
-    //console.error(pages)
+    //console.error(pages[0])
     let result = filterRouteLocale(pages, locale, defaultLocale).map(page => {
         if (page.frontMatter?.display === 'hidden') return null
         return (

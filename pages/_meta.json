@@ -210,6 +210,11 @@
         "title": "Nextra",
         "href": "https://nextra.vercel.app/",
         "newWindow": true
+      },
+      "ChatULL": {
+        "title": "Chat ULL (TFG Jonay)",
+        "href": "https://chatull.pages.dev",
+        "newWindow": true
       }
     }
 },
