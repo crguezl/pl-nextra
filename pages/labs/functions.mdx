@@ -51,6 +51,11 @@ video20230328:
   description: "Clase del 28/03/2023. Análisis de tipos en el lab. Lookup en el scope analysis. Soporte a las operaciones para los nuevos tipos. Nueva sintáxis para las calls"
   url: "https://youtu.be/XpzNZJ-fwx8"
   id: "XpzNZJ-fwx8"
+video20240304:
+  date: "04/03/2024"
+  description: "Clase del 04/03/2024. Consideraciones de diseño. Sintáxis de las expresiones función"
+  url: "https://youtu.be/d3RZTA3yzgo"
+  id: "d3RZTA3yzgo"
 ---
 import { Callout } from 'nextra/components'
 import Videos from '@/components/videos'
@@ -60,7 +65,7 @@ import Videos from '@/components/videos'
 
 Queremos extender nuestra calculadora para que soporte funciones con una sintáxis como la de este ejemplo:
 
-```js showLineNumbers {2-5,6}
+```js showLineNumbers {2-5} filename="test/data/input/test-fun-scop2.calc" /f(4)/
 x = 10,     # This x is global
 f = fun (a) {
   x = a+2i, # This x is local
@@ -643,6 +648,11 @@ In any case, remember that you must ensure that the error messages issued must b
 
 ## Videos
 import {frontmatter} from '@/src/frontmatter'
+
+{frontmatter().video20240304.description}:
+
+<Videos ids={[frontmatter().video20240304.id]}></Videos>
+
 
 {frontmatter().video20230322.description}:
 
