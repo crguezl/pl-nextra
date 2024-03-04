@@ -1,0 +1,107 @@
+---
+title: "Tuesday 2024/03/05"
+published: true
+summary: "Building the ASTs. Variables, initialization and uses"
+labs: [ 'functions' ]
+topics: 
+  - text: "AST types"
+    href: "/topics/tree-transformations/ast-types"
+  - text: "Hello AST Types repo"
+    href: https://github.com/crguezl/hello-ast-types
+  - text: "Recast"
+    href: "/topics/tree-transformations/jscodeshift-recast#recast"
+  - text: "Scope Analysis: teacher old notes"
+    href: "https://campusvirtual.ull.es/ocw/pluginfile.php/2321/mod_resource/content/0/perlexamples/node282.html"
+  - text: "Teacher old notes: Práctica: Calculadora con Análisis de Ámbito"
+    href: "http://crguezl.github.io/pl-html/node54.html"
+  - text: "GitHub Actions"
+    href: "/topics/introduction-to-javascript/github-actions"
+  - text: "Introduction to Compilers"
+    href: "https://docs.google.com/presentation/d/1N8h99dXzud9HzH8XY6QCZSmATCAWXtZebuqRTiy8qMU/edit?usp=sharing"
+
+video20230308:
+  date: "08/03/2023"
+  description: "Clase del 08/03/2023. Se describe el soporte para scopes de ast-types"
+  id: "CR_GI81TFt0"
+
+video20230313:
+  date: "13/03/2023"
+  description: "Clase del 13/03/2023. Se describe el soporte de ast-types para el recorrrido y modificación de nodos (Métodos visit)"
+  url: "https://youtu.be/CR_GI81TFt0"
+  id: "CR_GI81TFt0"
+
+video20230322:
+  date: "22/03/2023"
+  description: "Clase del 22/03/2023. Hasta el minuto 25 se explica como realizar el examen parcial del curso 22/23. Le será muy útil para preparar el próximo examen del 11/03. A partir del minuto 25 se explican las bases para la práctica functions"
+  url: "https://youtu.be/SfAIHgAqSuQ"
+  id: "SfAIHgAqSuQ"
+
+video20230327:
+  date: "27/03/2023"
+  description: "Clase del 27/03/2023. Se continúa la explicación de como realizar la práctica de funciones"
+  url: "https://youtu.be/DRP-_bmTdto"
+  id: "DRP-_bmTdto"
+
+video20230328:
+  date: "28/03/2023"
+  description: "Clase del 28/03/2023. Análisis de tipos en el lab. Lookup en el scope analysis. Soporte a las operaciones para los nuevos tipos. Nueva sintáxis para las calls"
+  url: "https://youtu.be/XpzNZJ-fwx8"
+  id: "XpzNZJ-fwx8"
+video20240304:
+  date: "04/03/2024"
+  description: "Clase del 04/03/2024. Consideraciones de diseño. Sintáxis de las expresiones función"
+  url: "https://youtu.be/d3RZTA3yzgo"
+  id: "d3RZTA3yzgo"
+---
+import {Link, frontmatter} from '@/src/frontmatter'
+import RelatedLabs from '@/components/related-labs'
+import RelatedTopics from '@/components/related-topics'
+import Videos from '@/components/videos'
+
+import { videos, videos23, video20240227 } from '@/src/labs/scope-intro'
+
+## Related topics
+
+<RelatedTopics topics={ frontmatter().topics }/>
+
+## Related labs
+
+<RelatedLabs labs={ frontmatter().labs }/>
+
+## Videos
+
+### Lab functions
+
+{frontmatter().video20240304.description}:
+
+<Videos ids={[frontmatter().video20240304.id]}></Videos>
+
+{frontmatter().video20230322.description}:
+
+<Videos ids={[frontmatter().video20230322.id]}></Videos>
+
+{frontmatter().video20230327.description}:
+
+<Videos ids={[frontmatter().video20230327.id]}></Videos>
+
+
+{frontmatter().video20230328.description}:
+
+<Videos ids={[frontmatter().video20230328.id]}></Videos>
+
+
+### Vídeos sobre manejo del AST con ast-types
+
+En los próximos cuestionarios se incluirán preguntas sobre el manejo de ast-types. Se recomienda ver los videos que se describen a continuación.
+
+{frontmatter().video20230313.description}:
+
+<Videos ids={[frontmatter().video20230313.id]}></Videos>
+
+
+El vídeo está enfocado a mostrar como usar ast-types en la resolución del problema planteado en la práctica [ast types: spread operator](https://ull-esit-pl-2223.github.io/practicas/spread-operator.html#frontmatter-title) desarrollada durante el curso 22/23.
+
+{frontmatter().video20230308.description}:
+
+<Videos ids={[frontmatter().video20230308.id]}></Videos>
+
