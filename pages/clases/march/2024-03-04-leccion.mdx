@@ -47,6 +47,11 @@ video20230328:
   description: "Clase del 28/03/2023. Análisis de tipos en el lab. Lookup en el scope analysis. Soporte a las operaciones para los nuevos tipos. Nueva sintáxis para las calls"
   url: "https://youtu.be/XpzNZJ-fwx8"
   id: "XpzNZJ-fwx8"
+video20240304:
+  date: "04/03/2024"
+  description: "Clase del 04/03/2024. Consideraciones de diseño. Sintáxis de las expresiones función"
+  url: "https://youtu.be/d3RZTA3yzgo"
+  id: "d3RZTA3yzgo"
 ---
 import {Link, frontmatter} from '@/src/frontmatter'
 import RelatedLabs from '@/components/related-labs'
@@ -66,6 +71,10 @@ import { videos, videos23, video20240227 } from '@/src/labs/scope-intro'
 ## Videos
 
 ### Lab functions
+
+{frontmatter().video20240304.description}:
+
+<Videos ids={[frontmatter().video20240304.id]}></Videos>
 
 {frontmatter().video20230322.description}:
 
