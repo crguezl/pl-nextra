@@ -52,6 +52,11 @@ video20240304:
   description: "Clase del 04/03/2024. Consideraciones de diseño. Sintáxis de las expresiones función"
   url: "https://youtu.be/d3RZTA3yzgo"
   id: "d3RZTA3yzgo"
+video20240305:
+  date: "05/03/2024"
+  description: "Clase del 05/03/2024. Function expressions: syntax and translation"
+  url: "https://youtu.be/rhJGaW3dcSM"
+  id: "rhJGaW3dcSM"
 ---
 import {Link, frontmatter} from '@/src/frontmatter'
 import RelatedLabs from '@/components/related-labs'
@@ -71,6 +76,9 @@ import { videos, videos23, video20240227 } from '@/src/labs/scope-intro'
 ## Videos
 
 ### Lab functions
+{frontmatter().video20240305.description}:
+
+<Videos ids={[frontmatter().video20240305.id]}></Videos>
 
 {frontmatter().video20240304.description}:
 
