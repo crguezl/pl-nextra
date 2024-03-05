@@ -10,10 +10,11 @@ layout: Practica
 sidebar: auto
 prev: "constant-folding.md"
 next: 
+classroom: "https://classroom.github.com/classrooms/153934884-ull-esit-pl-2324/assignments/functions"
 rubrica:
-  - El paquete está publicado en GitHub Registry
-  - Se comprueba que el módulo npm se instala desde el GitHub Registry y funciona
-  - Probar que el ejecutable queda correctamente instalado, puede ser ejecutado con el nombre publicado y produce salidas correctas
+  - (Opcional) El paquete está publicado en GitHub Registry
+  - (Opcional) Se comprueba que el módulo npm se instala desde el GitHub Registry y funciona
+  - (Opcional) Probar que el ejecutable queda correctamente instalado, puede ser ejecutado con el nombre publicado y produce salidas correctas
   - "Opciones en línea de comandos (-o, -V, -h, etc.)"
   - "Traduce correctamente las funciones"
   - "Traduce correctamente las llamadas encadenadas"
@@ -156,7 +157,7 @@ print($r);
 
 En este otro ejemplo, la función `add` recibe una función `f`  y retorna otra función que a su vez espera como argumento otra función `g` la cual retorna una función que es la función que suma a su argumento `x` los valores de la primera `f(x)` y la segunda `g(x)`:
 
-```js showLineNumbers 
+```js showLineNumbers filename="test/data/input/test-fun4.calc" /add(square)(double)(4))/ {2-6}
 add = fun(f) {
   fun(g) { 
     fun(x) { 
@@ -171,7 +172,7 @@ print(add(square)(double)(4)) # 24+0i
 
 Cuando la compilamos 
 
-```js {9-15} showLineNumbers
+```js {9-15} showLineNumbers filename="test/data/actualjs/test-fun4.js"
 ✗ bin/calc2js.mjs test/data/input/test-fun4.calc         
 #!/usr/bin/env node
 const Complex = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/complex.js");  
@@ -733,11 +734,32 @@ for (let i = 0; i < Test.length; i++) {
 }
 ```
 
+## Publishing a package to the GitHub Registry
+
+See the chapter [Publishing a package to the GitHub Registry](/topics/introduction-to-javascript/creating-and-publishing-npm-module#publishing-a-package-to-the-github-registry) and the sections
+
+* [Configure npm](/topics/introduction-to-javascript/creating-and-publishing-npm-module#configure-npm)
+* [What are scopes?](/topics/introduction-to-javascript/creating-and-publishing-npm-module#what-are-scopes)
+* [What is Github Registry?](/topics/introduction-to-javascript/creating-and-publishing-npm-module#what-is-github-registry)
+
 ## Documentación
 
 [Documente](/topics/introduction-to-javascript/documentation)
 el módulo incorporando un `README.md` y la documentación de la función exportada usando [JsDoc](/topics/introduction-to-javascript/documentation).
 Lea la sección [Documenting the JavaScript Sources](/topics/introduction-to-javascript/creating-and-publishing-npm-module#documenting-the-javascript-sources)
+
+## Rubric
+
+import Rubric from '@/components/rubric'
+
+<Rubric rubric={frontmatter().rubrica} />
+
+## {frontmatter().key} Repos
+
+import ReposForLab from '@/components/repos-for-lab'
+
+<ReposForLab lab={frontmatter().key} />
+
 
 ## References
 

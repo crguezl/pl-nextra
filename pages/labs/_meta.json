@@ -96,6 +96,14 @@
         "title": "Documentación",
         "href": "/labs/functions#documentación"
       },
+      "Rubric": {
+        "title": "Rubric",
+        "href": "/labs/functions#rubric"
+      },
+      "GitHub Repos": {
+        "title": "GitHub Repos for the Lab",
+        "href": "/labs/functions#frontmatterkey-repos"
+      },
       "References": {
         "title": "References",
         "href": "/labs/functions#references"
