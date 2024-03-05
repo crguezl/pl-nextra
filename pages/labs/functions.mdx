@@ -326,7 +326,7 @@ For an introduction to the basic concepts on type checking see the section [Type
 
 For example, we might decide to generalize to support arithmetic operations on functions whenever they make sense, so that a program like this:
 
-```js showLineNumbers {4-6}
+```js showLineNumbers {4-6} filename="test/data/input/test-fun-add.calc"
 f = fun(x) { 2*x },
 g = fun(x) { 3*x },
 r = fun(y) { 3*y },
@@ -750,6 +750,25 @@ See the chapter [Publishing a package to the GitHub Registry](/topics/introducti
 * [Configure npm](/topics/introduction-to-javascript/creating-and-publishing-npm-module#configure-npm)
 * [What are scopes?](/topics/introduction-to-javascript/creating-and-publishing-npm-module#what-are-scopes)
 * [What is Github Registry?](/topics/introduction-to-javascript/creating-and-publishing-npm-module#what-is-github-registry)
+* [Other ways to set the Scope](http://localhost:3000/topics/introduction-to-javascript/creating-and-publishing-npm-module#other-ways-to-set-the-scope)
+
+One  way to set GitHub as the registry is to add a `publishConfig` field to your `package.json` file
+
+```json filename="package.json"
+{
+  "name": "@ull-esit-pl-2324/functions-name-ape1-ape2-aluXXX",
+  "version": "1.2.0",
+  "description": "A lab for PL. Adding Functions to our Calculator",
+  "main": "src/transpile.js",
+  "bin": {
+    "calc2js": "./bin/calc2js.js"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  ...
+}
+```
 
 ## Documentación
 
