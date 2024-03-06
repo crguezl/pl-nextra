@@ -1,0 +1,252 @@
+---
+title: "Egg Parser"
+key: egg-parser
+published: true
+date: 
+delivery: 
+campus: 
+order: 13
+layout: Practica
+prev: functions.md
+next: lexer-generator.md
+sidebar: auto
+template: "https://github.com/ull-esit-pl/egg-parser-template"
+rubrica: 
+  - El paquete está publicado en GitHub Registry con el ámbito de la organización
+  - Contiene un ejecutable que se ejecuta correctamente (<code>--help</code>, etc.)
+  - The <code>parser</code> builds the correct ASTs for the Egg language 
+  - It includes a sufficient number of examples in the folder <code>examples</code> or in the <code>test/data/input</code> folder
+  - El módulo exporta las funciones adecuadas
+  - Contiene suficientes tests
+  - Se provee un workflow sencillo para convertir rápidamente un ejemplo operativo en un test 
+  - "Estudio de covering"
+  - Se ha hecho CI con GitHub Actions
+  - "Módulo bien documentado: jsdocs"
+  - Informe hecho con Vuepress desplegado
+  - Se ha hecho un buen uso del versionado semántico en la evolución del módulo
+temas:
+  - text: Gramáticas Independientes del Contexto
+    href: /topics/syntax-analysis/teoria#gramaticas-independientes-del-contexto
+  - text: "ASTs: Árboles de Análisis Abstracto"
+    href: "/topics/syntax-analysis/ast"
+  - text: "The Design of Programming Languages"
+    href: "/topics/syntax-analysis/the-design-of-programming-languages"
+  - text: "Nearley.js"
+    href: "/topics/syntax-analysis/earley/nearley"
+  - text: Repo ULL-ESIT-PL/learning-nearley
+    href: https://github.com/ULL-ESIT-PL/learning-nearley/
+  - text: "Lexical Analysis with moo"
+    href: "/topics/syntax-analysis/earley/moo"
+videos: 
+---
+import { Callout } from 'nextra/components'
+import Videos from '@/components/videos'
+import {frontmatter} from '@/src/frontmatter'
+import Rubric from '@/components/rubric'
+import ReposForLab from '@/components/repos-for-lab'
+
+
+## Objetivos
+
+Usando el generador de analizadores [Nearley.js](/topics/syntax-analysis/earley/nearley) escriba un parser para el [lenguaje Egg](/topics/syntax-analysis/teoria#gramaticas-independientes-del-contexto) que genere los árboles según la especificación que se describe en la sección [ASTs: Árboles de Análisis Abstracto](/topics/syntax-analysis/ast). Utilice el generador de analizadores léxicos [moo-ignore](/topics/syntax-analysis/earley/moo#skipping-tokens-in-moo) para la fase de análisis léxico.
+
+Construya un paquete npm y 
+publíquelo en [GitHub Registry](/topics/introduction-to-javascript/creating-and-publishing-npm-module#what-is-github-registry) con ámbito `@ull-esit-pl-2324` y nombre el nombre del repo asignado.
+
+El módulo  exportará un objeto con al menos la propiedad `{ parseFromfile }`. 
+
+* `parseFromFile(inputFile)` es una función que devuelve el AST construído a partir de los contenidos del programa en lenguaje Egg contenido en el fichero con nombre `inputFile`
+
+La gramática del lenguaje Egg se describe en la sección [Gramáticas Independientes del Contexto](/topics/syntax-analysis/teoria#gramaticas-independientes-del-contexto).
+This is the equivalent syntax diagram:
+
+![/images/egg-syntax-diagram.png](/images/egg-syntax-diagram.png)
+
+Se deberá proveer un ejecutable `eggc` con una interfaz como esta:
+
+```
+➜  prefix-lang git:(master) ✗ bin/eggc.js -h
+Usage: eggc [options] <origin>
+
+Compile a Egg lang file
+
+Arguments:
+  origin                   The path of the file to compile
+
+Options:
+  -V, --version            output the version number
+  -o, --out <destination>  Path for output file. If it isn't specified the path of the origin file will be
+                           used,changing the extension to .json
+  -h, --help               display help for command
+```
+
+Puede usar el ejecutable `evm` (las siglas corresponden a Egg virtual Machine) del paquete ["@crguezl/eloquentjsegg"](https://www.npmjs.com/package/@crguezl/eloquentjsegg) para comprobar que los ASTs generados funcionan. 
+
+Sigue un ejemplo (compatible ["@crguezl/eloquentjsegg"](https://www.npmjs.com/package/@crguezl/eloquentjsegg) versión 1.2.6) de como debería funcionar nuestro parser `eggc`:
+
+```ruby
+➜  prefix-lang git:(master) ✗ cat test/examples/array.egg 
+do(
+  def(x, arr(arr(1,4),5,7)),
+  print([](x,0)), # [1,4]
+  print([](x,1))  # 5
+)
+```
+
+Nuestro parser deberà por tanto producir un AST conforme a la especificación dada en la sección [Anatomía de los AST para Egg](/topics/syntax-analysis/ast#anatomia-de-los-ast-para-egg). Esto es, deberá estar conforme a esta gramática árbol:
+
+```
+ast: VALUE
+   | WORD 
+   | APPLY( operator:WORD args:[ ast * ]))
+```
+
+Los nodos `APPLY` tienen dos atributos `operator` y `args`. El atributo `args` es un ARRAY conteniendo los ASTs que  se corresponden con los argumentos de `operator`. Los nodos `WORD` son nodos hoja y tienen al menos el atributo `name`. 
+Los nodos `VALUE` tienen al menos el atributo `value`.
+
+Por ejemplo, el AST para `+(a,*(4,5))` se podría describir mediante este término: 
+
+```ruby
+APPLY(
+  operator: WORD{name: +},
+  args: [
+    WORD{name: a}, 
+    APPLY(
+      operator: WORD{name:*}, 
+      args: [VALUE{value:4}, VALUE{value:5}]
+    )
+   ]
+)
+``` 
+
+A la derecha del tipo de nodo y entre llaves escribimos las parejas` atributo: valor` que nos interesa resaltar. 
+
+El ejecutable ` bin/eggc.js` deberá producir un fichero JSON con el ast:
+
+```
+✗ bin/eggc.js test/examples/array.egg -o test/ast/array.json
+```
+
+Puede ver los contenidos del ast para el ejemplo [test/examples/array.egg](https://github.com/ULL-ESIT-PL-1617/egg/blob/539ddbc8f63d51641626dc03395796e3c01c2789/examples/array.egg) haciendo click sobre este enlace:
+
+[➜  prefix-lang git:(master) ✗ cat test/ast/array.json](/topics/syntax-analysis/earley/array-json)
+
+A continuación podemos usar el ejecutable `evm` para interpretar el árbol:
+
+```
+➜  prefix-lang git:(master) ✗ npx evm test/ast/array.json
+[ 1, 4 ]
+5
+```
+
+Observe que puesto que el paquete ["@crguezl/eloquentjsegg"](https://www.npmjs.com/package/@crguezl/eloquentjsegg) ha sido instalado localmente, necesitamos hacer uso de [npx](https://www.npmjs.com/package/npx) para ejecutar el intérprete `evm`.
+
+<Callout type="info" emoji="ℹ️"> 
+
+**npx**
+
+`npx <command>[@version] [command-arg]...` executes `<command>` 
+either from a local `node_modules/.bin`, or 
+from a central cache, usually in `~/.npm/cacache`
+
+```
+  npm config get cache
+  /Users/casianorodriguezleon/.npm
+  ✗ ls /Users/casianorodriguezleon/.npm/_cacache 
+content-v2 index-v5   tmp
+```
+
+installing any packages needed in order for `<command>` to run. By default, `npx` will check whether `<command>` exists in `$PATH`, or in the local project binaries, and execute that. If `<command>` is not found, it will be installed prior to execution.
+</Callout> 
+
+En el directorio `node_modules/@crguezl/eloquentjsegg/examples` tiene algunos ejemplos de programas egg  que puede usar para comprobar el buen funcionamiento de su parser:
+
+```
+➜  prefix-lang git:(master) ✗ ls  node_modules/@crguezl/eloquentjsegg/examples 
+array.egg       greater-x-5.egg main2.js        one.egg         sum.egg         unbalanced.egg
+expcomma.egg    if.egg          one-err-2.egg   scope.egg       sum.egg.evm
+fun.egg         main.js         one-err.egg     string.egg      two.egg
+```
+
+<Callout type="error" emoji="⚠️">
+
+**Nota de Advertencia**
+
+En algunos de los ejemplos, vídeos, repos, etc. que acompañan esta práctica puede notar algunas 
+inconsistencias en el lenguaje Egg debidas a que casi en cada curso hemos ido haciendo alias de algunos de los nombres de los constructos. Por ejemplo, a veces  en un vídeo en vez de `fun` usamos `->` y en algún ejemplo en los apuntes en vez de `element` se usa `<-`, etc. También en algún ejemplo aparecen llavitas `{` y `}` en vez de paréntesis (de nuevo una llave aquí es un alias del correspondiente paréntesis). Son cambios triviales que no deberían afectar a la comprensión del texto.
+</Callout>
+
+## Publicación del módulo 
+
+Una parte de los conceptos y habilidades a adquirir con esta práctica se explican en la sección [Creating and publishing a node.js module en GitHub y en NPM](/topics/introduction-to-javascript/creating-and-publishing-npm-module). Léala con detenimiento antes de hacer esta práctica. 
+
+## Pruebas
+
+Deberá añadir pruebas usando [Mocha y Chai](/topics/introduction-to-javascript/creating-and-publishing-npm-module#testing-with-mocha-and-chai) o [Jest](/topics/introduction-to-javascript/jest).
+Repase las secciones [Testing with Mocha and Chai](/topics/introduction-to-javascript/creating-and-publishing-npm-module#testing-with-mocha-and-chai) y [Jest](/topics/introduction-to-javascript/jest).
+
+Añada un estudio de covering. See the notes in [covering](/topics/introduction-to-javascript/covering). 
+
+Añada CI con GitHub Actions.
+
+## Informe y Documentación
+
+[Documente](/topics/introduction-to-javascript/documentation) el módulo incorporando un `README.md`: Como se instala, como se usa el ejecutable, como se carga la librería, etc.
+
+La documentación de la API de la función exportada usando [JsDoc](/topics/introduction-to-javascript/documentation) la puede dejar accesible en el despliegue (directorio `docs/api`). 
+
+Añada el informe de Covering también (directorio `docs/covering` o similar).
+
+
+## Challenge
+
+* Asegúrese de producir mensajes de error significativos informando de los números de línea y columna correctos
+
+## Videos
+
+<Videos ids={[frontmatter().videos]}></Videos>
+
+## Rubric
+
+<Rubric rubric={frontmatter().rubrica} />
+
+## {frontmatter().key} Repos
+
+<ReposForLab lab={frontmatter().key} />
+
+
+## References
+
+### Nearley.js 
+
+* [Repo ULL-ESIT-PL/learning-nearley](https://github.com/ULL-ESIT-PL/learning-nearley/)
+* [Nearley.JS Home Page](https://nearley.js.org/)
+
+### moo
+
+* [Tokenizers for nearley.js](https://nearley.js.org/docs/tokenizers)
+* [moo-ignore](https://www.npmjs.com/package/moo-ignore)
+* [moo](https://www.npmjs.com/package/moo/)
+
+### Testing 
+
+* [Mocha](/topics/introduction-to-javascript/mocha)
+* [Jest](/topics/introduction-to-javascript/jest)
+
+### Documentation
+
+* [Vuepress](https://vuepress.vuejs.org/guide/)
+  * [Deployment](https://vuepress.vuejs.org/guide/deploy#deploying)
+  * [Vuepress JsDoc Plugin](https://vuepress-jsdoc-example.vercel.app/code/)
+  * [jsdoc2vuepress](https://www.npmjs.com/package/jsdoc2vuepress)
+  * [Vuepress Autodoc Plugin](https://bprinty.github.io/vuepress-plugin-autodoc/#overview)
+* [.nojekyll](https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/) Bypassing Jekyll on GitHub Pages
+* [JSDoc and others](/topics/introduction-to-javascript/documentation) in this notes
+
+### Semantic versioning and npm
+
+* [Semantic versioning and npm](https://docs.npmjs.com/getting-started/semantic-versioning)
+* [Semantic Versioning: Why You Should Be Using it](https://www.sitepoint.com/semantic-versioning-why-you-should-using/) SitePoint
+* [YouTube Video: Semantic versioning and npm](https://youtu.be/kK4Meix58R4)
+* [El comando npm version](https://docs.npmjs.com/cli/version)
+

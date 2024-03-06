@@ -1,0 +1,365 @@
+---
+toc: true
+sidebar: auto
+---
+# Lexical Analysis with Moo and Moo-ignore
+
+By default, nearley splits the input into a stream of characters. This is
+called *scannerless* parsing.
+
+## Moo
+
+### Lexing with Moo
+
+The `@lexer` directive instructs Nearley to use a lexer you've defined inside a
+[Javascript block](grammar#additional-js) in your grammar.
+
+nearley supports and recommends [Moo](https://github.com/tjvr/moo), a
+super-fast lexer. Construct a lexer using `moo.compile`.
+
+When using a lexer, there are two ways to match tokens:
+
+  - Use `%token` to match a token with **type** `token`.
+
+    ```
+    line -> words %newline
+    ```
+
+  - Use `"foo"` to match a token with **text** `foo`.
+
+    This is convenient for matching keywords:
+
+    ```
+    ifStatement -> "if" condition "then" block
+    ```
+
+Here is an example of a simple grammar:
+
+```js
+@{%
+const moo = require("moo");
+
+const lexer = moo.compile({
+  ws:     /[ \t]+/,
+  number: /[0-9]+/,
+  word: { match: /[a-z]+/, type: moo.keywords({ times: "x" }) },
+  times:  /\*/
+});
+%}
+
+# Pass your lexer object using the @lexer option:
+@lexer lexer
+
+expr -> multiplication {% id %} | trig {% id %}
+
+# Use %token to match any token of that type instead of "token":
+multiplication -> %number %ws %times %ws %number {% ([first, , , , second]) => first * second %}
+
+# Literal strings now match tokens with that text:
+trig -> "sin" %ws %number {% ([, , x]) => Math.sin(x) %}
+```
+Compilation:
+
+```
+✗ nearleyc nearley-with-moo-example.ne -o nearley-with-moo-example.js 
+```
+
+and execution:
+
+```
+✗ nearley-test -qi '2 * 3' nearley-with-moo-example.js 
+[ 6 ]
+}
+✗ nearley-test -qi 'sin 3' nearley-with-moo-example.js 
+[ 0.1411200080598672 ]
+```
+
+Note how the management of white spaces is cumbersome and leads to errors:
+
+```
+✗ nearley-test -qi 'sin 3 ' nearley-with-moo-example.js
+Error: Syntax error at line 1 col 6
+```
+
+Have a look at [the Moo documentation](https://github.com/tjvr/moo#usage) to
+learn more about writing a tokenizer.
+
+You use the parser as usual: call `parser.feed(data)`, and nearley will give
+you the parsed results in return.
+
+### Writing a Custom lexer for Nearley
+
+nearley recommends using a [moo](https://github.com/tjvr/moo)-based lexer.
+However, you can use any lexer that conforms to the following interface:
+
+- `next()` returns a token object, which could have fields for line number,
+  etc. Importantly, a token object *must* have a `value` attribute.
+- `save()` returns an info object that describes the current state of the
+  lexer. nearley places no restrictions on this object.
+- `reset(chunk, info)` sets the internal buffer of the lexer to `chunk`, and
+  restores its state to a state returned by `save()`.
+- `formatError(token)` returns a string with an error message describing a
+  parse error at that token (for example, the string might contain the line and
+  column where the error was found).
+
+> Note: if you are searching for a lexer that allows indentation-aware
+> grammars (like in Python), you can still use moo. See [this
+> example](https://gist.github.com/nathan/d8d1adea38a1ef3a6d6a06552da641aa) or
+> the
+> [moo-indentation-lexer](https://www.npmjs.com/package/moo-indentation-lexer)
+> module.
+
+
+### moo: Examples
+
+See repo [ULL-ESIT-PL/moo-examples](https://github.com/ULL-ESIT-PL/moo-examples) for examples of use of Moo.
+
+* [hello.js](https://github.com/ULL-ESIT-PL/moo-examples/blob/main/hello.js)
+* [keywords.js](https://github.com/ULL-ESIT-PL/moo-examples/blob/main/keywords.js)
+* [skip-spaces.js](https://github.com/ULL-ESIT-PL/moo-examples/blob/main/skip-spaces.js)
+  
+
+### A moo lexer object is a Generator
+
+A moo lexer object is a [Generator](https://javascript.info/generators), you can use `filter()` and `map()` which are built-in to JavaScript. 
+
+See moo issue: <https://github.com/no-context/moo/issues/156>
+
+```js 
+const moo = require('moo')
+const lex = moo.compile({
+  // If one rule is /u then all must be
+  ws: { match: /\p{White_Space}+/u, lineBreaks: true },
+  word: /\p{XID_Start}\p{XID_Continue}*/u,
+  op: moo.fallback,
+});
+```
+
+`ID_Start` characters are derived from the Unicode `General_Category`. In set notation:
+
+```js
+/[\p{L}\p{Nl}\p{Other_ID_Start}-\p{Pattern_Syntax}-\p{Pattern_White_Space}]/u
+```
+
+`ID_Continue characters` in set notation is:
+
+```js
+/[\p{ID_Start}\p{Mn}\p{Mc}\p{Nd}\p{Pc}\p{Other_ID_Continue}-\p{Pattern_Syntax}-\p{Pattern_White_Space}]/
+```
+
+See [https://unicode.org/reports/tr31/](https://unicode.org/reports/tr31/).
+
+The expression `moo.fallback` matches anything else. 
+I believe is similar to: 
+
+```js
+{ match: /(?:.|\n)/u, lineBreaks: true}  
+```
+
+Observe how we feed the lexer using the `reset` method.
+Using the spread operator on the returned generator we get an array with the token 
+objects:
+
+```js
+const result = [...lex.reset('while ( a < 3 ) { a += 1; }')];
+```
+
+Something like:
+
+```js
+[
+  {
+    type: 'word',
+    value: 'while',
+    text: 'while',
+    toString: [Function: tokenToString],
+    offset: 0,
+    lineBreaks: 0,
+    line: 1,
+    col: 1
+  },
+  {
+    type: 'ws',
+    value: ' ',
+    text: ' ',
+    toString: [Function: tokenToString],
+    offset: 5,
+    lineBreaks: 0,
+    line: 1,
+    col: 6
+  },
+  ... etc.
+]
+```
+
+We can filter the array:
+
+```js
+let filtered = result.filter(t => t.type !== 'ws');
+console.log(filtered.map(function (t) { return { type: t.type, value: t.value } }) );
+```
+
+No longer white spaces:
+
+```js
+[
+  { type: 'word', value: 'while' }, { type: 'op', value: '(' },
+  { type: 'word', value: 'a' }, { type: 'op', value: '<' },
+  { type: 'op', value: '3' }, { type: 'op', value: ')' },
+  { type: 'op', value: '{' }, { type: 'word', value: 'a' },
+  { type: 'op', value: '+=' }, { type: 'op', value: '1;' },
+  { type: 'op', value: '}' }
+]
+```
+
+See file [ULL-ESIT-PL/moo-examples/skip-spaces.js](https://github.com/ULL-ESIT-PL/moo-examples/blob/main/skip-spaces.js) for the full code.
+
+::: danger Not a Solution for Nearley.JS
+The trick above does not work to build a lexer with token-skip for Nearley.js.
+Regrettably, Nearley.JS imposes the restrictions specified in section 
+[Writing a Custom lexer for Nearley](#writing-a-custom-lexer-for-nearley) and
+requires a Moo compatible lexer. That means **we have to wrap the returned array in a lexer complaining with a Moo-like API**!
+:::
+
+
+## moo-ignore
+
+### moo-ignore: Skipping Tokens in Moo
+
+Use  [Moo-ignore](https://github.com/ULL-ESIT-PL/moo-ignore).
+
+Moo-ignore (🐄) is a wrapper around the [moo](https://www.npmjs.com/package/moo) tokenizer/lexer generator that provides a [nearley.js](https://github.com/hardmath123/nearley) compatible lexer with the capacity to ignore specified tokens.
+
+You can use it in your Nearley.js program and ignore some tokens like white spaces and comments:
+
+
+```js
+@{%
+const tokens = require("./tokens");
+const { makeLexer } = require("../index.js");
+
+let lexer = makeLexer(tokens);
+lexer.ignore("ws", "comment");
+
+const getType = ([t]) => t.type;
+%}
+
+@lexer lexer
+
+S -> FUN LP name COMMA name COMMA name RP 
+      DO 
+        DO  END SEMICOLON 
+        DO END 
+      END
+     END
+
+name  ->      %identifier {% getType %}
+COMMA ->       ","        {% getType %}
+LP    ->       "("        {% getType %}
+RP    ->       ")"        {% getType %}
+END   ->      %end        {% getType %}
+DO    ->      %dolua      {% getType %}
+FUN   ->      %fun        {% getType %}
+SEMICOLON ->  ";"         {% getType %}
+```
+
+Alternatively, you can set to ignore some tokens in the call to `makeLexer`:
+
+```js
+let lexer = makeLexer(tokens, ["ws", "comment"]);
+```
+
+Or you can also combine both ways:
+
+```js
+let lexer = makeLexer(tokens, ["ws"]);
+lexer.ignore("comment");
+```
+
+For sake of completeness, here is the contents of the file `tokens.js` we have used in the former code:
+
+```js
+const { moo } = require("moo-ignore");
+
+module.exports = {
+    ws: { match: /\s+/, lineBreaks: true },
+    comment: /#[^\n]*/,
+    lp: "(",
+    rp: ")",
+    comma: ",",
+    semicolon: ";",
+    identifier: {
+        match: /[a-z_][a-z_0-9]*/,
+        type: moo.keywords({
+            fun: "fun",
+            end: "end",
+            dolua: "do"
+        })
+    }
+}
+```
+
+See the [tests](https://github.com/ULL-ESIT-PL/moo-ignore/tree/main/test) folder in this distribution for more examples of use. Here is a program that tests the former example:
+
+```js
+const nearley = require("nearley");
+const grammar = require("./test-grammar.js");
+
+let s = `
+fun (id, idtwo, idthree)  
+  do   #hello
+    do end;
+    do end # another comment
+  end 
+end`;
+
+try {
+  const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
+  parser.feed(s);
+  console.log(parser.results[0]) /* [ 'fun', 'lp', 'identifier', 'comma',
+          'identifier', 'comma', 'identifier', 'rp',
+          'dolua',      'dolua', 'end', 'semicolon',
+          'dolua',      'end', 'end', 'end' */
+} catch (e) {
+    console.log(e);
+}
+```
+
+### moo-ignore: The eof option. Emitting a token to signal the End Of File
+
+The last  argument of `makeLexer` is an object with configuration options:
+
+```js
+let lexer = makeLexer(Tokens, [ tokens, to, ignore ], { options });
+```
+
+
+Currently, the only `option` supported in this version is `eof`. 
+
+Remember that lexers generated by moo emit `undefined` when the end of the input is reached. This option changes this behavior.
+
+If the option `{ eof : true }` is specified,  and a token with the name `EOF: "termination string"` appears in the tokens specification, `moo-ignore` will concat the `"termination string"`  at the end of the input stream. 
+
+```js
+const { makeLexer } = require("moo-ignore");
+const Tokens = {
+  EOF: "__EOF__",
+  WHITES: { match: /\s+/, lineBreaks: true },
+  /* etc. */
+};
+
+let lexer = makeLexer(Tokens, ["WHITES"], { eof: true });
+```
+
+The generated lexer will emit this `EOF` token when the end of the input is reached. 
+
+Inside your grammar you'll have to explicit the use of the `EOF` token. Something like this:
+
+```js
+@{%
+const { lexer } = require('./lex.js');
+%}
+@lexer lexer
+program -> expression %EOF {% id %}
+# ... other rules
+```
