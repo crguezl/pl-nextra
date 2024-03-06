@@ -57,6 +57,11 @@ video20240305:
   description: "Clase del 05/03/2024. Function expressions: syntax and translation"
   url: "https://youtu.be/rhJGaW3dcSM"
   id: "rhJGaW3dcSM"
+video20240306:
+  date: "06/03/2024"
+  description: "Clase del 06/03/2024. Nested calls"
+  url: "https://youtu.be/rRuiCVzwP78"
+  id: "rRuiCVzwP78"
 ---
 import {Link, frontmatter} from '@/src/frontmatter'
 import RelatedLabs from '@/components/related-labs'
@@ -76,6 +81,11 @@ import { videos, videos23, video20240227 } from '@/src/labs/scope-intro'
 ## Videos
 
 ### Lab functions
+
+{frontmatter().video20240306.description}:
+
+<Videos ids={[frontmatter().video20240306.id]}></Videos>
+
 
 {frontmatter().video20240305.description}:
 
