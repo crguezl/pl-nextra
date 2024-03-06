@@ -13,7 +13,8 @@ import { Callout } from 'nextra/components'
 
 <Callout type="info" emoji="️🎓"> 
 
-A fact of interest is that the extension of the operations can lead to rethinking the syntax. For example, why not extend the call syntax to allow calls of the form `(f+g*h)(x)(y)`?
+A fact of interest is that the extension of the arithmetics operations you have made on this lab can lead to rethinking a bit the syntax. For example, why not extend the call syntax to allow calls of the form `(f+g*h)(x)(y)`
+or `(f+3)(x)`?
 
 For example, given the login program:
 
@@ -47,13 +48,13 @@ print(
 Which when executed gives rise to:
 
 ```
-➜ functions-solution git:(extendedcalls) ✗ bin/calc2js.mjs test/data/input/test-fun-call.calc | do not give
+➜ functions-solution git:(extendedcalls) ✗ bin/calc2js.mjs test/data/input/test-fun-call.calc | node -
   -
 { re: 9, im: 0 }
 ```
 </Callout>
 
-Extend your grammar to support this new syntax: after an expression between parenthesis can follow a call. 
+Extend your grammar to support this new syntax: **after an expression between parenthesis can follow calls**. 
 The use of parenthesis is needed to avoid ambiguities and conflicts in the grammar.
 
 ## Tests
