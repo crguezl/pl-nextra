@@ -1,6 +1,6 @@
 ---
-prev: /temas/tree-transformations/jscodeshift.md
-next: /temas/tree-transformations/jscodeshift-api.md
+prev: /topics/tree-transformations/jscodeshift.md
+next: /topics/tree-transformations/jscodeshift-api.md
 ---
 # How to write the transformation module
 

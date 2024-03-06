@@ -1,3 +1,22 @@
+# El AST para el ejemplo array.egg
+
+```ruby
+➜  prefix-lang git:(master) ✗ cat test/examples/array.egg 
+do(
+  def(x, arr(arr(1,4),5,7)),
+  print([](x,0)), # [1,4]
+  print([](x,1))  # 5
+)
+```
+
+El ejecutable ` bin/eggc.js` deberá producir un fichero JSON con el ast:
+
+```
+✗ bin/eggc.js test/examples/array.egg -o test/ast/array.json
+```
+
+Puede ver los contenidos del ast:
+
 ```json
 {
   "type": "apply",

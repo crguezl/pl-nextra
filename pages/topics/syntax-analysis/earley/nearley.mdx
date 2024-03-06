@@ -3,7 +3,8 @@ title: Parsing with Nearley.js
 clases: [ '2021/05/10', '2021/05/05', '2021/05/04', '2021/05/03', '2021/04/28' ]
 sidebar: auto
 ---
-
+import Youtube from '@/components/youtube'
+import { Callout } from 'nextra/components'
 
 ## Introduction to Nearley.js
 
@@ -62,7 +63,10 @@ expression ->
   | number "/" number
 ```
 
-::: warning Empty String 
+<Callout type="warning">
+
+**Empty String**
+
 The keyword `null` stands for the **epsilon rule** $\epsilon$, which matches nothing. The
 following nonterminal matches zero or more `cow`s in a row, such as
 `cowcowcow`:
@@ -70,7 +74,7 @@ following nonterminal matches zero or more `cow`s in a row, such as
 ```
 a -> null | a "cow"
 ```
-::: 
+</Callout>
 
 ### Postprocessors
 
@@ -177,13 +181,16 @@ Here,
 - `location: number` is the index (zero-based) at which the rule match starts.
   You might use this to show the location of an expression in an error message.
 
-  ::: warning Better forget
+  <Callout type="warning">
+  
+  **Better forget**
+
   Note: Many [tokenizers](tokenizers) provide line, column, and offset
   information in the Token object. If you are using a tokenizer, then it is
   better to use that information than the nearley-provided variable, which
   would only tell you that it saw the nth _token_ rather than the nth
   _character_ in the string.
-  :::
+  </Callout>
 
 - `reject: Object` is a unique object that you can return to signal that this
   rule doesn't *actually* match its input.
@@ -204,10 +211,13 @@ Here,
       }
   %}
   ```
-  ::: warning Reject is slow 
+  <Callout type="warning">
+  
+  **Reject is slow**
+
   Grammars using `reject` are not context-free, and are often much
   slower to parse. 
-  ::: 
+  </Callout> 
 
 nearley provides one built-in postprocessor:
 
@@ -422,9 +432,10 @@ try {
 
 ## Performance of NearleyJS
 
+
 This study by Toby Ho shows a case in which NearleyJS is 200 times slower than a Recursive Descendant Functional parser :disappointed:.
 
-<youtube id="njWmVljrhEE"></youtube> 
+<Youtube id="njWmVljrhEE"></Youtube> 
 
 ## The Earley Algorithm
 

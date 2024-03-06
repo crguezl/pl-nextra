@@ -1,6 +1,6 @@
 ---
-prev: /temas/tree-transformations/jscodeshift-api.md
-next: /temas/tree-transformations/jscodeshift.md
+prev: /topics/tree-transformations/jscodeshift-api.md
+next: /topics/tree-transformations/jscodeshift.md
 ---
 # Unit Testing jscodeshift Transformations
 

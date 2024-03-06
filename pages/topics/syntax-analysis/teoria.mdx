@@ -18,9 +18,10 @@ apply: /* vacio */
 
 Sólo hay dos variables sintácticas $V = \{ expression, \, apply \}$. El símbolo de arranque $S$ es $expression$.
 
-El conjunto de tokens es:
+El conjunto de tokens es: 
 
-$\Sigma = \{ STRING,\, NUMBER,\, WORD,\, '(',\, ')',\, ','  \}$
+$\Sigma = \{ STRING , NUMBER, WORD, (, ), `,' \}$
+
 
 Observe que algunos de los tokens son a su vez lenguajes de cierta complejidad, cuya definición está en otro nivel de abstracción, **el nivel léxico** y que se pueden definir mediante un mecanismo 
 mas secillo como son las expresiones regulares. 
@@ -260,4 +261,4 @@ See the code in the repo [crguezl/js-lexical-ambiguity](https://github.com/crgue
 
 ## The Design of Programming Languages
 
-See section [The Design of Programming Languages](/temas/syntax-analysis/the-design-of-programming-languages)
+See section [The Design of Programming Languages](/topics/syntax-analysis/the-design-of-programming-languages)

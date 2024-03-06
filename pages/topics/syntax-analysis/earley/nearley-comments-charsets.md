@@ -1,3 +1,7 @@
+---
+title: "Comments and charsets and Case Insensitive Strings in Nearley.JS"
+---
+
 ### More syntax: tips and tricks
 
 #### Comments

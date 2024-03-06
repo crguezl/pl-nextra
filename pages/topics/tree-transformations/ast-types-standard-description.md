@@ -1,6 +1,6 @@
 ---
-prev: "/temas/tree-transformations/jscodeshift-recast.md"
-next: "/temas/tree-transformations/jscodeshift-recast.md"
+prev: "/topics/tree-transformations/jscodeshift-recast.md"
+next: "/topics/tree-transformations/jscodeshift-recast.md"
 ---
 
 # Understanding the AST Types API
@@ -173,4 +173,4 @@ PrintResult {
 * [def/core.ts](https://github.com/benjamn/ast-types/blob/master/src/def/core.ts)
 * [ast-types](https://github.com/benjamn/ast-types) 
 * [Rasengar AST-builder](https://rajasegar.github.io/ast-builder/)
-* [More references about tree transformations](/temas/tree-transformations/tree-transformations-references.html#jscodeshift)
+* [More references about tree transformations](/topics/tree-transformations/tree-transformations-references.html#jscodeshift)

@@ -1,6 +1,6 @@
 ---
 prev: jscodeshift-transformation-module.md
-next: /temas/tree-transformations/jscodeshift.md
+next: /topics/tree-transformations/jscodeshift.md
 ---
 # The jscodeshift API
 

@@ -1,20 +1,10 @@
 ---
 title: The Earley Algorithm Explained
 sidebar: auto
-next: /temas/syntax-analysis/earley/nearley.md
+next: /topics/syntax-analysis/earley/nearley.md
 ---
-<!-- KatEX example
 
-# This is a markdown file
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/github-markdown-css/2.2.1/github-markdown.css"/>
-
-a formula $J \left( \theta_0, \theta_1 \right) = \frac{1}{2m}\sum\limits_{i=1}^m \left( h_{\theta}(x^{(i)})-y^{(i)} \right)^{2}$ and more text
--->
-
-# {{ $frontmatter.title }}
+import Youtube from '@/components/youtube'
 
 Let be a grammar $G = (\Sigma, V, P, Start)$ and $x$ an input sequence of tokens $x = a_{1}a_{2} \ldots a_{n}$.
 
@@ -337,11 +327,11 @@ The state `{P → S ● }, from: 0` represents a completed parse. This state als
 
 Toby Ho illustrates step by step the algorithm.
 
-<youtube id="WNKw1tiskSM"></youtube>
+<Youtube id="WNKw1tiskSM"></Youtube>
 
 ## Video on "Earley Parsing" by Natalie Parde
 
-<youtube id="1j6hB3O4hAM"></youtube>
+<Youtube id="1j6hB3O4hAM"></Youtube>
 
 
 ## "Early Parser" in the Wikipedia
@@ -364,7 +354,7 @@ See repo [lagodiuk/earley-parser-js](https://github.com/lagodiuk/earley-parser-j
 
 The implementation is in file [earley-oop.js](https://github.com/lagodiuk/earley-parser-js/blob/master/earley-oop.js).
 
-A fork of this repo for ULL-ESIT-PL is in <https://github.com/ULL-ESIT-PL/earley-parser-js>
+A fork of this repo for ULL-ESIT-PL is in https://github.com/ULL-ESIT-PL/earley-parser-js
 
 ### Others
 

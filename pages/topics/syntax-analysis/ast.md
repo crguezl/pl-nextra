@@ -295,4 +295,4 @@ The language [jq](https://stedolan.github.io/jq/manual/) to select sub-objects i
 
 ## References
 
-* [Códigos para la Construcción de los ASTs de Egg con un algoritmo PDR](/temas/syntax-analysis/analisis-descendente-predictivo-recursivo/egg-parsers-ast)
+* [Códigos para la Construcción de los ASTs de Egg con un algoritmo PDR](/topics/syntax-analysis/analisis-descendente-predictivo-recursivo/egg-parsers-ast)

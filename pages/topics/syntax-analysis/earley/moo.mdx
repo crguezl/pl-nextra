@@ -123,7 +123,7 @@ See repo [ULL-ESIT-PL/moo-examples](https://github.com/ULL-ESIT-PL/moo-examples)
 
 A moo lexer object is a [Generator](https://javascript.info/generators), you can use `filter()` and `map()` which are built-in to JavaScript. 
 
-See moo issue: <https://github.com/no-context/moo/issues/156>
+See moo issue: [no-context/moo/issues/156](https://github.com/no-context/moo/issues/156)
 
 ```js 
 const moo = require('moo')
@@ -214,12 +214,17 @@ No longer white spaces:
 
 See file [ULL-ESIT-PL/moo-examples/skip-spaces.js](https://github.com/ULL-ESIT-PL/moo-examples/blob/main/skip-spaces.js) for the full code.
 
-::: danger Not a Solution for Nearley.JS
+import { Callout } from 'nextra/components'
+
+<Callout type="error"> 
+
+**Not a Solution for Nearley.JS**
+
 The trick above does not work to build a lexer with token-skip for Nearley.js.
 Regrettably, Nearley.JS imposes the restrictions specified in section 
 [Writing a Custom lexer for Nearley](#writing-a-custom-lexer-for-nearley) and
 requires a Moo compatible lexer. That means **we have to wrap the returned array in a lexer complaining with a Moo-like API**!
-:::
+</Callout>
 
 
 ## moo-ignore

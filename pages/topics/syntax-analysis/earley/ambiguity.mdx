@@ -6,15 +6,13 @@ drive: "https://drive.google.com/file/d/18kRZAQyZemvkSctO32tJ-542Vc5zstNQ/view?u
 summary:  "Let's continue with Nearley.JS"  
 ---
 
-# {{ $frontmatter.title }}
-
-## ambiguous.ne
+## File ambiguous.ne
 
 ```
 ➜  ambiguous git:(main) ✗ cat ambiguous.ne
 ```
 
-```js
+```js filename="ambiguous.ne" showLineNumbers
 @{%
 const { makeLexer } = require("moo-ignore");
 const tokens = require('./tokens.js')
@@ -190,9 +188,9 @@ _ -> [\s]:*     {% function(d) {return null; } %}
 
 ## References
 
-* See the examples at <https://github.com/ULL-ESIT-PL/learning-nearley/tree/develop/examples>
+* See the examples at https://github.com/ULL-ESIT-PL/learning-nearley/tree/develop/examples
 * [Examples](https://github.com/ULL-ESIT-PL/learning-nearley/tree/develop/examples)
 * [Esquemas de Traducción y Definiciones Dirigidas por la Sintaxis](https://crguezl.github.io/pl-html/node58.html)
 * [Compiler Theory:Syntax-Directed Translation](https://www.csd.uwo.ca/~mmorenom/CS447/Lectures/Translation.html/Translation.html) by Marc Moreno Maza
-* [Nearley.js](/temas/syntax-analysis/earley/nearley)
-* [The Earley Algorithm](/temas/syntax-analysis/earley/algorithm)
+* [Nearley.js](/topics/syntax-analysis/earley/nearley)
+* [The Earley Algorithm](/topics/syntax-analysis/earley/algorithm)

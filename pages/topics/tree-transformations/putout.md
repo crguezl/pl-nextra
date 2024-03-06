@@ -758,7 +758,7 @@ See section [Architecture](architecture)
 
 ## Built-in Transformations
 
-See section [Built-in Transformations](/temas/tree-transformations/putout-builtin-transformations)
+See section [Built-in Transformations](/topics/tree-transformations/putout-builtin-transformations)
 
 ## References
 

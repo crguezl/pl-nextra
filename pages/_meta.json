@@ -211,6 +211,16 @@
         "href": "https://nextra.vercel.app/",
         "newWindow": true
       },
+      "nearley": {
+        "title": "Nearley",
+        "href": "https://nearley.js.org/",
+        "newWindow": true
+      },
+      "moo-ignore": {
+        "title": "Moo Ignore",
+        "href": "https://www.npmjs.com/package/moo-ignore",
+        "newWindow": true
+      },
       "ChatULL": {
         "title": "Chat ULL (TFG Jonay)",
         "href": "https://chatull.pages.dev",

@@ -1,3 +1,3 @@
 <ul>
-<li><a href="/temas/introduction-to-pl">Introducción a PL</a></li>
+<li><a href="/topics/introduction-to-pl">Introducción a PL</a></li>
 </ul>

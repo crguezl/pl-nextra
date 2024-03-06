@@ -1,6 +1,6 @@
 ---
-prev: /temas/tree-transformations/jscodeshift-recast.md
-next: /temas/tree-transformations/jscodeshift-transformation-module.md
+prev: /topics/tree-transformations/jscodeshift-recast.md
+next: /topics/tree-transformations/jscodeshift-transformation-module.md
 ---
 
 # jscodeshift 
