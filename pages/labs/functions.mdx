@@ -29,8 +29,8 @@ rubrica:
   - Ha añadido tests suficientes, documentación y cubrimiento
   - "Se publica la documentación usando un static generator, API docs y Covering" 
   - Se ha añadido el enlace a las GH pages en el "About" del repo
-  - Si se han usado herramientas AI se deberá  incluir en el <code>README.md</code> una sección sobre como fueron utilizadas. En caso contrario se debe declarar que no se han usado.
-  - El alumno se ha comprometido a no hacer uso de la IA que pueda impedir su crecimiento académico personal o pueda impedirle comprender los conceptos de esta práctica
+  - Si se han usado herramientas AI se deberá  <b>incluir en el <code>README.md</code> una sección sobre como fueron utilizadas. En caso contrario se debe declarar que no se han usado</b>.
+  - En la misma sección el alumno indicará su compromiso a no hacer uso de la IA que pueda impedir su crecimiento académico personal o impedirle comprender los conceptos de esta práctica
 
 video20230308:
   date: "08/03/2023"
@@ -640,7 +640,7 @@ For example, we could
 decide that two logical values can be checked for equal but cannot be added,
 so this program:
 
-```js
+```js showLineNumbers {3} filename="test/data/input/test-logic2.calc"
 b = false == false,
 print(b), #true
 c = true + true # error
@@ -648,7 +648,7 @@ c = true + true # error
 
 would result in output like this:
 
-```
+```bash showLineNumbers {2} 
 ✗ bin/calc2js.mjs test/data/input/test-logic2.calc | do not give -
 true
 Error. Unsupported operator "+" for type boolean
