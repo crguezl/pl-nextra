@@ -37,7 +37,27 @@ temas:
     href: https://github.com/ULL-ESIT-PL/learning-nearley/
   - text: "Lexical Analysis with moo"
     href: "/topics/syntax-analysis/earley/moo"
-videos: 
+videos: [ "9J0XelSTOhI?si=r9EjIc9L1x6daK1L", "pt7k_ZyOYXE?si=pq1Pwa8ajUqJVioz", "Y7f87gn8B3s?si=LZbezF1AxcZmyyr_", "kbSFcqni__0?si=WVkTrYLf7YN7HSNH"]
+video20230329:
+  date: "2023/03/29"
+  id: "9J0XelSTOhI?si=r9EjIc9L1x6daK1L"
+  url: "https://youtu.be/9J0XelSTOhI?si=r9EjIc9L1x6daK1L"
+  comment: "ASTs for Egg. Lexical Analysis with moo-ignore. Introduction to Nearley.js"
+video20230410:
+  date: "2023/04/10"
+  url: "https://youtu.be/pt7k_ZyOYXE?si=pq1Pwa8ajUqJVioz"
+  id: "pt7k_ZyOYXE?si=pq1Pwa8ajUqJVioz"
+  comment: "Parsing Egg. More on Nearley.js"
+video20230411:
+  date: "2023/04/11"
+  url: "https://youtu.be/Y7f87gn8B3s?si=LZbezF1AxcZmyyr_"
+  id: "Y7f87gn8B3s?si=LZbezF1AxcZmyyr_"
+  comment: "Building the Egg ASTs. White management in moo. The Earley algorithm"
+video20230412:
+  date: "2023/04/12"
+  url: "https://youtu.be/kbSFcqni__0?si=WVkTrYLf7YN7HSNH"
+  id: "kbSFcqni__0?si=WVkTrYLf7YN7HSNH"
+  comment: "The Earley algorithm"
 ---
 import { Callout } from 'nextra/components'
 import Videos from '@/components/videos'
@@ -204,7 +224,12 @@ Añada el informe de Covering también (directorio `docs/covering` o similar).
 
 ## Videos
 
-<Videos ids={[frontmatter().videos]}></Videos>
+<Videos ids={frontmatter().videos}></Videos>
+
+- Vídeo {frontmatter().video20230329.date}: {frontmatter().video20230329.comment}
+- Vídeo {frontmatter().video20230410.date}: {frontmatter().video20230410.comment}
+- Vídeo {frontmatter().video20230411.date}: {frontmatter().video20230411.comment}
+- Vídeo {frontmatter().video20230412.date}: {frontmatter().video20230412.comment}
 
 ## Rubric
 

@@ -1,4 +1,19 @@
 {
+  "egg-parser": {
+    "type": "menu",
+    "title": "Egg Parser",
+    "display": "normal",
+    "items": {
+      "Objetivos": { "href": "#objetivos", "title": "Objetivos" },
+      "Publicación del módulo": { "href": "#publicación-del-módulo", "title": "Publicación del módulo" },
+      "Pruebas": { "href": "#pruebas", "title": "Pruebas"},
+      "Informe y Documentación": { "href": "#informe-y-documentación", "title": "Informe y Documentación" },
+      "Videos": { "href": "#videos", "title": "Videos" },
+      "Rubric": { "href": "#rubric", "title": "Rubric" },
+      "{frontmatter().key} Repos": { "href": "#frontmatterkey-repos", "title": "Repos" },
+      "References": { "href": "#references", "title": "References" }
+    }
+  },
   "functions": {
     "type": "menu",
     "title": "Functions",
