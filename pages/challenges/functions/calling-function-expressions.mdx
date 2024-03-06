@@ -9,17 +9,15 @@ import { Callout } from 'nextra/components'
 
 # Challenge for lab {frontmatter().practica}
 
-## Objetivo
+## Goal
 
 <Callout type="info" emoji="️🎓"> 
 
-**Rethink your Syntax**
-
-Another fact of interest is that the extension of the operations can lead to rethinking the syntax. For example, why not extend the call syntax to allow calls of the form `(f+g*h)(x)(y)`?
+A fact of interest is that the extension of the operations can lead to rethinking the syntax. For example, why not extend the call syntax to allow calls of the form `(f+g*h)(x)(y)`?
 
 For example, given the login program:
 
-```js showLineNumbers {3}
+```js showLineNumbers {3} filename="test/data/input/test-fun-call.calc"
 f = fun(x) { x+1 },
 g = fun(x) { x+2 },
 print((f+g)(3)) # 9
@@ -55,7 +53,8 @@ Which when executed gives rise to:
 ```
 </Callout>
 
+Extend your grammar to support this new syntax.
 
-## Pruebas
+## Tests
 
-Añada pruebas para la nueva funcionalidad.
+Add tests for the new functionality.
