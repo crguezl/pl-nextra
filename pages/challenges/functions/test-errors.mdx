@@ -1,3 +1,6 @@
+---
+title: Testing wrong input programs
+---
 The goal of this challenge is to extend the testing to programs with errors.
 Consider this program:
 
@@ -15,7 +18,7 @@ Parse error on line 1:
 Expecting '-', '+', '*', '/', ')', '**', '!', got EOF
 ```
 
-Add a file `test/test-error-description.js` with the description of those tests that produce an error when compiled:
+Follow the same scheme we have used for correct programs and add a file `test/test-error-description.js` with the description of those tests that produce an error when compiled:
 
 ```js filename="test/test-error-description.js" showLineNumbers
 module.exports = [
@@ -54,7 +57,7 @@ for (let i = 0; i < Test.length; i++) {
 }
 ```
 
-So that you can run the tests producing errors with:
+Fill the missing code so that you can run the tests producing errors with:
 
 ```
 arith2js-solution git:(main) npx mocha test/test-error.js 
