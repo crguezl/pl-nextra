@@ -1,0 +1,63 @@
+The goal of this challenge is to extend the testing to programs with errors.
+Consider this program:
+
+```js filename="test/data/test-err.calc" 
+2*(-3!!
+```
+
+That correctly produces the following error to `stderr`:
+
+```js
+➜  arith2js-solution git:(main) bin/calc2js.mjs test/data/test-err.calc 
+Parse error on line 1:
+2*(-3!!
+-------^
+Expecting '-', '+', '*', '/', ')', '**', '!', got EOF
+```
+
+Add a file `test/test-error-description.js` with the description of those tests that produce an error when compiled:
+
+```js filename="test/test-error-description.js" showLineNumbers
+module.exports = [
+  {
+    input: 'test-err.calc',
+    output: 'outerr.txt',
+    expected: 'correcterr.txt',
+  },
+  ...
+];
+```
+
+and add a test file `test-error.js` that uses the `test-error-description.js` file to test the error messages produced by the compiler.
+
+```js filename="test/data/input/test-error.js" showLineNumbers
+const transpile = require("../src/transpile.js");
+const assert = require('assert');
+const fs = require("fs/promises");
+
+const Tst = require('./test-error-description.js');
+
+const Test = Tst.map(t => ({
+  input: __dirname + '/data/' + t.input,
+  output: __dirname + '/data/' + t.output,
+  expected: __dirname + '/data/' + t.expected,
+  correctOut: __dirname + '/data/' + t.correctOut,
+})
+)
+
+// Fill the code of any support functions you need
+
+for (let i = 0; i < Test.length; i++) {
+  it(`transpile(${Tst[i].input}, ${Tst[i].output})`, async () => {
+     // Fill the code
+  });
+}
+```
+
+So that you can run the tests producing errors with:
+
+```
+arith2js-solution git:(main) npx mocha test/test-error.js 
+✔ transpile(test-err.calc, outerr.txt)
+```
+
