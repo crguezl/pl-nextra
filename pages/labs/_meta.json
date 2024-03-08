@@ -4,14 +4,14 @@
     "title": "Egg Parser",
     "display": "normal",
     "items": {
-      "Objetivos": { "href": "#objetivos", "title": "Objetivos" },
-      "Publicación del módulo": { "href": "#publicación-del-módulo", "title": "Publicación del módulo" },
-      "Pruebas": { "href": "#pruebas", "title": "Pruebas"},
-      "Informe y Documentación": { "href": "#informe-y-documentación", "title": "Informe y Documentación" },
-      "Videos": { "href": "#videos", "title": "Videos" },
-      "Rubric": { "href": "#rubric", "title": "Rubric" },
-      "{frontmatter().key} Repos": { "href": "#frontmatterkey-repos", "title": "Repos" },
-      "References": { "href": "#references", "title": "References" }
+      "Objetivos": { "href": "/labs/egg-parser#objetivos", "title": "Objetivos" },
+      "Publicación del módulo": { "href": "/labs/egg-parser#publicación-del-módulo", "title": "Publicación del módulo" },
+      "Pruebas": { "href": "/labs/egg-parser#pruebas", "title": "Pruebas"},
+      "Informe y Documentación": { "href": "/labs/egg-parser#informe-y-documentación", "title": "Informe y Documentación" },
+      "Videos": { "href": "/labs/egg-parser#videos", "title": "Videos" },
+      "Rubric": { "href": "/labs/egg-parser#rubric", "title": "Rubric" },
+      "{frontmatter().key} Repos": { "href": "/labs/egg-parser#frontmatterkey-repos", "title": "Repos" },
+      "References": { "href": "/labs/egg-parser#references", "title": "References" }
     }
   },
   "functions": {
