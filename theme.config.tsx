@@ -6,10 +6,12 @@ import { Link } from 'nextra-theme-docs'
 const config: DocsThemeConfig = {
   banner: {
     key: 'functions',
-    text: (
-      <a href="/labs/functions#videos" target="_blank">
-        📄🖍️ Lab functions deadline is 07/03. Watch related videos →
+    text: (<span>
+      The midterm exam is delayed.
+      <a href="/labs/egg-parser#videos" target="_blank">
+        Lab egg-parser deadline is 14/03. Watch related videos →
       </a>
+    </span>
     )
   },
   logo: <span>
