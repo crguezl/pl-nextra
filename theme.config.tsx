@@ -7,9 +7,10 @@ const config: DocsThemeConfig = {
   banner: {
     key: 'functions',
     text: (<span>
-      The midterm exam is delayed.
+      Midterm exam is delayed. 
+      <a href="/clases/march/2024-03-11-leccion">Watch class 2024-03-11 →</a>. 
       <a href="/labs/egg-parser#videos" target="_blank">
-        Lab egg-parser deadline is 14/03. Watch related videos →
+        Lab egg-parser deadline is 14/03 →
       </a>
     </span>
     )

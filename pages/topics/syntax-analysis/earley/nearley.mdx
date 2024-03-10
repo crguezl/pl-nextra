@@ -90,7 +90,7 @@ For this purpose, each rule can have a **postprocessor**: a JavaScript function
 that transforms the array and returns a "processed" version of the result.
 Postprocessors are wrapped in `{% %}`s:
 
-```js
+```js filename="ULL-ESIT-PL/learning-nearley/examples/postprocessors-example.ne"
 expression -> number "+" number {%
     function(data) {
         return {
@@ -106,13 +106,13 @@ number -> [0-9]:+ {% d => parseInt(d[0].join("")) %}
 To compile it with nearley:
 
 ``` 
-➜  examples git:(main) ✗ nearleyc postprocessors-example.ne -o postprocessors-example.js 
+➜  examples git:(main) ✗ npx nearleyc postprocessors-example.ne -o postprocessors-example.js  
 ```
 
 and we can execute the resulting parser with `nearley-test`:
 
 ```
-➜  examples git:(main) ✗ nearley-test -i '5+10' postprocessors-example.js               
+➜  examples git:(main) ✗ npx nearley-test -i '5+10' postprocessors-example.js               
 Table length: 5
 Number of parses: 1
 Parse Charts
@@ -226,7 +226,7 @@ nearley provides one built-in postprocessor:
 
 ### More syntax: tips and tricks
 
-See [Comments and Charsets in Nearley.jss](nearley-comments-charsets)
+See [Comments and Charsets in Nearley.js](nearley-comments-charsets)
 
 
 #### EBNF: Repetitions and parenthesis

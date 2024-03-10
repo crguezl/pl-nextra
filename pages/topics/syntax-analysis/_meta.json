@@ -1,6 +1,6 @@
 {
-    "analysis-LR": "",
-    "ast": "",
+    "analysis-LR": "LR Analysis",
+    "ast": "Abstract Syntax Trees",
     "conflicts": "Solving LR Conflicts",
     "earley": "Earley Parsers",
     "teoria": "Gramáticas y Lenguajes"
