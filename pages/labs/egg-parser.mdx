@@ -61,6 +61,12 @@ video20230412:
   url: "https://youtu.be/kbSFcqni__0?si=WVkTrYLf7YN7HSNH"
   id: "kbSFcqni__0?si=WVkTrYLf7YN7HSNH"
   comment: "The Earley algorithm"
+video20240311:
+  date: "2024/03/11"
+  url: "https://youtu.be/d9ytm73tg-c"
+  id: "d9ytm73tg-c"
+  comment: "Retrasamos el examen parcial. El lenguaje Egg, ASTs para Egg, El generador de analizadores sintácticos Nearley.js, El generador de analizadores léxicos Moo. Moo-ignore"
+
 ---
 import { Callout } from 'nextra/components'
 import Videos from '@/components/videos'
@@ -225,6 +231,14 @@ Añada el informe de Covering también (directorio `docs/covering` o similar).
 * Asegúrese de producir mensajes de error significativos informando de los números de línea y columna correctos
 
 ## Videos
+
+### Lab egg-parser 2024
+
+{frontmatter().video20240311.comment}
+
+<Videos ids={[frontmatter().video20240311.id]}></Videos>
+
+### Videos Lab egg-parser 2023
 
 <Videos ids={frontmatter().videos}></Videos>
 
