@@ -176,6 +176,16 @@
     "title": "Tools",
     "type": "menu",
     "items": {
+      "nearley": {
+        "title": "Nearley",
+        "href": "https://nearley.js.org/",
+        "newWindow": true
+      },
+      "moo-ignore": {
+        "title": "Moo Ignore",
+        "href": "https://www.npmjs.com/package/moo-ignore",
+        "newWindow": true
+      },
       "ast-explorer": {
         "title": "AST Explorer",
         "href": "https://astexplorer.net/",
@@ -201,24 +211,14 @@
         "href": "/topics/introduction-to-pl/esprima#traversing-the-ast",
         "newWindow": true
       },
-      "estree/ES5": {
-        "title": "ESTree/ES5",
-        "href": "https://github.com/estree/estree/blob/master/es5.md",
+      "ast-types": {
+        "title": "ast-types",
+        "href": "https://github.com/benjamn/ast-types",
         "newWindow": true
       },
       "nextra": {
         "title": "Nextra",
         "href": "https://nextra.vercel.app/",
-        "newWindow": true
-      },
-      "nearley": {
-        "title": "Nearley",
-        "href": "https://nearley.js.org/",
-        "newWindow": true
-      },
-      "moo-ignore": {
-        "title": "Moo Ignore",
-        "href": "https://www.npmjs.com/package/moo-ignore",
         "newWindow": true
       },
       "ChatULL": {
