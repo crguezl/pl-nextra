@@ -7,7 +7,7 @@ const config: DocsThemeConfig = {
   banner: {
     key: 'functions',
     text: (<span>
-      Midterm exam is delayed. 
+      Midterm exam is Monday 01/04/2024. 
       <a href="/clases/march/2024-03-11-leccion">Watch class 2024-03-11 →</a>. 
       <a href="/labs/egg-parser#videos" target="_blank">
         Lab egg-parser deadline is 14/03 →
