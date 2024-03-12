@@ -13,20 +13,16 @@ prev: "constant-folding.md"
 next: 
 classroom: "https://classroom.github.com/classrooms/153934884-ull-esit-pl-2324/assignments/functions"
 rubrica:
-  - (Opcional) El paquete está publicado en GitHub Registry
-  - (Opcional) Se comprueba que el módulo npm se instala desde el GitHub Registry y funciona
-  - (Opcional) Probar que el ejecutable queda correctamente instalado, puede ser ejecutado con el nombre publicado y produce salidas correctas
+  - El paquete está publicado en GitHub Registry
+  - Se comprueba que el módulo npm se instala desde el GitHub Registry y funciona
+  - Probar que el ejecutable queda correctamente instalado, puede ser ejecutado con el nombre publicado y produce salidas correctas
   - "Opciones en línea de comandos (-o, -V, -h, etc.)"
-  - "Traduce correctamente las funciones"
-  - "Traduce correctamente las llamadas encadenadas"
-  - "Traduce correctamente las expresiones lógicas"
-  - Se declaran las variables inicializadas en el preámbulo de las funciones o del programa
-  - Da mensajes de error para variables no declaradas
-  - Los mensajes de error ayudan a la detección de errores
-  - Las operaciones aritméticas entre funciones son soportadas <code>(f+g)(x)</code> 
-  - Es posible operar una función con un número <code>(f+2)(x)</code>
-  - Los valores booleanos son soportados y se promueven a números y a funciones correctamente
-  - Los operadores de comparación son soportados
+  - "Traduce correctamente los bucles while"
+  - "Traduce correctamente las bucles for"
+  - "Traduce correctamente las strings"
+  - Las nuevas operaciones de strings y otros tipos son simétricas
+  - Los mensajes de error para operaciones sobre tipos incorrectos son adecuados
+  - Los operadores de comparación son soportados por las string
   - Ha añadido tests suficientes, documentación y cubrimiento
   - "Se publica la documentación usando un static generator, API docs y Covering" 
   - Se ha añadido el enlace a las GH pages en el "About" del repo
@@ -79,7 +75,7 @@ import { Callout } from 'nextra/components'
 import Videos from '@/components/videos'
 
 
-## Adding loops to the calculator
+## The `while` loop
 
 Queremos extender nuestra calculadora para que soporte bucles `while` con una sintáxis como la de este ejemplo:
 
@@ -92,9 +88,17 @@ while a < 10 {
 print(sum) # 285
 ```
 
-Cuando se llame a nuestro transpiler con la entrada anterior, se debe generar un programa JS equivalente a este:
+The `while` loop in our calculator has the following semantic:
 
-```js {5,12} /($a)/ showLineNumbers
+1. The `while` loop  **must be an expression and it returns the value of the last expression in the block**. 
+2. The block does not create a new scope.
+3. If the block is empty or the block in the loop is never executed, the value of the `while` loop is `false`.
+
+Notice the difficulty that arises on our translation since the JS `while` loop does not return a value. 
+
+When our transpiler is called with the above input, a JS program equivalent to this should be generated:
+
+```js {9-16} showLineNumbers filename="test/data/expectedjs/while-sum.js"
 ✗➜  functions-solution git:(while) bin/calc2js.mjs test/data/input/while-sum.calc 
 #!/usr/bin/env node
   const { Complex, print } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js"); 
@@ -126,7 +130,7 @@ That when executed gives:
 
 We also want to add a `for` loop to our calculator. The syntax will be like this:
 
-```js showLineNumbers
+```js showLineNumbers {2,4} /("a = "; a)/ /"  b = "; b/
 ➜  functions-solution git:(while) cat test/data/input/for-loop-nested-write.calc 
 for(a = 0; a < 5; a = a+1) {
   write("a = "; a),
@@ -136,9 +140,18 @@ for(a = 0; a < 5; a = a+1) {
 }
 ```
 
-When compiled, it should produce a program like this:
+The `for` loop in our calculator has the following semantic:
 
-```js
+1. The `for`loop **must be an expression and it returns the value of the last expression in the block**.
+2. The block does not create a new scope.
+3. If the block is empty or the block in the loop is never executed, the value of the `for` loop is `false`.
+
+In this lab you have also to extend the language with double quote delimited strings like the example `"a = "` above.
+Extend the `write` and `print` functions to accept multiple arguments separated by semicolons.
+
+When compiled, the former program should produce a JS program like this:
+
+```js showLineNumbers {8-25} filename="test/data/expectedjs/for-loop-nested-write.js"
 ➜  functions-solution git:(while) bin/calc2js.mjs test/data/input/for-loop-nested-write.calc 
 #!/usr/bin/env node
 const { Complex, write } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js"); 
@@ -150,7 +163,8 @@ let $a, $b;
     let result = false;
 
     for ($a = Complex("0"); $a.lessThan(Complex("5")); $a = $a.add(Complex("1"))) {
-        result = (write("a = ", $a), (() => {
+        result = (write("a = ", $a), 
+        (() => {
             let result = false;
 
             for ($b = Complex("0"); $b.lessThan($a); $b = $b.add(Complex("1"))) {
@@ -189,9 +203,9 @@ a =  4
 ## Strings
 
 
-Add strins to the language. allow the `+` operator to concatenate strings:
+Add strings to the language. Allow the `+` operator to be used to concatenate strings:
 
-```js  filename="test/data/input/string-add.calc" showLineNumbers
+```js  filename="test/data/input/string-add.calc" showLineNumbers /"a = " + a/  /"  b = " + b/
 for(a = 0; a < 5; a = a+1) {
   write("a = " + a),
   for(b = 0; b < a; b = b+1) {
@@ -201,7 +215,7 @@ for(a = 0; a < 5; a = a+1) {
 ```
 That can be translated to:
 
-```js  filename="test/data/actualjs/string-add.js" showLineNumbers
+```js  filename="test/data/actualjs/string-add.js" showLineNumbers /"a = ".add($a)/ /"  b = ".add($b)/
 ➜  functions-solution git:(while) bin/calc2js.mjs test/data/input/string-add.calc                   
 #!/usr/bin/env node
 const { Complex, write } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js"); 
@@ -251,7 +265,7 @@ a = 4
 
 The following program:
 
-```js showLineNumbers
+```js showLineNumbers {2-3} filename="test/data/input/string-string.calc"
 ➜  functions-solution git:(while) cat test/data/input/string-string.calc        
 print("a is "+ 4+2i),       # string + number
 print("a is "+ (4+2i)),     # string + number
@@ -260,9 +274,9 @@ print("a is "+ true),       # string + boolean
 print("a is "+ fun() { 1 }) # string + function
 ```
 
-produces:
+must produce an output like this:
 
-```js showLineNumbers
+```js showLineNumbers {2-3}
 ➜  functions-solution git:(while) bin/calc2js.mjs test/data/input/string-string.calc | node
 a is 42i
 a is 4 + 2i
@@ -273,10 +287,29 @@ a is function() {
 }
 ``` 
 
-Notices how you have to parenthesize the `(4+2i)` to get the expected result.
+Notices how you have to parenthesize the `(4+2i)` to get the expected result. 
+Our `+` operator for strings is not associative!
 
+## Symmetry
+
+Consider again the  **[symmetry](/labs/functions#language-symmetry)** problem for the `+` operator on strings. What about these expressions?:
+
+```js showLineNumbers
+4+2i+" is a complex number"
+true+" is a boolean"
+fun() { 1 }+" is a function"
+```
+
+Consider also the opportunity to add the `*`  operator to strings and numbers: `"a"*3` is `"aaa"` and must be the same as `3*"a"`.
+
+It makes sense to add a function and a string: `(f+"hello")(x) == ("hello"+f)(x) = (x => "hello"+(f(x)))`
+
+Think also about the relation of strings and comparison operators `<`, `>`, `<=`, `>=` and `==` etc.
+
+Be sure to produce appropriate error messages when the operators are used with incompatible types.
 
 ## Videos
+
 import {frontmatter} from '@/src/frontmatter'
 
 
