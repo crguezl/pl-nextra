@@ -1,4 +1,7 @@
 {
+  "while": {
+    "display": "hidden"
+  },
   "egg-parser": {
     "type": "menu",
     "title": "Egg Parser",

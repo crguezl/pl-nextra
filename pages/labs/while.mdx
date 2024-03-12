@@ -1,0 +1,393 @@
+---
+title: "Adding Loops to the Calculator"
+key: while
+published: true
+date: 2023/03/21
+delivery: 2023/03/30
+hidden: true
+campus: "https://campusingenieriaytecnologia2223.ull.es/mod/assign/view.php?id=28190&forceview=1"
+order: 12
+layout: Practica
+sidebar: auto
+prev: "constant-folding.md"
+next: 
+classroom: "https://classroom.github.com/classrooms/153934884-ull-esit-pl-2324/assignments/functions"
+rubrica:
+  - (Opcional) El paquete está publicado en GitHub Registry
+  - (Opcional) Se comprueba que el módulo npm se instala desde el GitHub Registry y funciona
+  - (Opcional) Probar que el ejecutable queda correctamente instalado, puede ser ejecutado con el nombre publicado y produce salidas correctas
+  - "Opciones en línea de comandos (-o, -V, -h, etc.)"
+  - "Traduce correctamente las funciones"
+  - "Traduce correctamente las llamadas encadenadas"
+  - "Traduce correctamente las expresiones lógicas"
+  - Se declaran las variables inicializadas en el preámbulo de las funciones o del programa
+  - Da mensajes de error para variables no declaradas
+  - Los mensajes de error ayudan a la detección de errores
+  - Las operaciones aritméticas entre funciones son soportadas <code>(f+g)(x)</code> 
+  - Es posible operar una función con un número <code>(f+2)(x)</code>
+  - Los valores booleanos son soportados y se promueven a números y a funciones correctamente
+  - Los operadores de comparación son soportados
+  - Ha añadido tests suficientes, documentación y cubrimiento
+  - "Se publica la documentación usando un static generator, API docs y Covering" 
+  - Se ha añadido el enlace a las GH pages en el "About" del repo
+  - Si se han usado herramientas AI se deberá  <b>incluir en el <code>README.md</code> una sección sobre como fueron utilizadas. En caso contrario se debe declarar que no se han usado</b>.
+  - En la misma sección el alumno indicará su compromiso a no hacer uso de la IA que pueda impedir su crecimiento académico personal o impedirle comprender los conceptos de esta práctica
+
+video20230308:
+  date: "08/03/2023"
+  description: "Clase del 08/03/2023. Se describe el soporte para scopes de ast-types"
+  id: "CR_GI81TFt0"
+
+video20230313:
+  date: "13/03/2023"
+  description: "Clase del 13/03/2023. Se describe el soporte de ast-types para el recorrrido y modificación de nodos (Métodos visit)"
+  url: "https://youtu.be/CR_GI81TFt0"
+  id: "CR_GI81TFt0"
+
+video20230322:
+  date: "22/03/2023"
+  description: "Clase del 22/03/2023. Hasta el minuto 25 se explica como realizar el examen parcial del curso 22/23. Le será muy útil para preparar  examenes. A partir del minuto 25 se explican las bases para la práctica functions"
+  url: "https://youtu.be/SfAIHgAqSuQ"
+  id: "SfAIHgAqSuQ"
+video20230327:
+  date: "27/03/2023"
+  description: "Clase del 27/03/2023. Se continúa la explicación de como realizar la práctica de funciones"
+  url: "https://youtu.be/DRP-_bmTdto"
+  id: "DRP-_bmTdto"
+video20230328:
+  date: "28/03/2023"
+  description: "Clase del 28/03/2023. Análisis de tipos en el lab. Lookup en el scope analysis. Soporte a las operaciones para los nuevos tipos. Nueva sintáxis para las calls"
+  url: "https://youtu.be/XpzNZJ-fwx8"
+  id: "XpzNZJ-fwx8"
+video20240304:
+  date: "04/03/2024"
+  description: "Clase del 04/03/2024. Consideraciones de diseño. Sintáxis de las expresiones función"
+  url: "https://youtu.be/d3RZTA3yzgo"
+  id: "d3RZTA3yzgo"
+video20240305:
+  date: "05/03/2024"
+  description: "Clase del 05/03/2024. Function expressions: syntax and translation. Calls"
+  url: "https://youtu.be/rhJGaW3dcSM"
+  id: "rhJGaW3dcSM"
+video20240306:
+  date: "06/03/2024"
+  description: "Clase del 06/03/2024. Nested calls. Scope analysis. Extending operations: type management"
+  url: "https://youtu.be/rRuiCVzwP78"
+  id: "rRuiCVzwP78"
+---
+import { Callout } from 'nextra/components'
+import Videos from '@/components/videos'
+
+
+## Adding loops to the calculator
+
+Queremos extender nuestra calculadora para que soporte bucles `while` con una sintáxis como la de este ejemplo:
+
+```js showLineNumbers {2-5} filename="test/data/input/while-sum.calc" 
+sum = a = 0,
+while a < 10 {
+  sum = sum + a * a,
+  a = a +1
+},
+print(sum) # 285
+```
+
+Cuando se llame a nuestro transpiler con la entrada anterior, se debe generar un programa JS equivalente a este:
+
+```js {5,12} /($a)/ showLineNumbers
+✗➜  functions-solution git:(while) bin/calc2js.mjs test/data/input/while-sum.calc 
+#!/usr/bin/env node
+  const { Complex, print } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js"); 
+/* End of support code */
+
+let $sum, $a;
+
+(  $sum = $a = Complex("0"), 
+   (() => {
+    let result = false;
+    while ($a.lessThan(Complex("10"))) {
+        result = ($sum = $sum.add($a.mul($a)), $a = $a.add(Complex("1")));
+    }
+
+    return result;
+    })()
+), 
+print($sum);
+``` 
+
+That when executed gives:
+
+```
+➜  functions-solution git:(while) bin/calc2js.mjs test/data/input/while-sum.calc | node
+{ re: 285, im: 0 }
+```
+
+## The `for` loop
+
+We also want to add a `for` loop to our calculator. The syntax will be like this:
+
+```js showLineNumbers
+➜  functions-solution git:(while) cat test/data/input/for-loop-nested-write.calc 
+for(a = 0; a < 5; a = a+1) {
+  write("a = "; a),
+  for(b = 0; b < a; b = b+1) {
+    write("  b = "; b)
+  }
+}
+```
+
+When compiled, it should produce a program like this:
+
+```js
+➜  functions-solution git:(while) bin/calc2js.mjs test/data/input/for-loop-nested-write.calc 
+#!/usr/bin/env node
+const { Complex, write } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js"); 
+  
+/* End of support code */
+let $a, $b;
+
+(() => {
+    let result = false;
+
+    for ($a = Complex("0"); $a.lessThan(Complex("5")); $a = $a.add(Complex("1"))) {
+        result = (write("a = ", $a), (() => {
+            let result = false;
+
+            for ($b = Complex("0"); $b.lessThan($a); $b = $b.add(Complex("1"))) {
+                result = write("  b = ", $b);
+            }
+
+            return result;
+        })());
+    }
+
+    return result;
+})();
+```
+
+When executed, it should produce:
+
+```
+➜  functions-solution git:(while) bin/calc2js.mjs test/data/input/for-loop-nested-write.calc | node 
+a =  0
+a =  1
+  b =  0
+a =  2
+  b =  0
+  b =  1
+a =  3
+  b =  0
+  b =  1
+  b =  2
+a =  4
+  b =  0
+  b =  1
+  b =  2
+  b =  3
+```
+
+## Strings
+
+
+Add strins to the language. allow the `+` operator to concatenate strings:
+
+```js  filename="test/data/input/string-add.calc" showLineNumbers
+for(a = 0; a < 5; a = a+1) {
+  write("a = " + a),
+  for(b = 0; b < a; b = b+1) {
+    write("  b = " + b)
+  }
+}  
+```
+That can be translated to:
+
+```js  filename="test/data/actualjs/string-add.js" showLineNumbers
+➜  functions-solution git:(while) bin/calc2js.mjs test/data/input/string-add.calc                   
+#!/usr/bin/env node
+const { Complex, write } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js"); 
+/* End of support code */
+let $a, $b;
+
+(() => {
+    let result = false;
+
+    for ($a = Complex("0"); $a.lessThan(Complex("5")); $a = $a.add(Complex("1"))) {
+        result = (write("a = ".add($a)), (() => {
+            let result = false;
+
+            for ($b = Complex("0"); $b.lessThan($a); $b = $b.add(Complex("1"))) {
+                result = write("  b = ".add($b));
+            }
+
+            return result;
+        })());
+    }
+
+    return result;
+})();
+```
+and when executed produces the expected output:
+
+```
+➜  functions-solution git:(while) bin/calc2js.mjs test/data/input/string-add.calc | node
+a = 0
+a = 1
+  b = 0
+a = 2
+  b = 0
+  b = 1
+a = 3
+  b = 0
+  b = 1
+  b = 2
+a = 4
+  b = 0
+  b = 1
+  b = 2
+  b = 3
+```
+
+## Plus Operator and Strings
+
+The following program:
+
+```js showLineNumbers
+➜  functions-solution git:(while) cat test/data/input/string-string.calc        
+print("a is "+ 4+2i),       # string + number
+print("a is "+ (4+2i)),     # string + number
+print("a is "+ "a letter"), # string + string
+print("a is "+ true),       # string + boolean
+print("a is "+ fun() { 1 }) # string + function
+```
+
+produces:
+
+```js showLineNumbers
+➜  functions-solution git:(while) bin/calc2js.mjs test/data/input/string-string.calc | node
+a is 42i
+a is 4 + 2i
+a is a letter
+a is true
+a is function() {
+    return Complex("1");
+}
+``` 
+
+Notices how you have to parenthesize the `(4+2i)` to get the expected result.
+
+
+## Videos
+import {frontmatter} from '@/src/frontmatter'
+
+
+
+## Pruebas, Covering e Integración Continua
+
+Escriba las pruebas, haga un estudio de cubrimiento usando [c8](https://github.com/bcoe/c8) y añada integración continua usando [GitHub Actions](/topics/introduction-to-javascript/github-actions).
+
+Lea las secciones [Testing with Mocha](/topics/introduction-to-javascript/mocha#mocha) y [Jest](/topics/introduction-to-javascript/jest).
+
+### Avoiding the preamble in the tests
+
+In your template for the code generation, use a special string like `\n/* End of support code */\n\n` to mark the end of the preamble and the beginning of the generated code. 
+
+```js
+const { {{ dependencies }} } = require("{{root}}/src/support-lib.js");
+
+/* End of support code */
+
+{{code}}
+```
+
+Then in your tests, use a funtion like the following to remove the preamble by 
+using a regexp that removes from the beginning to the from the generated code:
+
+```js
+function removeDependencies(s) {
+  const REGULAR_SEPARATION = /^(.|\n)*\n\/\* End of support code \*\/\n\n/
+  const pruned = s.replace(REGULAR_SEPARATION, '')
+
+  return removeSpaces(pruned);
+}
+```
+
+then you can use it in your tests removing the preamble from both the expected and the actual output:
+
+```js
+for (let i = 0; i < Test.length; i++) {
+  it(`transpile(${Tst[i].input}, ${Tst[i].actualjs}) (No errors: ${Boolean(Tst[i].expectedout)})`, async () => {
+    let actualjs = await transpile(Test[i].input, Test[i].actualjs);  
+    let expectedjs = fs.readFileSync(Test[i].expectedjs, 'utf-8')
+
+    let trimActualJS = removeDependencies(actualjs)
+    let trimExpectedJS = removeDependencies(expectedjs)
+    assert.equal(trimActualJS, trimExpectedJS);
+  });
+}
+```
+
+## Publishing a package to the GitHub Registry
+
+See the chapter [Publishing a package to the GitHub Registry](/topics/introduction-to-javascript/creating-and-publishing-npm-module#publishing-a-package-to-the-github-registry) and the sections
+
+* [Configure npm](/topics/introduction-to-javascript/creating-and-publishing-npm-module#configure-npm)
+* [What are scopes?](/topics/introduction-to-javascript/creating-and-publishing-npm-module#what-are-scopes)
+* [What is Github Registry?](/topics/introduction-to-javascript/creating-and-publishing-npm-module#what-is-github-registry)
+* [Other ways to set the Scope](http://localhost:3000/topics/introduction-to-javascript/creating-and-publishing-npm-module#other-ways-to-set-the-scope)
+
+One  way to set GitHub as the registry is to add a `publishConfig` field to your `package.json` file
+
+```json filename="package.json"
+{
+  "name": "@ull-esit-pl-2324/functions-name-ape1-ape2-aluXXX",
+  "version": "1.2.0",
+  "description": "A lab for PL. Adding Functions to our Calculator",
+  "main": "src/transpile.js",
+  "bin": {
+    "calc2js": "./bin/calc2js.js"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  ...
+}
+```
+
+## Documentación
+
+[Documente](/topics/introduction-to-javascript/documentation)
+el módulo incorporando un `README.md` y la documentación de la función exportada usando [JsDoc](/topics/introduction-to-javascript/documentation).
+Lea la sección [Documenting the JavaScript Sources](/topics/introduction-to-javascript/creating-and-publishing-npm-module#documenting-the-javascript-sources)
+
+## Rubric
+
+import Rubric from '@/components/rubric'
+
+<Rubric rubric={frontmatter().rubrica} />
+
+## {frontmatter().key} Repos
+
+import ReposForLab from '@/components/repos-for-lab'
+
+<ReposForLab lab={frontmatter().key} />
+
+
+## References
+
+* COMP442/6421 - Compiler Design - week 8 - AST traversal using the Visitor pattern. Concordia University, Montreal , Canada. 2022
+  *  <Videos ids={["enG0blJXbaY"]}></Videos>
+* Compiler Design Module 34 : Semantic Analysis Introduction to Scope. IITI Delhi. Compiler AI Labs. 2020
+  *  <Videos ids={["-OTt9IRBJKw?si=jSgET5RhS4-gXla6"]}></Videos>
+* Compiler Design Module 35 : Semantic Analysis as Recursive Descent over AST. IITI Delhi. Compiler AI Labs. 2020
+  *  <Videos ids={["PNS7nxSi608"]}></Videos>
+* [ast-types](/topics/tree-transformations/ast-types): See the scope section
+* [recast](/topics/tree-transformations/jscodeshift-recast) 
+
+### Polymorphism
+
+See the notes by Casiano Rodríguez León. 2011:
+
+1. [Sobrecarga, Polimorfismo e Inferencia de Tipos](https://campusvirtual.ull.es/ocw/pluginfile.php/2321/mod_resource/content/0/perlexamples/node295.html#SECTION001810040000000000000) 
+2. [Expresiones de Tipo, Sistemas de Tipos y Comprobadores de Tipos](https://campusvirtual.ull.es/ocw/pluginfile.php/2321/mod_resource/content/0/perlexamples/node295.html#SECTION001810010000000000000)]
+3. [Equivalencia de Expresiones de Tipo](https://campusvirtual.ull.es/ocw/pluginfile.php/2321/mod_resource/content/0/perlexamples/node295.html#SECTION001810050000000000000)
+4. [Un Lenguaje con Funciones Polimorfas](https://campusvirtual.ull.es/ocw/pluginfile.php/2321/mod_resource/content/0/perlexamples/node315.html)
