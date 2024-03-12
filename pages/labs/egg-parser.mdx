@@ -204,6 +204,42 @@ En algunos de los ejemplos, vídeos, repos, etc. que acompañan esta práctica p
 inconsistencias en el lenguaje Egg debidas a que casi en cada curso hemos ido haciendo alias de algunos de los nombres de los constructos. Por ejemplo, a veces  en un vídeo en vez de `fun` usamos `->` y en algún ejemplo en los apuntes en vez de `element` se usa `<-`, etc. También en algún ejemplo aparecen llavitas `{` y `}` en vez de paréntesis (de nuevo una llave aquí es un alias del correspondiente paréntesis). Son cambios triviales que no deberían afectar a la comprensión del texto.
 </Callout>
 
+## Option run
+
+The package `@crguezl/eloquentjsegg` includes a function `runFromEVM` that can be used to run the program after compiling it. Alternatively, you can extend your executable with an option `--run` to run the program after compiling it.
+
+```yml {11} showLineNumbers
+➜  prefix-lang git:(moo-ignore) ✗ bin/eggc.js -h
+Usage: eggc <origin> [options]
+
+Arguments:
+  origin                   The path of the file to compile
+
+Options:
+  -V, --version            output the version number
+  -o, --out <destination>  Path for output file. If it isn't specified the path of the origin file will be
+                           used,changing the extension to .json
+  -r, --run                Run the program after compiling it
+  -h, --help               display help for command
+```
+
+Simply add a code like this inside the `compile` function::
+
+```javascript showLineNumbers {7-9}
+const compile = (origin, options) => {
+  let destination = options.out;
+  if (destination == undefined) {
+    destination = options.out = origin.match(/^[^.]*/)[0] + '.json';
+  }
+  const ast = parseFromFile(origin);
+  if (options.run) {
+    const { runFromEVM } = require('@crguezl/eloquentjsegg/lib/eggvm.js');
+    runFromEVM(options.out);
+  }
+  ...
+}
+```
+
 ## Publicación del módulo 
 
 Una parte de los conceptos y habilidades a adquirir con esta práctica se explican en la sección [Creating and publishing a node.js module en GitHub y en NPM](/topics/introduction-to-javascript/creating-and-publishing-npm-module). Léala con detenimiento antes de hacer esta práctica. 

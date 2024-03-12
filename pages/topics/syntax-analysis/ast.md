@@ -255,7 +255,7 @@ La definición formal por inducción sería:
 
 Por ejemplo si:
 
-```
+```rb
 t =  
 APPLY(
   operator: WORD{name:+}, 

@@ -7,11 +7,11 @@ const config: DocsThemeConfig = {
   banner: {
     key: 'functions',
     text: (<span>
-      Midterm exam is Monday 01/04/2024. 
+      <b>Midterm exam is Monday 01/04/2024. 
       <a href="/clases/march/2024-03-12-leccion">Watch class 2024-03-12 →</a>. 
       <a href="/labs/egg-parser#videos" target="_blank">
         Lab egg-parser deadline is 14/03 →
-      </a>
+      </a></b>
     </span>
     )
   },
