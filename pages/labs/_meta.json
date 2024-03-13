@@ -1,6 +1,42 @@
 {
   "while": {
-    "display": "hidden"
+    "type": "menu",
+    "title": "Adding Loops to the Calculator",
+    "display": "normal",
+    "items": {
+      "The `while` loop": {
+        "title": "The while loop",
+        "href": "/labs/while#the-while-loop"
+      },
+      "The `for` loop": {
+        "title": "The for loop",
+        "href": "/labs/while#the-for-loop"
+      },
+      "Strings": {
+        "title": "Strings",
+        "href": "/labs/while#strings"
+      },
+      "Plus Operator and Strings": {
+        "title": "Plus Operator and Strings",
+        "href": "/labs/while#plus-operator-and-strings"
+      },
+      "Symmetry": {
+        "title": "Symmetry",
+        "href": "/labs/while#symmetry"
+      },
+      "Videos": {
+        "title": "Videos",
+        "href": "/labs/while#videos"
+      },
+      "Rubric": {
+        "title": "Rubric",
+        "href": "/labs/while#rubric"
+      },
+      "Repos": {
+        "title": "Repos",
+        "href": "/labs/while#frontmatterkey-repos"
+      }
+    }
   },
   "egg-parser": {
     "type": "menu",
