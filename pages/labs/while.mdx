@@ -265,9 +265,24 @@ true+" is a boolean"
 fun() { 1 }+" is a function"
 ```
 
-Consider also the opportunity to add the `*`  operator to strings and numbers: `"a"*3` is `"aaa"` and must be the same as `3*"a"`.
+Consider the opportunity to extend the other operators `-`, `*`, `/`, etc.  to strings. Does it make any sense to do so?
 
-It makes sense to add a function and a string: `(f+"hello")(x) == ("hello"+f)(x) = (x => "hello"+(f(x)))`
+<Callout type="error">
+  
+**Think about the symmetry of the `+` operator when you add a function and a string**
+
+Although it makes sense to add a function and a string following this definition: 
+```js 
+(f+"hello")(x) == ("hello"+f)(x) ≡ (x => "hello"+(f(x)))
+``` 
+
+that collisions with our former consideration about the simmetry of the `+` operator when we said that `"a is "+ fun() { 1 }` 
+can be interpreted as the string resulting from concatenating the string with the source of the function.
+
+ should be the same as `fun() { 1 }+" is a"`.
+
+ **Is it worth to break in this case the symmetry of the `+` operator?**
+ </Callout>
 
 Think also about the relation of strings and comparison operators `<`, `>`, `<=`, `>=` and `==` etc.
 
