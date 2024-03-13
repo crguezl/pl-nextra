@@ -29,47 +29,12 @@ rubrica:
   - Si se han usado herramientas AI se deberá  <b>incluir en el <code>README.md</code> una sección sobre como fueron utilizadas. En caso contrario se debe declarar que no se han usado</b>.
   - En la misma sección el alumno indicará su compromiso a no hacer uso de la IA que pueda impedir su crecimiento académico personal o impedirle comprender los conceptos de esta práctica
 
-video20230308:
-  date: "08/03/2023"
-  description: "Clase del 08/03/2023. Se describe el soporte para scopes de ast-types"
-  id: "CR_GI81TFt0"
 
-video20230313:
-  date: "13/03/2023"
-  description: "Clase del 13/03/2023. Se describe el soporte de ast-types para el recorrrido y modificación de nodos (Métodos visit)"
-  url: "https://youtu.be/CR_GI81TFt0"
-  id: "CR_GI81TFt0"
-
-video20230322:
-  date: "22/03/2023"
-  description: "Clase del 22/03/2023. Hasta el minuto 25 se explica como realizar el examen parcial del curso 22/23. Le será muy útil para preparar  examenes. A partir del minuto 25 se explican las bases para la práctica functions"
-  url: "https://youtu.be/SfAIHgAqSuQ"
-  id: "SfAIHgAqSuQ"
-video20230327:
-  date: "27/03/2023"
-  description: "Clase del 27/03/2023. Se continúa la explicación de como realizar la práctica de funciones"
-  url: "https://youtu.be/DRP-_bmTdto"
-  id: "DRP-_bmTdto"
-video20230328:
-  date: "28/03/2023"
-  description: "Clase del 28/03/2023. Análisis de tipos en el lab. Lookup en el scope analysis. Soporte a las operaciones para los nuevos tipos. Nueva sintáxis para las calls"
-  url: "https://youtu.be/XpzNZJ-fwx8"
-  id: "XpzNZJ-fwx8"
-video20240304:
-  date: "04/03/2024"
-  description: "Clase del 04/03/2024. Consideraciones de diseño. Sintáxis de las expresiones función"
-  url: "https://youtu.be/d3RZTA3yzgo"
-  id: "d3RZTA3yzgo"
-video20240305:
-  date: "05/03/2024"
-  description: "Clase del 05/03/2024. Function expressions: syntax and translation. Calls"
-  url: "https://youtu.be/rhJGaW3dcSM"
-  id: "rhJGaW3dcSM"
-video20240306:
-  date: "06/03/2024"
-  description: "Clase del 06/03/2024. Nested calls. Scope analysis. Extending operations: type management"
-  url: "https://youtu.be/rRuiCVzwP78"
-  id: "rRuiCVzwP78"
+video20240313:
+  date: "2024/03/13"
+  url: "https://youtu.be/R_Eg5LcJxF4"
+  id: "R_Eg5LcJxF4"
+  comment: "Clase del 13/03/2024. Building the AST for <code>ID apply</code> in Egg. Adding loops to the calculator language"
 ---
 import { Callout } from 'nextra/components'
 import Videos from '@/components/videos'
@@ -313,6 +278,9 @@ Be sure to produce appropriate error messages when the operators are used with i
 import {frontmatter} from '@/src/frontmatter'
 
 
+{frontmatter().video20240313.comment}
+
+<Videos ids={[frontmatter().video20240313.id]}></Videos>
 
 ## Pruebas, Covering e Integración Continua
 
