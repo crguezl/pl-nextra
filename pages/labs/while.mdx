@@ -271,17 +271,44 @@ Consider the opportunity to extend the other operators `-`, `*`, `/`, etc.  to s
   
 **Think about the symmetry of the `+` operator when you add a function and a string**
 
-Although it makes sense to add a function and a string following this definition: 
-```js 
-(f+"hello")(x) == ("hello"+f)(x) ≡ (x => "hello"+(f(x)))
+It makes sense to add a function and a string like 
+
+```js
+(fun(x) { x+1 }+"hello")(2) = 3 + "hello" = "3hello"
 ``` 
 
-that collisions with our former consideration about the simmetry of the `+` operator when we said that `"a is "+ fun() { 1 }` 
-can be interpreted as the string resulting from concatenating the string with the source of the function.
+The idea being that the string `"hello"` is promoted to the constant function  
+`"hello"` and the `+` promotes the `3` to string `"3"` and then concatenates the two strings.
 
- should be the same as `fun() { 1 }+" is a"`.
+Here is an actual example:
 
- **Is it worth to break in this case the symmetry of the `+` operator?**
+```js {1} showLineNumbers filename="test/data/input/function-plus-string.calc"
+print((fun(x) { x+1 }+"hello")(2)) # "3hello"
+``` 
+
+that when compiled produces:
+
+```js showLineNumbers filename="test/data/expectedjs/function-plus-string.js"
+➜  functions-solution git:(while) ✗ bin/calc2js.mjs test/data/input/function-plus-string.calc 
+#!/usr/bin/env node
+const { print, Complex } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js"); 
+/* End of support code */
+print(function($x) { return $x.add(Complex("1")); }.add("hello")(Complex("2")));
+```
+
+That with the appropriate extensions to the `Function` and `Complex` JS classes may lead to the following execution:
+
+```
+➜  functions-solution git:(while) ✗ bin/calc2js.mjs test/data/input/function-plus-string.calc | node
+3hello
+```
+
+Notice that we previously said that `"a is "+ fun() { 1 }` can be interpreted as the string resulting from concatenating the string 
+`" a is"` with the source of the function.
+
+
+ **Can be considered this a break in the symmetry of the `+` operator?**
+
  </Callout>
 
 Think also about the relation of strings and comparison operators `<`, `>`, `<=`, `>=` and `==` etc.
