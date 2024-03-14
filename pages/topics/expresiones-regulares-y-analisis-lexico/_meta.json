@@ -1,0 +1,24 @@
+{
+    "introduccion-a-regexp": "Introducción a las Expresiones Regulares",
+    "generacion-de-analizadores-lexicos": "Generación de Analizadores Léxicos",
+    "hello-unicode-js": {
+        "title": "Hello Unicode en JavaScript",
+        "display": "hidden"
+    },
+    "ejercicios": {
+        "title": "Ejercicios",
+        "display": "hidden"
+    },
+    "unicode-utf-16-and-js": {
+        "title": "Unicode, UTF-16 y JavaScript",
+        "display": "hidden"
+    },
+    "regexp-en-otros-lenguajes": {
+        "title": "Expresiones Regulares en otros lenguajes",
+        "display": "hidden"
+    },
+    "marks": {
+        "title": "Marcas",
+        "display": "hidden"
+    }
+}
