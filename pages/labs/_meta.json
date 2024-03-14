@@ -1,4 +1,67 @@
 {
+  "lexer-generator": {
+    "type": "menu",
+    "title": "Lexer Generator",
+    "display": "normal",
+    "items": {
+      "Objetivos": {
+        "title": "Objetivos",
+        "href": "/labs/lexer-generator#objetivos"
+      },
+      "API del módulo": {
+        "title": "API del módulo",
+        "href": "/labs/lexer-generator#api-del-módulo"
+      },
+      "Conocimientos Previos": {
+        "title": "Conocimientos Previos",
+        "href": "/labs/lexer-generator#conocimientos-previos"
+      },
+      "La función buildLexer": {
+        "title": "La función buildLexer",
+        "href": "/labs/lexer-generator#la-función-buildlexer"
+      },
+      "Vídeos de cursos  explicando los fundamentos necesarios": {
+        "title": "Vídeos de cursos  explicando los fundamentos necesarios",
+        "href": "/labs/lexer-generator#vídeos-de-cursos--explicando-los-fundamentos-necesarios"
+      },
+      "Sugerencias para la construcción de buildLexer": {
+        "title": "Sugerencias para la construcción de buildLexer",
+        "href": "/labs/lexer-generator#sugerencias-para-la-construcción-de-buildlexer"
+      },
+      "La función nearleyLexer": {
+        "title": "La función nearleyLexer",
+        "href": "/labs/lexer-generator#la-función-nearleylexer"
+      },
+      "Pruebas": {
+        "title": "Pruebas",
+        "href": "/labs/lexer-generator#pruebas"
+      },
+      "Integración Contínua usando GitHub Actions": {
+        "title": "Integración Contínua usando GitHub Actions",
+        "href": "/labs/lexer-generator#integración-contínua-usando-github-actions"
+      },
+      "Documentación": {
+        "title": "Documentación",
+        "href": "/labs/lexer-generator#documentación"
+      },
+      "Publicar como paquete npm en GitHub Registry": {
+        "title": "Publicar como paquete npm en GitHub Registry",
+        "href": "/labs/lexer-generator#publicar-como-paquete-npm-en-github-registry"
+      },
+      "Semantic Versioning": {
+        "title": "Semantic Versioning",
+        "href": "/labs/lexer-generator#semantic-versioning"
+      },
+      "Mejoras 2022": {
+        "title": "Mejoras 2022",
+        "href": "/labs/lexer-generator#mejoras-2022"
+      },
+      "Referencias": {
+        "title": "Referencias",
+        "href": "/labs/lexer-generator#referencias"
+      }
+    }
+  },
   "while": {
     "type": "menu",
     "title": "Adding Loops to the Calculator",
