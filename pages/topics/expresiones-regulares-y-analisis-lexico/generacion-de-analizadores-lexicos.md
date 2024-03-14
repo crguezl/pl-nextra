@@ -140,111 +140,6 @@ escribiendo una función `buildLexer` que recibe como argumentos un array `token
 como en el ejemplo y retorna una función que hace el análisis léxico 
 correspondiente a esos tokens.
 
-<!--
-## Analizadores Léxicos usando la Sticky flag
-
-Si combinamos la flag sticky con el uso de paréntesis con nombre 
-podemos construir un analizador léxico.
-
-Recuerda que la función de un analizador léxico es la de proporcionarnos
-un stream de tokens a partir de la cadena de entrada. 
-
-Por ejemplo, el tokenizer de `espree` funciona así:
-
-```js
-> const espree = require('espree')
-undefined
-> espree.tokenize('var a = "hello"')
-[
-  Token { type: 'Keyword', value: 'var', start: 0, end: 3 },
-  Token { type: 'Identifier', value: 'a', start: 4, end: 5 },
-  Token { type: 'Punctuator', value: '=', start: 6, end: 7 },
-  Token { type: 'String', value: '"hello"', start: 8, end: 15 }
-]
-```
-
-Queremos hacer algo parecido.
-
-Para ello usaremos el hecho de que podemos acceder al paréntesis que casa
-via el nombre:
-
-```js
-> RE = /(?<NUM>\d+)|(?<ID>[a-z]+)|(?<OP>[-+*=])/y;
-/(?<NUM>\d+)|(?<ID>[a-z]+)|(?<OP>[-+*=])/y
-> input = 'x=2+b'
-'x=2+b'
-> while (m = RE.exec(input)) { console.log(m.groups) }
-[Object: null prototype] { NUM: undefined, ID: 'x', OP: undefined }
-[Object: null prototype] { NUM: undefined, ID: undefined, OP: '=' }
-[Object: null prototype] { NUM: '2', ID: undefined, OP: undefined }
-[Object: null prototype] { NUM: undefined, ID: undefined, OP: '+' }
-[Object: null prototype] { NUM: undefined, ID: 'b', OP: undefined }
-```
-
-Puesto que la expresión regular es un OR, sólo una de las subexpresiones
-casa y el resto está `undefined`. 
-Para detectar el token debemos recorrer el objeto buscando la clave cuyo valor no 
-está `undefined`:
-
-```js
-> RE = /(?<NUM>\d+)|(?<ID>[a-z]+)|(?<OP>[-+*=])/y;
-/(?<NUM>\d+)|(?<ID>[a-z]+)|(?<OP>[-+*=])/y
-> input = 'x=2+b'
-'x=2+b'
-> names = ['NUM', 'ID', 'OP']
-[ 'NUM', 'ID', 'OP' ]
-> while (m = RE.exec(input)) { 
-  console.log(names.find(n => m.groups[n] !== undefined)) }
-ID
-OP
-NUM
-OP
-ID
-```
-
-El siguiente ejemplo ilustra la técnica:
-
-```
-[~/.../practicas/p2-t2-lexer(master)]$ cat sticky.js
-```
-
-```js
-const str = 'const varName = "value"';
-console.log(str);
-
-const SPACE = /(?<SPACE>\s+)/;
-const RESERVEDWORD = /(?<RESERVEDWORD>\b(const|let)\b)/;
-const ID = /(?<ID>([a-z_]\w+))/;
-const STRING = /(?<STRING>"([^\\"]|\\.")*")/;
-const OP = /(?<OP>[+*\/-=])/;
-
-const tokens = [
-  ['SPACE', SPACE], ['RESERVEDWORD', RESERVEDWORD], ['ID', ID],
-  ['STRING', STRING], ['OP', OP]
-];
-
-const tokenNames = tokens.map(t => t[0]);
-const tokenRegs  = tokens.map(t => t[1]);
-
-const buildOrRegexp = (regexps) => {
-  const sources = regexps.map(r => r.source);
-  const union = sources.join('|');
-  // console.log(union);
-  return new RegExp(union, 'y');
-};
-
-const regexp = buildOrRegexp(tokenRegs);
-
-const getToken = (m) => tokenNames.find(tn => typeof m[tn] !== 'undefined');
-
-let match;
-while (match = regexp.exec(str)) {
-  //console.log(match.groups);
-  let t = getToken(match.groups);
-  console.log(`Found token '${t}' with value '${match.groups[t]}'`);
-}
-```
--->
 
 ## Como obtener el nombre de una RegExp con nombre
 
@@ -319,10 +214,10 @@ Para que nuestro generador de analizadores léxicos pueda funcionar cada una de 
 
 ## Referencias
 
-* Tema [Expresiones Regulares y Análisis Léxico](/temas/expresiones-regulares-y-analisis-lexico)  
-  * [Sección lastindex](/temas/expresiones-regulares-y-analisis-lexico/#lastindex)
-  * [Sticky flag](/temas/expresiones-regulares-y-analisis-lexico/#sticky-flag-y-searching-at-position)
-  * [Analizadores Léxicos usando la Sticky flag](/temas/expresiones-regulares-y-analisis-lexico/#analizadores-lexicos-usando-la-sticky-flag)
+* Tema [Expresiones Regulares y Análisis Léxico](/topics/expresiones-regulares-y-analisis-lexico)  
+  * [Sección lastindex](/topics/expresiones-regulares-y-analisis-lexico/#lastindex)
+  * [Sticky flag](/topics/expresiones-regulares-y-analisis-lexico/#sticky-flag-y-searching-at-position)
+  * [Analizadores Léxicos usando la Sticky flag](/topics/expresiones-regulares-y-analisis-lexico/#analizadores-lexicos-usando-la-sticky-flag)
 * [Lab lexer-generator](/practicas/lexer-generator.html)
 * [Example: using sticky matching for tokenizing](https://2ality.com/2015/07/regexp-es6.html#example-using-sticky-matching-for-tokenizing) inside 
 the chapter [New regular expression features in ECMAScript 6](https://2ality.com/2015/07/regexp-es6.html#example-using-sticky-matching-for-tokenizing)
@@ -338,12 +233,3 @@ the chapter [New regular expression features in ECMAScript 6](https://2ality.com
 * [jison-lex](https://github.com/zaach/jison-lex)
 * [lexer](https://github.com/aaditmshah/lexer)
 
-<!--
-### Práctica p9-t2-lexer
-
-* [Práctica Escribir un Analizador Léxico para Javascript (p9-t2-lexer)](practicas/p9-t2-lexer/README.md)
-
-### Práctica p9-t2-lexer-with-server
-
-* [Práctica Autenticación y Analizador Léxico para Javascript  (p9-t2-lexer-with-server)](practicas/p9-t2-lexer/README-with-server-lab)
--->

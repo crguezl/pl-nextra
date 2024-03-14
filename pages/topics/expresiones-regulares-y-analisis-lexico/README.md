@@ -3,17 +3,17 @@ title: Expresiones Regulares y Análisis Léxico
 ---
 ## Expresiones Regulares
 
-Véase la sección [Introducción a las Expresiones Regulares](/temas/expresiones-regulares-y-analisis-lexico/introduccion-a-regexp)
+Véase la sección [Introducción a las Expresiones Regulares](/topics/expresiones-regulares-y-analisis-lexico/introduccion-a-regexp)
 
 ## Analisis Léxico
 
 Lea la sección 
-* [Como Escribir un Generador de Analizadores Léxicos](/temas/expresiones-regulares-y-analisis-lexico/generacion-de-analizadores-lexicos)
+* [Como Escribir un Generador de Analizadores Léxicos](/topics/expresiones-regulares-y-analisis-lexico/generacion-de-analizadores-lexicos)
 
 
 ## Unicode, UTF-16 and JavaScript
 
-Véase la sección [Unicode, UTF-16 and JavaScript](/temas/expresiones-regulares-y-analisis-lexico/unicode-utf-16-and-js.md)
+Véase la sección [Unicode, UTF-16 and JavaScript](/topics/expresiones-regulares-y-analisis-lexico/unicode-utf-16-and-js)
 
 ## RegExps en Otros lenguajes
 
@@ -27,7 +27,7 @@ Para ver
 [Expresiones Regulares en Flex](https://ull-esit-pl-1617.github.io/apuntesingenieriainformaticaPL/node19.html)
 
 
-lea la sección [RegExps en Otros lenguajes](/temas/expresiones-regulares-y-analisis-lexico/regexp-en-otros-lenguajes)
+lea la sección [RegExps en Otros lenguajes](/topics/expresiones-regulares-y-analisis-lexico/regexp-en-otros-lenguajes)
 
 
 ## Referencias
