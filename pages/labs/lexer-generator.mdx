@@ -5,7 +5,7 @@ published: true
 date: 2023/04/13
 delivery: "2023/04/20"
 order: 14
-campus: "https://campusingenieriaytecnologia2223.ull.es/mod/assign/view.php?id=20478"
+campus: "https://campusingenieriaytecnologia2324.ull.es/mod/assign/view.php?id=20478"
 layout: Practica
 prev: egg-parser.md
 next: # egg-interpreter.md
@@ -26,10 +26,11 @@ rubrica:
   - "Opcional: publicar la documentación de la API usando GitHub Pages en la carpeta <code>docs/</code>"
   - Se ha hecho un buen uso del versionado semántico en la evolución del módulo
   - Calidad del código
-video:
-  clase20200401: gO49wnWoE_s 
-  clase20200325: 4jmsZbEpW7g
-  clase20200324: xCNs1fT1KOc
+videos: [ "gO49wnWoE_s", "4jmsZbEpW7g", "xCNs1fT1KOc" ]
+
+clase20200401: "gO49wnWoE_s" 
+clase20200325: "4jmsZbEpW7g"
+clase20200324: "xCNs1fT1KOc"
 ---
 
 import { Callout } from 'nextra/components'
@@ -38,7 +39,7 @@ import Videos from '@/components/videos'
 ## Objetivos
 
 Usando el repo de la asignación de esta tarea construya un paquete npm y 
-publíquelo como paquete privado en GitHub Registry con ámbito `@ULL-ESIT-PL-2223`  y con nombre el nombre de su repo `lexgen-code-AluXXXteamName`
+publíquelo como paquete privado en GitHub Registry con ámbito `@ULL-ESIT-PL-2324`  y con nombre el nombre de su repo `lexgen-code-AluXXXteamName`
 
 ### API del módulo
 
@@ -64,7 +65,7 @@ Una parte de los conceptos y habilidades a ejercitar con esta práctica se expli
 ## La función buildLexer 
 
 ```js
-const { buildLexer } =require('@ULL-ESIT-PL-2223/lexgen-code-aluTeam');
+const { buildLexer } =require('@ULL-ESIT-PL-2324/lexgen-code-aluTeam');
 ```
 
 La función importada `buildLexer` se llamará con un array de expresiones regulares.
@@ -75,7 +76,7 @@ muestra un ejemplo de uso de la función `buildLexer`:
 
 ```js showLineNumbers filename="lexer-generator-solution/examples/hello.js"
   "use strict";
-const { buildLexer } =require('@ULL-ESIT-PL-2223/lexgen-code-aluTeam');
+const { buildLexer } =require('@ULL-ESIT-PL-2324/lexgen-code-aluTeam');
 
 const SPACE = /(?<SPACE>\s+)/; SPACE.skip = true;
 const COMMENT = /(?<COMMENT>\/\/.*)/; COMMENT.skip = true;
@@ -391,7 +392,7 @@ Reescriba la práctica anterior para que en vez de [moo-ignore]() use un analiza
 ```js showLineNumbers filename="prefix-lang/src/lex-pl.js"
 ➜  prefix-lang git:(sol-using-lexer-generator) ✗ cat src/lex-pl.js
 const { tokens } = require('./tokens.js');
-const { nearleyLexer } = require("@ull-esit-pl-2223/lexer-generator-solution");
+const { nearleyLexer } = require("@ull-esit-pl-2324/lexer-generator-solution");
 
 let lexer = nearleyLexer(tokens);
 
@@ -494,7 +495,7 @@ el módulo incorporando un `README.md` y la documentación de la función export
 
 ## Publicar como paquete npm en GitHub Registry
 
-Usando el repo de la asignación de esta tarea publique el paquete como paquete privado en GitHub Registry con ámbito `@ULL-ESIT-PL-2223`  y nombre el nombre de su repo `lexgen-code-aluTeam`
+Usando el repo de la asignación de esta tarea publique el paquete como paquete privado en GitHub Registry con ámbito `@ULL-ESIT-PL-2324`  y nombre el nombre de su repo `lexgen-code-aluTeam`
 
 ## Semantic Versioning
 
@@ -549,6 +550,26 @@ Que daría como salida:
 * formatError(token)
 * has(name) returns true if the lexer can emit tokens with that name. This is used to resolve %-specifiers in compiled nearley grammars.
 */}
+
+## Videos
+
+import {frontmatter} from '@/src/frontmatter'
+
+
+<Videos ids={ frontmatter().videos }></Videos>
+
+## Rubric
+
+import Rubric from '@/components/rubric'
+
+<Rubric rubric={frontmatter().rubrica} />
+
+## {frontmatter().key} Repos
+
+import ReposForLab from '@/components/repos-for-lab'
+
+<ReposForLab lab={frontmatter().key} />
+
 
 ## Referencias
 
