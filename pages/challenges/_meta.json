@@ -1,0 +1,27 @@
+{
+    "egg-parser": {
+        "title": "Egg Parser",
+        "type": "page",
+        "display": "hidden"
+    },
+    "functions": {
+        "title": "Functions",
+        "type": "page",
+        "display": "hidden"
+    },
+    "hello-compiler": {
+        "title": "Hello Compiler",
+        "type": "page",
+        "display": "hidden"
+    },
+    "tfa": {
+        "title": "TFA",
+        "type": "page",
+        "display": "hidden"
+    },
+    "while": {
+        "title": "While",
+        "type": "page",
+        "display": "hidden"
+    }
+}
