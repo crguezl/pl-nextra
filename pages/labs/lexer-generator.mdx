@@ -225,11 +225,11 @@ Véase el ejemplo utilizado en la sección anterior: [hello.js](/temas/expresion
 
 Este otro ejemplo [hello-unicode.js](/temas/expresiones-regulares-y-analisis-lexico/hello-unicode-js.md) es similar al anterior pero utiliza caracteres unicode.
 
-## Vídeos de cursos  explicando los fundamentos necesarios
+## Videos
 
 ### 2023/04/17
 
-Ese día se nos fue la luz y no pudimos grabar toda la clase.
+Ese día se nos fue la luz y no pudimos grabar toda la clase. Regexps. Unicode. utf-16.
 
 <Videos ids={["3v9d0qiU7og"]}></Videos>
 
@@ -250,6 +250,13 @@ para la realización de esta práctica. Especialmente
 * Construcción de analizador léxico minuto 33:45
 
 <Videos ids={["xCNs1fT1KOc"]}></Videos>
+
+### Videos 2020
+
+import {frontmatter} from '@/src/frontmatter'
+
+
+<Videos ids={ frontmatter().videos }></Videos>
 
 ### 2020/03/25
 
@@ -551,12 +558,6 @@ Que daría como salida:
 * has(name) returns true if the lexer can emit tokens with that name. This is used to resolve %-specifiers in compiled nearley grammars.
 */}
 
-## Videos
-
-import {frontmatter} from '@/src/frontmatter'
-
-
-<Videos ids={ frontmatter().videos }></Videos>
 
 ## Rubric
 
