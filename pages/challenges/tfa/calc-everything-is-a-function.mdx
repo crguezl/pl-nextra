@@ -88,6 +88,28 @@ let $f;
 write($f(Complex("9"))(Complex("2"))); // 11
 ```
 
+### Current implementation
+
+```js showLineNumbers {1,3} filename="src/support-lib.js"
+function memoize(f, cacheArgs, cacheValue, i) {
+  let cacheArgument = cacheArgs[i];
+  
+  return function(...args) {
+    let auxF = f;
+    
+     if (cacheArgument == null) return cacheValue;
+     if (args[0].equals(cacheArgument)) {
+      auxF = f(...args);
+      if (cacheArgs.length === i+1) return cacheValue;
+     }
+     if (args[0].equals(cacheArgument) && cacheArgs.length > i+1) {
+       return memoize(auxF, cacheArgs, cacheValue, i+1)
+     }
+     return auxF(...args);
+   }
+}
+```
+
 ### References on memoization
 
 See 
@@ -102,7 +124,7 @@ See
 The notation
 
 ```js
-a = [4,7,9] otherwise 0
+a = [4;7;9] otherwise 0
 ```
 
 defines `a` as a function such that `a(0)` returns `4`, `a(1)` returns `7`, and `a(2)` returns `9` and otherwise 
@@ -112,7 +134,7 @@ If the `otherwise expression` is not present, the function returns an special ob
 `null` for any argument not explicitly defined.
 
 ```js
-a = [4,7,9],
+a = [4;7;9],
 print(a(0)), # 4
 print(a(1)), # 7
 print(a(2)), # 9
@@ -129,16 +151,16 @@ translates to
 
 ```js
 a = function($x) {
-    let array = [4,7,9]
+    let arr = [Complex(4),Complex(7),Complex(9)]
     try{
-        let result = array[$x]
+        let result = arr[$x]
         if (typeof result === 'undefined') {
-            return 0
+            return Complex(0)
         } else {
             return result
         }
     } catch(e) {
-        return 0
+        return Complex(0)
     }
 }
 ```
@@ -146,7 +168,29 @@ a = function($x) {
 Other notations are possible. For example, the following code:
 
 ```js
-a = [4:5;7:3;9:6] otherwise 0
+a = [4:5;7:3;"hello2":6] otherwise 0
+```
+meaning a function that `a(4) = 5`, `a(7) = 3`, `a("hello2") = 6` and otherwise `a(x) = 0`.
+It can be translated to:
+
+```js
+a = function($x) {
+    let arr = new Map([
+        [4, Complex(5)],
+        [7, Complex(3)],
+        ["hello2", Complex(6)]
+    ])
+    try{
+        let result = arr.get($x)
+        if (typeof result === 'undefined') {
+            return Complex(0)
+        } else {
+            return result
+        }
+    } catch(e) {
+        return Complex(0)
+    }
+}
 ```
 
 ## null object 
@@ -159,6 +203,7 @@ null + "hello" == "hello",
 null * 4 == 0,
 4 - null == 4,
 fun(x) { x + 1 } * null # is the same as fun(x) { 0 },
+null && true == false,
 ```
 
 Notice that if `a` is a function like in the former example `a * null` is the function `a(x) = 0` for any `x`.
