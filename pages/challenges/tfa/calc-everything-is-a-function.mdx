@@ -4,6 +4,39 @@ import {frontmatter} from '@/src/frontmatter'
 import Rubric from '@/components/rubric'
 import ReposForLab from '@/components/repos-for-lab'
 
+##  Proposed sequence of labs about the calculator for course 23/24
+
+The PL labs of this group:
+
+while -> left-side -> array-maps-and-null
+
+corresponds to the branches
+
+- while
+- left-side
+- array-map
+
+of the repo [functions-solution](https://github.com/ULL-ESIT-PL/functions-solution)
+
+```
+➜  functions-solution git:(left-side) git remote -v
+origin  git@github.com:ULL-ESIT-PL/functions-solution.git (fetch)
+origin  git@github.com:ULL-ESIT-PL/functions-solution.git (push)
+pcgull-solution https://github.com/ULL-ESIT-PL-2223/arith2js-parallel-computing-group-parallel.git (fetch)
+pcgull-solution https://github.com/ULL-ESIT-PL-2223/arith2js-parallel-computing-group-parallel.git (push)
+scope-intro-solution    git@github.com:ULL-ESIT-PL/calc2js-solution.git (fetch)
+scope-intro-solution    git@github.com:ULL-ESIT-PL/calc2js-solution.git (push)
+upstream        https://github.com/ULL-ESIT-PL/arith2js-solution.git (fetch)
+upstream        https://github.com/ULL-ESIT-PL/arith2js-solution.git (push)
+```
+
+at
+
+```
+➜  functions-solution git:(left-side) pwd -P
+/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution
+```
+
 ## Goal: Functions on the left side of an assignment
 
 In the calculator language, the left side of an assignment only an ID is allowed. We want to extend the language to allow the modification of functions.
@@ -124,73 +157,67 @@ See
 The notation
 
 ```js
-a = [4;7;9] otherwise 0
+a = [4;7;9 ... 0]
 ```
 
 defines `a` as a function such that `a(0)` returns `4`, `a(1)` returns `7`, and `a(2)` returns `9` and otherwise 
 returns `0`.
 
-If the `otherwise expression` is not present, the function returns an special object called 
+If the `... expression` is not present, the function returns an special object called 
 `null` for any argument not explicitly defined.
 
-```js
-a = [4;7;9],
-print(a(0)), # 4
-print(a(1)), # 7
-print(a(2)), # 9
-print(a(3))  # null
+```js showLineNumbers filename: test/data/input/arr.calc 
+a = [4+2;5+3i;9-i],
+print(a(0)), # { re: 6, im: 0 }
+a(1) = 333,  
+print(a(1)), # { re: 333, im: 0 }
+print(a(9)), # null
+print(a)     #  { re: 6, im: 0 }, { re: 333, im: 0 }, { re: 9, im: -1 } ]
 ```
 
-### Translation
+The former code translates to
 
-```js
-a = [4;7;9] otherwise 0
+```js showLineNumbers filename: test/data/expectedjs/arr.js {14-18}
+➜  functions-solution git:(array-map) ✗ bin/calc2js.mjs test/data/input/arr.calc | npx prettier --parser babel
+#!/usr/bin/env node
+const {
+    arr,
+    Complex,
+    print,
+    memoize
+} = require('/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js');
+
+/* End of support code */
+
+let $a;
+
+((((($a = arr(
+    Complex('4').add(Complex('2')),
+    Complex('5').add(Complex('3i')),
+    Complex('9').sub(Complex('i'))
+)),
+print($a(Complex('0')))),
+($a = memoize($a, [Complex('1')], Complex('333'), 0))),
+print($a(Complex('1')))),
+print($a(Complex('9')))),
+    print($a);
 ```
 
-translates to
+## Hashes/Maps/Objects
+
+Proposed syntax for hashes/maps:
 
 ```js
-a = function($x) {
-    let arr = [Complex(4),Complex(7),Complex(9)]
-    try{
-        let result = arr[$x]
-        if (typeof result === 'undefined') {
-            return Complex(0)
-        } else {
-            return result
-        }
-    } catch(e) {
-        return Complex(0)
-    }
-}
+a = { 4: 5; 7: 3i; "hello": 6 ... 0}
 ```
 
-Other notations are possible. For example, the following code:
+meaning a function that `a(4) = 5`, `a(7) = 3i`, `a("hello") = 6` and otherwise `a(x) = 0` for all `x`.
+
+An alternative to explore/study is to consider the introduction of the `meth` keyword that will define a functions that usea the "object" as a context. For example, the following code:
 
 ```js
-a = [4:5;7:3;"hello2":6] otherwise 0
-```
-meaning a function that `a(4) = 5`, `a(7) = 3`, `a("hello2") = 6` and otherwise `a(x) = 0`.
-It can be translated to:
-
-```js
-a = function($x) {
-    let arr = new Map([
-        [4, Complex(5)],
-        [7, Complex(3)],
-        ["hello2", Complex(6)]
-    ])
-    try{
-        let result = arr.get($x)
-        if (typeof result === 'undefined') {
-            return Complex(0)
-        } else {
-            return result
-        }
-    } catch(e) {
-        return Complex(0)
-    }
-}
+b = { "x": 5;  "add": meth(z) { x + z} },
+f("add")(3) = 8
 ```
 
 ## null object 
