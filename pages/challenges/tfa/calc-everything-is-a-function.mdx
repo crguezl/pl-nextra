@@ -37,6 +37,15 @@ at
 /Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution
 ```
 
+## Regrets
+
+The translation of calls must change. Instead of translating
+`f(exp)` by `$f(translationOf(exp))` it is better to have s.t. following the "duck pattern" like:
+
+```js
+Call($f, translationOf(exp))
+``` 
+
 ## Goal: Functions on the left side of an assignment
 
 In the calculator language, the left side of an assignment only an ID is allowed. We want to extend the language to allow the modification of functions.
@@ -226,7 +235,7 @@ Introduce `null` as an extension of `0` and the empty string `""` so that it hol
 
 ```js
 null + 4 == 4,
-null + "hello" == "hello",
+null + "hello" == "hello", # this is not the JS behavior
 null * 4 == 0,
 4 - null == 4,
 fun(x) { x + 1 } * null # is the same as fun(x) { 0 },
