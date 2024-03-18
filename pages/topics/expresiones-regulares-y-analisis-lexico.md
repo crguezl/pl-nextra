@@ -17,14 +17,14 @@ Véase la sección [Unicode, UTF-16 and JavaScript](/topics/expresiones-regulare
 
 ## RegExps en Otros lenguajes
 
-Para ver  
-
-[Expresiones Regulares en Perl](https://crguezl.github.io/ull-etsii-grado-pl-apuntes/node96.html),
-[Expresiones Regulares en varios lenguajes](https://crguezl.github.io/ull-etsii-grado-pl-apuntes/node100.html), [Python](https://crguezl.github.io/ull-etsii-grado-pl-apuntes/node100.html#SECTION05440050000000000000),
-[Ruby](https://crguezl.github.io/ull-etsii-grado-pl-apuntes/node100.html#SECTION05440060000000000000)
-,[C++ Regex 101](https://www.fluentcpp.com/2020/02/28/c-regex-101-simple-code-for-simple-cases-with-regexes/  ),[Expresiones Regulares en C](https://crguezl.github.io/ull-etsii-grado-pl-apuntes/node80.html), 
-[sed, a stream editor](https://www.gnu.org/software/sed/manual/sed.html), [Expresiones Regulares en sed](https://crguezl.github.io/ull-etsii-grado-pl-apuntes/node83.html) y
-[Expresiones Regulares en Flex](https://ull-esit-pl-1617.github.io/apuntesingenieriainformaticaPL/node19.html)
+- [Expresiones Regulares en Perl](https://crguezl.github.io/ull-etsii-grado-pl-apuntes/node96.html),
+- [Expresiones Regulares en varios lenguajes](https://crguezl.github.io/ull-etsii-grado-pl-apuntes/node100.html), 
+- [Python](https://crguezl.github.io/ull-etsii-grado-pl-apuntes/node100.html#SECTION05440050000000000000),
+- [Ruby](https://crguezl.github.io/ull-etsii-grado-pl-apuntes/node100.html#SECTION05440060000000000000)
+- C++: See the example at repo [ULL-ESIT-PL/cpp-hello-regexp](https://github.com/ULL-ESIT-PL/cpp-hello-regexp) and the article [C++ Regex 101](https://www.fluentcpp.com/2020/02/28/c-regex-101-simple-code-for-simple-cases-with-regexes/  ),
+- [Expresiones Regulares en C](https://crguezl.github.io/ull-etsii-grado-pl-apuntes/node80.html), 
+- [sed, a stream editor](https://www.gnu.org/software/sed/manual/sed.html), [Expresiones Regulares en sed](https://crguezl.github.io/ull-etsii-grado-pl-apuntes/node83.html) y
+- [Expresiones Regulares en Flex](https://ull-esit-pl-1617.github.io/apuntesingenieriainformaticaPL/node19.html)
 
 
 lea la sección [RegExps en Otros lenguajes](/topics/expresiones-regulares-y-analisis-lexico/regexp-en-otros-lenguajes)

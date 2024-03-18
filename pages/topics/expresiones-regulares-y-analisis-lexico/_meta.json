@@ -11,7 +11,7 @@
     },
     "unicode-utf-16-and-js": {
         "title": "Unicode, UTF-16 y JavaScript",
-        "display": "hidden"
+        "display": "normal"
     },
     "regexp-en-otros-lenguajes": {
         "title": "Expresiones Regulares en otros lenguajes",
@@ -19,6 +19,10 @@
     },
     "marks": {
         "title": "Marcas",
+        "display": "hidden"
+    },
+    "hello-js": {
+        "title": "Contents of the program examples/hello.js using the lexer generated",
         "display": "hidden"
     }
 }
