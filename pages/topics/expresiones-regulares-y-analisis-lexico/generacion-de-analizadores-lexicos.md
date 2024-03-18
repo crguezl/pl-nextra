@@ -94,6 +94,49 @@ Véase también:
 
 * [Sticky flag "y", searching at position](https://javascript.info/regexp-sticky)
 
+## Named groups
+
+Remembering groups by their numbers can be hard. An option is to give names to parentheses.
+
+That's done by starting the capture regexp parenthesis by `(?<name>` and ending with `)`.
+For example, let's look for a date in the format *"year-month-day"*:
+
+```js
+let dateRegexp = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;
+let str = "2019-04-30";
+
+let groups = str.match(dateRegexp).groups;
+
+console.log(groups.year); // 2019
+console.log(groups.month); // 04
+console.log(groups.day); // 30
+```
+
+As you can see, the groups reside in the `.groups` property of the match.
+
+To look for all dates, we can add flag `pattern:g`.
+
+```js
+> dateRegexp = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/g;
+/(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/g
+> str = "2019-10-30 2020-01-01";
+'2019-10-30 2020-01-01'
+```
+
+We can use  `matchAll` to obtain full matches, together with groups.
+
+The `matchAll()` method returns an iterator of all results matching a string against a regular expression, including capturing groups.
+
+```js
+> results = str.matchAll(dateRegexp)
+Object [RegExp String Iterator] {}
+> for(let result of results) {
+...   let {year, month, day} = result.groups;
+...   console.log(`${day}.${month}.${year}`); }
+30.10.2019
+01.01.2020
+```
+
 ## Sugerencias para la construcción de buildLexer
 
 El siguiente código ilustra el uso combinado de la opción sticky y los grupos con nombre para 
@@ -215,10 +258,7 @@ Para que nuestro generador de analizadores léxicos pueda funcionar cada una de 
 ## Referencias
 
 * Tema [Expresiones Regulares y Análisis Léxico](/topics/expresiones-regulares-y-analisis-lexico)  
-  * [Sección lastindex](/topics/expresiones-regulares-y-analisis-lexico/#lastindex)
-  * [Sticky flag](/topics/expresiones-regulares-y-analisis-lexico/#sticky-flag-y-searching-at-position)
-  * [Analizadores Léxicos usando la Sticky flag](/topics/expresiones-regulares-y-analisis-lexico/#analizadores-lexicos-usando-la-sticky-flag)
-* [Lab lexer-generator](/practicas/lexer-generator.html)
+* [Lab lexer-generator](/labs/lexer-generator)
 * [Example: using sticky matching for tokenizing](https://2ality.com/2015/07/regexp-es6.html#example-using-sticky-matching-for-tokenizing) inside 
 the chapter [New regular expression features in ECMAScript 6](https://2ality.com/2015/07/regexp-es6.html#example-using-sticky-matching-for-tokenizing)
 
@@ -226,10 +266,10 @@ the chapter [New regular expression features in ECMAScript 6](https://2ality.com
 
 * [Ejemplo de Analizador Léxico para JS](https://github.com/crguezl/ull-etsii-grado-pl-minijavascript/blob/gh-pages/tokens.js)
 * [Descripción de la Práctica: Analizador Léxico para Un Subconjunto de JavaScript](https://casianorodriguezleon.gitbooks.io/ull-esit-1617/content/practicas/practicaanalisislexicotdop2018.html) gitbooks.io
-* [Compiler Construction by Wikipedians](https://books.google.es/books?id=nMZnyp_zW8AC&pg=PA570#v=onepage&q=Lexical&f=false). Chapter  Lexical Analysis
+* [Compiler Construction by Wikipedians](https://books.google.es/books?id=nMZnyp_zW8AC&lpg=PA570&hl=es&pg=PA19#v=onepage&q&f=false). Chapter  Lexical Analysis
 * [Un caso a estudiar: El módulo npm lexical-parser](https://github.com/Eitz/lexical-parser)
 * [Esprima. Chapter 3. Lexical Analysis (Tokenization)](https://esprima.readthedocs.io/en/latest/lexical-analysis.html)
     - [RepoULL-ESIT-GRADOII-PL/esprima-pegjs-jsconfeu-talk](https://github.com/ULL-ESIT-GRADOII-PL/esprima-pegjs-jsconfeu-talk)
-* [jison-lex](https://github.com/zaach/jison-lex)
-* [lexer](https://github.com/aaditmshah/lexer)
+* [jison-lex](https://github.com/zaach/jison-lex): A lexical analyzer generator used by jison. It takes a lexical grammar definition (either in JSON or Bison's lexical grammar format) and outputs a JavaScript lexer.
+* [lexer](https://github.com/aaditmshah/lexer). A JavaScript lexer modelled after flex
 

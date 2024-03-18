@@ -67,7 +67,7 @@ La primera functión `buildLexer` devolverá un generador de analizadores léxic
 
 ### Conocimientos Previos
 
-Una parte de los conceptos y habilidades a ejercitar con esta práctica se explican en la sección [Creating and publishing a node.js module en GitHub y en NPM](/temas/introduccion-a-javascript/creating-and-publishing-npm-module). 
+Una parte de los conceptos y habilidades a ejercitar con esta práctica se explican en la sección [Creating and publishing a node.js module en GitHub y en NPM](/topics/introduction-to-javascript/creating-and-publishing-npm-module). 
 
 ## La función buildLexer 
 
@@ -78,7 +78,7 @@ const { buildLexer } =require('@ULL-ESIT-PL-2324/lexgen-code-aluTeam');
 La función importada `buildLexer` se llamará con un array de expresiones regulares.
 Cada una de las expresiones regulares deberá ser un paréntesis con nombre.
 El nombre del paréntesis será el nombre/`type` del token/terminal. 
-El siguiente ejemplo [lexer-generator-solution/examples/hello.js](/temas/expresiones-regulares-y-analisis-lexico/examples/hello.js) 
+El siguiente ejemplo [hello.js](/topics/expresiones-regulares-y-analisis-lexico/hello-js)
 muestra un ejemplo de uso de la función `buildLexer`:
 
 ```js showLineNumbers filename="lexer-generator-solution/examples/hello.js"
@@ -228,9 +228,9 @@ Véase también el último ejemplo con errores en la [sección Pruebas](#pruebas
 
 ### Ejemplos 
 
-Véase el ejemplo utilizado en la sección anterior: [hello.js](/temas/expresiones-regulares-y-analisis-lexico/hello-js.md)
+Véase el ejemplo utilizado en la sección anterior: [hello.js](/topics/expresiones-regulares-y-analisis-lexico/hello-js.md)
 
-Este otro ejemplo [hello-unicode.js](/temas/expresiones-regulares-y-analisis-lexico/hello-unicode-js.md) es similar al anterior pero utiliza caracteres unicode.
+Este otro ejemplo [hello-unicode.js](/topics/expresiones-regulares-y-analisis-lexico/hello-unicode-js.md) es similar al anterior pero utiliza caracteres unicode.
 
 ## Videos
 
@@ -298,7 +298,7 @@ En  los primeros 25 minutos de este vídeo se explica como realizar una versión
 ## Sugerencias para la construcción de buildLexer
 
 Lea la sección 
-* [Como Escribir un Generador de Analizadores Léxicos](/temas/expresiones-regulares-y-analisis-lexico/generacion-de-analizadores-lexicos)
+* [Como Escribir un Generador de Analizadores Léxicos](/topics/expresiones-regulares-y-analisis-lexico/generacion-de-analizadores-lexicos)
 
 ## La función nearleyLexer
 
@@ -463,7 +463,7 @@ module.exports = {SPACE, tokens};
 Su versión de la práctica anterior debería seguir funcionando con el nuevo analizador léxico.
 
 ### Pruebas con Jest
-Deberá añadir pruebas usando [Jest](/temas/introduccion-a-javascript/jest). 
+Deberá añadir pruebas usando [Jest](/topics/introduction-to-javascript/jest). 
 
 Sigue un ejemplo:
 
@@ -478,7 +478,7 @@ egg                          test-grammar-combined.ne     test-grammar.js
 ➜  lexer-generator-solution git:(master) ✗ cat test/build-lexer.test.js 
 ```
 
-* Contenidos de [test/build-lexer.test.js](/temas/introduccion-a-javascript/jest-build-lexer-example)
+* Contenidos de [test/build-lexer.test.js](/topics/introduction-to-javascript/jest-build-lexer-example)
 
 Ejemplo de ejecución:
 
@@ -521,11 +521,11 @@ Ran all test suites.
 
 ## Integración Contínua usando GitHub Actions
 
-Use [GitHub Actions](/temas/introduccion-a-javascript/github-actions) para la ejecución de las pruebas
+Use [GitHub Actions](/topics/introduction-to-javascript/github-actions) para la ejecución de las pruebas
 
 ## Documentación
 
-[Documente](/temas/introduccion-a-javascript/documentation)
+[Documente](/topics/introduction-to-javascript/documentation)
 el módulo incorporando un `README.md` y la documentación de la función exportada.
 
 ## Publicar como paquete npm en GitHub Registry
@@ -602,14 +602,15 @@ import ReposForLab from '@/components/repos-for-lab'
 
 ## Referencias
 
-* Tema [Expresiones Regulares y Análisis Léxico](/temas/expresiones-regulares-y-analisis-lexico)  
-  * [Sección lastindex](/temas/expresiones-regulares-y-analisis-lexico/#lastindex)
-  * [Sticky flag](/temas/expresiones-regulares-y-analisis-lexico/#sticky-flag-y-searching-at-position)
-  * [Analizadores Léxicos usando la Sticky flag](/temas/expresiones-regulares-y-analisis-lexico/#analizadores-lexicos-usando-la-sticky-flag)
-* Sección [Creating and publishing a node.js module en GitHub y en NPM](/temas/introduccion-a-javascript/creating-and-publishing-npm-module)
-* [Jest](/temas/introduccion-a-javascript/jest)
-* Sección [GitHub Registry](/temas/introduccion-a-javascript/github-registry)
-* Sección [GitHub Actions](/temas/introduccion-a-javascript/github-actions)
-* Sección [Módulos](/temas/introduccion-a-javascript/modulos)
-* Sección [Node.js Packages](/temas/introduccion-a-javascript/nodejspackages)
-* Sección [Documentation](/temas/introduccion-a-javascript/documentation)
+* Tema [Expresiones Regulares y Análisis Léxico](/topics/expresiones-regulares-y-analisis-lexico)  
+* Tema [Como Escribir un Generador de Analizadores Léxicos](/topics/expresiones-regulares-y-analisis-lexico/generacion-de-analizadores-lexicos)
+* [Sección lastindex](/topics/expresiones-regulares-y-analisis-lexico/generacion-de-analizadores-lexicos#lastindex) de "Como Escribir un Generador de Analizadores Léxicos"
+* [Sticky flag](/topics/expresiones-regulares-y-analisis-lexico/generacion-de-analizadores-lexicos#sticky-flag-y-searching-at-position)
+* [Sugerencias para la construcción de buildLexer](/topics/expresiones-regulares-y-analisis-lexico/generacion-de-analizadores-lexicos#sugerencias-para-la-construcci%C3%B3n-de-buildlexer)
+* Sección [Creating and publishing a node.js module en GitHub y en NPM](/topics/introduction-to-javascript/creating-and-publishing-npm-module)
+* [Jest](/topics/introduction-to-javascript/jest)
+* Sección [GitHub Registry](/topics/introduction-to-javascript/github-registry)
+* Sección [GitHub Actions](/topics/introduction-to-javascript/github-actions)
+* Sección [Módulos](/topics/introduction-to-javascript/modulos)
+* Sección [Node.js Packages](/topics/introduction-to-javascript/nodejspackages)
+* Sección [Documentation](/topics/introduction-to-javascript/documentation)
