@@ -143,15 +143,15 @@ navigate any JSON in the command line:
 
 ## 4. Substitute the fixed parts by your AST parameters
 
-Now you are in condition to start writing the `buildWhileExpression` function associated to the construct
+Now you are in condition to start writing the `buildWhileExpression` function that has to build the AST producing the designed translation.
 
 ```jsx src/ast-build.js
 buildWhileExpression(test, body) {
-   return <Paste here the output of the JSON object>
+   return <Paste here the output of the JSON produced in the previous step>
 }
 ```
 
-substitute the fixed ASTs by your variables `test` and `body` that were built by the parser
+Substitute the fixed ASTs by your variable part: `test` and `body` that were built by the parser:
 
 ```js filename="src/grammar.jison"
   | WHILE e '{' e '}'   { $$ = buildWhileExpression($e1, $e2); }
