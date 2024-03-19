@@ -4,12 +4,15 @@ title: "Your workflow when adding a new feature to a translator"
 
 import {Link, frontmatter} from '@/src/frontmatter'
 
-## 0. Decide the syntax
+## 0. Decide the syntax and semantics of the new feature
 
-1. Add new rules to your grammar to support the new feature. 
-2. Avoid ambiguity in the grammar.
-3. Modify the lexical analyzer if new tokens appear.
-4. Decide the name and parameters of the function that will be used to build the AST for the new feature.
+When you are adding a new feature to a translator, you have to decide the syntax and semantics of the new feature.
+
+1. Try writing different program examples of the new feature in the original language playing with the expressiveness of different syntactical approaches and also considering possible semantic variants. 
+2. Add new rules to your grammar to support the new feature. 
+3. Avoid ambiguity in the grammar.
+4. Modify the lexical analyzer if new tokens appear.
+5. Decide the name and parameters of the function that will be used to build the AST for the new feature.
    
 For instance, when the new feature is `while` loops, you can add the following rule to the grammar:
 
@@ -17,13 +20,11 @@ For instance, when the new feature is `while` loops, you can add the following r
   | WHILE e '{' e '}'   { $$ = buildWhileExpression($e1, $e2); }
 ```
 
-a new token appears, `WHILE`, and a new function `buildWhileExpression` is defined.
+In the example, a new token appears, `WHILE`, and a new function like `buildWhileExpression` will be needed.
 
 ## 1. Write an example of the new feature
 
-When you are translating a new feature to JavaScript, it is a good idea to write an example of the new feature in the original language. This will help you understand the feature and its behavior.
-
-For instance, when the new feature is while loops, you can write a (future) test for the new feature in the original language
+Now you write one or more program examples according  to the selected syntax. For the `while` loops, you can write (future) very simple tests for the new feature in the original language
 
 ```js filename="test/data/input/while.calc" showLineNumbers copy {3-6}
 ➜  functions-solution git:(while) cat test/data/input/while.calc 
@@ -37,21 +38,19 @@ print(b) # 10
 
 ## 2. Write the JS code you expect for such example
 
-Then, you can start writing by hand the code you expect for such example in JavaScript.
+Start writing by hand the translation you expect for such example.
 
 You don't need to do everything, only the specific part of the code that you are working on.
 In the example below you concentrate on lines 13-20 below that 
 define the **translation scheme** for the while loop in the code above.
 
-```js filename="test/data/actualjs/while.js" showLineNumbers copy {13-20} /prettier/
+```js filename="test/data/expectedjs/while.js" showLineNumbers copy {13-20} /prettier/
 ➜  functions-solution git:(while) npx prettier test/data/expectedjs/while.js 
 #!/usr/bin/env node
 const { Complex, print, } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js");
-
 /* End of support code */
 
 let $a, $b;
-
 (
     ($a = Complex("0")),
     (
@@ -59,9 +58,11 @@ let $a, $b;
         () => {
             let result = false;
             while ($a.lessThan(Complex("10"))) {
-                result = (print($a), ($a = $a.add(Complex("1"))));
+                result = (
+                  print($a), 
+                  ($a = $a.add(Complex("1")))
+                );
             }
-
             return result;
         })()
     )
@@ -69,15 +70,16 @@ let $a, $b;
 print($b);
 ```
 
-## 3. Use tools to learn the shape of the AST
+## 3. Use tools to learn the shape of the AST to be generated
 
 In this step you 
-1. Will use tools to generate the AST for the code you wrote by hand in the previous step. Typically you will use any parser available for your target language. In this case our target language is JavaScript. Most parsers allow to generate the AST in JSON format.
-2. Will use tools to navigate the AST and learn the shape of the AST for the construct you are interested in.
-3. Detect the node you are interested in and its properties.
+1. Will use tools to generate the AST for the code you wrote by hand in the previous step. Typically you will use any parser available for your target language. In this case our target language is JavaScript.
+2. Most parsers allow to generate the AST in JSON format.
+3. Then use tools to navigate the AST and learn the shape of the AST for the construct you are interested in.
+4. Detect the node you are interested in and its properties.
 
 
-I'll show it here using version `4.1.0` of `compast` to generate the AST for the code above but you can use the AST explorer as well.
+I'll show it here using version `4.1.0` of `compast` to generate the AST for the code above but you can use the AST Explorer or any JS parser for the job.
 
 ```
 ✗ npm i -g compact-js-ast@4.1.0
@@ -110,7 +112,8 @@ Options:
   -h, --help                  display help for command
 ```
 
-Now generate the AST for the code you expect for the while loop in the code above. The `-j` option is used to generate the AST in JSON format. The `-o` option is used to specify the output file.
+Now generate the AST for the code you expect for the `while` loop in the code above. 
+The `-j` option is used to generate the AST in JSON format. The `-o` option is used to specify the output file.
 
 ```sh
 ✗ compast -j test/data/expectedjs/while.js -o test/data/expectedAST/while.json
@@ -166,7 +169,7 @@ Is not the case in this example, but sometimes you need to add code to the suppo
 
 Finally, you have to convert the previous example onto a test and new tests for the new feature.
 
-Name the tests after the name of the feature son that can be easily runned separately with `mocha --grep`:
+Name the tests after the name of the feature son that can be easily run separately with `mocha --grep`:
 
 ```
 functions-solution git:(while) ✗ npx mocha --grep while test/test.mjs 
