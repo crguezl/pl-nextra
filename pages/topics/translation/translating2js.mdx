@@ -6,13 +6,18 @@ import {Link, frontmatter} from '@/src/frontmatter'
 
 ## 0. Decide the syntax
 
-Add new rules to your grammar to support the new feature. Modify the lexical analyzer.
-Decide the name and parameters of the function that will be used to build the AST for the new feature.
-For instance, when the new feature is while loops, you can add the following rule to the grammar:
+1. Add new rules to your grammar to support the new feature. 
+2. Avoid ambiguity in the grammar.
+3. Modify the lexical analyzer if new tokens appear.
+4. Decide the name and parameters of the function that will be used to build the AST for the new feature.
+   
+For instance, when the new feature is `while` loops, you can add the following rule to the grammar:
 
 ```js filename="src/grammar.jison"
   | WHILE e '{' e '}'   { $$ = buildWhileExpression($e1, $e2); }
 ```
+
+a new token appears, `WHILE`, and a new function `buildWhileExpression` is defined.
 
 ## 1. Write an example of the new feature
 
@@ -38,7 +43,7 @@ You don't need to do everything, only the specific part of the code that you are
 In the example below you concentrate on lines 13-20 below that 
 define the **translation scheme** for the while loop in the code above.
 
-```js filename="test/data/actualjs/while.js" showLineNumbers copy {13-20}
+```js filename="test/data/actualjs/while.js" showLineNumbers copy {13-20} /prettier/
 ➜  functions-solution git:(while) npx prettier test/data/expectedjs/while.js 
 #!/usr/bin/env node
 const { Complex, print, } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js");
@@ -66,10 +71,13 @@ print($b);
 
 ## 3. Use tools to learn the shape of the AST
 
-In this step you will use tools to generate the AST for the code you wrote by hand in the previous step. Typically you will use any parser available for your target language. In this case our target language is JavaScript. Most parsers allow to generate the AST in JSON format.
+In this step you 
+1. Will use tools to generate the AST for the code you wrote by hand in the previous step. Typically you will use any parser available for your target language. In this case our target language is JavaScript. Most parsers allow to generate the AST in JSON format.
+2. Will use tools to navigate the AST and learn the shape of the AST for the construct you are interested in.
+3. Detect the node you are interested in and its properties.
 
-I'll use it here  version `4.1.0` of `compast` to generate the AST for the code above but you can 
-use the AST explorer as well.
+
+I'll show it here using version `4.1.0` of `compast` to generate the AST for the code above but you can use the AST explorer as well.
 
 ```
 ✗ npm i -g compact-js-ast@4.1.0
