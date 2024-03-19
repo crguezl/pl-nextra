@@ -5,6 +5,8 @@ next: generacion-de-analizadores-lexicos.md
 ---
 # Unicode, UTF-16 and JavaScript
 
+You can find many of the code examples in this chapter at GitHub repo [ULL-ESIT-PL/unicode-js](https://github.com/ULL-ESIT-PL/unicode-js)
+
 ## The Unicode Standard
 
 The way JavaScript models Strings is based on the **Unicode** standard. 
@@ -24,10 +26,10 @@ The BMP is the first (code points from U+0000 to U+FFFF), the other 16 planes ar
 
 The code points contained in astral planes are called **astral code points**.
 
-Astral code points go from U+10000 to U+10FFFF.
+Astral code points go from U+10000 (65536) to U+10FFFF (1 114 111).
 
 
-JavaScript’s representation uses 16 bits per string element, which can describe up to $2^{16}$ different characters. But Unicode defines more characters than that: about twice as many. So some characters, such as many emoji, *take up two character positions* in JavaScript strings.
+JavaScript’s representation uses 16 bits per string element, which can describe up to $2^{16}$ different characters. But Unicode defines more characters than that: **about twice as many**. So some characters, such as many emoji, *take up two character positions* in JavaScript strings.
 
 When comparing strings, JavaScript goes over the characters from left to right, comparing the Unicode codes one by one.
 

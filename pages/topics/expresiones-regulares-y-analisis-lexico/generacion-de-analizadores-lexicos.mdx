@@ -22,7 +22,7 @@ method multiple times to find successive matches in the same string.
 When you do so, the search starts at the substring specified
 by the regular expression’s `lastIndex` property.
   
-```js
+```js showLineNumbers {7-8,11-12,15-16}
       > re = /d(b+)(d)/ig
       /d(b+)(d)/gi
       > z = "dBdxdbbdzdbd"
@@ -47,7 +47,7 @@ by the regular expression’s `lastIndex` property.
 
 Thus, we can write a loop like this:
 
-```js
+```js copy showLineNumbers /match = number.exec(input)/
 let input = "A string with 3 numbers in it... 42 and 88.";
 let number = /\b\d+\b/g;
 let match;
@@ -69,7 +69,7 @@ Regular expressions can have options, which are written after the closing slash.
   
 The difference between the global and the sticky options is that, when sticky is enabled, the match will succeed only if it starts directly at `lastIndex`, whereas with global, it will search ahead for a position where a match can start.
 
-```js
+```js showLineNumbers {3,6}
 let global = /abc/g;
 console.log(global.exec("xyz abc"));
 // → ["abc"]
@@ -78,7 +78,7 @@ console.log(sticky.exec("xyz abc"));
 // → null
 ```
 
-```js
+```js showLineNumbers {3,9}
 let str = 'let varName = "value"';
 
 let regexp = /\w+/y;
@@ -101,7 +101,7 @@ Remembering groups by their numbers can be hard. An option is to give names to p
 That's done by starting the capture regexp parenthesis by `(?<name>` and ending with `)`.
 For example, let's look for a date in the format *"year-month-day"*:
 
-```js
+```js showLineNumbers {4}
 let dateRegexp = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;
 let str = "2019-04-30";
 
@@ -116,7 +116,7 @@ As you can see, the groups reside in the `.groups` property of the match.
 
 To look for all dates, we can add flag `pattern:g`.
 
-```js
+```js showLineNumbers 
 > dateRegexp = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/g;
 /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/g
 > str = "2019-10-30 2020-01-01";
@@ -127,7 +127,7 @@ We can use  `matchAll` to obtain full matches, together with groups.
 
 The `matchAll()` method returns an iterator of all results matching a string against a regular expression, including capturing groups.
 
-```js
+```js showLineNumbers {1-2}
 > results = str.matchAll(dateRegexp)
 Object [RegExp String Iterator] {}
 > for(let result of results) {
@@ -142,7 +142,7 @@ Object [RegExp String Iterator] {}
 El siguiente código ilustra el uso combinado de la opción sticky y los grupos con nombre para 
 encontrar la solución a esta práctica:
 
-```js
+```js copy showLineNumbers {18-23}
 const str = 'const varName = "value"';
 console.log(str);
 
@@ -188,13 +188,13 @@ correspondiente a esos tokens.
 
 Consideremos una expresión regular con nombre:
 
-```js 
+```js  {1} showLineNumbers copy
 > NUM = /(?<NUM>\d+)/
 /(?<NUM>\d+)/
 ```
 La siguiente expresión regular tiene dos paréntesis para capturar el nombre y el resto de la regexp:
 
-```js
+```js {1} showLineNumbers copy
 > getName = /^[(][?]<(\w+)>(.+)[)]$/
 /^[(][?]<(\w+)>(.+)[)]$/
 ```
@@ -203,7 +203,7 @@ Cuando se tiene una regexp `Re`, el atributo `Re.source` contiene la cadena que 
 
 Asi pues, cuando hacemos `getName.exec(NUM.source)` obtenemos:
 
-```js
+```js {1,4-5} showLineNumbers copy
 > r = getName.exec(NUM.source)
 [
   '(?<NUM>\\d+)',
@@ -217,7 +217,7 @@ Asi pues, cuando hacemos `getName.exec(NUM.source)` obtenemos:
 
 En el primer paréntesis casamos con el nombre y en el segundo con la regexp:
 
-```js
+```js showLineNumbers 
 > r[1]
 'NUM'
 > r[2]
@@ -226,7 +226,7 @@ En el primer paréntesis casamos con el nombre y en el segundo con la regexp:
 
 Para que nuestro generador de analizadores léxicos pueda funcionar cada una de las regexp proveídas debe tener un único paréntesis con nombre. Podemos comprobar si el cuerpo de la regexp en `r[2]` contiene mas paréntesis con nombre haciendo algo como esto:
 
-```js
+```js showLineNumbers copy {7}
 > OP = /(?<OP>(?<OP2>[+*\/=-]))/
 /(?<OP>(?<OP2>[+*\/=-]))/
 > r = getName.exec(OP.source)
@@ -240,7 +240,7 @@ Para que nuestro generador de analizadores léxicos pueda funcionar cada una de 
 ]
 ```
 
-```js
+```js showLineNumbers copy {1}
 > hasNamedParen = /[(][?]<(\w+)>(.+)[)]/
 /[(][?]<(\w+)>(.+)[)]/
 > hasNamedParen.exec(r[2])
