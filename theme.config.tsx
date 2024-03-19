@@ -8,7 +8,7 @@ const config: DocsThemeConfig = {
     key: 'functions',
     text: (<span>
       <b>Midterm exam is Monday 01/04/2024. 
-      <a href="/clases/march/2024-03-19-leccion">Watch class 2024-03-19 →</a>. 
+      <a href="/clases/march/2024-03-20-leccion">Watch class 2024-03-20 →</a>. 
       <a href="/labs/while#videos" target="_blank">
         Lab while deadline is 21/03 →
       </a></b>
