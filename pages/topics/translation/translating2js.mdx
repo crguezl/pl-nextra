@@ -157,3 +157,24 @@ substitute the fixed ASTs by your variables `test` and `body` that were built by
 and you are almost done!
 
 ![/public/images/parametric-ast.png](/images/parametric-ast.png)
+
+## 5. Add functions to the support library
+
+Is not the case in this example, but sometimes you need to add code to the support library to easy the translation of the new feature.
+
+## 6. Add tests
+
+Finally, you have to convert the previous example onto a test and new tests for the new feature.
+
+Name the tests after the name of the feature son that can be easily runned separately with `mocha --grep`:
+
+```
+functions-solution git:(while) ✗ npx mocha --grep while test/test.mjs 
+
+  ✔ transpile(while.calc, while.js) (No errors: true) (105ms)
+  ✔ transpile(while-while.calc, while-while.js) (No errors: true) (118ms)
+  ✔ transpile(while-sum.calc, while-sum.js) (No errors: true) (101ms)
+  ✔ transpile(while-nested.calc, while-nested.js) (No errors: true) (123ms)
+
+  4 passing (450ms)
+```
