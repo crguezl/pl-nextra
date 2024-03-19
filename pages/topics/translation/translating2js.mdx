@@ -1,0 +1,134 @@
+---
+title: "Translation of a new feature to JS. Workflow"
+---
+
+import {Link, frontmatter} from '@/src/frontmatter'
+
+## 1. Write an example of the new feature
+
+When you are translating a new feature to JavaScript, it is a good idea to write an example of the new feature in the original language. This will help you understand the feature and its behavior.
+
+For instance, when the new feature is while loops, you can write a (future) test for the new feature in the original language
+
+```js filename="test/data/input/while.calc" showLineNumbers copy {3-6}
+➜  functions-solution git:(while) cat test/data/input/while.calc 
+a = 0,
+b = while a < 10 {
+  print(a),
+  a = a +1
+},
+print(b) # 10
+```
+
+## 2. Write the JS code you expect for such example
+
+Then, you can start writing by hand the code you expect for such example in JavaScript.
+
+You don't need to do everything, only the specific part of the code that you are working on.
+In the example below you concentrate on lines 13-20 below that 
+define the **translation scheme** for the while loop in the code above.
+
+```js filename="test/data/actualjs/while.js" showLineNumbers copy {13-20}
+➜  functions-solution git:(while) npx prettier test/data/expectedjs/while.js 
+#!/usr/bin/env node
+const { Complex, print, } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js");
+
+/* End of support code */
+
+let $a, $b;
+
+(
+    ($a = Complex("0")),
+    (
+        $b = (
+        () => {
+            let result = false;
+            while ($a.lessThan(Complex("10"))) {
+                result = (print($a), ($a = $a.add(Complex("1"))));
+            }
+
+            return result;
+        })()
+    )
+),
+print($b);
+```
+
+## 3. Go to ast explorer or use compast to learn the shape of the AST
+
+I'll use it here  version `4.1.0` of `compast` to generate the AST for the code above but you can 
+use the AST explorer as well.
+
+```
+✗ npm i -g compact-js-ast@4.1.0
+✗ compast --version
+4.1.0
+```
+Here are the options supported in this version of `compast`:
+
+```
+✗ compast --help
+Usage: compast [options] [filename]
+
+Converts a JS program into a JSON or YML AST format
+
+Arguments:
+  filename                    file with the original code
+
+Options:
+  -V, --version               output the version number
+  -o, --output <filename>     file name of the json putput program
+  -p, --program <JS program>  JS program is given in the command line
+  -jw --whites <string>       string '  ' Specifies the number of whites for formatting the object
+                              (default: "  ")
+  -e --hide <fieldnames...>   List of AST fields to omit (default: [])
+  -f --hideFile <fileName>    File with a line per AST fields to omit
+  -j --json                   output in JSON format (default is YML
+  -n --no-parse               do not parse the code, assume the input is already an AST in json format
+  -a --all                    output all fields
+  -l --location               omit only location fields
+  -h, --help                  display help for command
+```
+
+Now generate the AST for the code you expect for the while loop in the code above. The `-j` option is used to generate the AST in JSON format. The `-o` option is used to specify the output file.
+
+```sh
+✗ compast -j test/data/expectedjs/while.js -o test/data/expectedAST/while.json
+```
+
+Edit the JSON with VSCode and get familiar with the different nodes and their properties.
+By navigating in the JSON you can detect that the node you are interested in
+is  the `CallExpression` node with `callee`  an `ArrowFunctionExpression`. 
+
+### jq and jless
+
+Namely in the `jq` language the node of the AST we are interested in is:
+
+```jq /jless/
+✗ jq '.body[2].expression.expressions[0].expressions[1].right' test/data/expectedAST/while.json
+| jless
+```
+
+Notice the use of `jless` a utility that can be used to navigate any JSON in the command line:
+
+![images/jless-ast.png](/images/jless-ast.png)
+
+## 4. Substitute the fixed parts by your AST parameters
+
+Now you are in condition to start writing the `buildWhileExpression` function associated to the construct
+
+```jsx src/ast-build.js
+buildWhileExpression(test, body) {
+   return <Paste here the output of the JSON object>
+}
+```
+
+substitute the fixed ASTs by your variables `test` and `body` that were built by the parser
+
+```js filename="src/grammar.jison"
+  | WHILE e '{' e '}'   { $$ = buildWhileExpression($e1, $e2); }
+```
+
+and you are almost done!
+
+![/public/images/parametric-ast.png](/images/parametric-ast.png)
