@@ -8,9 +8,23 @@ import {Link, frontmatter} from '@/src/frontmatter'
 
 When you are adding a new feature to a translator, you have to decide the syntax and semantics of the new feature.
 
-1. Try writing different program examples of the new feature in the original language playing with the expressiveness of different syntactical approaches and also considering possible semantic variants. 
+1. Try writing different program examples of the new feature playing with the expressiveness of different syntactical approaches and also considering possible semantic variants. For instance, if you are adding `while` loops to a language, you can try a syntax like `while` or `while do` etc. You can also consider if the `while` loop will return a value or not. Or if a `while` creates a new scope or not:
+
+```ruby  showLineNumbers copy {3-6}
+➜  functions-solution git:(while) cat test/data/input/while.calc 
+a = 0,
+b = while a < 10 do { # or while a < 10 {
+  print(a),
+  a = a +1
+},
+print(b) # 10
+```
+
+discuss with other people. Decide the syntax and semantics for the new feature.
+
+
 2. Add new rules to your grammar to support the new feature. 
-3. Avoid ambiguity in the grammar.
+3. Avoid ambiguity in the grammar. check with `npx jison src/grammar.jison` that the grammar is not ambiguous.
 4. Modify the lexical analyzer if new tokens appear.
 5. Decide the name and parameters of the function that will be used to build the AST for the new feature.
    
@@ -22,7 +36,7 @@ For instance, when the new feature is `while` loops, you can add the following r
 
 In the example, a new token appears, `WHILE`, and a new function like `buildWhileExpression` will be needed.
 
-## 1. Write an example of the new feature
+## 1. Write a simplistic example of the new feature
 
 Now you write one or more program examples according  to the selected syntax. For the `while` loops, you can write (future) very simple tests for the new feature in the original language
 
@@ -161,11 +175,15 @@ and you are almost done!
 
 ![/public/images/parametric-ast.png](/images/parametric-ast.png)
 
-## 5. Add functions to the support library
+## 5. Consider scope problems and type checking
+
+In the example above, you have to consider scope problems, type checking and interactions with the remaining code.
+
+## 6. Add functions to the support library
 
 Is not the case in this example, but sometimes you need to add code to the support library to easy the translation of the new feature.
 
-## 6. Add tests
+## 7. Add tests
 
 Finally, you have to convert the previous example onto a test and new tests for the new feature.
 
