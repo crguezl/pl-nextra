@@ -177,11 +177,11 @@ and you are almost done!
 
 ## 5. Consider scope problems and type checking
 
-In the example above, you have to consider scope problems, type checking and interactions with the remaining code.
+You have to consider scope problems, type checking and interactions with the remaining code. If you decide that the loop creates a new scope it may alter the code in the scope analysis phase.
 
 ## 6. Add functions to the support library
 
-Is not the case in this example, but sometimes you need to add code to the support library to easy the translation of the new feature.
+Is not the case in this example, but sometimes you need to add code to the support library to easy the translation of the new feature. For instace if you are adding strings to the language, you may need to monkey patch the `String` class to support operators like `+`.
 
 ## 7. Add tests
 
