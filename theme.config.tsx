@@ -6,12 +6,11 @@ import { Link } from 'nextra-theme-docs'
 const config: DocsThemeConfig = {
   banner: {
     key: 'functions',
-    text: (<span>
-      <b>Midterm exam is Monday 01/04/2024. 
-      <a href="/clases/march/2024-03-20-leccion">Watch class 2024-03-20 →</a>. 
+    text: (<span> 
+      <a href="/clases/april/2024-04-01-leccion">Midterm exam is Monday 01/04/2024 →</a> 
       <a href="/labs/while#videos" target="_blank">
         Lab while deadline is 21/03 →
-      </a></b>
+      </a>
     </span>
     )
   },
