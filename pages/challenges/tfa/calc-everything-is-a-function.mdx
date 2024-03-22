@@ -8,7 +8,7 @@ import ReposForLab from '@/components/repos-for-lab'
 
 The PL labs of this group:
 
-while -> strings -> left-side -> array-maps-and-null
+while -> strings -> left-side -> array-maps-and-null 
 
 corresponds to the branches
 
@@ -40,13 +40,6 @@ at
 ```
 
 ## Regrets
-
-The translation of calls must change. Instead of translating
-`f(exp)` by `$f(translationOf(exp))` it is better to have s.t. following the "duck pattern" like:
-
-```js
-Call($f, translationOf(exp))
-``` 
 
 Don't know how to deal with `this`
 
