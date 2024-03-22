@@ -50,7 +50,7 @@ import Videos from '@/components/videos'
 
 In the calculator language, the left side of an assignment only an ID is allowed. We want to extend the language to allow the modification of functions.
 
-### Introduction
+## Introduction
 
 We want to extend the language so that on the left side of an assignment you can have a function modification. For example, the following code should be valid:
 
@@ -90,7 +90,7 @@ When you run the former code you get the following output:
 1000
 ```
 
-### Modifying a function with nested calls on the left side
+## Modifying a function with nested calls on the left side
 
 let's consider the following example in which a nested call occurs in the left hand side of the assignment:
 
@@ -150,30 +150,47 @@ print(f(2)(3)(5)) # 10
 
 Is for that reason that `f(1)(3)`  is the square of `3` and `f(2)(3)(5)` is `2 + 3 + 5` that is `10`.
 
-### The memoize function
+## Empty arguments on the left side
+
+We are going to consider that when a call to a function occurs on a left side of an assignment expression it has to have argument. 
+
+```js showLineNumbers filename=fun-empty-on-the-left-side.calc
+f = fun() { 1 },
+f() = 8 # Error message
+```
+
+```bash showLineNumbers 
+➜  functions-solution git:(array-map) bin/calc2js.mjs test/data/input/fun-empty-on-the-left-side.calc  
+Error: Can't assign to "f" with no arguments
+```
+
+## The memoize function
 
 As we have seen the `memoize` function receives 
-1. a function `$f` to memoize,
+1. a function `$f` that is going to be modified,
 2. an array of arguments `cacheArgs` like `[ Complex("2"), Complex("3")]` that correspond to the source nested calls `f(2)(3)`
-3. the value to return `Complex("8")` in the former example
+3. the value to return `Complex("8")` in the example `f(2)(3) = 8`
 4. the index `i` to recursively traverse the `cacheArgs` array.
 
-f(1)(2) = 8
 
 ```js showLineNumbers filename="src/memoize.js" copy
 function memoize(f, cacheArgs, cacheValue, i) {
+    let next = i+1;
     let cacheArgument = cacheArgs[i];
 
     return function (...args) {
         let auxF = f;
 
-        if (cacheArgument == null) return cacheValue; //?
-        if (args[0].equals(cacheArgument)) {
-            auxF = f(...args);
-            if (cacheArgs.length === i + 1) return cacheValue;
+        if (cacheArgument == null) {
+            let error = new Error('Invalid null argument on left side of assignment');
+            throw error;
         }
-        if (args[0].equals(cacheArgument) && cacheArgs.length > i + 1) {
-            return memoize(auxF, cacheArgs, cacheValue, i + 1)
+        if (args[0].equals(cacheArgument)) {
+            if (cacheArgs.length === next) {
+                return cacheValue;
+            }
+            auxF = f(...args);
+            return memoize(auxF, cacheArgs, cacheValue, next)
         }
         return auxF(...args);
     }
@@ -181,15 +198,6 @@ function memoize(f, cacheArgs, cacheValue, i) {
 
 module.exports = { memoize };
 ```
-
-### References on memoization
-
-See 
-1. My old notes in [memoization](https://crguezl.github.io/apuntes-ruby/node167.html) of the `fib`onacci function in Ruby and 
-2. The [wikipedia section on Memoization](https://en.wikipedia.org/wiki/Memoization).
-3. [Memoization of the require in Egg](https://crguezl.github.io/ull-esit-1617/_book/practicas/practica-egg-4.html)
-4. [memoize](https://github.com/sindresorhus/memoize) npm package by Sindre Sorhus
-5. [Memoization of Multi-Parametered Functions in JavaScript](https://medium.com/@joedski/memoization-of-multi-parametered-functions-in-javascript-8508e89ba545) by Joseph Sikorski. Jul 14, 2017
 
 ## Goal: Array notation for functions and otherwise
 
@@ -362,20 +370,9 @@ import ReposForLab from '@/components/repos-for-lab'
 
 ## References
 
-* COMP442/6421 - Compiler Design - week 8 - AST traversal using the Visitor pattern. Concordia University, Montreal , Canada. 2022
-  *  <Videos ids={["enG0blJXbaY"]}></Videos>
-* Compiler Design Module 34 : Semantic Analysis Introduction to Scope. IITI Delhi. Compiler AI Labs. 2020
-  *  <Videos ids={["-OTt9IRBJKw?si=jSgET5RhS4-gXla6"]}></Videos>
-* Compiler Design Module 35 : Semantic Analysis as Recursive Descent over AST. IITI Delhi. Compiler AI Labs. 2020
-  *  <Videos ids={["PNS7nxSi608"]}></Videos>
-* [ast-types](/topics/tree-transformations/ast-types): See the scope section
-* [recast](/topics/tree-transformations/jscodeshift-recast) 
+1. My old notes in [memoization](https://crguezl.github.io/apuntes-ruby/node167.html) of the `fib`onacci function in Ruby and 
+2. The [wikipedia section on Memoization](https://en.wikipedia.org/wiki/Memoization).
+3. [Memoization of the require in Egg](https://crguezl.github.io/ull-esit-1617/_book/practicas/practica-egg-4.html)
+4. [memoize](https://github.com/sindresorhus/memoize) npm package by Sindre Sorhus
+5. [Memoization of Multi-Parametered Functions in JavaScript](https://medium.com/@joedski/memoization-of-multi-parametered-functions-in-javascript-8508e89ba545) by Joseph Sikorski. Jul 14, 2017
 
-### Polymorphism
-
-See the notes by Casiano Rodríguez León. 2011:
-
-1. [Sobrecarga, Polimorfismo e Inferencia de Tipos](https://campusvirtual.ull.es/ocw/pluginfile.php/2321/mod_resource/content/0/perlexamples/node295.html#SECTION001810040000000000000) 
-2. [Expresiones de Tipo, Sistemas de Tipos y Comprobadores de Tipos](https://campusvirtual.ull.es/ocw/pluginfile.php/2321/mod_resource/content/0/perlexamples/node295.html#SECTION001810010000000000000)]
-3. [Equivalencia de Expresiones de Tipo](https://campusvirtual.ull.es/ocw/pluginfile.php/2321/mod_resource/content/0/perlexamples/node295.html#SECTION001810050000000000000)
-4. [Un Lenguaje con Funciones Polimorfas](https://campusvirtual.ull.es/ocw/pluginfile.php/2321/mod_resource/content/0/perlexamples/node315.html)
