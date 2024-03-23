@@ -1,4 +1,71 @@
 {
+  "left-side": {
+    "type": "menu",
+    "title": "Calculator. Funs on the left side. Multiple arguments",
+    "display": "normal",
+    "items": {
+      "Goal: Functions on the left side of an assignment": {
+        "title": "Goal: Functions on the left side of an assignment",
+        "href": "/labs/left-side#goal-functions-on-the-left-side-of-an-assignment"
+      },
+      "Introduction": {
+        "title": "Introduction",
+        "href": "/labs/left-side#introduction"
+      },
+      "Modifying a function with nested calls on the left side": {
+        "title": "Modifying a function with nested calls on the left side",
+        "href": "/labs/left-side#modifying-a-function-with-nested-calls-on-the-left-side"
+      },
+      "Nested calls on the left side and a function on the right side": {
+        "title": "Nested calls on the left side and a function on the right side",
+        "href": "/labs/left-side#nested-calls-on-the-left-side-and-a-function-on-the-right-side"
+      },
+      "Empty arguments on the left side": {
+        "title": "Empty arguments on the left side",
+        "href": "/labs/left-side#empty-arguments-on-the-left-side"
+      },
+      "Types and symmetry": {
+        "title": "Types and symmetry",
+        "href": "/labs/left-side#types-and-symmetry"
+      },
+      "The `assign` function": {
+        "title": "The assign function",
+        "href": "/labs/left-side#the-assign-function"
+      },
+      "Currying and multiple arguments for functions": {
+        "title": "Currying and multiple arguments for functions",
+        "href": "/labs/left-side#currying-and-multiple-arguments-for-functions"
+      },
+      "Videos": {
+        "title": "Videos",
+        "href": "/labs/left-side#videos"
+      },
+      "Pruebas, Covering e Integración Continua": {
+        "title": "Pruebas, Covering e Integración Continua",
+        "href": "/labs/left-side#pruebas-covering-e-integración-continua"
+      },
+      "Publishing a package to the GitHub Registry": {
+        "title": "Publishing a package to the GitHub Registry",
+        "href": "/labs/left-side#publishing-a-package-to-the-github-registry"
+      },
+      "Documentación": {
+        "title": "Documentación",
+        "href": "/labs/left-side#documentación"
+      },
+      "Rubric": {
+        "title": "Rubric",
+        "href": "/labs/left-side#rubric"
+      },
+      "{frontmatter().key} Repos": {
+        "title": "Repos",
+        "href": "/labs/left-side#frontmatterkey-repos"
+      },
+      "References": {
+        "title": "References",
+        "href": "/labs/left-side#references"
+      }
+    }
+  },
   "lexer-generator": {
     "type": "menu",
     "title": "Lexer Generator",

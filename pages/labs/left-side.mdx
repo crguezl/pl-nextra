@@ -4,7 +4,7 @@ key: left-side
 published: true
 date: 2024/04/01
 delivery: 2024/04/11
-display: "hidden"
+#display: "hidden"
 campus: ""
 classroom: "https://classroom.github.com/classrooms/153934884-ull-esit-pl-2324/assignments/left-side"
 rubrica:
@@ -46,10 +46,35 @@ video20240320:
 import { Callout } from 'nextra/components'
 import Videos from '@/components/videos'
 
-
 ## Goal: Functions on the left side of an assignment
 
-In the calculator language, the left side of an assignment only an ID is allowed. We want to extend the language to allow the modification of functions.
+Watch the video of Monday 2024/03/18 that day up to minute 35 to understand the motivation for this lab and some incoming labs.
+
+{frontmatter().video20240318.comment}
+
+<Videos ids={[frontmatter().video20240318.id]}></Videos>
+
+The summary being that you can do this in most languages:
+  
+  ```js
+  > a = [4,3,1]
+[ 4, 3, 1 ]
+> a[1] = 8
+8
+```
+But you can't do this:
+
+```js
+> f = x => x +1
+[Function: f]
+> f(2) = 9
+Uncaught ReferenceError: Invalid left-hand side in assignment
+```
+
+We want to invent a language in which you can change the behavior of a function via assignments.
+
+At this time, in our calculator language, the left side of an assignment only an ID is allowed. 
+We want to extend the language to allow the modification of functions. 
 
 ## Introduction
 
@@ -277,9 +302,6 @@ import {frontmatter} from '@/src/frontmatter'
 
 <Videos ids={[frontmatter().video20240313.id]}></Videos>
 
-{frontmatter().video20240318.comment}
-
-<Videos ids={[frontmatter().video20240318.id]}></Videos>
 
 ## Pruebas, Covering e Integración Continua
 
