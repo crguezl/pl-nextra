@@ -52,7 +52,7 @@ Watch the video of Monday 2024/03/18 that day up to minute 35 to understand the 
 
 <Videos ids={[frontmatter().video20240318.id]}></Videos>
 
-The summary of the idea being that you can do this in most languages:
+The summary of the idea being that you can do this in most programming languages:
   
   ```js
   > a = [4,3,1]
@@ -60,7 +60,7 @@ The summary of the idea being that you can do this in most languages:
 > a[1] = 8
 8
 ```
-But you can't do something like this (or equivalent) in any known programming language:
+But, as far as I know, you can't do something like this (or equivalent) in any known programming language:
 
 ```js
 > f = x => x +1
@@ -116,7 +116,7 @@ When you run the former code you get the following output:
 
 ## Modifying a function with nested calls on the left side
 
-let's consider the following example in which a nested call occurs in the left hand side of the assignment:
+Let's consider the following example in which a nested call occurs in the left hand side of the assignment:
 
 ```js showLineNumbers {3} filename="test/data/input/fun-on-the-left-side.calc"
 ➜  functions-solution git:(left-side) cat test/data/input/fun-on-the-left-side.calc            
@@ -175,11 +175,14 @@ We are going to consider that when a call to a function occurs on a left side of
 f = fun() { 1 },
 f() = 8 # Error message
 ```
+Somehow the reason for such design is for analogy to what most programming languages do for arrays and objects. For example, in JavaScript you can't do s.t. like `a[] = 8`. You have to mention an index or a key. 
 
+When you run the former code you get the following output:
 ```bash showLineNumbers 
 ➜  functions-solution git:(array-map) bin/calc2js.mjs test/data/input/fun-empty-on-the-left-side.calc  
 Error: Can't assign to "f" with no arguments
 ```
+
 ## Types and symmetry
 
 The new feature should work with all the types supported by the calculator language. Here is an example for booleans:
