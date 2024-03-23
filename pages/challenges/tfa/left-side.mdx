@@ -13,7 +13,6 @@ rubrica:
   - Probar que el ejecutable queda correctamente instalado, puede ser ejecutado con el nombre publicado y produce salidas correctas
   - "Opciones en línea de comandos (-o, -V, -h, etc.)"
   - "Traduce correctamente los asignaciones a funciones"
-  - "Currying and multiple arguments for functions"
   - Las operaciones son simétricas
   - Los mensajes de error para operaciones sobre tipos incorrectos son adecuados
   - Los operadores de comparación son soportados por las string
@@ -241,7 +240,7 @@ print(f(2;3)) # same as f(2)(3)
 The translation shows how the function `f` is curryfied and converted onto a function of one argument that returns a 
 function. In the same way `f(2;3)` is translated as `f(2)(3)`:
 
-```js showLineNumbers {6-11} copy filename="test/data/expectedjs/fun-manyargs.js"
+```js showLineNumbers {5,9} copy filename="test/data/expectedjs/fun-manyargs.js"
 #!/usr/bin/env node
 const { print, Complex } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js"); 
 /* End of support code */
@@ -251,8 +250,7 @@ $f = function($y) {
     return function($x) {
         return $x.add($y);
     };
-}, 
-print($f(Complex("2"))(Complex("3")));  
+}, print($f(Complex("2"))(Complex("3")));  
 ```
 
 When you run the former code you get the following output:
@@ -261,6 +259,89 @@ When you run the former code you get the following output:
 ➜  functions-solution git:(array-map) ✗ node test/data/expectedjs/fun-manyargs.js 
 { re: 5, im: 0 }
 ```
+
+## Goal: Array notation for functions and otherwise
+
+The notation
+
+```js
+a = [4;7;9 ... 0]
+```
+
+defines `a` as a function such that `a(0)` returns `4`, `a(1)` returns `7`, and `a(2)` returns `9` and otherwise 
+returns `0`.
+
+If the `... expression` is not present, the function returns an special object called 
+`null` for any argument not explicitly defined.
+
+```js showLineNumbers filename: test/data/input/arr.calc 
+a = [4+2;5+3i;9-i],
+print(a(0)), # { re: 6, im: 0 }
+a(1) = 333,  
+print(a(1)), # { re: 333, im: 0 }
+print(a(9)), # null
+print(a)     #  { re: 6, im: 0 }, { re: 333, im: 0 }, { re: 9, im: -1 } ]
+```
+
+The former code translates to
+
+```js showLineNumbers filename: test/data/expectedjs/arr.js {14-18}
+➜  functions-solution git:(array-map) ✗ bin/calc2js.mjs test/data/input/arr.calc | npx prettier --parser babel
+#!/usr/bin/env node
+const {
+    arr,
+    Complex,
+    print,
+    memoize
+} = require('/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js');
+
+/* End of support code */
+
+let $a;
+
+((((($a = arr(
+    Complex('4').add(Complex('2')),
+    Complex('5').add(Complex('3i')),
+    Complex('9').sub(Complex('i'))
+)),
+print($a(Complex('0')))),
+($a = memoize($a, [Complex('1')], Complex('333'), 0))),
+print($a(Complex('1')))),
+print($a(Complex('9')))),
+    print($a);
+```
+
+## Hashes/Maps/Objects
+
+Proposed syntax for hashes/maps:
+
+```js
+a = { 4: 5; 7: 3i; "hello": 6 ... 0}
+```
+
+meaning a function that `a(4) = 5`, `a(7) = 3i`, `a("hello") = 6` and otherwise `a(x) = 0` for all `x`.
+
+An alternative to explore/study is to consider the introduction of the `meth` keyword that will define a functions that usea the "object" as a context. For example, the following code:
+
+```js
+b = { "x": 5;  "add": meth(z) { x + z} },
+f("add")(3) # 8
+```
+
+## null object 
+
+Introduce `null` as an extension of `0` and the empty string `""` so that it holds the following properties:
+
+```js
+null + 4 == 4,
+null + "hello" == "hello", # this is not the JS behavior
+null * 4 == 0,
+4 - null == 4,
+fun(x) { x + 1 } * null # is the same as fun(x) { 0 },
+null && true == false,
+```
+
+Notice that if `a` is a function like in the former example `a * null` is the function `a(x) = 0` for any `x`.
 
 ## Videos
 
