@@ -3,7 +3,9 @@ title: "Tuesday 2024/04/01"
 published: true
 summary: "PARTIAL EXAM"
 labs: [  ]
-topics: [ ]
+topics: 
+  - text: "La Asignatura Procesadores de Lenguajes"
+    href: "/topics/introduction-to-pl#evaluacion"
 video20230322:
   date: "22/03/2023"
   description: "Clase del 22/03/2023. Hasta el minuto 25 se explica como realizar el examen parcial del curso 22/23. Le será muy útil para preparar el próximo examen del 11/03. A partir del minuto 25 se explican las bases para la práctica functions"
@@ -26,3 +28,7 @@ import Videos from '@/components/videos'
 {frontmatter().video20230322.description}:
 
 <Videos ids={[frontmatter().video20230322.id]}></Videos>
+
+## Related topics
+
+<RelatedTopics topics={ frontmatter().topics }/>
