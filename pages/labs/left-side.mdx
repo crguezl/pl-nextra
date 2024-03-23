@@ -65,19 +65,19 @@ write(f(4))  # 1000
 
 The translation of the former code can be s.t. like the following:
 
-```js showLineNumbers /memoize/ filename="test/data/expectedjs/fun.js" copy
+```js showLineNumbers /assign/ filename="test/data/expectedjs/fun.js" copy
 ➜  functions-solution git:(array-map) bin/calc2js.mjs test/data/input/fun.calc 
 #!/usr/bin/env node
-const { Complex, memoize, write } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js"); 
+const { Complex, assign, write } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js"); 
 /* End of support code */
- 
+
 let $f;
 
 (((($f = function($x) {
     return $x.add(Complex("1"));
 }, 
-$f = memoize($f, [Complex("0").add(Complex("2"))], Complex("8"), 0)), 
-$f = memoize($f, [Complex("1").add(Complex("3"))], Complex("1000"), 0)), 
+$f = assign($f, [Complex("0").add(Complex("2"))], Complex("8"), 0)), 
+$f = assign($f, [Complex("1").add(Complex("3"))], Complex("1000"), 0)), 
 write($f(Complex("0")))), 
 write($f(Complex("2")))), 
 write($f(Complex("4")));
@@ -106,31 +106,24 @@ write(f(9)(2))   # 11
 
 The former code modifies the code of the function `$f`  created in the first assignment
 
-```js showLineNumbers {16} filename="test/data/expectedjs/fun-on-the-left-side.js"
-➜  functions-solution git:(left-side) ✗ bin/calc2js.mjs test/data/input/fun-on-the-left-side.calc
+```js showLineNumbers {13} filename="test/data/expectedjs/fun-on-the-left-side.js"
+➜  functions-solution git:(array-map) bin/calc2js.mjs test/data/input/fun-on-the-left-side.calc
 #!/usr/bin/env node
-const { memoize, Complex, write } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js"); 
+const { assign, Complex, write } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js"); 
 /* End of support code */
- 
+
 let $f;
-(
-    (
-        (
-            (
-                $f = function($x) {
-                    return function($y) {
-                        return $x.add($y);
-                    };
-                }, 
-                $f = memoize($f, [Complex("2"), Complex("3")], Complex("8"), 0)
-            ), 
-            write($f(Complex("2"))(Complex("3"))) // 8
-        ), 
-        write($f(Complex("2"))(Complex("5")))  // 7
-    ), 
-    write($f(Complex("3"))(Complex("1")))  // 4
-), 
-write($f(Complex("9"))(Complex("2"))); // 11
+
+(((($f = function($x) {
+    return function($y) {
+        return $x.add($y);
+    };
+}, 
+$f = assign($f, [Complex("2"), Complex("3")], Complex("8"), 0)), 
+write($f(Complex("2"))(Complex("3")))), 
+write($f(Complex("2"))(Complex("5")))),
+write($f(Complex("3"))(Complex("1")))), 
+write($f(Complex("9"))(Complex("2")));
 ```
 
 ## Nested calls on the left side and a function on the right side
@@ -164,18 +157,23 @@ f() = 8 # Error message
 Error: Can't assign to "f" with no arguments
 ```
 
-## The memoize function
+## The assign function
 
-As we have seen the `memoize` function receives 
+As we have seen the `assign` function receives 
 1. a function `$f` that is going to be modified,
 2. an array of arguments `cacheArgs` like `[ Complex("2"), Complex("3")]` that correspond to the source nested calls `f(2)(3)`
 3. the value to return `Complex("8")` in the example `f(2)(3) = 8`
 4. the index `i` to recursively traverse the `cacheArgs` array.
 
 
-```js showLineNumbers filename="src/memoize.js" copy
-function memoize(f, cacheArgs, cacheValue, i) {
+```js showLineNumbers filename="src/assign.js" copy
+function assign(f, cacheArgs, cacheValue, i) {
     let next = i+1;
+
+    if (f.constructor.name == "ArrayFunction") { // If f is an array function
+        f.assign(cacheArgs, cacheValue);
+        return f; 
+    }
     let cacheArgument = cacheArgs[i];
 
     return function (...args) {
@@ -185,18 +183,18 @@ function memoize(f, cacheArgs, cacheValue, i) {
             let error = new Error('Invalid null argument on left side of assignment');
             throw error;
         }
-        if (args[0].equals(cacheArgument)) {
+        if (args[0].equals && args[0]?.equals(cacheArgument) || args[0] == cacheArgument) {  
             if (cacheArgs.length === next) {
                 return cacheValue;
             }
             auxF = f(...args);
-            return memoize(auxF, cacheArgs, cacheValue, next)
+            return assign(auxF, cacheArgs, cacheValue, next)
         }
         return auxF(...args);
     }
 }
 
-module.exports = { memoize };
+module.exports = { assign };
 ```
 
 ## Goal: Array notation for functions and otherwise
