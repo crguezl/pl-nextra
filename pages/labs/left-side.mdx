@@ -220,7 +220,7 @@ write(f(2)(3)), #  5
 write(f(g)(4))  # 19
 ```
 
-## Consequences
+## Consequences: Object Oriented Programming
 
 Notice that the new feature is quite powerful. Object oriented programming can be done with it. For example
 
@@ -239,8 +239,13 @@ When you run the former code you get the following output:
 ➜  functions-solution git:(array-map) ✗ bin/calc2js.mjs test/data/input/object.calc | node
 I am John. Glad to meet you Juana
 ```
-Notice how the `obj` method `greet` is able to access the properties of `obj` like `name` and `age`  without the use of `this` or `self` or any other mechanism.
 
+<Callout type="error">
+
+Notice how the `obj` method `greet` is able to access the properties of `obj` like `name` and `age`  without the use of `this` or `self` or any other mechanism.
+</Callout>
+
+**We have objects now!**
 
 ## The assign function
 
