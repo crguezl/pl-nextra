@@ -190,14 +190,14 @@ Error: Can't assign to "f" with no arguments
 
 The new feature should work with all the types supported by the calculator language. Here is an example for booleans:
 
-```js {2,4} showLineNumbers filename="test/data/input/fun-on-the-left-side-boolean.calc" copy
+```js {2,4} showLineNumbers filename="test/data/input/fun-on-the-left-side-boolean.calc" copy /true;4/
 f = fun(x) { fun(y) { x + y } },
 f(true)(3) = 8,    # 
 write(f(true)(3)), #  8 true has an equals method!
 write(f(true;4)),  # 5
 write(f(4)(true))  # 5
 ```
-The notation `f(true;4)` is equivalent to `f(true)(4)` and will be introduced in the next section.
+The notation `f(true;4)` is equivalent to `f(true)(4)` and will be introduced in the  section [Currying and multiple arguments for functions](#currying-and-multiple-arguments-for-functions) of this lab.
 
 For strings:
 
