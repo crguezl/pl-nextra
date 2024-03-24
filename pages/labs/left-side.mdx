@@ -242,10 +242,78 @@ I am John. Glad to meet you Juana
 
 <Callout type="error">
 
-Notice how the `obj` method `greet` is able to access the properties of `obj` like `name` and `age`  without the use of `this` or `self` or any other mechanism.
+Notice how the `obj` method `greet` is able to access the properties of `obj` like `name` and `age`  
 </Callout>
 
-**We have objects now!**
+## Classes and OOP
+
+The following code defines a class `Person` that has a constructor that receives a `name` and an `age`. The class has a method `greet` that receives another `Person` and writes a message to the console. We are using the semicolon notation that will be introduced in the section [Currying and multiple arguments for functions](#currying-and-multiple-arguments-for-functions) of this lab.
+
+```js showLineNumbers filename="test/data/input/object-template.calc" copy
+Person = fun(name; age) { 
+    this = fun () { 0 },
+    this("name") = name,
+    this("age") = age,
+    this("greet") = fun(other) {
+       write("I am "+this("name")+". Glad to meet you "+other)
+     },
+    this
+},
+john = Person("John"; 25),
+print(john),
+john("greet"; "Juana")
+```
+
+Here is the translation of the former code:
+
+```js showLineNumbers filename="test/data/expectedjs/object-template.js" copy
+➜  functions-solution git:(array-map) ✗ bin/calc2js.mjs test/data/input/object-template.calc                       
+#!/usr/bin/env node
+const { Complex, assign, write } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js"); 
+/* End of support code */
+ 
+let $Person, $john;
+
+(($Person = function($age) {
+    return function($name) {
+        let $this;
+
+        return ((($this = function() {
+            return Complex("0");
+        }, $this = assign($this, ["name"], $name, 0)), $this = assign($this, ["age"], $age, 0)), $this = assign($this, ["greet"], function($other) {
+            return write("I am ".add($this("name")).add(". Glad to meet you ").add($other));
+        }, 0)), $this;
+    };
+}, 
+$john = $Person("John")(Complex("25"))), 
+write($john)), 
+$john("greet")("Juana");
+```
+
+When you run the former code you get the following output:
+
+```bash showLineNumbers copy
+➜  functions-solution git:(array-map) ✗ bin/calc2js.mjs test/data/input/object-template.calc | node
+function (...args) {
+        let auxF = f;
+
+        if (cacheArgument == null) {
+            let error = new Error('Invalid null argument on left side of assignment');
+            throw error;
+        }
+        if (args[0].equals && args[0]?.equals(cacheArgument) || args[0] == cacheArgument) {  
+            if (cacheArgs.length === next) {
+                return cacheValue;
+            }
+            auxF = f(...args);
+            return assign(auxF, cacheArgs, cacheValue, next)
+        }
+        return auxF(...args);
+    }
+I am 25. Glad to meet you Juana
+```
+
+**We have classes and objects now!**
 
 ## The assign function
 
