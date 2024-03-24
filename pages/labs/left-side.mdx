@@ -117,6 +117,24 @@ When you run the former code you get the following output:
 1000
 ```
 
+## Scope Analysis revisited
+
+<Callout type="error">
+
+Notice that 
+
+```js showLineNumbers copy  {1}
+a = fun (x) { x + 1 }
+a(3) = 4
+```
+Line 1 is a declaration/definition but line 2 is an assignment.
+
+Therefore, **our former scope analysis where we assumed that the left side of an assignment was a declaration is not valid anymore**.
+
+It is important a research on the consequences of the modification on the left side on scope analysis.
+
+</Callout>
+
 ## Modifying a function with nested calls on the left side
 
 Let's consider the following example in which a nested call occurs in the left hand side of the assignment:
@@ -247,73 +265,61 @@ Notice how the `obj` method `greet` is able to access the properties of `obj` li
 
 ## Classes and OOP
 
-The following code defines a class `Person` that has a constructor that receives a `name` and an `age`. The class has a method `greet` that receives another `Person` and writes a message to the console. We are using the semicolon notation that will be introduced in the section [Currying and multiple arguments for functions](#currying-and-multiple-arguments-for-functions) of this lab.
+The following code defines a *"class"* `Person` that has a constructor that receives a `name` and an `age`. The class has a method `greet` that receives the `other` argument and writes a message to the console. We are using the semicolon notation that will be introduced in the section [Currying and multiple arguments for functions](#currying-and-multiple-arguments-for-functions) of this lab.
 
-```js showLineNumbers filename="test/data/input/object-template.calc" copy
-Person = fun(name; age) { 
+```js showLineNumbers copy filename="test/data/input/object-template.calc" branch="array-map" /"John"; 25/
+Person = fun(name) {
     this = fun () { 0 },
     this("name") = name,
-    this("age") = age,
     this("greet") = fun(other) {
-       write("I am "+this("name")+". Glad to meet you "+other)
-     },
-    this
+      write("I am "+this("name")+". Glad to meet you "+other)
+    },
+    fun(age) {          # scope analysis must change!!!
+      this("age") = age # this is not local to this function
+    }
 },
 john = Person("John"; 25),
-print(john),
-john("greet"; "Juana")
+john("greet")("Juana")
 ```
 
-Here is the translation of the former code:
+Once we are sure we have rightly modified the scope analysis to consider the fact that `a(expression) = value` is a modification but not a definition, we can proceed to the translation of the former code. Here is a potential translation of the former code:
 
-```js showLineNumbers filename="test/data/expectedjs/object-template.js" copy
-➜  functions-solution git:(array-map) ✗ bin/calc2js.mjs test/data/input/object-template.calc                       
+```js showLineNumbers filename="test/data/expectedjs/object-template.js" copy 
 #!/usr/bin/env node
-const { Complex, assign, write } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js"); 
+const { Complex, assign, write } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js");   
 /* End of support code */
- 
+
 let $Person, $john;
 
-(($Person = function($age) {
-    return function($name) {
-        let $this;
+($Person = function($name) {
+    let $this;
 
-        return ((($this = function() {
-            return Complex("0");
-        }, $this = assign($this, ["name"], $name, 0)), $this = assign($this, ["age"], $age, 0)), $this = assign($this, ["greet"], function($other) {
-            return write("I am ".add($this("name")).add(". Glad to meet you ").add($other));
-        }, 0)), $this;
-    };
+    return ((
+      $this = function() { return Complex("0"); }, 
+      $this = assign($this, ["name"], $name, 0)), 
+      $this = assign($this, 
+        ["greet"], 
+        function($other) {
+          return write("I am ".add($this("name")).add(". Glad to meet you ").add($other));
+        }, 
+        0)), 
+      function($age) {
+        return $this = assign($this, ["age"], $age, 0);
+      };
 }, 
 $john = $Person("John")(Complex("25"))), 
-write($john)), 
-$john("greet")("Juana");
+$john("greet")("Juana"); 
 ```
 
-When you run the former code you get the following output:
+When you run the former code (modified manually) you get the following output:
 
-```bash showLineNumbers copy
-➜  functions-solution git:(array-map) ✗ bin/calc2js.mjs test/data/input/object-template.calc | node
-function (...args) {
-        let auxF = f;
-
-        if (cacheArgument == null) {
-            let error = new Error('Invalid null argument on left side of assignment');
-            throw error;
-        }
-        if (args[0].equals && args[0]?.equals(cacheArgument) || args[0] == cacheArgument) {  
-            if (cacheArgs.length === next) {
-                return cacheValue;
-            }
-            auxF = f(...args);
-            return assign(auxF, cacheArgs, cacheValue, next)
-        }
-        return auxF(...args);
-    }
-I am 25. Glad to meet you Juana
+```js showLineNumbers copy
+➜  functions-solution git:(array-map) ✗ node test/data/expectedjs/object-template.js
+I am John. Glad to meet you Juana
 ```
 
-**We have classes and objects now!**
+**We (almost) have classes and objects now!**
+
 
 ## The assign function
 
