@@ -372,16 +372,17 @@ function. In the same way `f(2;3)` is translated as `f(2)(3)`:
 
 ```js showLineNumbers {6-11} copy filename="test/data/expectedjs/fun-manyargs.js"
 #!/usr/bin/env node
-const { print, Complex } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js"); 
+const { print, Complex } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js");   
 /* End of support code */
+
 let $f;
 
-$f = function($y) {
-    return function($x) {
+$f = function($x) {
+    return function($y) {
         return $x.add($y);
     };
 }, 
-print($f(Complex("2"))(Complex("3")));  
+print($f(Complex("2"))(Complex("3"))); 
 ```
 
 When you run the former code you get the following output:
@@ -389,6 +390,49 @@ When you run the former code you get the following output:
 ```
 ➜  functions-solution git:(array-map) ✗ node test/data/expectedjs/fun-manyargs.js 
 { re: 5, im: 0 }
+```
+
+Here is a new version of the `Person` class that uses the semicolon notation:
+
+```js showLineNumbers copy filename="test/data/input/object-template-semicolon.calc" 
+Person = fun(name; age) {
+    this = fun () { 0 },
+    this("name") = name,
+    this("greet") = fun(other) {
+      write("I am "+this("name")+". Glad to meet you "+other)
+    },
+    this("age") = age # this is not local to this function
+},
+john = Person("John"; 25),
+john("greet")("Juana")
+```
+
+That when compiled
+
+```
+➜  functions-solution git:(array-map) ✗ bin/calc2js.mjs test/data/input/object-template-semicolon.calc -o test/data/expectedjs/object-template-semicolon.js
+```
+
+produces the following JavaScript code:
+
+```js showLineNumbers copy filename="test/data/expectedjs/object-template-semicolon.js"
+Person = fun(name; age) {
+    this = fun () { 0 },
+    this("name") = name,
+    this("greet") = fun(other) {
+      write("I am "+this("name")+". Glad to meet you "+other)
+    },
+    this("age") = age # this is not local to this function
+},
+john = Person("John"; 25),
+john("greet")("Juana")
+```
+  
+  When you run the former code you get the following output:
+
+```bash showLineNumbers
+➜  functions-solution git:(array-map) ✗ node test/data/expectedjs/object-template-semicolon.js 
+I am John. Glad to meet you Juana
 ```
 
 ## Videos
