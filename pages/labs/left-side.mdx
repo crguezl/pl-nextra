@@ -68,7 +68,7 @@ But, as far as I know, you can't do something like this (or equivalent) in any k
 > f(2) = 9
 Uncaught ReferenceError: Invalid left-hand side in assignment
 ```
-That is you can't do an assignment to an element of a function. If you stop to think about it,  both arrays and objects can be thought as functions. 
+That is, you can't do an assignment to an element of a function. If you stop to think about it,  both arrays and objects can be thought as functions. 
 - The array  `[4,3,1]` can be thought as a function that maps `0` to `4`, `1` to `3` and `2` to `1`. 
 - The object `{a: 4, b: 3, c: 1}` can be thought as a function that maps `a` to `4`, `b` to `3` and `c` to `1`.
 
@@ -219,6 +219,27 @@ f(g) = fun(v) { f(g(v))(3) },
 write(f(2)(3)), #  5 
 write(f(g)(4))  # 19
 ```
+
+## Consequences
+
+Notice that the new feature is quite powerful. Object oriented programming can be done with it. For example
+
+```js showLineNumbers filename="test/data/input/object.calc" copy
+➜  functions-solution git:(array-map) ✗ cat test/data/input/object.calc
+obj = fun(x) { x },
+obj("name") = "John",
+obj("age") = 42,
+obj("greet") = fun(other) {
+    write("I am "+obj("name")+". Glad to meet you "+other)
+},
+obj("greet")("Juana")
+``` 
+When you run the former code you get the following output:
+```bash showLineNumbers
+➜  functions-solution git:(array-map) ✗ bin/calc2js.mjs test/data/input/object.calc | node
+I am John. Glad to meet you Juana
+```
+Notice how the `obj` method `greet` is able to access the properties of `obj` like `name` and `age`  without the use of `this` or `self` or any other mechanism.
 
 
 ## The assign function
