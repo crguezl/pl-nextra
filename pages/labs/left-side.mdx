@@ -72,7 +72,14 @@ That is, you can't do an assignment to an element of a function. If you stop to 
 - The array  `[4,3,1]` can be thought as a function that maps `0` to `4`, `1` to `3` and `2` to `1`. 
 - The object `{a: 4, b: 3, c: 1}` can be thought as a function that maps `a` to `4`, `b` to `3` and `c` to `1`.
 
-We want to invent a language in which you can change the behavior of a function via assignments.
+We want to invent a language in which you can change the behavior of a function via assignments, in the same way you can change the value of an element of an array or a property of an object.
+
+```js
+f = fun(x) { x +1 },
+f(2) = 9 
+write(f(2)), # 9
+write(f(3))  # 4
+```
 
 At this time, in our calculator language, the left side of an assignment only an ID is allowed. 
 We want to extend the language to allow the modification of functions. 
