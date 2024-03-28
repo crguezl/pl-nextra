@@ -272,7 +272,7 @@ Notice how the `obj` method `greet` is able to access the properties of `obj` li
 
 ## Classes and OOP
 
-The following code defines a *"class"* `Person` that has a constructor that receives a `name` and an `age`. The class has a method `greet` that receives the `other` argument and writes a message to the console. We are using the semicolon notation that will be introduced in the section [Currying and multiple arguments for functions](#currying-and-multiple-arguments-for-functions) of this lab.
+The following code defines a sort of *"class"* `Person` that has a constructor that receives a `name` and an `age`. The class has a method `greet` that receives the `other` argument and writes a message to the console. We are using the semicolon notation that will be introduced in the section [Currying and multiple arguments for functions](#currying-and-multiple-arguments-for-functions) of this lab.
 
 ```js showLineNumbers copy filename="test/data/input/object-template.calc" branch="array-map" /"John"; 25/
 Person = fun(name) {
@@ -325,7 +325,73 @@ When you run the former code (modified manually) you get the following output:
 I am John. Glad to meet you Juana
 ```
 
-**We (almost) have classes and objects now!**
+## Problems with setters
+
+**We (almost) have classes and objects but ...**
+
+```js showLineNumbers copy filename="test/data/input/object-template-semicolon-3.calc" /thom = thom("setAge")(80)/
+Person = fun(name; age) {
+    this = fun (x) { x },
+    this("name") = name,
+    this("age") = age, # this is not local to this function
+
+    this("setAge") = fun(newAge) {
+      this("age") = newAge # if it is a setter changes the reference to the object
+    }
+},
+thom = Person("Thom"; 78),
+thom = thom("setAge")(80),
+write(thom("name"); "is"; thom("age"))
+```
+
+<Callout type="error">
+Notice the need of the ugly assignment to `thom` in line 11. The code 
+generated for the setter `setAge`
+
+```js showLineNumbers copy filename="test/data/expectedjs/object-template-semicolon-3.js" 
+$this = assign($this, ["setAge"], function ($newAge) {
+      return $this = assign($this, ["age"], $newAge, 0);
+    }, 0);
+```
+modifies `$this` but this is no longer the same function than the `$thom` function.
+The code does not work without the assignment to `thom`. 
+</Callout>
+
+When you compile the former code you get the following Javascript code:
+
+```js showLineNumbers copy filename="test/data/expectedjs/object-template-semicolon-3.js"
+#!/usr/bin/env node
+const { assign, Complex, write } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/left-side/left-side-solution/src/support-lib.js");
+
+/* End of support code */
+
+let $Person, $thom;
+
+(($Person = function ($name) {
+  return function ($age) {
+    let $this;
+
+    return (($this = function ($x) {
+      return $x;
+    }, 
+    $this = assign($this, ["name"], $name, 0)), 
+    $this = assign($this, ["age"], $age, 0)), 
+    $this = assign($this, ["setAge"], function ($newAge) {
+      return $this = assign($this, ["age"], $newAge, 0);
+    }, 0);
+  };
+}, 
+$thom = $Person("Thom")(Complex("78"))), 
+$thom = $thom("setAge")(Complex("80"))), 
+write($thom("name"), "is", $thom("age"));
+```
+
+that when run produces the following output:
+
+```bash showLineNumbers copy
+➜  left-side-solution git:(main) ✗ node test/data/expectedjs/object-template-semicolon-3.js                                                               
+Thom is 80
+```
 
 
 ## The assign function
