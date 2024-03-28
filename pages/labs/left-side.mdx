@@ -393,6 +393,50 @@ that when run produces the following output:
 Thom is 80
 ```
 
+**The problem is that the reference to the function is passed by value and not by reference**.
+We can modify by hand the translation to produce the following code:
+
+```js showLineNumbers copy filename="test/data/expectedjs/object-template-semicolon-3-handmade-translation.js" {19-22,27,30}
+#!/usr/bin/env node
+const { assign, Complex, write } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/left-side/left-side-solution/src/support-lib.js");
+
+/* End of support code */
+
+
+let $Person, $thom;
+
+(($Person = function ($name) {
+  return function ($age) {
+    let $this;
+
+    return (($this = function ($x) {
+      return $x;
+    }, 
+    $this = assign($this, ["name"], $name, 0)), 
+    $this = assign($this, ["age"], $age, 0)), 
+
+    $this = assign($this, ["setAge"], function ($person, $newAge) {
+      $person.object = assign($person.object, ["age"], $newAge, 0);
+      write($person.object("name"), "is", $person.object("age"));
+      return $person.object;
+    }, 0);
+
+  };
+}, 
+$thom = { object: $Person("Thom")(Complex("78"))}
+),
+
+$thom.object("setAge")($thom, Complex("80"))), 
+write($thom.object("name"), "is", $thom.object("age"));
+```
+when executed produces the following output:
+
+```bash showLineNumbers copy
+➜  left-side-solution git:(main) ✗ node test/data/expectedjs/object-template-semicolon-3\ copy.js
+Thom is 80
+Thom is 80
+```
+
 
 ## The assign function
 
