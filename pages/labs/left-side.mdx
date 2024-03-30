@@ -100,19 +100,22 @@ write(f(4))  # 1000
 The translation of the former code can be s.t. like the following:
 
 ```js showLineNumbers /assign/ filename="test/data/expectedjs/fun.js" copy /functionObject/
-➜  left-side-solution git:(main) bin/calc2js.mjs test/data/input/fun.calc                               
+➜  left-side-solution git:(develop) ✗ bin/calc2js.mjs test/data/input/fun-on-the-left-side.calc              
 #!/usr/bin/env node
-const { functionObject, Complex, assign, write } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/left-side/left-side-solution/src/support-lib.js"); 
+const { functionObject, assign, Complex, write } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/left-side/left-side-solution/src/support-lib.js"); 
 /* End of support code */
  
 let $f;
 
-(((($f = functionObject(function($x) { return $x.add(Complex("1")); }), 
-$f = assign($f, [Complex("0").add(Complex("2"))], Complex("8"), 0)), 
-$f = assign($f, [Complex("1").add(Complex("3"))], Complex("1000"), 0)), 
-write($f(Complex("0")))), 
-write($f(Complex("2")))), 
-write($f(Complex("4")));
+(((($f = functionObject(function($x) {
+    return functionObject(function($y) { return $x.add($y); });
+}), 
+assign($f, [Complex("2"), Complex("3")], Complex("8"), 0)), 
+write($f(Complex("2"))(Complex("3")))), 
+write($f(Complex("2"))(Complex("5")))), 
+write($f(Complex("3"))(Complex("1")))), 
+write($f(Complex("9"))(Complex("2")));
+  
 ```
 When you run the former code you get the following output:
 ```
@@ -126,6 +129,8 @@ When you run the former code you get the following output:
 
 <Callout type="error">
 
+Let us consider the consequences of the propposed modification on the left side from the perspective of scope analysis.
+
 Notice that 
 
 ```js showLineNumbers copy  {1}
@@ -134,9 +139,13 @@ a(3) = 4
 ```
 Line 1 is a declaration/definition but line 2 is an assignment.
 
-Therefore, **our former scope analysis where we assumed that the left side of an assignment was a declaration is not valid anymore**.
+When we do our translation `a(3) = 4`  becomes:
 
-It is important a research on the consequences of the modification on the left side on scope analysis.
+```js showLineNumbers copy  {1}
+assign($f, [Complex("3")], Complex("4"), 0)), 
+```
+
+Therefore, there is no need to change scope analysis to consider this kind of assignments.
 
 </Callout>
 
@@ -156,18 +165,21 @@ write(f(9)(2))   # 11
 
 The former code modifies the code of the function `$f`  created in the first assignment
 
-```js showLineNumbers {11} filename="test/data/expectedjs/fun-on-the-left-side.js"
-➜  left-side-solution git:(main) bin/calc2js.mjs test/data/input/fun-on-the-left-side.calc
+```js showLineNumbers {14} filename="test/data/expectedjs/fun-on-the-left-side.js"
+➜  left-side-solution git:(main) cat test/data/expectedjs/fun-on-the-left-side.js
 #!/usr/bin/env node
-const { functionObject, assign, Complex, write } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/left-side/left-side-solution/src/support-lib.js");  
+const { functionObject, assign, Complex, write } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/left-side/left-side-solution/src/support-lib.js"); 
+  
 /* End of support code */
  
 let $f;
 
 (((($f = functionObject(function($x) {
-    return functionObject(function($y) { return $x.add($y); });
+    return functionObject(function($y) {
+        return $x.add($y);
+    });
 }), 
-$f = assign($f, [Complex("2"), Complex("3")], Complex("8"), 0)), 
+assign($f, [Complex("2"), Complex("3")], Complex("8"), 0)), 
 write($f(Complex("2"))(Complex("3")))), 
 write($f(Complex("2"))(Complex("5")))), 
 write($f(Complex("3"))(Complex("1")))), 
@@ -288,26 +300,29 @@ john("greet")("Juana")
 Once we are sure we have rightly modified the scope analysis to consider the fact that `a(expression) = value` is a modification but not a definition, we can proceed to the translation of the former code. Here is a potential translation of the former code:
 
 ```js showLineNumbers filename="test/data/expectedjs/object-template.js" copy /assign/ /functionObject/
-left-side-solution git:(main) ✗ bin/calc2js.mjs test/data/input/object-template-semicolon-3.calc       
+➜  left-side-solution git:(main) cat test/data/expectedjs/object-template.js
 #!/usr/bin/env node
-  const { functionObject, assign, Complex, write } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/left-side/left-side-solution/src/support-lib.js"); 
-  
+const { functionObject, Complex, assign, write } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/left-side/left-side-solution/src/support-lib.js"); 
 /* End of support code */
-
  
-  let $Person, $thom;
+let $Person, $john;
 
-(($Person = functionObject(function($name) {
-    return functionObject(function($age) {
-        let $this;
+($Person = functionObject(function($name) {
+    let $this;
 
-        return (($this = functionObject(function($x) {
-            return $x;
-        }), $this = assign($this, ["name"], $name, 0)), $this = assign($this, ["age"], $age, 0)), $this = assign($this, ["setAge"], functionObject(function($newAge) {
-            return $this = assign($this, ["age"], $newAge, 0);
-        }), 0);
+    return (($this = functionObject(function() {
+        return Complex("0");
+    }), 
+    assign($this, ["name"], $name, 0)), 
+    assign($this, ["greet"], 
+      functionObject(function($other) {
+        return write("I am ".add($this("name")).add(". Glad to meet you ").add($other)); }), 0)), 
+    functionObject(function($age) {
+        return assign($this, ["age"], $age, 0);
     });
-}), $thom = $Person("Thom")(Complex("78"))), $thom("setAge")(Complex("80"))), write($thom("name"), "is", $thom("age"));
+}), 
+$john = $Person("John")(Complex("25"))), 
+$john("greet")("Juana");
 ```
 
 When you run the former code (modified manually) you get the following output:
@@ -319,9 +334,9 @@ I am John. Glad to meet you Juana
 
 ## Setters
 
-We have something like classes and objects:
+Let us add a `setAge` method to the `Person`class:
 
-```js showLineNumbers copy filename="test/data/input/object-template-semicolon-3.calc" /thom("setAge")(80)/
+```js showLineNumbers copy filename="test/data/input/object-template-semicolon-3.calc" /thom("setAge")(80)/ {7-9}
 left-side-solution git:(main) ✗ cat test/data/input/object-template-semicolon-3.calc
 Person = fun(name; age) {
     this = fun (x) { x },
@@ -339,23 +354,26 @@ write(thom("name"); "is"; thom("age"))
 
 When you compile the former code you get the following Javascript code:
 
-```js showLineNumbers copy filename="test/data/expectedjs/object-template-semicolon-3.js"
-➜  left-side-solution git:(main) ✗ bin/calc2js.mjs test/data/input/object-template-semicolon-3.calc 
+```js showLineNumbers copy filename="test/data/expectedjs/object-template-semicolon-3.js" {18-20,24}
+➜  left-side-solution git:(main) bin/calc2js.mjs test/data/input/object-template-semicolon-3.calc  
+
 #!/usr/bin/env node
 const { functionObject, assign, Complex, write } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/left-side/left-side-solution/src/support-lib.js"); 
 /* End of support code */
- 
+
 let $Person, $thom;
 
 (($Person = functionObject(function($name) {
     return functionObject(function($age) {
         let $this;
 
-        return (($this = functionObject(function($x) { return $x; }), 
-        $this = assign($this, ["name"], $name, 0)), 
-        $this = assign($this, ["age"], $age, 0)), 
-        $this = assign($this, ["setAge"], functionObject(function($newAge) {
-            return $this = assign($this, ["age"], $newAge, 0);
+        return (($this = functionObject(function($x) {
+            return $x;
+        }), 
+        assign($this, ["name"], $name, 0)), 
+        assign($this, ["age"], $age, 0)), 
+        assign($this, ["setAge"], functionObject(function($newAge) {
+            return assign($this, ["age"], $newAge, 0);
         }), 0);
     });
 }), 
@@ -371,7 +389,63 @@ that when run produces the following output:
 Thom is 80
 ```
 
-To implement the setters we need that the reference to the function is by reference, but this is not the JS behavior with th efunction reference. That is the reason why we convert the functions into callable objects, since objects are passed by reference.
+To implement the setters we need that the code of `assign` receives the reference to the function to be passed by reference. That is the variable `$thom` has to change to receive the reference to the original function when is modified by `assign`. To make this possible I have to convert each function to a `FunctionObject` that is a class that wraps a function and allows the modification of the reference. 
+
+
+```js showLineNumbers copy
+assign($this, ["setAge"], functionObject(function($newAge) {
+            return assign($this, ["age"], $newAge, 0);
+        }), 0);
+```
+
+## The FunctionObject class
+
+A callable object is a data structure that behaves as both an object and a function. 
+
+You can 
+
+- access and assign properties `obj.bar`, 
+- call methods `obj.foo()`, but also 
+- call the object directly `obj()`, as if it were a function.
+
+The direct call is like calling a method of `obj` which has access to the object’s properties through its this context.
+
+The package [callable-object](https://www.npmjs.com/package/callable-object) provides a simple implementation of a callable object in JavaScript. 
+
+See the repo [ULL-ESIT-PL/callable-objects](https://github.com/ULL-ESIT-PL/callable-objects) for some examples.
+
+Therefore we convert each function to a `FunctionObject`  which has an attribute 
+`function` storing the function and a  method `_call` that is the method that is going to be called when the object is called directly:
+
+```js
+const CallableInstance = require("callable-instance");
+
+class FunctionObject extends CallableInstance {
+    constructor(a) {
+        super("_call");
+        this.function = a;
+    }
+
+    _call(arg) {
+        let result = this.function(arg);
+        return (typeof result == 'undefined') ? null : result;
+    }
+
+    toFunction() {
+        return this.function;
+    }
+
+    toString() {
+        return this.function.toString();
+    }
+}
+
+function functionObject(a) {
+    return new FunctionObject(a);
+}
+
+module.exports = { functionObject, FunctionObject };
+```
 
 ## The assign function
 
@@ -396,7 +470,7 @@ function assign(oF, cacheArgs, cacheValue, i) {
 
 function _assign(f, cacheArgs, cacheValue, i) {
     let next = i+1;
-    if (f.constructor.name == "ArrayFunction") { // If f is an array function
+    if (f.constructor.name == "ArrayFunction") { // Functionality for a future lab
         f.assign(cacheArgs, cacheValue);
         return f; 
     }

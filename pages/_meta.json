@@ -196,6 +196,11 @@
         "href": "https://www.npmjs.com/package/compact-js-ast",
         "newWindow": true
       },
+      "ast-compare": {
+        "title": "AST Compare",
+        "href": "https://github.com/ULL-ESIT-PL/ast-compare",
+        "newWindow": true
+      },
       "espree": {
         "title": "Espree",
         "href": "https://github.com/eslint/espree",
