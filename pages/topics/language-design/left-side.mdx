@@ -1,0 +1,53 @@
+import { Callout } from 'nextra/components'
+
+# Chat GPT on Programming Languages allowing f(3) = 9  for a function f
+
+Follows a chat with GPT-3 on the topic of the existence of programming languages that allow you to assign a value to a function at a specific point, like `f(3) = 9`.
+
+
+## Question
+
+In most programming languages you can put on the left side of an assignment a property of an object or an index of an array like:
+
+For an array:
+```
+a[0] = 4;
+```
+or  for an object:
+
+```
+a["x"] = 9 
+```
+
+but you can't do something like this for the value of a function at a specific point like in:
+
+```
+f(3) = 9;
+```
+
+**Do you know of any programming language in which you can write something like this?**
+
+## Chat GPT Answer
+
+<Callout type="info">
+In most programming languages, functions are treated as first-class citizens, meaning they can be passed around and manipulated like any other data type. **However, the ability to assign a value to the result of a function call directly, as in `f(3) = 9;`, is not a common feature in programming languages**.
+
+However, *there are some languages that allow you to achieve similar behavior using various mechanisms*. One such language is Mathematica.
+
+In Mathematica, you can define functions with pattern-matching rules, and you can use these rules to effectively assign values to function inputs. Here's an example:
+
+```mathematica
+f[x_] := 2x + 1
+
+(* Now we can define values for specific inputs *)
+f[3] = 9
+
+(* You can now call f[3] and it will return the assigned value *)
+f[3]
+(* Output: 9 *)
+```
+
+In this example, we defined a function `f[x_]` which represents a **linear equation**. Then, we assigned a specific value `9` to `f[3]`. Now, whenever you call `f[3]`, it will return `9`.
+
+Mathematica's pattern-matching rules and symbolic computation capabilities enable this behavior, allowing for a more symbolic and mathematical programming style compared to traditional imperative languages. However, it's important to note that Mathematica operates in a different paradigm compared to most mainstream programming languages, and **direct function value assignment like this is not a common feature in those languages**.
+</Callout>
