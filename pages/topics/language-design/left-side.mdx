@@ -239,10 +239,10 @@ julia> struct Polynomial{R}
                   coeffs::Vector{R}
               end
 
-julia> function (p::Polynomial)(x)
-                  v = p.coeffs[end]
-                  for i = (length(p.coeffs)-1):-1:1
-                      v = v*x + p.coeffs[i]
+julia> function (p::Polynomial)(x)  # defines a callable object for type Polynomial. 
+                  v = p.coeffs[end] # last coefficient
+                  for i = (length(p.coeffs)-1):-1:1 
+                      v = v*x + p.coeffs[i] #  calculates the value of the polynomial at x using Horner's method
                   end
                   return v
               end
@@ -252,7 +252,7 @@ julia> (p::Polynomial)() = 4
 julia> p = Polynomial([1,10,100])
 Polynomial{Int64}([1, 10, 100])
 
-julia> p(3)
+julia> p(3) # 100*3^2 + 10*3 + 1 = 900 + 30 + 1 = 931
 931
 
 julia> p()
