@@ -10,18 +10,18 @@ Follows a chat with GPT-3 on the topic of the existence of programming languages
 In most programming languages you can put on the left side of an assignment a property of an object or an index of an array like:
 
 For an array:
-```
+```js
 a[0] = 4;
 ```
 or  for an object:
 
-```
+```js
 a["x"] = 9 
 ```
 
 but you can't do something like this for the value of a function at a specific point like in:
 
-```
+```js
 f(3) = 9;
 ```
 
@@ -36,7 +36,7 @@ However, *there are some languages that allow you to achieve similar behavior us
 
 In Mathematica, you can define functions with pattern-matching rules, and you can use these rules to effectively assign values to function inputs. Here's an example:
 
-```mathematica
+```js /:=/ /x_/
 f[x_] := 2x + 1
 
 (* Now we can define values for specific inputs *)
@@ -114,6 +114,107 @@ Here follows a Google Gemini answer to the exactly the same question:
 <Callout type="warning">
 **Remember that these approaches don't directly modify a function's code itself; they create new functions or aliases with altered behavior.** Understanding these nuances is crucial for writing clear and maintainable code.
 </Callout>
+
+## Wolfram Mathematica
+
+For a introduction to Wolfram Mathematica see:
+
+1. [MATHEMATICA TUTORIAL for the First Course: Functions](https://www.cfm.brown.edu/people/dobrush/am33/Mathematica/intro/function.html) by Prof. Vladimir Dobrushkin at Brown University.
+2. [Answers to the question: How to modify function argument?](https://mathematica.stackexchange.com/questions/17767/how-to-modify-function-argument) at https://mathematica.stackexchange.com/
+
+To define a function, just type in the formula.
+We need to use a special form for the left hand side, which includes 
+- an **underscore** after the name of the variable, and 
+- a special "**colon-equals**" sign `:=` for the function definition:
+
+```js /:=/
+f[x_] := (Cos[x] -1)/ x^2
+```
+
+The symbol `x_`, pronounced *x-blank*, denotes a **pattern** named "x." For example, If one were to enter
+
+```js /=/
+f[x] =3*x+1
+``` 
+
+then
+- `f[3]` and `f[a+b]` will not be evaluated, but 
+- `g[x]` will be evaluated because `x` is set as the only variable that this function will accept.
+
+Function evaluation in Mathematica is indicated by square brackets. 
+That is, while in mathematical notation, we write $f(x)$, in Mathematica the correct syntax is `f[x]`. 
+Ordinary parentheses are used exclusively for algebraic grouping. 
+Thus we write `(a*t)` to indicate that the argument is the product of `a` and `t`. 
+
+However, if `f[x_]=3*x+1` is entered, then 
+- `f[2]` is 7, 
+- `f[a+b] = 3a+3b+1`, and 
+- `f[x] is 3x+1` 
+
+
+**because entering `x_` allows me to plug in different values for "x-blank."**
+
+Quote from [How to modify function argument?](https://mathematica.stackexchange.com/questions/17767/how-to-modify-function-argument) at https://mathematica.stackexchange.com/:
+
+> ... Whether or not the expressions passed as arguments can be modified inside a function depends on whether or not they represent an **L-value** (meaning they can be assigned a value, e.g. via `Set` operator) ... for the following function:
+
+```mathematica
+f[x_]:=x=1
+```
+this will assign to `a`:
+
+```mathematica
+Clear[a];
+f[a]
+```
+while this will result in an error:
+
+```mathematica
+a=2;
+f[a]
+```
+> because in the first case, the symbol `a` is injected into the r.h.s. (it is of course first evaluated, but since it does not have any value, it evaluates trivially, to itself), while in the second, it already has a value, so it's immutable value `2` is injected.
+>
+> ... Note however, that this "**injection**" parameter-passing mechanism is highly unusual, from the point of view of traditional languages. In essence, **parameter-passing acts as a code-generation device**, assembling full function's code in *a macro-like fashion* from code pieces passed as parameters and the body which has "placeholders" and acts like a macro. 
+> **One can say that in Mathematica, run-time code generation happens at each function invocation**.
+
+
+## SymPy
+
+SymPy is a Python library for symbolic mathematics. 
+It aims to become a full-featured computer algebra system (CAS). 
+
+If you wish to contribute to SymPy or like to get the latest updates as they come, install SymPy from git. To download the repository, execute the following from the command line:
+
+```bash
+git clone https://github.com/sympy/sympy.git
+```
+
+Here is a simple example of how to use SymPy:
+
+```python
+>>> from sympy import symbols
+>>> x, y = symbols('x y')
+>>> expr = x + 2*y
+>>> expr
+x + 2*y
+>>> expr - x
+2*y
+>>> expr.evalf(subs={x:4})
+2.0*y + 4.0
+>>> expr.evalf(subs={x:4}).evalf(subs={y:1})
+6.00000000000000
+>>> from sympy import Piecewise, Eq, pprint
+>>> f = Piecewise((0, Eq(x, 0)), (x + 1, True))
+>>> pprint(f, use_unicode=True)
+⎧  0    for x = 0
+⎨                
+⎩x + 1  otherwise
+>>> f.subs(x, 0)
+0
+>>> f.subs(x, 1)
+2
+```
 
 ## Lab left-side
 
