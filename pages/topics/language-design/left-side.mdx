@@ -216,6 +216,49 @@ x + 2*y
 2
 ```
 
+## Julia
+
+Julia features optional typing, multiple dispatch, and good performance, achieved using type inference and just-in-time ([JIT](https://en.wikipedia.org/wiki/Just-in-time_compilation)) compilation (and [optional ahead-of-time compilation](https://github.com/JuliaLang/PackageCompiler.jl)), implemented using [LLVM](https://en.wikipedia.org/wiki/Low_Level_Virtual_Machine). It is multi-paradigm, combining features of imperative, functional, and object-oriented programming. 
+
+See section [Redefining methods](https://docs.julialang.org/en/v1/manual/methods/) of the Julia documentation:
+
+```julia
+julia> f(x::Real) = 2*x
+f (generic function with 1 method)
+julia> f(x::Int) = x
+f (generic function with 2 methods)
+julia> f(3)
+3
+julia> f(1.5)
+3.0
+```
+Also:
+
+```julia
+julia> struct Polynomial{R}
+                  coeffs::Vector{R}
+              end
+
+julia> function (p::Polynomial)(x)
+                  v = p.coeffs[end]
+                  for i = (length(p.coeffs)-1):-1:1
+                      v = v*x + p.coeffs[i]
+                  end
+                  return v
+              end
+
+julia> (p::Polynomial)() = 4
+
+julia> p = Polynomial([1,10,100])
+Polynomial{Int64}([1, 10, 100])
+
+julia> p(3)
+931
+
+julia> p()
+4
+```
+
 ## Lab left-side
 
 The lab [left-side](/labs/left-side) is a lab that explores answers to this question.
