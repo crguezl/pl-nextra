@@ -1,0 +1,168 @@
+---
+title: "Wednesday 2024/04/03"
+published: true
+summary: "Your workflow when addinga new feature to a translator"
+labs: [ "lexer-generator", "left-side" ]
+topics: 
+  - text: "Como Escribir un Generador de Analizadores Léxicos"
+    href: "/topics/expresiones-regulares-y-analisis-lexico/generacion-de-analizadores-lexicos"
+  - text: "Unicode, UTF-16 and JavaScript"
+    href: "/topics/expresiones-regulares-y-analisis-lexico/unicode-utf-16-and-js"
+  - text: "Introducción a las Expresiones Regulares"
+    href: "/topics/expresiones-regulares-y-analisis-lexico/introduccion-a-regexp"
+  - text: "What can we write on the left side of an assignment?"
+    href: "/topics/language-design/left-side"
+
+videos: [ "9J0XelSTOhI?si=r9EjIc9L1x6daK1L", "pt7k_ZyOYXE?si=pq1Pwa8ajUqJVioz", "Y7f87gn8B3s?si=LZbezF1AxcZmyyr_", "kbSFcqni__0?si=WVkTrYLf7YN7HSNH"]
+video20230329:
+  date: "2023/03/29"
+  id: "9J0XelSTOhI?si=r9EjIc9L1x6daK1L"
+  url: "https://youtu.be/9J0XelSTOhI?si=r9EjIc9L1x6daK1L"
+  comment: "ASTs for Egg. Lexical Analysis with moo-ignore. Introduction to Nearley.js"
+video20230410:
+  date: "2023/04/10"
+  url: "https://youtu.be/pt7k_ZyOYXE?si=pq1Pwa8ajUqJVioz"
+  id: "pt7k_ZyOYXE?si=pq1Pwa8ajUqJVioz"
+  comment: "Parsing Egg. More on Nearley.js"
+video20230411:
+  date: "2023/04/11"
+  url: "https://youtu.be/Y7f87gn8B3s?si=LZbezF1AxcZmyyr_"
+  id: "Y7f87gn8B3s?si=LZbezF1AxcZmyyr_"
+  comment: "Building the Egg ASTs. White management in moo. The Earley algorithm"
+
+video20240311:
+  date: "2024/03/11"
+  url: "https://youtu.be/d9ytm73tg-c"
+  id: "d9ytm73tg-c"
+  comment: "Clase del 11/03/2024. Retrasamos el examen parcial al 01/04/2024. El lenguaje Egg, ASTs para Egg, El generador de analizadores sintácticos Nearley.js, El generador de analizadores léxicos Moo. Moo-ignore"
+
+video20240312:
+  date: "2024/03/12"
+  url: "https://youtu.be/JjdRTqTKp4I"
+  id: "JjdRTqTKp4I"
+  comment: "Clase del 12/03/2024. Lexical Analysis of  Egg with moo-ignore. Egg grammar in Nearley.js"
+
+video20240313:
+  date: "2024/03/13"
+  url: "https://youtu.be/R_Eg5LcJxF4"
+  id: "R_Eg5LcJxF4"
+  comment: "Clase del 13/03/2024. Building the AST for 'ID apply' in Egg. Adding loops to the calculator language"
+video20240318: 
+  date: "2024/03/18"
+  url: "https://youtu.be/ESRZvz0IzQg"
+  id: "ESRZvz0IzQg"
+  comment: "Clase del 18/03/2024. Motivation for extending assignments so that on the left-side we can modify functions" 
+
+video20240319: 
+  url: "https://youtu.be/lTGOa2hqR7o"
+  id: "lTGOa2hqR7o"
+  date: "2024/03/19"
+  comment: "Clase del 19/03/2024. Adding loops to the calculator language. Building a lexer generator"
+
+video20240320:
+  url: "https://youtu.be/d3TTS5ZgddA"
+  id: "d3TTS5ZgddA"
+  date: "2024/03/20"
+  comment: "Clase del 20/03/2024. Your workflow when adding a new feature to a translator"
+---
+import { Callout } from 'nextra/components'
+import Videos from '@/components/videos'
+import Rubric from '@/components/rubric'
+import ReposForLab from '@/components/repos-for-lab'
+import {Link, frontmatter} from '@/src/frontmatter'
+import RelatedLabs from '@/components/related-labs'
+import RelatedTopics from '@/components/related-topics'
+
+## GoRace Experiment
+
+GoRace is a web app designed at [Universidad de Cadiz](https://gorace.uca.es/en/about-us) to gamify a set of activities. 
+Visit the landing page at https://gorace.uca.es/.
+Once the race manager/teacher has set the race, the runner/students's progress in the activities is visualized as an Olympic race which is set by the manager.
+
+As his TFM, our student [Claudio Nestor](https://github.com/claudio4) is writing an extension web app (a web service plus a Cli, plus a GitHub app) for GoRace that allows to feed a GoRace "race" with the student results provided by the GitHub Classroom Autograding System.
+
+The software is now reaching an state in which we can make a test and thus we are intending to use it for the lab [left-side](/labs/left-side).
+
+These are the instructions for the race:
+
+1. You will receive an email to register for the race. Please click on the link to accept your registration in GoRace.  
+2. Do not start pushing to the assignment repo until you have accepted the race.
+
+If you want to collaborate with us, please follow these instructions. 
+
+
+
+## Related topics
+
+<RelatedTopics topics={ frontmatter().topics }/>
+
+## Related labs
+
+<RelatedLabs labs={ frontmatter().labs }/>
+
+### Lexer Generator
+
+Vea el [vídeo de la clase del 25/03/2020](https://youtu.be/4jmsZbEpW7g?si=c3nQ2tFoUZ5jmgda) para los detalles de la realización de la práctica de generación de analizadores léxicos. También hablamos de Unicode y UTF-16. 
+
+
+<Videos ids={ [ frontmatter().videos[1] ] }></Videos>
+
+El video de la clase 2020/03/24
+
+<Videos ids={ [ frontmatter().videos[1] ] }></Videos>
+
+contiene también material para la práctica del generador de analizadores léxicos que es similar al de la clase e las clases del 18 y 20 de Marzo de 2024.
+
+## Videos
+
+### 2024/03/18
+
+{ frontmatter().video20240318.comment }
+
+<Videos ids={ [frontmatter().video20240318.id] }></Videos>
+
+### 2024/03/20
+
+{ frontmatter().video20240320.comment }
+
+<Videos ids={ [frontmatter().video20240320.id] }></Videos>
+
+### 2024/03/19
+
+{ frontmatter().video20240319.comment }
+
+<Videos ids={ [frontmatter().video20240319.id] }></Videos>
+
+
+### Problems publishing a private module to the GitHub Package Registry
+
+[This video from the class 2023/03/14 from 18:03 to to 35:00 may help to overcome the gotchas when publishing a private npm module in the github package registry](/news).
+
+
+### Lab "while" 2024
+
+{frontmatter().video20240313.comment}
+
+<Videos ids={[frontmatter().video20240313.id]}></Videos>
+
+## Lab egg-parser 2024
+
+{frontmatter().video20240312.comment}
+
+<Videos ids={[frontmatter().video20240312.id]}></Videos>
+
+{frontmatter().video20240311.comment}
+
+<Videos ids={[frontmatter().video20240311.id]}></Videos>
+
+### 2023 videos for lab egg-parser
+
+<Videos ids={frontmatter().videos}></Videos>
+
+- Vídeo {frontmatter().video20230329.date}: {frontmatter().video20230329.comment}
+- Vídeo {frontmatter().video20230410.date}: {frontmatter().video20230410.comment}
+- Vídeo {frontmatter().video20230411.date}: {frontmatter().video20230411.comment}
+
+
+
+
