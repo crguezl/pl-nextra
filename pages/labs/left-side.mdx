@@ -126,14 +126,15 @@ const { functionObject, assign, Complex, write } = require("/Users/casianorodrig
 let $f;
 
 (((($f = functionObject(function($x) {
-    return functionObject(function($y) { return $x.add($y); });
+    return functionObject(function($y) {
+        return $x.add($y);
+    });
 }), 
-assign($f, [Complex("2"), Complex("3")], Complex("8"), 0)), 
+assign($f, [Complex("2"), Complex("3")], Complex("8"))), 
 write($f(Complex("2"))(Complex("3")))), 
 write($f(Complex("2"))(Complex("5")))), 
-write($f(Complex("3"))(Complex("1")))), 
+write($f(Complex("3"))(Complex("1")))),
 write($f(Complex("9"))(Complex("2")));
-  
 ```
 When you run the former code you get the following output:
 ```
@@ -189,7 +190,7 @@ The former code modifies the code of the function `$f`  created in the first ass
 const { functionObject, assign, Complex, write } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/left-side/left-side-solution/src/support-lib.js"); 
   
 /* End of support code */
- 
+
 let $f;
 
 (((($f = functionObject(function($x) {
@@ -197,9 +198,9 @@ let $f;
         return $x.add($y);
     });
 }), 
-assign($f, [Complex("2"), Complex("3")], Complex("8"), 0)), 
+assign($f, [Complex("2"), Complex("3")], Complex("8"))), 
 write($f(Complex("2"))(Complex("3")))), 
-write($f(Complex("2"))(Complex("5")))), 
+write($f(Complex("2"))(Complex("5")))),
 write($f(Complex("3"))(Complex("1")))), 
 write($f(Complex("9"))(Complex("2")));
 ```
@@ -331,12 +332,13 @@ let $Person, $john;
     return (($this = functionObject(function() {
         return Complex("0");
     }), 
-    assign($this, ["name"], $name, 0)), 
+    assign($this, ["name"], $name)), 
     assign($this, ["greet"], 
-      functionObject(function($other) {
-        return write("I am ".add($this("name")).add(". Glad to meet you ").add($other)); }), 0)), 
+    functionObject(function($other) {
+        return write("I am ".add($this("name")).add(". Glad to meet you ").add($other));
+    }))), 
     functionObject(function($age) {
-        return assign($this, ["age"], $age, 0);
+        return assign($this, ["age"], $age);
     });
 }), 
 $john = $Person("John")(Complex("25"))), 
@@ -388,11 +390,11 @@ let $Person, $thom;
         return (($this = functionObject(function($x) {
             return $x;
         }), 
-        assign($this, ["name"], $name, 0)), 
-        assign($this, ["age"], $age, 0)), 
+        assign($this, ["name"], $name)), 
+        assign($this, ["age"], $age)), 
         assign($this, ["setAge"], functionObject(function($newAge) {
-            return assign($this, ["age"], $newAge, 0);
-        }), 0);
+            return assign($this, ["age"], $newAge);
+        }));
     });
 }), 
 $thom = $Person("Thom")(Complex("78"))), 
@@ -412,8 +414,8 @@ To implement the setters we need that the code of `assign` receives the referenc
 
 ```js showLineNumbers copy
 assign($this, ["setAge"], functionObject(function($newAge) {
-            return assign($this, ["age"], $newAge, 0);
-        }), 0);
+            return assign($this, ["age"], $newAge);
+        }));
 ```
 
 ## The FunctionObject class
@@ -435,7 +437,7 @@ See the repo [ULL-ESIT-PL/callable-objects](https://github.com/ULL-ESIT-PL/calla
 Therefore we convert each function to a `FunctionObject`  which has an attribute 
 `function` storing the function and a  method `_call` that is the method that is going to be called when the object is called directly:
 
-```js
+```js showLineNumbers copy filename="src/FunctionObject.js"
 const CallableInstance = require("callable-instance");
 
 class FunctionObject extends CallableInstance {
@@ -473,23 +475,24 @@ As we have seen the `assign` function receives
 3. the value to return `Complex("8")` in the example `f(2)(3) = 8`
 4. the index `i` to recursively traverse the `cacheArgs` array.
 
+This is a naive implementation of the `assign` function:
 
-```js showLineNumbers filename="src/assign.js" copy  {18}
-function assign(oF, cacheArgs, cacheValue, i) {
+```js showLineNumbers filename="src/assign-simple.js" copy  {18}
+function assign(oF, cacheArgs, cacheValue) {
     let f;
     if (oF?.constructor?.name === "FunctionObject") {
         f = oF.toFunction();
     } else {
         f = oF;
     }
-    oF.function = _assign(f, cacheArgs, cacheValue, i);
+    oF.function = _assign(f, cacheArgs, cacheValue, 0);
     return oF;    
 }
 
 function _assign(f, cacheArgs, cacheValue, i) {
     let next = i+1;
-    if (f.constructor.name == "ArrayFunction") { // Functionality for a future lab
-        f.assign(cacheArgs, cacheValue);
+    if (f.constructor.name == "ArrayFunction") { // Code for incoming lab
+        f.assign(cacheArgs, cacheValue);         // not for this lab
         return f; 
     }
     let cacheArgument = cacheArgs[i];
@@ -575,7 +578,7 @@ That when compiled
 
 produces the following JavaScript code:
 
-```js showLineNumbers copy filename="test/data/expectedjs/object-template-semicolon.js" {8-9,20-22}
+```js showLineNumbers copy filename="test/data/expectedjs/object-template-semicolon.js" {8-9,21}
 ➜  left-side-solution git:(main) bin/calc2js.mjs test/data/input/object-template-semicolon.calc                                                   
 #!/usr/bin/env node
 const { functionObject, Complex, assign, write } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/left-side/left-side-solution/src/support-lib.js"); 
@@ -587,14 +590,13 @@ let $Person, $john;
     return functionObject(function($age) {
         let $this;
 
-        return (($this = functionObject(function() {
-            return Complex("0");
-        }), 
-        assign($this, ["name"], $name, 0)), 
+        return ((
+        $this = functionObject(function() { return Complex("0"); }), 
+        assign($this, ["name"], $name)), 
         assign($this, ["greet"], functionObject(function($other) {
             return write("I am ".add($this("name")).add(". Glad to meet you ").add($other));
-        }), 0)), 
-        assign($this, ["age"], $age, 0);
+        }))), 
+        assign($this, ["age"], $age);
     });
 }), 
 $john = $Person("John")(Complex("25"))), 
