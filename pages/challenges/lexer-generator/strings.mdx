@@ -1,34 +1,35 @@
-## Using String Arrays to Define new Tokens
+## Using Strings to Define new Tokens
 
-Moo makes it convenient to define literal tokens using an array of strings.
+Moo makes it easy to define literal tokens using this syntax:
 
 ```js
     moo.compile({
-      keyword: ['while', 'if', 'else', 'moo', 'cows'],
+      lparen:  '(',
+      rparen:  ')'
     })
 ```
 
-So that `while`, `if`, etc.  will be recognized as a token of type  `keyword`.
+Add to your lexical generator a similar functionality to define literals so that tokens can be defined using this syntax:
 
-Add to your lexical generator a similar functionality to define literals so that tokens can be defined this way:
-
-```js{4}
-const myTokens = [
-  SPACE, COMMENT, 
-  NUMBER, 
-  { KEYWORD: ["let", "const"] },
-  ID, 
-  STRING, PUNCTUATOR
+```js {5-7} showLineNumbers
+const tokens = [
+  SPACE,
+  NUMBER,
+  STRING,
+  {LP: "(" },
+  {RP: ")" },
+  {COMMA: "," },
+  WORD,
 ];
-const { lexer } = buildLexer(myTokens);
 ```
 
-So that `let` and `const` will be recognized as a token of type  `KEYWORD`.
+So that a token of type `LP` will be returned each time a `(` is found in the input.
+The entry `{LP: "(" }` is equivalent to write `/(?<LP>\)/`.
 
 Here is a full example:
 
-```js
-➜  lexer-generator-solution git:(transform-challenge) ✗ cat examples/strings-array-challenge.js  
+```js showLineNumbers
+➜  lexer-generator-solution git:(transform-challenge) ✗ cat examples/strings-challenge.js 
 "use strict";
 
 const {buildLexer} = require("../src/main.js");
@@ -43,10 +44,9 @@ const PUNCTUATOR = /(?<PUNCTUATOR>[-+*\/=;])/;
 const myTokens = [
   SPACE, COMMENT, 
   NUMBER, 
-  { KEYWORD: ["let", "const"] },
-  ID, 
-  STRING, PUNCTUATOR
-];
+  { LET: 'let'},
+  { CONST: 'const'},
+  ID, STRING, PUNCTUATOR];
 
 const { lexer } = buildLexer(myTokens);
 
@@ -57,17 +57,17 @@ const result = lexer(str);
 console.log(result);
 ```
 
-That when executed produces this output:
+Follows an execution of the former program:
 
-```js
-➜  lexer-generator-solution git:(transform-challenge) ✗ node examples/strings-array-challenge.js 
+```js {3,8,9} showLineNumbers
+➜  lexer-generator-solution git:(transform-challenge) ✗ node examples/strings-challenge.js 
 [
-  { type: 'KEYWORD', value: 'const', line: 1, col: 1, length: 5 },
+  { type: 'CONST', value: 'const', line: 1, col: 1, length: 5 },
   { type: 'ID', value: 'varName', line: 1, col: 7, length: 7 },
   { type: 'PUNCTUATOR', value: '=', line: 3, col: 1, length: 1 },
   { type: 'NUMBER', value: 3, line: 4, col: 2, length: 1 },
   { type: 'PUNCTUATOR', value: ';', line: 4, col: 3, length: 1 },
-  { type: 'KEYWORD', value: 'let', line: 5, col: 1, length: 3 },
+  { type: 'LET', value: 'let', line: 5, col: 1, length: 3 },
   { type: 'ID', value: 'z', line: 5, col: 5, length: 1 },
   { type: 'PUNCTUATOR', value: '=', line: 5, col: 7, length: 1 },
   { type: 'STRING', value: '"value"', line: 5, col: 9, length: 7 }

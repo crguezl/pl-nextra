@@ -4,7 +4,7 @@ Add to your lexical generator a new functionality: When the regexp has a `transf
 
 The example below illustrates how the new functionality can be used to manage keywords when the token for `ID` matches:
 
-```js 
+```js showLineNumbers {10-14} filename="examples/transform-challenge.js"
 ➜  lexer-generator-solution git:(transform-challenge) cat examples/transform-challenge.js 
 "use strict";
 
@@ -38,13 +38,13 @@ console.log(result);
 
 When executed for the input 
 
-```js
+```js /let/ /const/
 'const varName \n// An example of comment\n=\n 3;\nlet z = "value"'
 ```
 
 has to produce the token `RESERVEDWORD` instead of `ID` for `const` and `let`: 
 
-```js
+```js showLineNumbers {3,8} filename="examples/transform-challenge.js"
 ➜  lexer-generator-solution git:(transform-challenge) ✗ node examples/transform-challenge.js
 [
   { type: 'RESERVEDWORD', value: 'const', line: 1, col: 1, length: 5 },
