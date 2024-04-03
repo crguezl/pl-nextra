@@ -11,7 +11,7 @@ Moo makes it easy to define literal tokens using this syntax:
 
 Add to your lexical generator a similar functionality to define literals so that tokens can be defined using this syntax:
 
-```js{5-7}
+```js {5-7}
 const tokens = [
   SPACE,
   NUMBER,
@@ -59,7 +59,7 @@ console.log(result);
 
 Follows an execution of the former program:
 
-```js{3,8,9}
+```js {3,8,9}
 ➜  lexer-generator-solution git:(transform-challenge) ✗ node examples/strings-challenge.js 
 [
   { type: 'CONST', value: 'const', line: 1, col: 1, length: 5 },
