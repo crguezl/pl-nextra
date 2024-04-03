@@ -27,7 +27,7 @@ So that `let` and `const` will be recognized as a token of type  `KEYWORD`.
 
 Here is a full example:
 
-```js
+```js showLineNumbers {16,23} filename="examples/strings-array-challenge.js"
 ➜  lexer-generator-solution git:(transform-challenge) ✗ cat examples/strings-array-challenge.js  
 "use strict";
 
@@ -59,7 +59,7 @@ console.log(result);
 
 That when executed produces this output:
 
-```js showLineNumbers
+```js showLineNumbers {3,8} filename="examples/strings-array-challenge.js"
 ➜  lexer-generator-solution git:(transform-challenge) ✗ node examples/strings-array-challenge.js 
 [
   { type: 'KEYWORD', value: 'const', line: 1, col: 1, length: 5 },
