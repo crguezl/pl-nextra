@@ -1,0 +1,75 @@
+## Using String Arrays to Define new Tokens
+
+Moo makes it convenient to define literal tokens using an array of strings.
+
+```js
+    moo.compile({
+      keyword: ['while', 'if', 'else', 'moo', 'cows'],
+    })
+```
+
+So that `while`, `if`, etc.  will be recognized as a token of type  `keyword`.
+
+Add to your lexical generator a similar functionality to define literals so that tokens can be defined this way:
+
+```js{4}
+const myTokens = [
+  SPACE, COMMENT, 
+  NUMBER, 
+  { KEYWORD: ["let", "const"] },
+  ID, 
+  STRING, PUNCTUATOR
+];
+const { lexer } = buildLexer(myTokens);
+```
+
+So that `let` and `const` will be recognized as a token of type  `KEYWORD`.
+
+Here is a full example:
+
+```js
+➜  lexer-generator-solution git:(transform-challenge) ✗ cat examples/strings-array-challenge.js  
+"use strict";
+
+const {buildLexer} = require("../src/main.js");
+
+const SPACE = /(?<SPACE>\s+)/; SPACE.skip = true;
+const COMMENT = /(?<COMMENT>\/\/.*)/; COMMENT.skip = true;
+const NUMBER = /(?<NUMBER>\d+)/; NUMBER.value = v => Number(v);
+const ID = /(?<ID>\b([a-z_]\w*)\b)/;
+const STRING = /(?<STRING>"([^\\"]|\\.")*")/;
+const PUNCTUATOR = /(?<PUNCTUATOR>[-+*\/=;])/;
+
+const myTokens = [
+  SPACE, COMMENT, 
+  NUMBER, 
+  { KEYWORD: ["let", "const"] },
+  ID, 
+  STRING, PUNCTUATOR
+];
+
+const { lexer } = buildLexer(myTokens);
+
+const str = 'const varName \n// An example of comment\n=\n 3;\nlet z = "value"';
+
+const result = lexer(str);
+
+console.log(result);
+```
+
+That when executed produces this output:
+
+```js
+➜  lexer-generator-solution git:(transform-challenge) ✗ node examples/strings-array-challenge.js 
+[
+  { type: 'KEYWORD', value: 'const', line: 1, col: 1, length: 5 },
+  { type: 'ID', value: 'varName', line: 1, col: 7, length: 7 },
+  { type: 'PUNCTUATOR', value: '=', line: 3, col: 1, length: 1 },
+  { type: 'NUMBER', value: 3, line: 4, col: 2, length: 1 },
+  { type: 'PUNCTUATOR', value: ';', line: 4, col: 3, length: 1 },
+  { type: 'KEYWORD', value: 'let', line: 5, col: 1, length: 3 },
+  { type: 'ID', value: 'z', line: 5, col: 5, length: 1 },
+  { type: 'PUNCTUATOR', value: '=', line: 5, col: 7, length: 1 },
+  { type: 'STRING', value: '"value"', line: 5, col: 9, length: 7 }
+]
+```
