@@ -118,23 +118,20 @@ write(f(4))  # 1000
 The translation of the former code can be s.t. like the following:
 
 ```js showLineNumbers /assign/ filename="test/data/expectedjs/fun.js" copy /functionObject/
-➜  left-side-solution git:(develop) ✗ bin/calc2js.mjs test/data/input/fun-on-the-left-side.calc              
-#!/usr/bin/env node
-const { functionObject, assign, Complex, write } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/left-side/left-side-solution/src/support-lib.js"); 
+➜  left-side-solution git:(main) bin/calc2js.mjs test/data/input/fun.calc      
+#!/usr/bin/env node --stack-size=65500
+const { functionObject, Complex, assign, write } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/left-side/left-side-solution/src/support-lib.js"); 
 /* End of support code */
- 
+
 let $f;
 
-(((($f = functionObject(function($x) {
-    return functionObject(function($y) {
-        return $x.add($y);
-    });
-}), 
-assign($f, [Complex("2"), Complex("3")], Complex("8"))), 
-write($f(Complex("2"))(Complex("3")))), 
-write($f(Complex("2"))(Complex("5")))), 
-write($f(Complex("3"))(Complex("1")))),
-write($f(Complex("9"))(Complex("2")));
+((((
+$f = functionObject(function($x) { return $x.add(Complex("1")); }), 
+assign($f, [Complex("0").add(Complex("2"))], Complex("8"))), 
+assign($f, [Complex("1").add(Complex("3"))], Complex("1000"))), 
+write($f(Complex("0")))),
+write($f(Complex("2")))),
+write($f(Complex("4")));
 ```
 When you run the former code you get the following output:
 ```
@@ -185,22 +182,22 @@ write(f(9)(2))   # 11
 The former code modifies the code of the function `$f`  created in the first assignment
 
 ```js showLineNumbers {14} filename="test/data/expectedjs/fun-on-the-left-side.js"
-➜  left-side-solution git:(main) cat test/data/expectedjs/fun-on-the-left-side.js
-#!/usr/bin/env node
+➜  left-side-solution git:(main) ✗ cat  test/data/expectedjs/fun-on-the-left-side.js
+#!/usr/bin/env node --stack-size=65500
 const { functionObject, assign, Complex, write } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/left-side/left-side-solution/src/support-lib.js"); 
-  
 /* End of support code */
 
 let $f;
 
-(((($f = functionObject(function($x) {
-    return functionObject(function($y) {
-        return $x.add($y);
+((((
+$f = functionObject(function($x) { 
+    return functionObject(function($y) { 
+        return $x.add($y); 
     });
 }), 
 assign($f, [Complex("2"), Complex("3")], Complex("8"))), 
 write($f(Complex("2"))(Complex("3")))), 
-write($f(Complex("2"))(Complex("5")))),
+write($f(Complex("2"))(Complex("5")))), 
 write($f(Complex("3"))(Complex("1")))), 
 write($f(Complex("9"))(Complex("2")));
 ```
@@ -277,19 +274,21 @@ write(f(g)(4))  # 19
 Notice that the new feature is quite powerful. Object oriented programming can be done with it. For example
 
 ```js showLineNumbers filename="test/data/input/object.calc" copy
-➜  functions-solution git:(array-map) ✗ cat test/data/input/object.calc
+➜  left-side-solution git:(main) ✗ cat test/data/input/object.calc
 obj = fun(x) { x },
 obj("name") = "John",
 obj("age") = 42,
 obj("greet") = fun(other) {
-    write("I am "+obj("name")+". Glad to meet you "+other)
+    write("I am "+obj("name")+
+    ". I am "+obj("age")+
+    " years old. Glad to meet you "+other)
 },
 obj("greet")("Juana")
 ``` 
 When you run the former code you get the following output:
 ```bash showLineNumbers
-➜  functions-solution git:(array-map) ✗ bin/calc2js.mjs test/data/input/object.calc | node
-I am John. Glad to meet you Juana
+➜  left-side-solution git:(main) ✗ bin/calc2js.mjs test/data/input/object.calc | node
+I am John. I am 42 years old. Glad to meet you Juana
 ```
 
 <Callout type="error">
@@ -302,14 +301,16 @@ Notice how the `obj` method `greet` is able to access the properties of `obj` li
 The following code defines a sort of *"class"* `Person` that has a constructor that receives a `name` and an `age`. The class has a method `greet` that receives the `other` argument and writes a message to the console. We are using the semicolon notation that will be introduced in the section [Currying and multiple arguments for functions](#currying-and-multiple-arguments-for-functions) of this lab.
 
 ```js showLineNumbers copy filename="test/data/input/object-template.calc" branch="array-map" /"John"; 25/
+➜  left-side-solution git:(main) ✗ cat test/data/input/object-template.calc
 Person = fun(name) {
     this = fun () { 0 },
     this("name") = name,
     this("greet") = fun(other) {
       write("I am "+this("name")+". Glad to meet you "+other)
     },
-    fun(age) {          # scope analysis must change!!!
-      this("age") = age # this is not local to this function
+    fun(age) { # scope analysis must change
+      this("age") = age, # this is not local to this function
+      this
     }
 },
 john = Person("John"; 25),
@@ -319,8 +320,8 @@ john("greet")("Juana")
 Once we are sure we have rightly modified the scope analysis to consider the fact that `a(expression) = value` is a modification but not a definition, we can proceed to the translation of the former code. Here is a potential translation of the former code:
 
 ```js showLineNumbers filename="test/data/expectedjs/object-template.js" copy /assign/ /functionObject/
-➜  left-side-solution git:(main) cat test/data/expectedjs/object-template.js
-#!/usr/bin/env node
+➜  left-side-solution git:(main) ✗ bin/calc2js.mjs test/data/input/object-template.calc 
+#!/usr/bin/env node --stack-size=65500
 const { functionObject, Complex, assign, write } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/left-side/left-side-solution/src/support-lib.js"); 
 /* End of support code */
  
@@ -329,17 +330,15 @@ let $Person, $john;
 ($Person = functionObject(function($name) {
     let $this;
 
-    return (($this = functionObject(function() {
-        return Complex("0");
-    }), 
+    return (((
+    $this = functionObject(function() { return Complex("0"); }), 
     assign($this, ["name"], $name)), 
-    assign($this, ["greet"], 
-    functionObject(function($other) {
+    assign($this, ["greet"], functionObject(function($other) {
         return write("I am ".add($this("name")).add(". Glad to meet you ").add($other));
     }))), 
     functionObject(function($age) {
-        return assign($this, ["age"], $age);
-    });
+        return assign($this, ["age"], $age), $this;
+    }))
 }), 
 $john = $Person("John")(Complex("25"))), 
 $john("greet")("Juana");
@@ -365,19 +364,22 @@ Person = fun(name; age) {
 
     this("setAge") = fun(newAge) {
       this("age") = newAge # if it is a setter changes the reference to the object
-    }
+    },
+    this
 },
 thom = Person("Thom"; 78),
 thom("setAge")(80),
 write(thom("name"); "is"; thom("age"))
 ```
 
+Notice also that we are returning `this` at the end of the constructor. If you remove  line 10 it will not work.
+
+
 When you compile the former code you get the following Javascript code:
 
-```js showLineNumbers copy filename="test/data/expectedjs/object-template-semicolon-3.js" {18-20,24}
-➜  left-side-solution git:(main) bin/calc2js.mjs test/data/input/object-template-semicolon-3.calc  
-
-#!/usr/bin/env node
+```js showLineNumbers copy filename="test/data/expectedjs/object-template-semicolon-3.js" {17-20,24}
+➜  left-side-solution git:(main) ✗ bin/calc2js.mjs test/data/input/object-template-semicolon-3.calc      
+#!/usr/bin/env node --stack-size=65500
 const { functionObject, assign, Complex, write } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/left-side/left-side-solution/src/support-lib.js"); 
 /* End of support code */
 
@@ -387,14 +389,15 @@ let $Person, $thom;
     return functionObject(function($age) {
         let $this;
 
-        return (($this = functionObject(function($x) {
+        return ((($this = functionObject(function($x) {
             return $x;
         }), 
         assign($this, ["name"], $name)), 
         assign($this, ["age"], $age)), 
         assign($this, ["setAge"], functionObject(function($newAge) {
             return assign($this, ["age"], $newAge);
-        }));
+        }))), 
+        $this;
     });
 }), 
 $thom = $Person("Thom")(Complex("78"))), 
@@ -557,14 +560,15 @@ When you run the former code you get the following output:
 
 Here is a new version of the `Person` class that uses the semicolon notation:
 
-```js showLineNumbers copy filename="test/data/input/object-template-semicolon.calc" {1,9}
+```js showLineNumbers copy filename="test/data/input/object-template-semicolon.calc" {1,8}
 Person = fun(name; age) {
     this = fun () { 0 },
     this("name") = name,
     this("greet") = fun(other) {
       write("I am "+this("name")+". Glad to meet you "+other)
     },
-    this("age") = age # this is not local to this function
+    this("age") = age, # this is not local to this function
+    this
 },
 john = Person("John"; 25),
 john("greet")("Juana")
@@ -578,25 +582,27 @@ That when compiled
 
 produces the following JavaScript code:
 
-```js showLineNumbers copy filename="test/data/expectedjs/object-template-semicolon.js" {8-9,21}
-➜  left-side-solution git:(main) bin/calc2js.mjs test/data/input/object-template-semicolon.calc                                                   
-#!/usr/bin/env node
+```js showLineNumbers copy filename="test/data/expectedjs/object-template-semicolon.js" {8-9,20}
+➜  left-side-solution git:(main) ✗ bin/calc2js.mjs test/data/input/object-template-semicolon.calc
+#!/usr/bin/env node --stack-size=65500
 const { functionObject, Complex, assign, write } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/left-side/left-side-solution/src/support-lib.js"); 
 /* End of support code */
- 
+
 let $Person, $john;
 
 ($Person = functionObject(function($name) {
     return functionObject(function($age) {
         let $this;
 
-        return ((
-        $this = functionObject(function() { return Complex("0"); }), 
+        return ((($this = functionObject(function() {
+            return Complex("0");
+        }), 
         assign($this, ["name"], $name)), 
         assign($this, ["greet"], functionObject(function($other) {
             return write("I am ".add($this("name")).add(". Glad to meet you ").add($other));
         }))), 
-        assign($this, ["age"], $age);
+        assign($this, ["age"], $age)), 
+        $this;
     });
 }), 
 $john = $Person("John")(Complex("25"))), 

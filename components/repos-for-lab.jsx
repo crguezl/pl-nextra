@@ -12,6 +12,7 @@ export default function ReposForLab({ lab}) {
           GitHub Classroom Assignments for lab {lab}
           </Link>
         </li>
+        <li><Link href={"https://github.com/ULL-ESIT-PL/"+lab+"-template"}>Repo template</Link></li>
       </ul>
     </div>
   )
