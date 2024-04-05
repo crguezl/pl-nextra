@@ -7,8 +7,8 @@ const config: DocsThemeConfig = {
   banner: {
     key: 'functions',
     text: (<span> 
-      <a href="/labs/lexer-generator#videos" target="_blank">
-        Lab lexer-generator deadline is 04/04 →
+      <a href="/labs/lexer-generator##gorace-experiment" target="_blank">
+        Ready for GoRace? deadline is 04/04 →
       </a>
     </span>
     )
