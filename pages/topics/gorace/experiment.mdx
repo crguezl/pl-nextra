@@ -1,26 +1,73 @@
 import Videos from '@/components/videos'
 import Image from 'next/image'
- 
-GoRace is a web app designed by people at [Universidad de Cadiz](https://gorace.uca.es/en/about-us) to gamify a set of activities. 
-Visit the landing page at https://gorace.uca.es/.
-Once the race manager/teacher has set the race, the runner/students's progress in the activities is visualized as an Olympic race which is set by the manager.
+import Link from 'next/link'
 
-As his TFM, our student [Claudio Nestor](https://github.com/claudio4) is writing an extension web app (a web service plus a Cli, plus a GitHub app) for GoRace that allows to feed a GoRace "race" with the student results provided by the GitHub Classroom Autograding System.
+GoRace es una aplicación web diseñada por gente de la [Universidad de Cádiz](https://gorace.uca.es/es/about-us) para gamificar un conjunto de actividades.
+Visita la página de aterrizaje en https://gorace.uca.es/.
+Una vez que el director de carrera/profesor ha fijado la carrera, el progreso del corredor/estudiantes en las actividades se visualiza como una carrera olímpica fijada por el director.
+
+Como TFM, nuestro estudiante [Claudio Nestor](https://github.com/claudio4) está escribiendo una aplicación web de extensión (un servicio web más un Cli, más una aplicación GitHub) para GoRace que permite alimentar una "carrera" de GoRace con los resultados de los estudiantes proporcionados por el sistema de calificación automática de GitHub Classroom.
 
 
 <Image src="/images/gorace-teide.png" alt="/images/gorace-teide.png" width={400} height={400} />
 
-The software is now reaching an state in which we can make a [staging test](https://www.abtasty.com/blog/test-environment/) and thus we are intending to use it for the lab [left-side](/labs/left-side).
-
-These are the instructions for the race:
-
-1. You will receive an email to register for the race. Please click on the link to accept your registration in GoRace.  
-2. Do not start pushing to the assignment repo until you have accepted the race.
-
-If you want to collaborate with us, please follow these instructions. 
+El software ahora está alcanzando un estado en el que podemos realizar una [prueba de preparación](https://www.abtasty.com/blog/test-environment/) y, por lo tanto, tenemos la intención de usarlo para el laboratorio [left side](/labs/left-side).
 
 <Videos ids={["KI8Qh8mCpkg?si=gY0qf1jVkybGxufP"]}></Videos>
 
-Many things can go wrong with this experiment. We ask for your understanding of the errors and difficulties that will surely arise. 
+Muchas cosas pueden salir mal con este experimento. Solicitamos su comprensión ante los errores y dificultades que seguramente surgirán.
 
-The system is not currently prepared to detect cheating. As always, we count on your commitment to comply with the rules and play fairly.
+Actualmente, el sistema no está preparado para detectar trampas. Como siempre, contamos con tu compromiso para cumplir las reglas y jugar limpio.
+
+
+Si quieres colaborar con nosotros, **sigue estas instrucciones**{/*<li><a href="https://classroom.github.com/a/IZMNL_JT" target="_blank">Acepte la asignación</a> */}
+* Antes de comenzar la carrera rellene este [cuestionario](https://forms.gle/oY2eNr9vqYJitHvv8).  
+Este cuestionario es  tanto para conocer su información demográfica y también tiene que contestar el test de Bartle para determinar su perfil de jugador (Pre-Cuestionario). <b>Este cuestionario debería realizarse el primer dia de la experiencia, a ser posible antes de comenzar con la carrera</b> 
+* You will receive an email to register for the race. Please click on the link to accept your registration in GoRace.  
+* Cuando les llegue el email de registro  recuerda  que tienes que elegir un Nickname y un Password para finalizar el registro y como consejo, recuerda que el Nickname no es el correo electrónico, sino el nombre que tendrá su avatar en la carrera (pasa a veces que los alumnos ponen el correo o el identificador de la universidad).
+* Do not start pushing to the assignment repo until you have filled the [cuestionario](https://forms.gle/oY2eNr9vqYJitHvv8) and accepted the race.
+* La carrera se abrirá el  viernes 05/04/2024. Hay dos carreras a la vez, una de prueba GITHUB_TEST y la otra reaL PLULL24. Asegúrate de que estás en la carrera correcta (PLULL24).
+
+
+**The Bartle Test**
+
+Is a test based on the player types identified by  Richard Bartle in his paper, [Hearts, Clubs, Diamonds, Spades: Players Who Suit MUDs](http://mud.co.uk/richard/hcds.htm). It is strongly recommended that you read this paper if you wish to find out more about your player type, and what it all means. Bartle revisits and expands upon these ideas in his book, <i>Designing Virtual Worlds</i>, which is also recommended if you wish to delve a little deeper.
+
+{/* 
+Buenas tardes de nuevo, Casiano y Claudio,
+
+Os mando las directrices para la nueva experiencia. Las credenciales como administradores siguen siendo las mismas, eso sí ahora al entrar en la aplicación observaréis que podéis seleccionar la experiencia a gestionar (desplegable en la esquina superior derecha del entorno), ya sea la de prueba (GITHUB_Test) o la nueva, denominada PLULL24. 
+
+Como con la aplicación anterior, podréis observar toda la información necesaria para las peticiones de la API relacionadas con los entregables (Assignments) y variables de la APP en la sección Home del entorno. En concreto, la nueva aplicación posee una única actividad denominada "left-side", tal como indicastéis en la documentación. La actividad se ha definido para ser de tipo "Improvement", esto significa que cada vez que se envíen datos sobre ellas, el sistema se quedará con la mejor puntuación recibida. Entiendo que este es el funcionamiento del ejercicio, de no ser así, por favor informarme para realizar los cambios oportunos.
+
+Las variables que evalúan dicha actividad, las cuales se tienen que pasar cada vez que se envíen resultados son las siguientes:
+
+FUND 
+COND 
+FUNLEFT 
+MAN 
+OBJ
+
+Dichas variables se han definido también de acuerdo a la información facilitada en la documentación de planificación de la estrategia. Es importante, como se cita en la documentación de la API que los nombres de los "assignments" y "variables" sean los mismos, ya que el sistema se encarga de hacer el enlace y convertir los resultados de las variables para cada entregable facilitados en una cantidad de puntos con diferentes significados dentro de la narrativa que engloba GoRace. Finalmente como hemos comentado, los nombres de las variables se han reducido y son en mayúsculas.
+
+Toda esta información será necesaria para realizar las peticiones vía API y observar su funcionamiento. Pero no podrá comenzar con la experiencia hasta crear los parámetros necesarios para conectar GITHUB Classroom con la API de GoRace los cuales se generan en la sección API de la administración. En dicha sección, recordad que tendréis que generar la nueva clave de acceso a la aplicación (JWT) y dar de alta la dirección IP desde la que se llevarán a cabo las peticiones.
+
+Para que podáis probar la experiencia creada, he definido que empiece hoy a las 18:00h. Esto no influye en la carrera, dado que los alumnos no estarán dados de alta, entiendo que hasta mañana.
+
+Por otro lado, una vez que probéis la correcta conexión y funcionamiento con la nueva experiencia, ya solo quedaría que dieséis de alta a los alumnos y que ellos completarán el registro, a través del correo que les llegará. Así mismo, recordadles que tienen que elegir un Nickname y un Password para finalizar el registro y como consejo, que el Nickname no es el correo electrónico, sino el nombre que tendrá su avatar en la carrera (nos ha pasado que ponen el correo o el identificador de la universidad).
+
+Tras eso la experiencia comenzará. He puesto su fecha de finalización el 11 de abril a las 23:59:59, si preferís que la hora de finalización sea antes, para poder gestionar el cierre de la experiencia en clase, no dudéis en comentarmelo y lo cambio en un momento.
+
+Por lo demás, durante la experiencia recordad también que tenéis las funciones de administrador para crear códigos, a modo de premios, y usar el modo dios, para dinamizar la experiencia en tiempo real, premiando o catigando los comportamientos que queráis.
+
+Por último, dado que vais a llevar una experiencia con alumnos, os agradeceríamos que pasaráis a los participantes un par de cuestionarios para evaluar la experiencia de cara a seguir mejorando GoRace y la creación de las estrategias. El primero es para conocer su información demográfica y tienen que contestar el test de Bartle para asociarlos con un perfil de jugador (Pre-Cuestionario). Este cuestionario debería realizarse el primer dia de la experiencia, a ser posible antes de comenzar con ella. Por otro lado, el segundo cuestionario evalúa la experiencia con GoRace y también la experiencia conjunta entre GoRace y Github Classroom (Post-Cuestionario). Este cuestionario debería realizarse al finalizar la experiencia.
+
+A continuación os facilito los links a los cuetionarios, los cuales se han definido mediante un formulario de Google:
+Pre-Cuestionario: https://forms.gle/oY2eNr9vqYJitHvv8
+Post-Cuestionario: https://forms.gle/hqiC6NusRUiFiSHj8
+
+Creo que no se me olvida nada más por comentar, no obstante, cualquier cosa, no dudéis en ponerse en contacto con nosotros.
+
+Saludos,
+Alejandro
+*/}
