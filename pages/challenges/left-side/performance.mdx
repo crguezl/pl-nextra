@@ -1,0 +1,139 @@
+## Challenge: Performance of extended assignments
+
+This is the challenge for lab **leftside**. 
+
+Consider the following input:
+
+```js filename="test/data/input/assign-performance.calc" showLineNumbers copy
+n = Complex(commandLine(2)),  # number of assignments
+if (n < 2) { n = 4 },
+write(n;" repetitions"),
+f = fun(x) { 0 },    # identity
+experiment = fun() {
+    # Make assignments
+    for(j=0;j<n;j=j+1) {
+      f(j) = j
+    },
+    # Use assignments
+    for(j=0;j<n;j=j+1) {
+      result = f(j)
+    }
+
+},
+performance("assign"; experiment)
+```
+that  when executed gives the time in milliseconds spent in the function `experiment`. The number of assignments can be given as a command line argument.
+
+```js showLineNumbers
+➜  left-side-solution git:(main) ✗ bin/calc2js.mjs test/data/input/assign-performance.calc -o test/data/actualjs/assign-performance.js
+➜  left-side-solution git:(main) ✗ test/data/actualjs/assign-performance.js
+4  repetitions
+assign: 0.782ms
+➜  left-side-solution git:(main) ✗ test/data/actualjs/assign-performance.js 6
+6  repetitions
+assign: 0.887ms
+```
+
+Whe we use the algorithm described in the lab for the assignment 
+
+```js filename="src/assign-simple.js" showLineNumbers copy
+function assign(oF, cacheArgs, cacheValue) {
+    let f;
+    if (oF?.constructor?.name === "FunctionObject") {
+        f = oF.toFunction();
+        //console.log(`FunctionObject in assign`)
+    } else {
+        //console.log(`Not a FunctionObject in assign`)
+        f = oF;
+    }
+    //console.log('f', f.toString().slice(0,8), cacheArgs, cacheValue, i);
+    oF.function = _assign(f, cacheArgs, cacheValue, 0);
+    return oF;    
+}
+
+function _assign(f, cacheArgs, cacheValue, i) {
+    let next = i+1;
+    //debugger;
+    if (f.constructor.name == "ArrayFunction") { // If f is an array function
+        f.assign(cacheArgs, cacheValue);
+        return f; 
+    }
+    let cacheArgument = cacheArgs[i];
+
+    return function (...args) {
+        let auxF = f;
+
+        if (cacheArgument == null) {
+            let error = new Error('Invalid null argument on left side of assignment');
+            throw error;
+        }
+        if (args[0].equals && args[0]?.equals(cacheArgument) || args[0] == cacheArgument) {  
+            if (cacheArgs.length === next) {
+                return cacheValue;
+            }
+            auxF = f(...args);
+            return _assign(auxF, cacheArgs, cacheValue, next)
+        }
+        return auxF(...args);
+    }
+}
+
+console.error("assign simple ")
+
+module.exports = { assign };
+```
+
+We get 5 secs for 100 assignments, 1 minute for 1000 assignments and a stack overflow for 10000 assignments:
+
+```js showLineNumbers
+➜  left-side-solution git:(main) ✗ test/data/actualjs/assign-performance.js 100 
+100  repetitions
+assign: 4.786ms
+➜  left-side-solution git:(main) ✗ test/data/actualjs/assign-performance.js 1000
+1000  repetitions
+assign: 59.203ms
+➜  left-side-solution git:(main) ✗ test/data/actualjs/assign-performance.js 10000
+10000  repetitions
+/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/left-side/left-side-solution/node_modules/complex.js/complex.js:1293
+RangeError: Maximum call stack size exceeded
+```
+
+A trivial solution to the stack overflow problem is to increase the stack size:
+
+```js showLineNumbers copy
+➜  left-side-solution git:(main) ✗ bin/calc2js.mjs test/data/input/assign-performance.calc -o test/data/actualjs/assign-performance.js -n '-stack-size=65536'
+➜  left-side-solution git:(main) ✗ test/data/actualjs/assign-performance.js 10000
+10000  repetitions
+assign: 3.971s
+```
+
+The stack overflow dissapears, but the time is still too high. 
+
+The challenge is to improve the performance of the algorithm in `src/assign-simple.js` so that it can handle more assignments and work with smaller stacks.
+
+Here we run an alternative implementation of the algorithm. We can see that it is 119 times faster than the original implementation. It also dos not require an increase in the stack size:
+
+```js filename="src/assign-improved.js" showLineNumbers copy
+➜  left-side-solution git:(main) ✗ test/data/actualjs/assign-performance.js 10000
+10000  repetitions
+assign: 33.386ms
+➜  left-side-solution git:(main) ✗ node
+> 3971/33.386 // we divide the previous time with the simple approach by the time with the improved approach
+118.94207152698735
+```
+
+Here  are the times for 1e5 (0.2 seconds), 1e6 (1.2 seconds) and 1e7 (13 seconds) assignments:
+
+```js showLineNumbers
+➜  left-side-solution git:(main) ✗ test/data/actualjs/assign-performance.js 100000
+100000  repetitions
+assign: 182.074ms
+➜  left-side-solution git:(main) ✗ test/data/actualjs/assign-performance.js 1000000
+1000000  repetitions
+assign: 1.243s
+➜  left-side-solution git:(main) ✗ test/data/actualjs/assign-performance.js 10000000
+10000000  repetitions
+assign: 13.078s
+```
+
+The idea behind this version of the algorithm is to simply use a cache for the assignments. 
