@@ -111,7 +111,7 @@ The stack overflow dissapears, but the time is still too high.
 
 The challenge is to improve the performance of the algorithm in `src/assign-simple.js` so that it can handle more assignments and work with smaller stacks.
 
-Here we run an alternative implementation of the algorithm. We can see that it is 119 times faster than the original implementation. It also dos not require an increase in the stack size:
+Here we run an alternative implementation of the algorithm. We can see that it is 119 times faster than the original implementation. It also does not require an increase on the stack size:
 
 ```js filename="src/assign-improved.js" showLineNumbers copy
 ➜  left-side-solution git:(main) ✗ test/data/actualjs/assign-performance.js 10000
@@ -122,7 +122,7 @@ assign: 33.386ms
 118.94207152698735
 ```
 
-Here  are the times for 1e5 (0.2 seconds), 1e6 (1.2 seconds) and 1e7 (13 seconds) assignments:
+Here  are the times for sizes 1e5 (0.2 seconds), 1e6 (1.2 seconds) and 1e7 (13 seconds) assignments:
 
 ```js showLineNumbers
 ➜  left-side-solution git:(main) ✗ test/data/actualjs/assign-performance.js 100000
@@ -135,5 +135,12 @@ assign: 1.243s
 10000000  repetitions
 assign: 13.078s
 ```
+
+Here is a summary of the times:
+
+| size       | 1e5     | 1e6 | 1e7 |
+|------       |-----            |-----|-----|
+| time **simple** | 💥 (overflow)    | 💥 | 💥 |
+| time **cached** | 0.182s | 1.243s | 13.078s |
 
 The idea behind this version of the algorithm is to simply use a cache for the assignments. 
