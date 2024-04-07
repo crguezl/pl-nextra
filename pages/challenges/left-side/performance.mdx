@@ -1,14 +1,14 @@
-## Challenge: Performance of extended assignments
+import { Callout } from 'nextra/components'
 
-This is the challenge for lab **leftside**. 
+## Challenge: Performance of extended assignments
 
 Consider the following input:
 
 ```js filename="test/data/input/assign-performance.calc" showLineNumbers copy
 n = Complex(commandLine(2)),  # number of assignments
-if (n < 2) { n = 4 },
+if (n < 2) { n = 4 },         # if no argument is given or less than 2, n = 4
 write(n;" repetitions"),
-f = fun(x) { 0 },    # identity
+f = fun(x) { 0 },             # initial value of f
 experiment = fun() {
     # Make assignments
     for(j=0;j<n;j=j+1) {
@@ -20,7 +20,7 @@ experiment = fun() {
     }
 
 },
-performance("assign"; experiment)
+performance("assign"; experiment) # measure the time spent in the experiment
 ```
 that  when executed gives the time in milliseconds spent in the function `experiment`. The number of assignments can be given as a command line argument.
 
@@ -41,23 +41,15 @@ function assign(oF, cacheArgs, cacheValue) {
     let f;
     if (oF?.constructor?.name === "FunctionObject") {
         f = oF.toFunction();
-        //console.log(`FunctionObject in assign`)
     } else {
-        //console.log(`Not a FunctionObject in assign`)
         f = oF;
     }
-    //console.log('f', f.toString().slice(0,8), cacheArgs, cacheValue, i);
     oF.function = _assign(f, cacheArgs, cacheValue, 0);
     return oF;    
 }
 
 function _assign(f, cacheArgs, cacheValue, i) {
     let next = i+1;
-    //debugger;
-    if (f.constructor.name == "ArrayFunction") { // If f is an array function
-        f.assign(cacheArgs, cacheValue);
-        return f; 
-    }
     let cacheArgument = cacheArgs[i];
 
     return function (...args) {
@@ -77,13 +69,12 @@ function _assign(f, cacheArgs, cacheValue, i) {
         return auxF(...args);
     }
 }
-
-console.error("assign simple ")
-
 module.exports = { assign };
 ```
 
-We get 5 secs for 100 assignments, 1 minute for 1000 assignments and a stack overflow for 10000 assignments:
+<Callout type="error">
+
+We get 5 secs for 100 assignments, 1 minute for 1000 assignments and a stack overflow 💥 for 10000 assignments:
 
 ```js showLineNumbers
 ➜  left-side-solution git:(main) ✗ test/data/actualjs/assign-performance.js 100 
@@ -97,6 +88,7 @@ assign: 59.203ms
 /Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/left-side/left-side-solution/node_modules/complex.js/complex.js:1293
 RangeError: Maximum call stack size exceeded
 ```
+</Callout>
 
 A trivial solution to the stack overflow problem is to increase the stack size:
 
