@@ -7,8 +7,9 @@ const config: DocsThemeConfig = {
   banner: {
     key: 'functions',
     text: (<span> 
-      <a href="/labs/lexer-generator##gorace-experiment" target="_blank">
-        Ready for GoRace? deadline is 04/04 →
+      <a href="https://gorace.uca.es/app/" target="_blank">To the Race!. </a>
+      <a href="/labs/left-side##gorace-experiment" target="_blank">
+         Lab left-side. deadline is 11/04 →
       </a>
     </span>
     )

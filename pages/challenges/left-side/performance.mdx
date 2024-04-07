@@ -90,7 +90,7 @@ RangeError: Maximum call stack size exceeded
 ```
 </Callout>
 
-A trivial solution to the stack overflow problem is to increase the stack size:
+A trivial solution to the stack overflow problem is to increase the stack size[^2]:
 
 ```js showLineNumbers copy
 ➜  left-side-solution git:(main) ✗ bin/calc2js.mjs test/data/input/assign-performance.calc -o test/data/actualjs/assign-performance.js -n '-stack-size=65536'
@@ -136,3 +136,6 @@ Here is a summary of the times:
 | time **cached** | 0.182s | 1.243s | 13.078s |
 
 The idea behind this version of the algorithm is to simply use a cache for the assignments. 
+
+[^2]: We have added the option ` -n --node <nodeOptions>  options for node.js,eg: '-n --stack-size=4096' (default: "")` to our compiler:
+
