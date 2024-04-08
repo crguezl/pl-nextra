@@ -1,4 +1,24 @@
 {
+  "egg-interpreter": {
+    "type": "menu",
+    "title": "Egg Interpreter",
+    "display": "normal",
+    "items": {
+      "Modificaciones en el módulo de Análisis Sintáctico": {
+        "title": "Modificaciones en el módulo de Análisis Sintáctico",
+        "href": "/labs/egg-interpreter#modificaciones-en-el-módulo-de-análisis-sintáctico"
+      },
+      "Egg Repeat Evaluate Print Loop": {
+        "title": "Egg Repeat Evaluate Print Loop",
+        "href": "/labs/egg-interpreter#egg-repeat-evaluate-print-loop"
+      },
+      "AST Classes and AST Interpretation": {
+        "title": "AST Classes and AST Interpretation",
+        "href": "/labs/egg-interpreter#ast-classes-and-ast-interpretation"
+      }
+    } 
+  },
+
   "left-side": {
     "type": "menu",
     "title": "Calculator. Funs on the left side. Multiple arguments",
