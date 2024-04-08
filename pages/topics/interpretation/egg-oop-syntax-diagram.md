@@ -3,4 +3,4 @@ sidebar: false
 ---
 # Syntax Diagram for Egg extended with OOP
 
-<egg-oop-syntax-diagram></egg-oop-syntax-diagram>
+![egg-syntax-diagram.png](/images/egg-syntax-diagram.png)

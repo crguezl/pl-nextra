@@ -6,7 +6,7 @@ next: /temas/interpretation/assignment-interpretation.md
 
 ## Introducción 
 
-En el fichero `src/ast.js`  de la práctica [egg-interpreter](/practicas/egg-interpreter/) encontrará las clases `Value`, `Word` y  `Apply` para los distintos tipos de nodos del AST. todos los tipos de nodo  disponen de un método `evaluate(env)` que evalúa/interpreta el nodo en el contexto de la memoria asociativa local que se pasa en el parámetro `env`. 
+En el fichero `src/ast.js`  de la práctica [egg-interpreter](/labs/egg-interpreter/) encontrará las clases `Value`, `Word` y  `Apply` para los distintos tipos de nodos del AST. todos los tipos de nodo  disponen de un método `evaluate(env)` que evalúa/interpreta el nodo en el contexto de la memoria asociativa local que se pasa en el parámetro `env`. 
 
 El fichero `ast.js` exporta las tres clases:
 
@@ -223,7 +223,7 @@ apply(operator: word{name: '+'}, args: [ value{value: 2}, value{value:3}])
 
 that when the `apply` is interpreted `this.operator.type` is `'word'` but `this.operator.name` is `+` which isn't  in `specialForms` skipping lines 2-4. 
 
-```js{7-13}
+```js {7-13}
   evaluate(env) { // ... inside the Apply class
     if (this.operator.type == 'word' && this.operator.name in specialForms) {
       return specialForms[this.operator.name](this.args, env);
