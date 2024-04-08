@@ -53,6 +53,14 @@ video20240403:
   id: "twroW5voFEo"
   date: "2024/04/03"
   comment: "Clase del 03/04/2024. Doubts and queries about lexer-generator. The FunctionObject class. Callable instances. First steps on the assign function"
+
+video20240408:
+  url: https://youtu.be/qj2O0Hb6SQ8
+  id: qj2O0Hb6SQ8
+  date: 2024/04/08
+  comment: "Clase del 08/04/2024. Tests: bin/test and .env. Scope analysis and the left side of an assignment. The assign function. Performance of the assign function"
+
+
 ---
 import { Callout } from 'nextra/components'
 import Videos from '@/components/videos'
@@ -161,7 +169,7 @@ When we do our translation `a(3) = 4`  becomes:
 assign($f, [Complex("3")], Complex("4"), 0)), 
 ```
 
-Therefore, there is no need to change scope analysis to consider this kind of assignments.
+Therefore, during scope analysis we have to take into accoun that this kind of assignment is not a declaration/definition of a new entity but a modification.
 
 </Callout>
 
@@ -300,7 +308,7 @@ Notice how the `obj` method `greet` is able to access the properties of `obj` li
 
 The following code defines a sort of *"class"* `Person` that has a constructor that receives a `name` and an `age`. The class has a method `greet` that receives the `other` argument and writes a message to the console. We are using the semicolon notation that will be introduced in the section [Currying and multiple arguments for functions](#currying-and-multiple-arguments-for-functions) of this lab.
 
-```js showLineNumbers copy filename="test/data/input/object-template.calc" branch="array-map" /"John"; 25/
+```js showLineNumbers copy filename="test/data/input/object-template.calc" branch="array-map"  {10,13}
 ➜  left-side-solution git:(main) ✗ cat test/data/input/object-template.calc
 Person = fun(name) {
     this = fun () { 0 },
@@ -316,6 +324,9 @@ Person = fun(name) {
 john = Person("John"; 25),
 john("greet")("Juana")
 ```
+
+Notice that line 10 returns `this` which is why in line 13 the assignment `john = Person("John"; 25)`  sets
+`john` to the object created by the constructor `Person`. 
 
 Once we are sure we have rightly modified the scope analysis to consider the fact that `a(expression) = value` is a modification but not a definition, we can proceed to the translation of the former code. Here is a potential translation of the former code:
 
@@ -619,6 +630,12 @@ I am John. Glad to meet you Juana
 ## Videos
 
 import {frontmatter} from '@/src/frontmatter'
+
+### 2024/04/08
+
+{ frontmatter().video20240408.comment }
+
+<Videos ids={ [frontmatter().video20240408.id] }></Videos>
 
 ### 2024/04/03
 
