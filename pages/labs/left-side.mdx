@@ -317,7 +317,7 @@ Person = fun(name) {
       write("I am "+this("name")+". Glad to meet you "+other)
     },
     fun(age) { # scope analysis must change
-      this("age") = age, # this is not local to this function
+      this("age") = age, # this is not local to this function because it is a modification not a definition!!
       this
     }
 },
@@ -371,7 +371,7 @@ left-side-solution git:(main) ✗ cat test/data/input/object-template-semicolon-
 Person = fun(name; age) {
     this = fun (x) { x },
     this("name") = name,
-    this("age") = age, # this is not local to this function
+    this("age") = age, 
 
     this("setAge") = fun(newAge) {
       this("age") = newAge # if it is a setter changes the reference to the object
@@ -430,6 +430,41 @@ To implement the setters we need that the code of `assign` receives the referenc
 assign($this, ["setAge"], functionObject(function($newAge) {
             return assign($this, ["age"], $newAge);
         }));
+```
+
+## Inheritance
+
+Here is an example of how to implement inheritance in our language. It uses the semicolon notation that will be introduced in the section [Currying and multiple arguments for functions](#currying-and-multiple-arguments-for-functions) and 
+the bracket notation that will be introduced in an incoming lab. Arrays will be functions that map integers to their elements and strings to their corresponding methods.
+
+```js showLineNumbers copy filename="test/data/input/inheritance.calc" {11-15,17} 
+Person = fun(name; age) {
+    this = fun () { 0 },
+    this("name") = name,
+    this("greet") = fun(other) {
+      write("I am "+this("name")+". Glad to meet you "+other)
+    },
+    this("age") = age, 
+    this
+},
+
+Teacher = fun(name; age; subjects) {
+    this = Person(name; age),
+    this("subjects") = subjects,
+    this
+},
+
+john = Teacher("John"; 69; ["PL"; "DMSI"]),
+john("greet")("Juana"),
+write(john("name");"teaches subject";john("subjects")(0)) 
+```
+
+When you run the former code you get the following output:
+
+```bash showLineNumbers copy
+➜  left-side-solution git:(main) ✗ bin/calc2js.mjs test/data/input/inheritance.calc | node
+I am John. Glad to meet you Juana
+John teaches subject PL
 ```
 
 ## The FunctionObject class
@@ -578,7 +613,7 @@ Person = fun(name; age) {
     this("greet") = fun(other) {
       write("I am "+this("name")+". Glad to meet you "+other)
     },
-    this("age") = age, # this is not local to this function
+    this("age") = age, 
     this
 },
 john = Person("John"; 25),
