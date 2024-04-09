@@ -583,18 +583,20 @@ The translation shows how the function `f` is curryfied and converted onto a fun
 function. In the same way `f(2;3)` is translated as `f(2)(3)`:
 
 ```js showLineNumbers {7-12} copy filename="test/data/expectedjs/fun-manyargs.js"
-#!/usr/bin/env node
-const { print, Complex } = require("/Users/casianorodriguezleon/campus-virtual/2223/pl2223/practicas/functions/functions-solution/src/support-lib.js");   
-/* End of support code */
+➜  left-side-solution git:(main) bin/calc2js.mjs test/data/input/fun-manyargs.calc
 
+#!/usr/bin/env node 
+const { functionObject, print, Complex } = require("/Users/casianorodriguezleon/campus-virtual/2324/pl2324/practicas/left-side/left-side-solution/src/support-lib.js"); 
+/* End of support code */
+ 
 let $f;
 
-$f = function($x) {
-    return function($y) {
+$f = functionObject(function($x) {
+    return functionObject(function($y) {
         return $x.add($y);
-    };
-}, 
-print($f(Complex("2"))(Complex("3"))); 
+    });
+}), 
+print($f(Complex("2"))(Complex("3")));
 ```
 
 When you run the former code you get the following output:
