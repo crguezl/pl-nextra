@@ -582,7 +582,7 @@ print(f(2;3)) # same as f(2)(3)
 The translation shows how the function `f` is curryfied and converted onto a function of one argument that returns a 
 function. In the same way `f(2;3)` is translated as `f(2)(3)`:
 
-```js showLineNumbers {7-12} copy filename="test/data/expectedjs/fun-manyargs.js"
+```js showLineNumbers {9-12,14} copy filename="test/data/expectedjs/fun-manyargs.js"
 ➜  left-side-solution git:(main) bin/calc2js.mjs test/data/input/fun-manyargs.calc
 
 #!/usr/bin/env node 
@@ -667,6 +667,14 @@ I am John. Glad to meet you Juana
 ## Videos
 
 import {frontmatter} from '@/src/frontmatter'
+
+### 2024/04/29
+
+Herencia en calc. 
+Como implantar el currying en funciones y llamadas.
+
+<Videos ids={ ["yBAmj9EN59k"] }></Videos>
+
 
 ### 2024/04/08
 
