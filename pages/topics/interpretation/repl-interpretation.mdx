@@ -2,6 +2,11 @@
 prev: /practicas/egg-interpreter.md
 next: ast-interpretation.md
 ---
+
+import { Callout } from 'nextra/components'
+import Videos from '@/components/videos'
+
+
 # Construcción de un Repeat Evaluate Print Loop
 
 En la práctica [egg-interpreter](/practicas/egg-interpreter/) deberá hacer  que el ejecutable `egg` funcione como un bucle REPL cuando no se le proporciona un fichero de entrada. 
@@ -26,7 +31,14 @@ En la práctica [egg-interpreter](/practicas/egg-interpreter/) deberá hacer  qu
 
 En este [Vídeo *Programando un bucle REPL para el lenguaje Egg*](https://youtu.be/5gIlt6r29lw) explicamos como hacerlo
 
-<youtube id="5gIlt6r29lw"></youtube>
+Véase la clase 2023/04/19. Además del bucle repl: Interpretación de los Nodos del AST de Egg. Interpretation of Assignment Expressions. Function Interpretation. 
+
+<Videos ids={["KXHrsrSThT0?si=hgtPd5X_7m5MrlEp"]}></Videos>
+
+Building a Repeat Evaluate Print Loop. [Vídeo *Programando un bucle REPL para el lenguaje Egg*](https://youtu.be/5gIlt6r29lw)
+
+<Videos ids={["5gIlt6r29lw"]}></Videos>
+
 
 The function `parBalance(line)` that we introduce in the `parse.js` main file checks for parenthesis balance in `line`. The parameter `line` contains a (potentially incomplete)
 egg expression:
