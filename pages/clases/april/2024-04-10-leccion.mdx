@@ -1,14 +1,19 @@
 ---
-title: "Tuesday 2024/04/09"
+title: "Wednesday 2024/04/10"
 published: true
 summary: "the race. Lab left side"
-labs: [ "left-side" ]
+labs: [ "left-side", "egg-interpreter" ]
 topics: 
   - text: "What can we write on the left side of an assignment?"
     href: "/topics/language-design/left-side"
 
 
 videos: [ "9J0XelSTOhI?si=r9EjIc9L1x6daK1L", "pt7k_ZyOYXE?si=pq1Pwa8ajUqJVioz", "Y7f87gn8B3s?si=LZbezF1AxcZmyyr_", "kbSFcqni__0?si=WVkTrYLf7YN7HSNH"]
+video20230329:
+  date: "2023/03/29"
+  id: "9J0XelSTOhI?si=r9EjIc9L1x6daK1L"
+  url: "https://youtu.be/9J0XelSTOhI?si=r9EjIc9L1x6daK1L"
+  comment: "ASTs for Egg. Lexical Analysis with moo-ignore. Introduction to Nearley.js"
 
 video20240318: 
   date: "2024/03/18"
@@ -44,14 +49,6 @@ import {Link, frontmatter} from '@/src/frontmatter'
 import RelatedLabs from '@/components/related-labs'
 import RelatedTopics from '@/components/related-topics'
 
-## GoRace Experiment
-
-import Experiment from "@/pages/topics/gorace/experiment.mdx"
-
-Tests: 
-- [the `.env` file](https://github.com/ULL-ESIT-PL/left-side-template/blob/main/.env), 
-- [the `bin/test` script](https://github.com/ULL-ESIT-PL/left-side-template/blob/main/bin/test)
-
 ## Related topics
 
 <RelatedTopics topics={ frontmatter().topics }/>
@@ -60,37 +57,19 @@ Tests:
 
 <RelatedLabs labs={ frontmatter().labs }/>
 
-### Left Side Lab
 
-### 2024/04/09
+### Egg-interpreter Lab
 
-Herencia en calc. 
-Como implantar el currying en funciones y llamadas.
+Clase 2023/04/19. Interpretación de los Nodos del AST de Egg. Interpretation of Assignment Expressions
+Function Interpretation. 
 
-<Videos ids={ ["yBAmj9EN59k"] }></Videos>
+<Videos ids={["KXHrsrSThT0?si=hgtPd5X_7m5MrlEp"]}></Videos>
 
+Building a Repeat Evaluate Print Loop. [Vídeo *Programando un bucle REPL para el lenguaje Egg*](https://youtu.be/5gIlt6r29lw)
 
-#### 2024/04/08
-
-{ frontmatter().video20240408.comment }
-
-<Videos ids={ [frontmatter().video20240408.id] }></Videos>
-
-#### 2024/04/03
-
-{ frontmatter().video20240403.comment }
-
-<Videos ids={ [frontmatter().video20240403.id] }></Videos>
-
+  <Videos ids={["5gIlt6r29lw"]}></Videos>
 
 ## Videos
-
-#### 2024/04/02
-
-{ frontmatter().video20240402.comment }
-
-<Videos ids={ [frontmatter().video20240402.id] }></Videos>
-
 
 
 
