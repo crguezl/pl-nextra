@@ -8,10 +8,10 @@ order: 15
 campus: "https://campusingenieriaytecnologia2324.ull.es/mod/assign/view.php?id=20457"
 template: "https://github.com/crguezl/egg-interpreter-template"
 rubrica: 
+  - El analizador léxico de Egg usa un analizador léxico generado por el generador de analizadores léxicos del alumno
   - El REPL funciona correctamente
   - Las clases de los ASTs disponen de los métodos adecuados
   - Las asignaciones han sido implementadas correctamente
-  - El analizador léxico de Egg usa un analizador léxico generado por el generador de analizadores léxicos del alumno
   - Comprende la interpretación de las funciones Egg mediante funciones JS
   - Comprende el manejo de ámbitos
   - Contiene suficientes tests
@@ -23,6 +23,9 @@ rubrica:
   - Se ha publicado como módulo y se ha hecho un buen uso del versionado semántico en la evolución del módulo
 ---
 
+import {frontmatter} from '@/src/frontmatter'
+import { Callout } from 'nextra/components'
+import Videos from '@/components/videos'
 
 ## Modificaciones en el módulo de Análisis Sintáctico
 
@@ -274,6 +277,35 @@ Lea el capítulo 12 "*A Programming Language*" del libro EJS:
 * [Eloquent JS. Chapter 12. Project: A Programming Language](http://eloquentjavascript.net/12_language)
 
 Salte la sección **Parsing** de ese capítulo y pase directamente a la sección **The Evaluator**.
+
+## Videos
+
+Clase del 2024/04/10: Modifying the parser to use our lexer-generator instead of moo-ignore.
+A REPL for Egg. Interpretation of the ASTs of Egg: Values and Word nodes.
+
+<Videos ids={["GOy5zotcSSo"]}></Videos>
+
+Clase 2023/04/19. Interpretación de los Nodos del AST de Egg. Interpretation of Assignment Expressions
+Function Interpretation. 
+
+<Videos ids={["KXHrsrSThT0?si=hgtPd5X_7m5MrlEp"]}></Videos>
+
+Building a Repeat Evaluate Print Loop. [Vídeo *Programando un bucle REPL para el lenguaje Egg*](https://youtu.be/5gIlt6r29lw)
+
+  <Videos ids={["5gIlt6r29lw"]}></Videos>
+
+## Rubric
+
+import Rubric from '@/components/rubric'
+
+<Rubric rubric={frontmatter().rubrica} />
+
+## {frontmatter().key} Repos
+
+import ReposForLab from '@/components/repos-for-lab'
+
+<ReposForLab lab={frontmatter().key} />
+
 
 ## Recursos
 

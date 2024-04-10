@@ -136,8 +136,8 @@ More precisely, describing its actual implementation attributes:
 ```
 $ cat greater-x-5.egg 
 >(x,5)
-$ ./eggc.js greater-x-5.egg 
-$ cat greater-x-5.egg.evm
+$ npx eggc examples/greater-x-5.egg
+$ cat examples/greater-x-5.egg.json
 ```
 
 Here is the JSON:
