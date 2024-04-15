@@ -69,7 +69,7 @@ Our `evaluate` methods do not work here, since they interpret the expressions in
 
 The proposal is to introduce `leftEvaluate` methods in the AST node classes that evaluate the expressions in a l-value context. Something like the following code for `specialForms['=']`:
 
-```js{10}
+```js {10}
 specialForms['='] = specialForms['set'] = function(args, env) { 
   if (args.length !== 2 || args[0].type === 'value') {
     throw new SyntaxError('Bad use of set');
@@ -91,7 +91,7 @@ specialForms['='] = specialForms['set'] = function(args, env) {
 Try to write the `leftEvaluate` method(s) for WORD nodes. To start with, allow only words on the left side of any assignment so that, for instance in the following program 
 
 
-```js{5}  
+```js {5}  
 ➜  egg-interpreter-solution git:(master) ✗ cat examples/fun.egg 
 do(
    define(x, 4),
@@ -283,11 +283,13 @@ do {
 
 ## Future Work on Assignments
 
-::: danger Future Work
+<Callout type="error">
+
+**Future Work**
 
 Although by now we will restrict to allow only words on the left side of any assignment, we aim to increase expressiveness and to allow assignments that can contains expressions like the `=(y["y"][1], 9)` or `=(self.c, a)` in the following example (`examples/set-lefteval.egg`):
 
-```js{4}
+```js {4}
 do (
   def (x, [[1,2], [3,4]]),
   =(x[0], 9), # [9, [3,4]]
@@ -317,7 +319,7 @@ That we will compile and execute like here:
 8
 8
 ```
-
+</Callout>
 
 ## See also
 
