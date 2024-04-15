@@ -18,7 +18,7 @@ module.exports = { Value, Word, Apply };
 
 Por ejemplo el código para los nodos `Value` puede ser algo así:
 
-```js
+```js showLineNumbers copy 
 class Value {
   constructor(token) {
     this.type = token.type;
@@ -39,7 +39,7 @@ Evaluar/interpretar un node `Value` es simplemente retornar su atributo `value`.
 
 Este es un extracto de la clase `Word`:
 
-```js
+```js showLineNumbers copy
 class Word {
   constructor(token) {
     this.type = token.type || 'word';
@@ -97,7 +97,7 @@ supone un recorrido de la lista enlazada de prototipos de los ámbitos `env` en 
 
 ## La Clase Apply
 
-```js
+```js showLineNumbers copy
 const { specialForms } = require("./registry.js");
 
 /* ... */
@@ -146,7 +146,7 @@ operation `this.operator.name`
 
 Notice that in such case is the handler function `specialForms[while]` the one that is in charge to evaluate and interpret the current AST includen its children. For instance, the interpretation of an `apply` node with operator type `while` will be: 
 
-```js
+```js showLineNumbers copy
 specialForms['while'] = function(args, env) {
   if (args.length != 2) {
     throw new SyntaxError('Bad number of args to while');
@@ -161,7 +161,7 @@ specialForms['while'] = function(args, env) {
 
 that will correctly interpret an Egg program like:
 
-```js
+```js showLineNumbers copy
 ➜  egg-interpreter-solution git:(master) ✗ cat examples/while.egg 
 do(
     def(i,1),
@@ -223,7 +223,7 @@ apply(operator: word{name: '+'}, args: [ value{value: 2}, value{value:3}])
 
 that when the `apply` is interpreted `this.operator.type` is `'word'` but `this.operator.name` is `+` which isn't  in `specialForms` skipping lines 2-4. 
 
-```js {7-13}
+```js {7-13} showLineNumbers
   evaluate(env) { // ... inside the Apply class
     if (this.operator.type == 'word' && this.operator.name in specialForms) {
       return specialForms[this.operator.name](this.args, env);
@@ -247,7 +247,7 @@ that when the `apply` is interpreted `this.operator.type` is `'word'` but `this.
 Line 7 `op = this.operator.evaluate(env)` will leave in `op` the entry  of `topEnv["+"]` 
 which was accordingly initialized:
 
-```js
+```js filename="src/eggvm.js" 
 // Code from the file src/eggvm.js ULL-ESIT-PL-2122/private-egg branch private2122
 [ '+',  '-', '*', '/', '**', ].forEach(op => {
   topEnv[op] = new Function('...s', `return s.reduce((a,b) => a ${op} b);`);
