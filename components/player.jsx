@@ -270,7 +270,13 @@ function Profile(p) {
 
 function PlayerProfile(p) {
   return (
-  <li><b>Player Profile:</b><ul> <Profile {...p} /></ul></li>
+    <ul className={styles.uList}> 
+      <li>Killer: {p["%Killer"]}</li> 
+      <li>Socialiser: {p["%Socialiser"]}</li>
+      <li>Achiever: {p["%Achiever"]}</li>
+      <li>Explorer: {p["%Explorer"]}</li>
+      <li>Bartle: <b>{p["Bartle"]}</b> </li>
+    </ul>
   )
 }
 
@@ -286,7 +292,7 @@ function AllProfiles() {
   )
 }
 
-export default function User() {
+export default function Player() {
   const { data: session, status } = useSession()
   let config = useConfig()
 
@@ -294,16 +300,12 @@ export default function User() {
     console.error("***********Session***********")
     console.error(session)
     config.chat.icon = (session.user.name)
-    let userProfile = profiles.find(p => p.Email === session.user.email)
-    return (<div>
-          <ul className={styles.uList}>
-            <li><img src={session.user.image} alt={session.user.name} width="32" height="32" /></li>
-            <li>Email: {session.user.email}</li>
-            <li>Name: {session.user.name}</li>
-          </ul>  
-          <button onClick={() => signOut()} className={styles.button}>Sign out</button>
-        </div>)
+    if (session.user.email === "crguezl@ull.edu.es") return (<AllProfiles />) 
+      let userProfile = profiles.find(p => p.Email === session.user.email)
+      if (userProfile) return  <ul className={styles.uList}>{userProfile? <PlayerProfile {...userProfile} />: null}</ul>
+    return null;
   }
-
-  return <a href="/api/auth/signin" className={ styles.button}>Sign in</a>
+  return null;
 }
+
+ 
