@@ -7,8 +7,7 @@ const config: DocsThemeConfig = {
   banner: {
     key: 'functions',
     text: (<span> 
-      <a href="/labs/egg-interpreter" target="_blank">
-         Lab egg-interpreter. Deadline is 18/04 →
+      <a href="/user">Your player's Bartle profile →
       </a>
     </span>
     )

@@ -279,7 +279,7 @@ export default function User() {
               Socialiser: {userProfile["%Socialiser"]},
               Achiever: {userProfile["%Achiever"]},
               Explorer: {userProfile["%Explorer"]},
-              Bartle: {userProfile["Bartle"]}  
+              Bartle: <b>{userProfile["Bartle"]}</b>  
             </ul>          
             </li>
             ): null}
