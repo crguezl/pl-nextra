@@ -7,7 +7,7 @@ const config: DocsThemeConfig = {
   banner: {
     key: 'functions',
     text: (<span> 
-      <a href="/user">Your player's Bartle profile →
+      <a href="/user#player">Your player's Bartle profile →
       </a>
     </span>
     )
