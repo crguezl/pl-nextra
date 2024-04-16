@@ -259,19 +259,19 @@ const profiles = [
 
 function Profile(p) {
   return (<li key={p.Email}>
-  <b>{p["Participant Name"]}</b>:
-  &nbsp; Killer: {p["%Killer"]}, 
-  Socialiser: {p["%Socialiser"]},
-  Achiever: {p["%Achiever"]},
-  Explorer: {p["%Explorer"]},
-  Bartle: <b>{p["Bartle"]}</b> 
+    <b>{p["Participant Name"]}</b>:
+    &nbsp; Killer: {p["%Killer"]},
+    Socialiser: {p["%Socialiser"]},
+    Achiever: {p["%Achiever"]},
+    Explorer: {p["%Explorer"]},
+    Bartle: <b>{p["Bartle"]}</b>
   </li>)
 }
 
 function PlayerProfile(p) {
   return (
-    <ul className={styles.uList}> 
-      <li>Killer: {p["%Killer"]}</li> 
+    <ul className={styles.uList}>
+      <li>Killer: {p["%Killer"]}</li>
       <li>Socialiser: {p["%Socialiser"]}</li>
       <li>Achiever: {p["%Achiever"]}</li>
       <li>Explorer: {p["%Explorer"]}</li>
@@ -283,29 +283,29 @@ function PlayerProfile(p) {
 function AllProfiles() {
   return (
     <ul className={styles.uList}>
-    {
-    profiles.map(p => (
-      <Profile {...p} />
-    ))
-  }
-  </ul>
+      {
+        profiles.map(p => (
+          <Profile {...p} />
+        ))
+      }
+    </ul>
   )
 }
 
-export default function Player() {
+export default function Player({admin}) {
   const { data: session, status } = useSession()
   let config = useConfig()
 
   if (status === "authenticated") {
+    console.error("***********Admin***********", admin)
     console.error("***********Session***********")
     console.error(session)
     config.chat.icon = (session.user.name)
-    if (session.user.email === "crguezl@ull.edu.es") return (<AllProfiles />) 
-      let userProfile = profiles.find(p => p.Email === session.user.email)
-      if (userProfile) return  <ul className={styles.uList}>{userProfile? <PlayerProfile {...userProfile} />: null}</ul>
+    if (session.user.email === admin) return (<AllProfiles />)
+    let userProfile = profiles.find(p => p.Email === session.user.email)
+    if (userProfile) return <ul className={styles.uList}>{userProfile ? <PlayerProfile {...userProfile} /> : null}</ul>
     return null;
   }
   return null;
 }
 
- 
