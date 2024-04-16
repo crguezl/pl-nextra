@@ -3,6 +3,7 @@
 import { useSession, signOut } from "next-auth/react" // https://next-auth.js.org/getting-started/client#usesession
 import { useConfig } from 'nextra-theme-docs'
 import styles from './counters.module.css'
+// Convert from CSV to json using https://csvjson.com/csv2json
 const profiles = [
   {
     "Order": "A1",
@@ -255,7 +256,7 @@ const profiles = [
     "%Explorer": "33,33%",
     "Bartle": "E"
   }
-]
+].sort((a, b) => a["Participant Name"].localeCompare(b["Participant Name"]))
 
 function Profile(p) {
   return (<li key={p.Email}>
