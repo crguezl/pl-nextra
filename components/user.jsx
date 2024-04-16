@@ -257,6 +257,35 @@ const profiles = [
   }
 ]
 
+function Profile(p) {
+  return (<li key={p.Email}>
+  <b>{p["Participant Name"]}</b>:
+  &nbsp; Killer: {p["%Killer"]}, 
+  Socialiser: {p["%Socialiser"]},
+  Achiever: {p["%Achiever"]},
+  Explorer: {p["%Explorer"]},
+  Bartle: <b>{p["Bartle"]}</b> 
+  </li>)
+}
+
+function PlayerProfile(p) {
+  return (
+  <li><b>Player Profile:</b><ul> <Profile {...p} /></ul></li>
+  )
+}
+
+function AllProfiles() {
+  return (
+    <ul className={styles.uList}>
+    {
+    profiles.map(p => (
+      <Profile {...p} />
+    ))
+  }
+  </ul>
+  )
+}
+
 export default function User() {
   const { data: session, status } = useSession()
   let config = useConfig()
@@ -271,20 +300,11 @@ export default function User() {
             <li><img src={session.user.image} alt={session.user.name} width="32" height="32" /></li>
             <li>Email: {session.user.email}</li>
             <li>Name: {session.user.name}</li>
-            {userProfile? 
-            (
-            <li><b>Player Profile:</b>
-            <ul>
-              Killer: {userProfile["%Killer"]}, 
-              Socialiser: {userProfile["%Socialiser"]},
-              Achiever: {userProfile["%Achiever"]},
-              Explorer: {userProfile["%Explorer"]},
-              Bartle: <b>{userProfile["Bartle"]}</b>  
-            </ul>          
-            </li>
-            ): null}
+            {userProfile? <PlayerProfile {...userProfile} />: null}
           </ul>  
           <button onClick={() => signOut()} className={styles.button}>Sign out</button>
+          {session.user.email === "crguezl@ull.edu.es" ? <AllProfiles /> : null}
+
         </div>)
   }
 
