@@ -1,6 +1,6 @@
 # Sets in Egg
 
-Add a function `Set` to the Egg interpreter allowing the creation of Set-like objects.
+Using your egg-parser and egg-interpreter repo assignments, add a function `Set` to the Egg interpreter allowing the creation of Set-like objects.
 Extend also Egg with functions `SetAdd`, `SetHas`, `SetDelete` and `Set2Array` so that the 
 following Egg program 
 works:

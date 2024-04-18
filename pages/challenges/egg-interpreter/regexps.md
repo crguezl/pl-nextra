@@ -1,6 +1,6 @@
 # RegExps in Egg
 
-Add a function `RegExp` to the Egg interpreter allowing the creation of Regular Expression objects.
+Using your egg-parser and egg-interpreter repo assignments, add a function `RegExp` to the Egg interpreter allowing the creation of Regular Expression objects.
 Add also a function `REtest` so that the 
 following Egg program 
 works:
