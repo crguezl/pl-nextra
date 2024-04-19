@@ -9,7 +9,7 @@ works:
 ➜  egg-interpreter-solution git:(RegExps-challenge) ✗ cat examples/RegExps-challenge-1.egg 
 do(
   def(r, RegExp("[a-b].[a-b]")),
-  print(REtest(r, "acb")) # true
-  print(REtest(r, "ace")) # false
+  print(REtest(r, "acb")), # true
+  print(REtest(r, "ace"))  # false
 )
 ```
