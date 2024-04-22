@@ -10,20 +10,31 @@ then we want `arg1, ...` to be interpreted as arguments for `someFun` and the ex
 
 For instance:
 
-```ruby
+```ruby showLineNumbers copy filename="examples/curry-no-method.egg"
 ✗ cat examples/curry-no-method.egg        
 print(+[4](2))
 ```
 
 In this version of the Egg interpreter `+` is a function that takes an arbritrary number of numbers:
 
-$$+: \cup_{i=1}^{\infty}\mathbb{R}^i \longrightarrow \mathbb{R}$$
+$$
++: \cup_{i=1}^{\infty}\mathbb{R}^i \longrightarrow \mathbb{R}
+$$
 
-and returns its sum. The curried $+[4]: \cup_{i=1}^{\infty}\mathbb{R}^i \longrightarrow \mathbb{R}$ is the function defined by $+[4](x_2, \cdots, x_n) = +(4, x_2, \cdots, x_n)$.
+and returns its sum. The curried 
+
+$$
++[4]: \cup_{i=1}^{\infty}\mathbb{R}^i \longrightarrow \mathbb{R}
+$$ 
+is the function defined by 
+
+$$
++[4](x_2, \cdots, x_n) = +(4, x_2, \cdots, x_n)
+$$
 
 Here is the implementation of the arithmetic operations in this version of the Egg interpreter that take an arbritrary number of numbers:
 
-```javascript
+```javascript showLineNumbers copy filename="~/campus-virtual/shared/egg/eloquentjsegg/lib/eggvm.js branch=2223" {9}
 // arithmetics
 [
   '+', 
@@ -46,7 +57,7 @@ Execution:
 
 However, if the attribute exists we want an ordinary property evaluation, as in this example:
 
-```ruby
+```ruby showLineNumbers copy filename="examples/function-length-property.egg"
 ➜  egg-oop-parser-solution git:(master) cat examples/function-length-property.egg
 do(
     def(f, fun(x, y, +(x,y))),
@@ -56,7 +67,7 @@ do(
 2
 ```
 
-We have added an attribute `numParams` to the Egg Function objects that returns the number of parameters in its declaration.
+[We have added an attribute `numParams` to the Egg Function objects that returns the number of parameters in its declaration](https://github.com/ULL-ESIT-PL/private-egg/blob/main/lib/eggvm.js#L84-L116).
 
 import { Callout } from 'nextra/components'
 
@@ -78,12 +89,10 @@ which makes the design proposal consistent with the idea of **property**
 
 ## Currying and the dot operator
 
-The *dot operator*  for objects `a.b`  is defined in such a way that `a.b` and `a["b"]` are the same thing. This is why the former program can be rewritten this way:
+The *dot operator*  for objects `a.b`  is defined in such a way that `a.b` and `a["b"]` are the same thing. This is why the former program `examples/curry-no-method.egg` can be rewritten this way:
 
-```
-➜  egg-oop-parser-solution git:(master) ✗ cat  examples/curry-no-method-dot.egg
-```
-```ruby 
+```ruby showLineNumbers copy filename="examples/curry-no-method-dot.egg"
+➜  egg-oop-parser-solution git:(master) ✗ cat  examples/curry-no-method-dot.egg 
 print(+.4(2))
 ```
 ```                                                                       

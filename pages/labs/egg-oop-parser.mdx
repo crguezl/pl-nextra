@@ -3,8 +3,8 @@ title: "Adding OOP to the Egg Parser"
 key: egg-oop-parser
 published: true
 campus: "https://campusingenieriaytecnologia2223.ull.es/mod/assign/view.php?id=20469"
-next: /practicas/extended-egg-interpreter.md
-prev: /practicas/egg-interpreter.md
+next: /labs/extended-egg-interpreter.md
+prev: /labs/egg-interpreter.md
 template: "https://github.com/ULL-ESIT-PL-2122/egg-oop-parser-template"
 rubrica: 
   - Added properties with brackets
@@ -213,7 +213,7 @@ I usually stop for a moment and consider 🤔 if there is some not obvious meani
 
 * May be we can give to `x[]`the meaning "to return a deep copy of `x`"? (See [structuredClone](https://developer.mozilla.org/en-US/docs/Web/API/structuredClone) node v17+ or npm package [realistic-structured-clone](https://www.npmjs.com/package/realistic-structured-clone))
 * For instance all arrays, objects and maps have in common the `length` property. May be we can give to `x[]`the meaning "to return `x.length`"? 
-* May be we can introduce the concept of `default` value for each of the entities in our language? So that `x[]` means `x["default"]`? For instance:
+* **May be we can introduce the concept of `default` value for each of the entities in our language? So that `x[]` means `x["default"]`?** For instance:
   * The `default` of a function is what is returned if the underlying JS function throws or returns `undefined` 
   * The `default` of an array is what is returned if the index is the element is `undefined` or the index is out of bounds
   * The `default` of an object is what is returned if the property is not defined
@@ -245,7 +245,7 @@ The neurology of language functioning is of current interest to psycholinguists,
 - language after congenital or acquired injury to the immature brain, and 
 - developmental disorders of language (dysphasia). 
 
-Some psycholinguists have also extended their interests to experiments in nonhuman language learning (e.g., gorillas and chimpanzees) to discover if language as we know it is a uniquely human phenomenon.
+Some psycholinguists have also extended their interests to experiments in nonhuman language learning (e.g., gorillas, chimpanzees, orcas, ...) to discover if language as we know it is a uniquely human phenomenon.
 
 - Here is the Lex Friedman interview to psycholinguistic prof. Edward Gibson at MIT
   
@@ -266,7 +266,7 @@ import Currying from '@/pages/pl-includes/currying.mdx'
 To keep our version of Egg **symmetric and regular** let us consider the arithmetic operations as methods of the number objects. This way number `4` has `+` as a method. This can be combined with currying to write 
 code like the following:
 
-```ruby
+```ruby showLineNumbers filename="examples/curry-method.egg" copy
 ➜  egg-oop-parser-solution git:(master) cat examples/curry-method.egg
 do (
   print(4["+"][5](3)), 
@@ -277,9 +277,9 @@ do (
 )
 ```
 
-We say that something has a **symmetry** when it remains similar under transformation. Here the symmetry results of the fact that the different transformations `4["+"]`, `+[4]`, `+.4`  and `4.+` produce the same function. A wide range of desirable properties of programming languages can be expressed as symmetry properties. See the blog and video [NOETHER: symmetry in programming language design](https://www.thestrangeloop.com/2013/noether-symmetry-in-programming-language-design.html)
+We say that something has a **symmetry** when it remains similar under transformation. Here the symmetry results of the fact that the different transformations `4["+"]`, `+[4]`, `+.4`  and `4.+` produce the same function. A wide range of desirable properties of programming languages can be expressed as symmetry properties. See the blog and video [NOETHER: symmetry in programming language design](https://www.thestrangeloop.com/2013/noether-symmetry-in-programming-language-design)
 
-The ambiguities that arise in the expression `4.+` are discussed in section [The Dot Ambiguity: Property dot or Mantissa dot?](/practicas/egg-oop-parser.html#the-dot-ambiguity-property-dot-or-mantissa-dot). 
+The ambiguities that arise in the expression `4.+` are discussed in section [The Dot Ambiguity: Property dot or Mantissa dot?](/labs/egg-oop-parser#the-dot-ambiguity-property-dot-or-mantissa-dot). 
 
 Execution:
 
@@ -300,7 +300,7 @@ To add it to Egg we add the production `properties -> selector applies` to the g
 
 Lines 8-10 show the rules for the new syntactic variable `selector`:
 
-```js {6,8-10}
+```js {6,8-10} showLineNumbers filename="src/egg.ne" copy
 applies -> calls
     | properties
     | null
@@ -315,7 +315,7 @@ selector   ->
 
 We want to allow programs  like the following:
 
-```ruby
+```ruby showLineNumbers filename="examples/dot-chain.egg" copy
 ➜  egg-oop-parser-solution git:(master) ✗ cat examples/dot-chain.egg 
 print([1,4,5].join("-").length) # Same as array(1,4,5)["join"]("-")["length"]                          
 ➜  egg-oop-parser-solution git:(master) ✗ bin/egg examples/dot-chain
@@ -324,7 +324,7 @@ print([1,4,5].join("-").length) # Same as array(1,4,5)["join"]("-")["length"]
 
 same thing with object literals:
 
-```ruby
+```ruby showLineNumbers filename="examples/dot-obj-literal.egg" copy
 ➜  egg-oop-parser-solution git:(master) ✗ cat examples/dot-obj-literal.egg 
 print({x : 3}.x) # 3
 ➜  egg-oop-parser-solution git:(master) ✗ bin/egg examples/dot-obj-literal
@@ -333,7 +333,7 @@ print({x : 3}.x) # 3
 
 and also:
 
-```js
+```js showLineNumbers filename="examples/dot-num.egg" copy
 ➜  egg-oop-parser-solution git:(master) ✗ cat examples/dot-num.egg 
 print(4.3.toFixed(2))
 ➜  egg-oop-parser-solution git:(master) ✗ bin/egg examples/dot-num 
@@ -365,7 +365,7 @@ Think on the sub-expression above **`a.0.1`** from the lexical analysis point of
 
 Consider the following Egg program:
 
-```ruby
+```ruby showLineNumbers copy {2} filename="examples/dot-num.egg"
 ✗ cat examples/dot-num.egg                         
 print(4.3.toFixed(2))
 ```
@@ -401,7 +401,7 @@ The AST generated has a new type of node called `property` to represent object p
 
 Here is a second example, the AST for the expression **`a[0,2]`**:
 
-```json
+```json showLineNumbers copy filename="examples/multiple-properties-simplified.egg"
 {
   "type": "property",
   "operator": { "type": "word", "name": "a" },
@@ -464,7 +464,7 @@ apply(
     args:[value{2}])])
 ```
 
-If you have difficulties review the section [Anatomy of ASTs for Egg](/temas/syntax-analysis/ast.html#anatomy-of-ast-for-egg)
+If you have difficulties review the section [Anatomy of ASTs for Egg](/topics/syntax-analysis/ast#anatomy-of-ast-for-egg)
 
 ### The Shape of Property ASTs
 
@@ -555,28 +555,28 @@ Uncaught SyntaxError: Invalid or unexpected token
 
 ##  Lexical Transformations 
 
-To facilitate the task of doing this lab, it is convenient that we return to the [lexer-generator](/practicas/lexer-generator) module and modify its API a bit, providing it with the ability to add lexical transformations.
+To facilitate the task of doing this lab, it is convenient that we return to the [lexer-generator](/labs/lexer-generator) module and modify its API a bit, providing it with the ability to add lexical transformations.
 
 To do this, the `nearleyLexer` function will now receive an additional parameter of an object with options:
 
-```js
-let lexer = nearleyLexer(tokens, { transform: transformerFun});
+```js /{ transform: transformerFun }/
+let lexer = nearleyLexer(tokens, { transform: transformerFun });
 ```
 
 The only option we are going to add is `transform`. When specified, it applies the `transformerFun` function to each of the `tokens` of the lexer object generated by `nearleyLexer`. 
 
 We can have more than one lexical transformations to apply. Thus, we allow the `transform` property to be an array, so that the builder `nearleyLexer` can be called this way:
 
-```js
+```js /[colonTransformer, NumberToDotsTransformer]/
 let lexer = nearleyLexer(tokens, { transform: [colonTransformer, NumberToDotsTransformer] });
 ```
 
 <Callout type="info">
 
 Adding transformations to the nearley compatible lexer
-To achieve the goal we have to modify the `reset` method of our nearley compatible object:
+To achieve the goal we have to modify [the `reset` method](https://github.com/ULL-ESIT-PL/lexer-generator-solution/blob/main/src/main.js#L175-L184) of our nearley compatible object:
 
-```js {10-17}
+```js {10-16} showLineNumbers copy filename="lexer-generator-solution/src/main.js"
 const nearleyLexer = function (regexps, options) {
   ...
   return {
@@ -601,7 +601,7 @@ const nearleyLexer = function (regexps, options) {
 ```
 </Callout>
 
-See the code for the nearley lexer at section [La función nearleyLexer](/practicas/lexer-generator.html#la-funcion-nearleylexer) of the lab [Lexer Generator](/practicas/lexer-generator.html#la-funcion-nearleylexer)
+See the code for the nearley lexer at section [La función nearleyLexer](/labs/lexer-generator#la-función-nearleylexer) of the lab [Lexer Generator](/labs/lexer-generator)
 
 
 ## The Lexical Word Colon Transformation
@@ -611,7 +611,7 @@ We want to transform all the pair subsequences `WORD, COLON`  into `STRING, COMM
 
 In this way we can write a program like this:
 
-```ruby
+```ruby showLineNumbers copy filename="examples/colon.egg" {3}
 ✗ cat examples/colon.egg 
 do(
   def(b, [a:4]), # The : is a "lexical" operator
@@ -621,7 +621,7 @@ do(
 
 so that when compiled and executed produces:
 
-```
+```console showLineNumbers {3}
 ✗ bin/eggc.js examples/colon.egg
 ✗ npx evm examples/colon.json   
 ["a",4]
@@ -642,7 +642,7 @@ function colonTransformer(tokens) {
 This transformation is what allow us the syntax to describe the object in the example `examples/object-colon-selector.egg` in section [introduction](#introduction) 
 
 
-```ruby
+```ruby showLineNumbers copy filename="examples/object-colon-selector.egg" 
 def(x, { 
   c: [1, 2, 3], 
   gc:  fun(element(self, "c")), 
@@ -653,7 +653,7 @@ def(x, {
 
 ## Full Grammar 
 
-The following grammar is a NearleyJS non ambiguous grammar that allows the requested features and extends the previous Egg grammar we introduced in lab [egg-parser](/practicas/egg-parser.html):
+The following grammar is a NearleyJS non ambiguous grammar that allows the requested features and extends the previous Egg grammar we introduced in lab [egg-parser](/labs/egg-parser):
 
 ```js showLineNumbers copy
 program -> expression %EOF
@@ -685,12 +685,12 @@ optProperties -> null
    | properties
 ```
 
-See also the [Syntax Diagram/Railroad Diagram](/temas/interpretation/egg-oop-syntax-diagram)
+![Syntax Diagram/Railroad Diagram](/images/egg-oop-syntax-diagram.png)
 
 ## A new Ambiguity: Number Dot Number
 
 **Just for fun and to go beyond what any other programming language allows** we want the dot to work
-with numbers as property selector. [This is something, to my knowledge, no language allows](/recursos/chat-gpt-array-selector-js). For instance, in JS:
+with numbers as property selector. [This is something, to my knowledge, no language allows](/topics/interpretation/chat-gpt-array-selector-js). For instance, in JS:
 
 ```js {8-11}
 ➜  src git:(main) ✗ node
@@ -1115,11 +1115,11 @@ import ReposForLab from '@/components/repos-for-lab'
 * [Repo ULL-ESIT-PL/egg-oop-parser-template ](https://github.com/ULL-ESIT-PL/egg-oop-parser-template)
   * [Releases](https://github.com/ULL-ESIT-PL/egg-oop-parser-template/releases/tag/1.0.0)
   * [Distribution repo: ULL-ESIT-PL/dist-egg](https://github.com/ULL-ESIT-PL/dist-egg) private
-* [GitHub Actions. The Secrets context](/temas/introduccion-a-javascript/github-actions.html#the-secrets-context)
-* [Installing Private Packages in a GitHub Action](/temas/introduccion-a-javascript/creating-and-publishing-npm-module.html#installing-private-packages-in-a-github-action)
+* [GitHub Actions. The Secrets context](/topics/introduction-to-javascript/github-actions#the-secrets-context)
+* [Installing Private Packages in a GitHub Action](/topics/introduction-to-javascript/creating-and-publishing-npm-module#installing-private-packages-in-a-github-action)
 * [latest-version-cli](https://github.com/sindresorhus/latest-version-cli) Get the latest version of an npm package
 * [Egg Virtual Machine with OOP extensions for Windows/Linux/Mac OS](https://github.com/crguezl/oop-evm-releases/releases/tag/v1.0.0)
-* [Eloquent JS: Chapter 11. Project: A Programming Language](http://eloquentjavascript.net/11_language.html)
+* [Eloquent JS: Chapter 11. Project: A Programming Language](http://eloquentjavascript.net/11_language)
 * [Vídeo *Programando un bucle REPL para el lenguaje Egg*](https://youtu.be/5gIlt6r29lw)
 * El módulo [@ull-esit-pl/example2test](https://www.npmjs.com/package/@ull-esit-pl/example2test)
 

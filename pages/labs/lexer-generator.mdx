@@ -313,7 +313,7 @@ Lea la sección
 A partir del analizador léxico generado por `buildLexer(regexps)` contruimos un segundo analizador 
 léxico con [la API que requiere nearley.JS](https://nearley.js.org/docs/tokenizers#custom-lexers). Este es el código completo de la versión actual:
 
-```js {30-37} showLineNUmbers
+```js {30-37} showLineNumbers
 const nearleyLexer = function(regexps, options) {
   //debugger;
   const {validTokens, lexer} = buildLexer(regexps);
