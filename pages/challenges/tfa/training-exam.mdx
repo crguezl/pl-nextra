@@ -1,0 +1,135 @@
+---
+title: "Training Exams for PL"
+categories: [ "exams" ]
+sidebar: auto
+key: training-exam
+published: true
+date: 2023/05/05
+kind: task
+delivery:
+order: 19
+layout: Practica
+prev: /practicas/tfa.md
+template: https://github.com/ULL-ESIT-PL/exam-training-template
+---
+import Videos from '@/components/videos'
+
+## Exam: Parsing RegExps
+
+* Read carefully [the pdf with the questions](https://github.com/ULL-ESIT-PL/exam-training-template/blob/master/docs/exam.pdf)
+* Fill the code in this template repo [ULL-ESIT-PL/exam-training-template](https://github.com/ULL-ESIT-PL/exam-training-template)
+
+[AST Explorer](https://astexplorer.net/#/gist/4ea2b52f0e546af6fb14f9b2f5671c1c/49dafda5429858220f62387740fd4226cdc3dde0) supports various regexp parsers. Feel free to play with them and have a look at the shapes of the ASTs.
+
+
+Watch this video 
+
+<Videos ids={["bxadjvhtffs"]}></Videos>
+
+and this other from minute 30:30:
+
+<Videos ids={["W94dX7zeRO0"]}></Videos>
+
+## Exam: Parsing JSON
+
+* [Exam Parsing JSON](/assets/old-exam-sample.pdf): pdf file. Question: Parse the JSON Language 
+  
+### Examples of Solutions
+
+* [Solution: JSON parser in nearley.js](https://github.com/ULL-ESIT-PL/learning-nearley/blob/main/examples/json.ne)
+  * Task to do: Improve the solution by using your own lexical analyzer generator instead of the current moo lexer, removing the explicit use of white spaces (syntactic variable `_` like in the production rule `pair -> key _ ":" _ value`) in the Nearley grammar
+* [Solution: JSON parser in yacc](https://gist.github.com/justjkk/436828/)
+* [Solution: JSON parser in pegjs](https://github.com/pegjs/pegjs/blob/master/examples/json.pegjs)
+
+## Exam: Translator from Egg AST to AST Term 
+
+### Question 
+
+Here is a variant of the previous exam.
+
+Assume the input JSON contains an Egg AST and translate it to AST Term notation.
+
+### The Term Language to Summarize ASTs
+
+`Term` is a DSL to summarize ASTs. Here is an attempt to describe the language:
+
+```
+term -> ('NAME' ':')? 'TYPE' '(' term (',' term)* ')'
+  | leaf
+leaf -> ('NAME' ':')? 'TYPE' ('{' 'ATTRIBUTE' '}')?
+```
+
+* Token `'NAME'` is the name of the child in the node, 
+* Token `'TYPE'` represents the type of the node, 
+* The token `'ATTRIBUTE'` is the JSON stringify of a single attribute of the leaf node. 
+
+To summarize the AST the following rules are followed: 
+
+* Only the type of the node is shown
+* Only one selected attribute of a leaf is shown (Between curly brackets)
+* Array n-ary nodes are allowed (and they go between brackets)
+
+Here is an example. Given the input program:
+
+```ruby
+➜  evm2term git:(master) cat examples/property.egg 
+x["sub", 1]("length") # 3
+``` 
+
+Whose JSON looks like:
+
+```json showLineNumbers filename=examples/property.json
+➜  evm2term git:(master) cat examples/property.json
+{
+  "type": "apply",
+  "operator": {
+    "type": "property",
+    "operator": {
+      "type": "word",
+      "line": 1,
+      "col": 1,
+      "length": 1,
+      "name": "x"
+    },
+    "args": [
+      {
+        "type": "value",
+        "value": "sub",
+        "line": 1,
+        "col": 3,
+        "length": 5,
+        "raw": "\"sub\""
+      },
+      {
+        "type": "value",
+        "value": 1,
+        "line": 1,
+        "col": 10,
+        "length": 1
+      }
+    ]
+  },
+  "args": [
+    {
+      "type": "value",
+      "value": "length",
+      "line": 1,
+      "col": 13,
+      "length": 8,
+      "raw": "\"length\""
+    }
+  ]
+}
+```
+
+The output of the `evm2term` translator will be:
+
+```js
+➜  evm2term git:(master) evm2term examples/property.json 
+apply(op:property(op:word{x}, args:[value{sub},value{1}]), args:[value{length}])
+```
+
+
+### Example of Solution
+
+* See package [evm2term](https://www.npmjs.com/package/evm2term) and file [crguezl/evm2term/index.js](https://github.com/crguezl/evm2term/blob/master/index.js) for a solution using `estraverse`
