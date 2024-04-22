@@ -213,6 +213,10 @@ I usually stop for a moment and consider 🤔 if there is some not obvious meani
 
 * May be we can give to `x[]`the meaning "to return a deep copy of `x`"? (See [structuredClone](https://developer.mozilla.org/en-US/docs/Web/API/structuredClone) node v17+ or npm package [realistic-structured-clone](https://www.npmjs.com/package/realistic-structured-clone))
 * For instance all arrays, objects and maps have in common the `length` property. May be we can give to `x[]`the meaning "to return `x.length`"? 
+* May be we can introduce the concept of `default` value for each of the entities in our language? So that `x[]` means `x["default"]`? For instance:
+  * The `default` of a function is what is returned if the underlying JS function throws or returns `undefined` 
+  * The `default` of an array is what is returned if the index is the element is `undefined` or the index is out of bounds
+  * The `default` of an object is what is returned if the property is not defined
 </Callout>
 
 See also 
