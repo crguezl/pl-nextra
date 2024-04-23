@@ -1,4 +1,4 @@
-# Chat GPT conversation
+# Chat GPT (crazy) conversation
 
 ## Question:
 
@@ -26,7 +26,7 @@ and to the second element as "`a.1`", etc.
 Do you know if such a languages exists or has been proposed?
 
 
-## Answer
+## Chat GPT Answer
 
 Yes, there are programming languages that allow accessing array elements using dot notation. 
 One such language is JavaScript, which is a popular language used for web development. 

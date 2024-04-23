@@ -619,7 +619,15 @@ do(
 )                                                                                                           
 ```
 
-so that when compiled and executed produces:
+so that when compiled 
+
+```console showLineNumbers
+➜  egg-oop-parser-solution git:(master) bin/eggc.js examples/colon.egg
+➜  egg-oop-parser-solution git:(master) ✗ jless examples/colon.json
+```
+![](/images/lexical-word-colon-transformation-ast.png)
+
+and when executed produces:
 
 ```console showLineNumbers {3}
 ✗ bin/eggc.js examples/colon.egg
@@ -639,7 +647,7 @@ function colonTransformer(tokens) {
 ```
 </Callout>
 
-This transformation is what allow us the syntax to describe the object in the example `examples/object-colon-selector.egg` in section [introduction](#introduction) 
+This transformation is what allow us to deal with the colon syntax to describe the object in the example `examples/object-colon-selector.egg` in section [introduction](#introduction) 
 
 
 ```ruby showLineNumbers copy filename="examples/object-colon-selector.egg" 
@@ -747,7 +755,7 @@ Disambiguation Rule
 
 Notice that before a dot token not necessarily comes a word, but it can be a complex expression like in this other example (Observe the first dot at line 4):
 
-```ruby {4}
+```ruby {4} showLineNumbers filename="examples/function-returning-array-dot-number.egg" copy
 ✗ cat examples/function-returning-array-dot-number.egg 
 do(
     def(f, fun([[0,Math.PI],2])), # A function that returns an array
@@ -779,7 +787,8 @@ function NumberToDotsTransformer(tokens) {
 
 ### Raw versus value 
 
-Be careful to work with the `raw` attribute of the `NUMBER` token inside the `NumberToDotsTransformer` and not to work directly with the `value` attribute of the `NUMBER` token. Otherwise if you use instead the `value` attribute and have activated the `value` transformer it will occur that  during the first lexical pass strings like `0.0` or `1.0` will have their `value` transformed to numbers like `0` and `1` and the dot access information will be lost!.
+<Callout type="error">
+Be careful to work with the lexical `raw` attribute of the `NUMBER` token inside the `NumberToDotsTransformer` and not to work directly with the `value` attribute of the `NUMBER` token. Otherwise if you use instead the `value` attribute and have activated the `value` transformer it will occur that  during the first lexical pass strings like `0.0` or `1.0` will have their `value` transformed to numbers like `0` and `1` and **the dot access information will be lost**!.
 
 The following example test the problem:
 
@@ -791,6 +800,7 @@ print([[1,2],3].0.0)
 ```
 
 The transformation has to substitute `DOT{.} NUMBER{raw:"0.0"}` by `DOT NUMBER{0} DOT{.} NUMBER{0}` and not by `DOT NUMBER{0}`.
+</Callout>
 
 ## The Evaluation/Interpretation of Property nodes
 
@@ -972,7 +982,7 @@ The errors produced by Nearley.JS are quite verbose:
 ➜  egg-oop-parser-solution git:(b2bc2de) cat test/errors/unexpected-token.egg
 +{2,3}
 ```
-```                                   
+```console showLineNumbers filename="test/errors/unexpected-token.egg"                                   
 ➜  egg-oop-parser-solution git:(b2bc2de) bin/eggc.js test/errors/unexpected-token.egg
 There was an error: Error near "{" in line 1
 Unexpected LCB token: "{". Instead, I was expecting to see one of the following:
@@ -1009,7 +1019,7 @@ In version `2.20.1` of Nearley, the Error object has an attribute `token` than c
 
 In the example below we make use of a RegExp to traverse the `message` attribute of the error and add to the message the expected tokens. In Nearley JS error message you can see many repetitions of the  `A "<something>" based on:` pattern that for named tokens changes to `A <something> token based on:`
 
-```js
+```js showLineNumbers copy filename="src/parse.js"
 function parseFromFile(origin) {
   try {
     const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
