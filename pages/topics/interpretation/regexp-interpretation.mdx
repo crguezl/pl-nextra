@@ -1,0 +1,146 @@
+# Adding Regexps to Egg
+
+Here we will add a function `RegExp` to the Egg interpreter allowing the creation of Regular Expression objects.
+
+## Example
+
+```ruby showLineNumbers copy filename="examples/regexp.egg"
+ egg-oop-parser-solution git:(master) ✗ cat examples/regexp.egg
+(
+  def(d, r/
+         (?<year>  \d{4} ) -?  # year 
+         (?<month> \d{2} ) -?  # month 
+         (?<day>   \d{2} )     # day
+        /x),
+  print(d.test("1987-07-14")),  # true
+  def(m, d.exec("1987-07-14")),  
+  print(util.inspect(m, {depth: null})),   /*  [  '1987-07-14',  '1987',  '07',  '14',  index: 0,  input: '1987-07-14',  groups: undefined ] */
+  print(m.index), # 0
+  
+  def(x, RegExp.exec("2015-01-22", d)), 
+  print(util.inspect(x, {depth: null})),
+  print(x.year), # 2015
+  print(x.month) # 02
+)
+```
+
+The interpreter provided for this lab is not able to handle regular expressions. The following error is produced when trying to run the example above:
+
+```
+➜  egg-oop-parser-solution git:(master) ✗ bin/eggc.js examples/regexp.egg
+➜  egg-oop-parser-solution git:(master) ✗ bin/evm examples/regexp.json
+TypeError: Applying not a function or method TypeError: Applying not a function or method TypeError: Applying not a function or method ReferenceError: Undefined variable: util
+    at Apply.evaluate (/snapshot/2122-dist-egg/index.js:2:1230)
+```
+The error is about `util` not being defined.
+
+But if I use the interpreter provided in the repo [ULL-ESIT-PL/private-egg](https://github.com/ULL-ESIT-PL/private-egg) (private repo):
+
+```
+egg-oop-parser-solution git:(master) ✗ ls -l bin
+total 24
+-rwxr-xr-x  1 casianorodriguezleon  staff   215 22 abr 13:10 egg
+-rwxr-xr-x  1 casianorodriguezleon  staff  1678 22 abr 12:29 eggc.js
+lrwxr-xr-x  1 casianorodriguezleon  staff    85 22 abr 12:32 evm -> /Users/casianorodriguezleon/campus-virtual/shared/egg/oop-evm-releases/evm-2122-macos
+lrwxr-xr-x  1 casianorodriguezleon  staff    78 23 abr 10:57 evm-crguezl.js -> /Users/casianorodriguezleon/campus-virtual/shared/egg/eloquentjsegg/bin/evm.js
+-rwxr-xr-x  1 casianorodriguezleon  staff   106 19 abr  2023 make-test
+```
+
+the example runs correctly:
+
+```
+➜  egg-oop-parser-solution git:(master) ✗ bin/evm-crguezl.js examples/regexp.json
+true
+[
+  '1987-07-14',
+  '1987',
+  '07',
+  '14',
+  index: 0,
+  input: '1987-07-14',
+  groups: undefined
+]
+0
+[
+  '2015-01-22',
+  '2015',
+  '01',
+  '22',
+  index: 0,
+  input: '2015-01-22',
+  groups: undefined,
+  year: '2015',
+  month: '01',
+  day: '22'
+]
+2015
+01
+```
+
+This means the release must be updated for next course 24/25.
+
+
+## tokens.js
+
+```js showLineNumbers copy filename="src/token.js, branch:main egg-oop-parser-solution"
+...
+const REGEXP = /(?<REGEXP>r\/((?:[^\/\\]|\\.)*)\/(\w*?\b)?)/;
+REGEXP.value = (value) => {
+  let [source, flags] = value.split('/').slice(1);
+  return {
+      type: 'RegExp',
+      info: [ source, flags]
+  };
+};
+```
+
+## grammar.js
+
+```js showLineNumbers copy filename="src/egg.ne, branch:main egg-oop-parser-solution"
+      %STRING  optProperties   {% buildStringValue %}
+    | %NUMBER  optProperties   {% buildNumberValue %}
+    | %REGEXP  optProperties   {% buildRegexpValue %}
+    | bracketExp optProperties {% buildArray %}
+    | curlyExp   optProperties {% buildObject %}
+    | "(" commaExp ")"         {% buildDo %}
+    | %WORD applies            {% buildWordApplies %}
+```
+## buildRegexpValue
+
+```js showLineNumbers copy filename="src/build-ast.js, branch:main egg-oop-parser-solution"
+function buildRegexpValue([regexpnode, properties]) {
+  if (!properties) {
+    regexpnode.type = "value";
+    return regexpnode;
+  }
+  return fromListToAST(regexpnode, properties);
+}
+```
+
+## j2a.js
+
+```js filename="lib/j2a.js, branch:main eloquentjs" showLineNumbers copy
+const {j2a, json2AST, topEnv} = require("./registry.js");
+const {Value, Word, Apply, Property} = require("./ast.js");
+
+j2a['value'] = (j) => { 
+  let obj = new Value(j);
+      // Lift the object if required
+    if (typeof obj.value === "object" && obj.value.type && topEnv[obj.value.type] && typeof topEnv[obj.value.type] === "function") {
+      debugger;
+      try {
+        obj.value = new topEnv[obj.value.type](...obj.value.info);
+      } catch (e) {
+        throw new TypeError(`Invalid attempt to create an ${obj.value.type}. Object value: ${obj.value}`);
+      }
+    }
+
+  return obj;
+};
+j2a['word']  = (j) => new Word(j);
+j2a['apply'] = (j) => {... };
+
+j2a['property'] = (j) => { ...};
+
+module.exports = { j2a, json2AST };
+```
