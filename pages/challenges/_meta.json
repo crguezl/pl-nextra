@@ -1,4 +1,20 @@
 {
+
+    "egg-oop-parser": {
+        "title": "Egg OOP Parser",
+        "type": "page",
+        "display": "hidden"
+    },
+    "egg-interpreter": {
+        "title": "Egg Interpreter",
+        "type": "page",
+        "display": "hidden"
+    },
+    "left-side": {
+        "title": "Left Side",
+        "type": "page",
+        "display": "hidden"
+    },
     "egg-parser": {
         "title": "Egg Parser",
         "type": "page",
