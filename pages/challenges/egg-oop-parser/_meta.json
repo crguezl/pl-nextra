@@ -1,0 +1,22 @@
+{
+    "array-operations": {
+        "title": "Array Operations",
+        "type": "page",
+        "display": "hidden"
+    },
+    "complex": {
+        "title": "Complex",
+        "type": "page",
+        "display": "hidden"
+    },
+    "ref": {
+        "title": "Ref",
+        "type": "page",
+        "display": "hidden"
+    },
+    "training-exam": {
+        "title": "Training Exam",
+        "type": "page",
+        "display": "hidden"
+    }
+}
