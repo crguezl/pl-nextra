@@ -1,5 +1,6 @@
-# The *Begin End Something* Language Design Pattern
-The "Begin End Something" Language Design Pattern
+# for ... end for as a synonym of while( ...)
+
+The "Begin End Something" Language Design Pattern works as follows:
 
 1. Add a couple of tokens to the language to signal the beginning and the end of the **new specialized category of expressions**:  for instance add `[` to begin array literals and `]` to end array literals
    * Introduce the new tokens in the lexer (be carefull with conflicts, specially with "expansive" tokens. Don't trample on existing "reserved words")
@@ -8,18 +9,14 @@ The "Begin End Something" Language Design Pattern
    * The function `buildCategory` returns in fact a specialized case of an already existent kind of AST
    * Remember to export the new function and import the new function in your grammar file
 
-Following these instructions it is trivial to extend Egg with a family of constructs as 
+Following these instructions extend Egg with a construct 
+```ruby
+for (expression; expression; expression) 
+  expression 
+end for
+``` 
 
-* `(` ... `)` as a synonym of `do( ...)`: See an example in the branch `doendo` of the solution repo
+that works as usual for `for` loops. 
 
-  ```ruby
-  ➜  egg-oop-parser-solution git:(doendo) ✗ cat examples/do-endo.egg 
-  (
-    def(a,4),
-    print(a)
-  )
-  ➜  egg-oop-parser-solution git:(doendo) ✗ bin/egg examples/do-endo
-  4
-  ```
-* `loop` ... `end loop` or `While` ... `end While` as a synonym of `while(...)`. Do not use `while` ... `end while` for the delimiter tokens or you will trample with the already existing word `while`
-*  etc.
+Assume you only have a `while( ...)` loop implemented in your egg interpreter:
+

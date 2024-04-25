@@ -1,5 +1,6 @@
-# The *Begin End Something* Language Design Pattern
-The "Begin End Something" Language Design Pattern
+# begin ... end as a synonym of do( ...)
+
+The "Begin End Something" Language Design Pattern works as follows:
 
 1. Add a couple of tokens to the language to signal the beginning and the end of the **new specialized category of expressions**:  for instance add `[` to begin array literals and `]` to end array literals
    * Introduce the new tokens in the lexer (be carefull with conflicts, specially with "expansive" tokens. Don't trample on existing "reserved words")
@@ -11,15 +12,11 @@ The "Begin End Something" Language Design Pattern
 Following these instructions extend Egg with a construct `begin` ... `end` that works as a synonym of `do( ...)`:
 
 ```ruby
-
-* `begin` ... `end` as a synonym of `do( ...)`: <!--See an example in the branch `doendo` of the solution repo-->
-
-  ```ruby
-  ➜  egg-oop-parser-solution git:(doendo) ✗ cat examples/do-endo.egg 
-  begin
-    def(a,4),
-    print(a)
-  end
-  ➜  egg-oop-parser-solution git:(doendo) ✗ bin/egg examples/do-endo
-  4
-  ```
+➜  egg-oop-parser-solution git:(doendo) ✗ cat examples/do-endo.egg 
+begin
+  def(a,4),
+  print(a)
+end
+➜  egg-oop-parser-solution git:(doendo) ✗ bin/egg examples/do-endo
+4
+```
