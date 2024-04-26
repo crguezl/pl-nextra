@@ -23,6 +23,10 @@ rubrica:
     - "Opcional: publicar la documentación de la API usando GitHub Pages en la carpeta `docs/`. Informe de cubrimiento"
 --- 
 
+import {frontmatter} from '@/src/frontmatter'
+import { Callout } from 'nextra/components'
+import Videos from '@/components/videos'
+
 ## Goals
 
 Write a translator from the [Egg](https://eloquentjavascript.net/12_language.html) language to the JavaScript language.
@@ -33,7 +37,9 @@ Reuse your parser to create the parse trees. Add traversal functions of the ASTs
 
 None of these quotes will serve as an excuse for your Egg to JS translator not to be faithful to the original Egg interpreter
 
-::: tip Negative Quotes
+<Callout type="info"> 
+**Negative Quotes**
+
 > The original is unfaithful to the translation.
 
 - Jorge Luis Borges, book *Other Inquisitions*
@@ -46,17 +52,19 @@ You can also try to say that, according to Robert Frost, it is because there is 
 > Poetry is what gets lost in translation
 
 - Robert Frost
-:::
+</Callout>
 
 
 Instead you have to follow Gunter Grass:
 
-::: tip Positive Quotes
+<Callout type="info"> 
+
+**Positive Quotes**
 
 > Translation is that which transforms everything so that nothing changes
 
 - Gunter Grass
-:::
+</Callout>
 
 ### Etimology 
 

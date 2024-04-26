@@ -4,6 +4,11 @@
     "display": "normal",
     "href": "/labs/tfa"
   },
+  "egg-2-js": {
+    "title": "Translating Egg to JS",
+    "display": "normal",
+    "href": "/labs/egg-2-js"    
+  },
   "extended-egg-interpreter": {
     "title": "Extended Egg Interpreter",
     "display": "normal",
