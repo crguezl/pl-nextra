@@ -73,7 +73,7 @@ You can present as part of your TFA work the result of these labs:
 
 1. [Extending the Egg Interpreter](/labs/extended-egg-interpreter)
 
-## Async and Await en Egg
+## Async and Await
 
 ### Promises in Egg
 
@@ -240,6 +240,11 @@ My Control Version Bio: Started with Unix RCS, then moved to  CVS, then Subversi
 
 However, this wasn't a satisfactory solution. I believe it will be much easier to do in a Egg to JS translator.
 
+
+### Async and the Calculator Language
+
+You can also propose to add async and await to the calculator language.
+
 ### Resources and References 
 
 * [ULL-ESIT-PL-1819/private-egg branch async2019](https://github.com/ULL-ESIT-PL-1819/private-egg/tree/async2019) (private)
@@ -283,6 +288,8 @@ We can extend Egg with declarations of the form `const(a,4)` for constants, and 
 
 Once we have constants in Egg we can review the declarations of Egg `true`, `false`, etc. as constants.
 
+You can also consider to add `const` to the calculator language.
+
 ### References
 
 * [Example of Scope Analysis for Egg](/topics/scope-analysis/egg-scope-analysis.md) by David Afonso
@@ -293,10 +300,40 @@ Once we have constants in Egg we can review the declarations of Egg `true`, `fal
 The goal of this proposal is to implement a translator from Egg to JavaScript as is described in the section
 [Scope Analysis and Translation: Translating From Egg to JavaScript](/topics/translation/egg-2-js) of this book/site/subject. This task implies the study and building of the  Scope Analysis stage. Make it as complete as possible.
 
+An alternative is to implement to write a parser for the calculator language to produce Egg ASTs.
 
 ## Lua Compiler
 
 Using an interpreter for a large enough subset of the [Lua Grammar](https://github.com/kach/nearley/blob/master/examples/lua.ne) in Nearley.js by translating to Egg trees or directly to JS.
+
+## Improve the Calculator with Syntax Sugar for Objects, Arrays, Classes and Inheritance
+
+Propose syntactic sugar for objects. For instance, something like this:
+
+```ruby
+obj = {
+    "name": "John";
+    "age": 42;
+    "greet": fun(other) { write("I am "+obj("name")+". I am "+obj("age")+" years old. Glad to meet you "+other)}
+} else fun(other) { # this function is called when the field is not found
+    "Field '"+other+"' not found"
+},
+obj("greet")("Juana"),   #  I am John. I am 42 years old. Glad to meet you Juana
+write(obj("pachamama"))  # Field 'pachamama' not found
+```
+
+Here is an example of potential syntax for arrays:
+
+```ruby
+a = [1;2;3;4] else 0 +[3;2;1] else 0,
+write(a[0]), # 4
+write(a[4]), # 4
+write(a[5])  # 0
+```
+
+Propose syntactic sugars for classes and inheritance. 
+
+Attempt to provide the usual methods for objects and arrays.
 
 ## Add Object Inheritance to Egg
 
