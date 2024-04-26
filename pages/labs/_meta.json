@@ -1,4 +1,9 @@
 {
+  "tfa": {
+    "title": "TFA: Final Project",
+    "display": "normal",
+    "href": "/labs/tfa"
+  },
   "extended-egg-interpreter": {
     "title": "Extended Egg Interpreter",
     "display": "normal",
