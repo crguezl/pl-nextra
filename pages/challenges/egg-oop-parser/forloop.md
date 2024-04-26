@@ -1,4 +1,4 @@
-# for ... end for as a synonym of while( ...)
+# for ... end
 
 The "Begin End Something" Language Design Pattern works as follows:
 

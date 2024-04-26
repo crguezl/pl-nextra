@@ -87,7 +87,7 @@ In this case the idea behind the proposal is that
 which makes the design proposal consistent with the idea of **property**
 </Callout>
 
-## Currying and the dot operator
+### Currying and the dot operator
 
 The *dot operator*  for objects `a.b`  is defined in such a way that `a.b` and `a["b"]` are the same thing. This is why the former program `examples/curry-no-method.egg` can be rewritten this way:
 
@@ -100,3 +100,26 @@ print(+.4(2))
 6
 ```
 
+### Changing the `evaluate` method
+
+You have to add the code in lines 12-14 to return the curryfied function:
+
+```js {12-14} showLineNumbers copy
+  evaluate(env) {
+    if (this.operator.type == "word" && this.operator.name in specialForms) { 
+      // ... ?
+    }
+
+    let theObject = this.operator.evaluate(env);
+    let propsProcessed = this.args.map((arg) => arg.evaluate(env));
+    let propName = checkNegativeIndex(theObject, propsProcessed[0]);
+
+    if (theObject[propName] || propName in theObject) {
+      // ... theObject has a property with name "propName" 
+    } else if (typeof theObject === "function") {
+      // theObject is a function, curry the function 
+      // using propsProcessed as fixed arguments
+    } else 
+      throw new TypeError(`...`);
+  }
+```

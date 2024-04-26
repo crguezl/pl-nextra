@@ -1,4 +1,9 @@
 {
+  "extended-egg-interpreter": {
+    "title": "Extended Egg Interpreter",
+    "display": "normal",
+    "href": "/labs/extended-egg-interpreter"
+  },
   "egg-oop-parser": {
     "title": "Egg OOP Parser",
     "display": "normal",
