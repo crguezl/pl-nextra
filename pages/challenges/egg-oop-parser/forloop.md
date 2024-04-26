@@ -1,4 +1,4 @@
-# for ... end
+# for ... end for
 
 The "Begin End Something" Language Design Pattern works as follows:
 
