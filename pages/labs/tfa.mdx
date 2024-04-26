@@ -67,11 +67,12 @@ Veamos el resultado de una ejecución:
 */}
 
 
-## Extending Egg with OOP, currying, selectors ...
+## Optional labs
 
 You can present as part of your TFA work the result of these labs:
 
-1. [Extending the Egg Interpreter](/labs/extended-egg-interpreter)
+1. [Extending the Egg Interpreter](/labs/extended-egg-interpreter). Extending Egg with OOP, currying, selectors ...
+2. A translator from Egg to JavaScript as is described in the lab [Translating From Egg to JavaScript](/labs/egg-2-js) 
 
 ## Async and Await
 
@@ -295,12 +296,6 @@ You can also consider to add `const` to the calculator language.
 * [Example of Scope Analysis for Egg](/topics/scope-analysis/egg-scope-analysis.md) by David Afonso
 * Vea el Capítulo [Análisis del Contexto](/topics/scope-analysis/analisis-dependiente-del-contexto) en estos apuntes y lea el capítulo *Symbol Table Structure* y el Chapter 3 del libro de Muchnik:
 
-## Translation: Egg to JS Compiler
-
-The goal of this proposal is to implement a translator from Egg to JavaScript as is described in the section
-[Scope Analysis and Translation: Translating From Egg to JavaScript](/labs/egg-2-js) of this book/site/subject. This task implies the study and building of the  Scope Analysis stage. Make it as complete as possible.
-
-An alternative is to implement to write a parser for the calculator language to produce Egg ASTs.
 
 ## Lua Compiler
 
@@ -485,6 +480,8 @@ do (
 You may find it helpful to read this tutorial [JavaScript Default Parameters](https://www.javascripttutorial.net/es6/javascript-default-parameters/)
 if you decide to tackle this extension.
 
+Consider also to add default values to the function aprameters in the calculator language.
+
 ## Spread operator
 
 Add a `spread` operator to Egg that works like the one in JS.
@@ -510,6 +507,8 @@ do (
   print(g(1, 4, 5)) # a es 1 y x es [4, 5]. Resultado: 9
 )
 ```
+
+Consider also to add the spread operator to the calculator language.
 
 ## Improve Location Information and Run Time Errors
 
@@ -538,6 +537,8 @@ See
 
 
 Try to improve error management in Egg.  
+
+Alternatively add  both `trow` and `try` `catch` `finally` to the calculator language. 
 
 ## AST Optimizations
 
@@ -735,6 +736,7 @@ do(
     print("First and last Members: ", inside[0], inside[-1])
 )
 ```
+
 ## Types
 
 
