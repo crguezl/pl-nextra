@@ -1,0 +1,245 @@
+---
+title: "Monday 2024/04/29"
+published: true
+summary: "Extended Egg Interpreter. Egg to JS translator. TFA. Exams"
+labs: [  "extended-egg-interpreter", "egg-2-js", "tfa" ]
+topics: 
+  - text: Encuesta al alumnado
+    href: /topics/evaluacion-de-la-docencia/encuesta-pl
+  - text: Fin de Curso
+    href: /pl-includes/planificacion-final
+  - text: Training Exam
+    href: /challenges/tfa/training-exam
+
+videos: [ "9J0XelSTOhI?si=r9EjIc9L1x6daK1L", "pt7k_ZyOYXE?si=pq1Pwa8ajUqJVioz", "Y7f87gn8B3s?si=LZbezF1AxcZmyyr_", "kbSFcqni__0?si=WVkTrYLf7YN7HSNH"]
+video20230329:
+  date: "2023/03/29"
+  id: "9J0XelSTOhI?si=r9EjIc9L1x6daK1L"
+  url: "https://youtu.be/9J0XelSTOhI?si=r9EjIc9L1x6daK1L"
+  comment: "ASTs for Egg. Lexical Analysis with moo-ignore. Introduction to Nearley.js"
+
+video20240318: 
+  date: "2024/03/18"
+  url: "https://youtu.be/ESRZvz0IzQg"
+  id: "ESRZvz0IzQg"
+  comment: "Clase del 18/03/2024. Motivation for extending assignments so that on the left-side we can modify functions" 
+
+video20240402:
+  url: "https://youtu.be/_MppVqEUpNY"
+  id: "_MppVqEUpNY"
+  date: "2024/04/03"
+  comment: "Extending the assignment to functions: the left side lab "
+
+video20240403:
+  url: "https://youtu.be/twroW5voFEo"
+  id: "twroW5voFEo"
+  date: "2024/04/03"
+  comment: "Clase del 03/04/2024. Doubts and queries about lexer-generator. The FunctionObject class. Callable instances. First steps on the assign function"
+
+
+video20240408:
+  url: https://youtu.be/qj2O0Hb6SQ8
+  id: qj2O0Hb6SQ8
+  date: 2024/04/08
+  comment: "Clase del 08/04/2024. Tests: bin/test and .env. Scope analysis and the left side of an assignment. The assign function. Performance of the assign function"
+
+---
+import { Callout } from 'nextra/components'
+import Videos from '@/components/videos'
+import Rubric from '@/components/rubric'
+import ReposForLab from '@/components/repos-for-lab'
+import {Link, frontmatter} from '@/src/frontmatter'
+import RelatedLabs from '@/components/related-labs'
+import RelatedTopics from '@/components/related-topics'
+
+
+## Encuesta de Satisfacción
+
+La Unidad de Evaluación y Mejora de la Calidad, desde el 15 de abril de 2024, ha procedido a la activación de las encuestas de satisfacción del alumnado para valorar la docencia impartida por el profesorado de la ULL durante el segundo cuatrimestre del curso 2023-2024.
+
+El enlace a la encuesta estará accesible hasta el 8 de mayo de 2024.  Les animo a cumplimentarla.
+
+- [Seguimiento de la participación](https://lookerstudio.google.com/reporting/ab33ee33-00a2-4b62-a851-3882faf3c1fe/page/NYKjC?params=%7B%22df3%22:%22include%25EE%2580%25801%25EE%2580%2580IN%25EE%2580%2580133746%22,%22df18%22:%22include%25EE%2580%25801%25EE%2580%2580IN%25EE%2580%2580133746%22%7D)
+
+Véanse las [notas para rellenar la encuesta del alumnado](/topics/evaluacion-de-la-docencia/encuesta-pl).
+
+## Yet Another Survey: Cuestionario de Experiencia de Usuario de GitHub GoRace 
+
+- [Cuestionario de Experiencia de Usuario de GitHub GoRace](https://campusingenieriaytecnologia2324.ull.es/mod/url/view.php?id=28799)
+
+## Yet Another Survey: Cuestionario sobre uso del ChatBot de Guías Docentes ULL 
+
+- [Cuestionario sobre uso del ChatBot de Guías Docentes ULL ](https://campusingenieriaytecnologia2324.ull.es/mod/url/view.php?id=28802)
+
+## Related topics
+
+<RelatedTopics topics={ frontmatter().topics }/>
+
+## Related labs
+
+<RelatedLabs labs={ frontmatter().labs }/>
+
+
+## Videos
+
+### Videos del curso 2023/2024
+
+#### 2024/04/24
+
+Cuestionarios de satisfacción, gorace, chatbot guías docentes. The dot ambiguity. Array and object literals. Error management.
+
+<Videos ids={["lBMofCG8olM"]}></Videos>
+
+
+### Videos del curso 2022/2023
+
+#### 2023/05/08
+
+Lab extended Egg Interpreter:
+
+<Videos ids={["ojS6-MDg0vw?si=VpE1pKnjKkoMeErR"]}></Videos>
+
+
+### Videos del curso 2021/2022
+
+#### 2022/05/03
+
+Extending Egg: evaluate for the Property Class, Negative Indices, Monkey Patching, Currying, Intro to leftEvaluate
+
+<Videos ids={["aZhB38kW4og"]}></Videos>
+
+#### 2022/05/04
+
+Extending the Egg Interpreter: fromList2AST, buildXXX, set and leftEvaluate
+
+<Videos ids={["BDEciremkxQ"]}></Videos>
+
+#### 2022/05/09
+
+Exam example: parsing JSON and translating Egg ASTs to term notation. Extending the Egg Interpreter: Hashes, Objects
+
+<Videos ids={["dkqxrJ7igH4"]}></Videos>
+
+#### 2022/05/10
+
+Martes 2022/05/10. TFA. Extending the Egg Interpreter: Objects, RegExps, On the properties of Code
+
+<Videos ids={["-NKBcw9q6qw"]}></Videos>
+
+#### 2022/05/11
+
+Miércoles 2022/05/11. Extending Egg: For loops. TFA: Async Programming in Egg. Translation from Egg to JS
+
+<Videos ids={["bkeQp8sk0Mw"]}></Videos>
+
+#### Miércoles 2022/05/11
+
+Miércoles 2022/05/11. Extending Egg: For loops. TFA: Async Programming in Egg. Translation from Egg to JS (44:30)
+
+<Videos ids={["bkeQp8sk0Mw"]}></Videos>
+
+#### Lunes 2022/05/16
+
+Scope Analysis. Translating Value, Words, operators and print. TFA. TFA assesment. Poll
+
+<Videos ids={["QtJCskUFQ4Y"]}></Videos>
+
+#### Martes 2022/05/17
+
+Translating reserved words: do, def, fun
+
+<Videos ids={["0ePrkUBCMCs"]}></Videos>
+
+#### Miércoles 2022/05/18
+
+Translating reserved words: `fun`, `set`, `while`
+
+<Videos ids={["bB-7KiSlY_I"]}></Videos>
+
+
+### Videos del curso 2020/2021
+
+#### Tuesday 2021/05/10
+
+Extended Egg Interpreter. 
+
+<Videos ids={["-NKBcw9q6qw?si=1jpKCq1MkojI9u2D"]}></Videos>
+
+#### Monday 11/05/2022
+
+TFA. Egg to JS translator.
+
+<Videos ids={["bkeQp8sk0Mw?si=PqXW16kf7Zt5Q4WE"]}></Videos>
+
+### Videos del curso 2019/2020
+
+#### Monday 2020/05/11
+
+
+[Parsing Expression Grammars (PEGs)](https://ull-esit-pl-2021.github.io/assets/temas/syntax-analysis/parsing-expression-grammars/).
+[Introducción Parsing Expression Grammars (PEGs)](https://ull-esit-pl-2021.github.io/assets/temas/syntax-analysis/parsing-expression-grammars/peg-intro).
+[PEG.js](https://ull-esit-pl-2021.github.io/assets/temas/syntax-analysis/parsing-expression-grammars/pegjs.html)
+
+<Videos ids={["bxadjvhtffs?si=HLDv0ceeanGtCWdO"]}></Videos>
+
+{ /*
+---
+layout: single
+title: "Martes 12/05/2020"
+categories: clases
+published: false
+video: https://campusvirtual.ull.es/ingenieriaytecnologia/mod/kalvidres/view.php?id=251526
+---
+*/}
+
+#### Monday 16/05/2020  
+
+
+TFA. Egg to JS.
+
+<Videos ids={["QtJCskUFQ4Y?si=xoS9TxX1icVEpK_U"]}></Videos>
+
+
+
+
+{/*
+---
+layout: single
+title: "Miércoles 13/05/2020"
+categories: clases
+published: false
+video: https://campusvirtual.ull.es/ingenieriaytecnologia/mod/kalvidres/view.php?id=251582
+---
+*/}
+
+#### Tuesday 17/05/2020  
+
+Egg to JS translator
+
+<Videos ids={["0ePrkUBCMCs?si=ueE1JLb-vTslR1TJ"]}></Videos>
+
+#### Wednesday 18/05/2020
+
+Egg to JS translator
+
+<Videos ids={["bB-7KiSlY_I?si=CLofXSSpavW4IYSp"]}></Videos>
+
+#### Monday 23/05/2020
+
+Egg to JS translator
+
+<Videos ids={["bB-7KiSlY_I?si=CLofXSSpavW4IYSp"]}></Videos>
+
+#### Exam training. Tuesday 24/05/2020
+
+
+Exam training. The regular expression language.
+
+<Videos ids={["bxadjvhtffs?si=HLDv0ceeanGtCWdO"]}></Videos>
+
+
+#### Exam training. Wednesday 25/05/2020
+
+Exam training. The regular expression language.
+
+<Videos ids={["bxadjvhtffs?si=HLDv0ceeanGtCWdO"]}></Videos>

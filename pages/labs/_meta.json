@@ -1,4 +1,9 @@
 {
+  "training-exam": {
+    "title": "Training Exam",
+    "display": "normal",
+    "href": "/labs/training-exam"
+  },
   "tfa": {
     "title": "TFA: Final Project",
     "display": "normal",
