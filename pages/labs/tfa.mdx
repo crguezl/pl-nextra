@@ -6,6 +6,13 @@ order: 18
 campus:
 template: 
 ---
+import { Callout } from 'nextra/components'
+import Videos from '@/components/videos'
+import Rubric from '@/components/rubric'
+import ReposForLab from '@/components/repos-for-lab'
+import {Link, frontmatter} from '@/src/frontmatter'
+import RelatedLabs from '@/components/related-labs'
+import RelatedTopics from '@/components/related-topics'
 
 ## Introduction
 
@@ -174,13 +181,15 @@ Me he encontrado con algunos problemas cuando probé a escribir este programa:
 )
 ```
 
-::: danger JS calls the callback with different number of arguments
+<Callout type="error">
+**JS calls the callback with different number of arguments**
+
 The problem is that JS calls the callback
 with a single argument `err` when an error occurs and with two
 `(err, data)` when the operation succeeds.
 
 This JS behavior causes that in some versions of the Egg compiler, the virtual machine  protests saying that *it expects the number of arguments to match the number of declared parameters*. Unfortunately, when there is an error JS calls the Egg-callback with a different number of arguments than it was declared with.
-:::
+</Callout>
 
 The thing has several solutions, but I have opted for the fastest one, which has been that Egg does not protest against calls with a number of arguments less than those that were declared.
 
@@ -239,7 +248,7 @@ https://crguezl.github.io/
 My Control Version Bio: Started with Unix RCS, then moved to  CVS, then Subversion and finally git 
 ```
 
-However, this wasn't a satisfactory solution. I believe it will be much easier to do in a Egg to JS translator.
+However, this wasn't a satisfactory solution. I believe it will be much easier to do in a Egg to JS translator or in the calculator language.
 
 
 ### Async and the Calculator Language
@@ -324,8 +333,8 @@ a = [1;2;3;4] else 0,
 b = [3;2;1] else 0,  
 c = a + b,   # Since arrays are functions they can be added
 write(c[0]), # 4
-write(c[4]), # 4
-write(c[5])  # 0
+write(c[3]), # 4 since b[3] is 0
+write(c[5])  # 0  since both a[5] and b[5] are 0
 ```
 
 And here is an example of potential syntax for objects:
@@ -759,21 +768,21 @@ Here is a proposal of syntax for introducing types in Egg:
 do(
   TYPE(STUDENT, OBJECT(name: STRING,id: STRING, mark: NUMBER)),
   TYPE(NUMLIST, ARRAY(NUMBER)),
-  TYPE(NUMFUN, FUN(NUMBER, NUMBER)),
-  NUMLIST(x, [4,7,9]),
+  TYPE(NUMFUN, FUN(NUMBER, NUMBER)), # type of functions that receive a number and return a number
+  NUMLIST(x, [4,7,9]),               # Like def(x, [4,7,9]) but with type checking
   STUDENT(juan, {name: "Juan", id: "aluXX", mark: 10}),
-  NUMFUN(f, fun(x, "hi!")), # error
-  =(juan.name, 4),          # error
-  =(juan.id, "alu123"),     # correct
-  =(x[0], "not allowed"),   # error
+  NUMFUN(f, fun(x, "hi!")), # Error in the definition of f, must receive and return a number
+  =(juan.name, 4),          # Error: juan.name must be a STRING
+  =(juan.id, "alu123"),     # Correct: The type expression of the left is STRING and the type expression of the righ is STRING
+  =(x[0], "not allowed"),   # Error: the type expression of x[0] is NUMBER and the type expression of the right side is STRING
 )
 ``` 
 
 * `TYPE`s and type names will be in uppercase
 * The call to type `TYPE(X, ...) ` will produce a sort of *constructor of the type* that can be referred later in the program as `X(leftvalue, expression)`
 * The special form `def` dissapears and is substituted by these type constructors
-* Now we have to compute the type attribute of every AST node and check for type compatibility
-* Ideally structural compatibility
+* Now we have to compute the type attribute of every AST node and check for type compatibility in assignments and function calls
+* Ideally structural compatibility 
 
 To attempt this phase you must first have completed the scope analysis.
 
@@ -807,3 +816,149 @@ You can propose for the TFA tree transformations to help in code factorization u
 
 Do the compiler explained in
 * [Experimental Language: EXPL](https://silcnitc.github.io/) Write your own compiler!. An educational platform for compiler construction ([silcnitc](https://github.com/silcnitc))
+
+## Videos
+
+### Videos del curso 2023/2024
+
+#### 2024/04/29
+
+Final de curso. TFA: asincronía, tipos
+
+<Videos ids={["YgiIWj0u-6I"]}></Videos>
+
+
+### Videos del curso 2022/2023
+
+#### 2023/05/08
+
+Lab extended Egg Interpreter:
+
+<Videos ids={["ojS6-MDg0vw?si=VpE1pKnjKkoMeErR"]}></Videos>
+
+
+### Videos del curso 2021/2022
+
+#### 2022/05/03
+
+Extending Egg: evaluate for the Property Class, Negative Indices, Monkey Patching, Currying, Intro to leftEvaluate
+
+<Videos ids={["aZhB38kW4og"]}></Videos>
+
+#### 2022/05/04
+
+Extending the Egg Interpreter: fromList2AST, buildXXX, set and leftEvaluate
+
+<Videos ids={["BDEciremkxQ"]}></Videos>
+
+#### 2022/05/09
+
+Exam example: parsing JSON and translating Egg ASTs to term notation. Extending the Egg Interpreter: Hashes, Objects
+
+<Videos ids={["dkqxrJ7igH4"]}></Videos>
+
+#### 2022/05/10
+
+Martes 2022/05/10. TFA. Extending the Egg Interpreter: Objects, RegExps, On the properties of Code
+
+<Videos ids={["-NKBcw9q6qw"]}></Videos>
+
+#### Miércoles 2022/05/11
+
+Miércoles 2022/05/11. Extending Egg: For loops. TFA: Async Programming in Egg. Translation from Egg to JS (44:30)
+
+<Videos ids={["bkeQp8sk0Mw"]}></Videos>
+
+{
+/* 
+<Videos ids={["bkeQp8sk0Mw"]}></Videos>
+<Videos ids={["bkeQp8sk0Mw?si=PqXW16kf7Zt5Q4WE"]}></Videos>
+*/
+}
+
+#### Lunes 2022/05/16
+
+Scope Analysis. Translating Value, Words, operators and print. TFA. TFA assesment. Poll
+
+<Videos ids={["QtJCskUFQ4Y"]}></Videos>
+
+#### Martes 2022/05/17
+
+Translating reserved words: do, def, fun
+
+<Videos ids={["0ePrkUBCMCs"]}></Videos>
+
+#### Miércoles 2022/05/18
+
+Translating reserved words: `fun`, `set`, `while`
+
+<Videos ids={["bB-7KiSlY_I"]}></Videos>
+
+
+### Videos del curso 2020/2021
+
+#### Tuesday 2021/05/10
+
+Extended Egg Interpreter. 
+
+<Videos ids={["-NKBcw9q6qw?si=1jpKCq1MkojI9u2D"]}></Videos>
+
+### Videos del curso 2019/2020
+
+#### Monday 2020/05/11
+
+
+[Parsing Expression Grammars (PEGs)](https://ull-esit-pl-2021.github.io/assets/temas/syntax-analysis/parsing-expression-grammars/).
+[Introducción Parsing Expression Grammars (PEGs)](https://ull-esit-pl-2021.github.io/assets/temas/syntax-analysis/parsing-expression-grammars/peg-intro).
+[PEG.js](https://ull-esit-pl-2021.github.io/assets/temas/syntax-analysis/parsing-expression-grammars/pegjs.html)
+
+<Videos ids={["bxadjvhtffs?si=HLDv0ceeanGtCWdO"]}></Videos>
+
+{ /*
+---
+layout: single
+title: "Martes 12/05/2020"
+categories: clases
+published: false
+video: https://campusvirtual.ull.es/ingenieriaytecnologia/mod/kalvidres/view.php?id=251526
+---
+*/}
+
+#### Monday 16/05/2020  
+
+
+TFA. Egg to JS.
+
+<Videos ids={["QtJCskUFQ4Y?si=xoS9TxX1icVEpK_U"]}></Videos>
+
+
+
+
+{/*
+---
+layout: single
+title: "Miércoles 13/05/2020"
+categories: clases
+published: false
+video: https://campusvirtual.ull.es/ingenieriaytecnologia/mod/kalvidres/view.php?id=251582
+---
+*/}
+
+#### Tuesday 17/05/2020  
+
+Egg to JS translator
+
+<Videos ids={["0ePrkUBCMCs?si=ueE1JLb-vTslR1TJ"]}></Videos>
+
+#### Wednesday 18/05/2020
+
+Egg to JS translator
+
+<Videos ids={["bB-7KiSlY_I?si=CLofXSSpavW4IYSp"]}></Videos>
+
+#### Monday 23/05/2020
+
+Egg to JS translator
+
+<Videos ids={["bB-7KiSlY_I?si=CLofXSSpavW4IYSp"]}></Videos>
+
