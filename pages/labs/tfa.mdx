@@ -5,6 +5,16 @@ published: true
 order: 18
 campus:
 template: 
+rubrica: 
+  - There is an interesting contribution 
+  - Contains enough tests
+  - Study of covering
+  - CI has been done with GitHub Actions
+  - Well documented module
+  - It has been published as a module and good use has been made of semantic versioning in the evolution of the module
+  - Report made with Nextra/Docusaurus/Vuepress deployed
+  - Si se han usado herramientas AI se deberá  incluir en el <code>README.md</code> una sección sobre como fueron utilizadas. En caso contrario se debe declarar que no se han usado.
+  - En la misma sección el alumno indicará su compromiso a no hacer uso de la IA que pueda impedir su crecimiento académico personal o impedirle comprender los conceptos de esta práctica
 ---
 import { Callout } from 'nextra/components'
 import Videos from '@/components/videos'
@@ -334,7 +344,7 @@ b = [3;2;1] else 0,
 c = a + b,   # Since arrays are functions they can be added
 write(c[0]), # 4
 write(c[3]), # 4 since b[3] is 0
-write(c[5])  # 0  since both a[5] and b[5] are 0
+write(c[5])  # 0 since both a[5] and b[5] are 0
 ```
 
 And here is an example of potential syntax for objects:
@@ -936,7 +946,6 @@ TFA. Egg to JS.
 
 {/*
 ---
-layout: single
 title: "Miércoles 13/05/2020"
 categories: clases
 published: false
@@ -961,4 +970,13 @@ Egg to JS translator
 Egg to JS translator
 
 <Videos ids={["bB-7KiSlY_I?si=CLofXSSpavW4IYSp"]}></Videos>
+
+## Rubric
+
+<Rubric rubric={frontmatter().rubrica} />
+
+## {frontmatter().key} Repos
+
+<ReposForLab lab={frontmatter().key} />
+
 

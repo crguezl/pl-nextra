@@ -1,9 +1,17 @@
 {
+    "introduction-to-pl":  "Introduction to Programming Languages",
+    "introduction-to-javascript": "Fundamentals of Programming",
     "expresiones-regulares-y-analisis-lexico": "Regular Expressions and Lexical Analysis",
+    "syntax-analysis":  "Syntax Analysis",
+    "scope-analysis": "Scope Analysis",
     "type-checking": "Type  Checking. Basic Concepts",
     "tree-transformations": "Tree Transformations",
-    "syntax-analysis":  "Syntax Analysis",
-    "introduction-to-javascript": "Fundamentals of Programming",
-    "introduction-to-pl":  "Introduction to Programming Languages",
-    "translation": "Translation"
+    "translation": "Translation",
+    "interpretation": "Interpretation",
+    "evaluacion-de-la-docencia": {
+        "type": "page",
+        "title": "Evaluación de la Docencia",
+        "href": "/topics/evaluacion-de-la-docencia/encuesta-pl",
+        "display": "hidden"
+    }
 }
