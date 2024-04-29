@@ -46,7 +46,7 @@ The first thing to do is to fill the class `Property` inside the file `src/ast.j
 
 Here is a proposal template:
 
-```js {5-20}
+```js {5-20} showLineNumbers copy filename="~/campus-virtual/shared/egg/eloquentjsegg/lib/ast.js branch=private2223"
 class Property {
   constructor(tree) { ... }
 
@@ -84,7 +84,7 @@ We check in line 13 that the object really has that property. If so, we have to 
 
 The interpreter has to understand indexation on negative indices. The consequence is that when accessing properties, we must check if that is the case.  A solution is to write a helper and use it wherever is needed:
 
-```js
+```js showLineNumbers copy filename="~/campus-virtual/shared/egg/eloquentjsegg/lib/registry.js branch=private2223"
 function checkNegativeIndex(obj, element) {
   if (Array.isArray(obj) &&  element < 0 ) {
     element += obj.length;
@@ -95,14 +95,16 @@ function checkNegativeIndex(obj, element) {
 
 Another is to do Monkey Patching in the object class.
 
+Instead of using `checkNegativeIndex`, we can alternatively add to the object class a method `at` that is called `object.at(property)` and returns `object[property]`  but when `property` is a negative number and `object` is an array, it  returns `object[length+property]`. Then we can use `at` wherever is needed. Choose the option that suits you.
+
+
 ## Monkey Patching 
 
-Instead of using `checkNegativeIndex`, we can alternatively add to the object class a method `at` that is called `object.at(property)` and returns `object[property]`  but when `property` is a negative number and `object` is an array, it  returns `object[length+property]`. Then we can use `at` wherever is needed. Choose the option that suits you.
 
 You can also use Monkey Patching  to extend any of the basic classes. For instance, 
 the following code augments the `Number` class with methods for the numeric operations:
 
-```js
+```js showLineNumbers copy filename="~/campus-virtual/shared/egg/eloquentjsegg/lib/monkey-patch.js branch=private2223"
 const binOp = {
   "+": (a, b) => a + b,
   "-": (a, b) => a - b,
@@ -236,7 +238,7 @@ One meaning that may be useful for expressions like `while[<(x,4), ... ]` is to 
 
 With that in mind and adding an `eval` function, we can write Egg programs like the following:
 
-```ruby
+```ruby showLineNumbers
 ➜  egg-oop-parser-solution git:(master) ✗ cat examples/specialform-property-4.egg
 (
     def(b,4),
@@ -253,7 +255,7 @@ With that in mind and adding an `eval` function, we can write Egg programs like 
 That when executed produces:
 
 ```json
-➜  egg-oop-parser-solution git:(master) ✗ bin/egg examples/specialform-property-4 
+➜  egg-oop-parser-solution git:(master) ✗ bin/evm-crguezl.js examples/specialform-property-4.json
 ["ast","scope"]
 {
   "type": "apply",
@@ -291,6 +293,17 @@ That when executed produces:
   ]
 }
 10
+```
+
+Here the `evm-crguezl.js` script points to the solution in the `eloquentjsegg` repository branch `private-2223`:
+
+```
+➜  egg-oop-parser-solution git:(master) ✗ ls -l bin/
+total 24
+-rwxr-xr-x  1 casianorodriguezleon  staff   215 Apr 22 13:10 egg
+-rwxr-xr-x  1 casianorodriguezleon  staff  1678 Apr 22 12:29 eggc.js
+lrwxr-xr-x  1 casianorodriguezleon  staff    85 Apr 22 12:32 evm -> /Users/casianorodriguezleon/campus-virtual/shared/egg/oop-evm-releases/evm-2122-macos
+lrwxr-xr-x  1 casianorodriguezleon  staff    78 Apr 23 10:57 evm-crguezl.js -> /Users/casianorodriguezleon/campus-virtual/shared/egg/eloquentjsegg/bin/evm.js
 ```
 
 ### Adding the parser to topEnv 

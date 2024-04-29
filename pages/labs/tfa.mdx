@@ -320,13 +320,26 @@ write(obj("pachamama"))  # Field 'pachamama' not found
 Here is an example of potential syntax for arrays:
 
 ```ruby
-a = [1;2;3;4] else 0 +[3;2;1] else 0,
-write(a[0]), # 4
-write(a[4]), # 4
-write(a[5])  # 0
+a = [1;2;3;4] else 0,
+b = [3;2;1] else 0,  
+c = a + b,   # Since arrays are functions they can be added
+write(c[0]), # 4
+write(c[4]), # 4
+write(c[5])  # 0
 ```
 
-Propose syntactic sugars for classes and inheritance. 
+And here is an example of potential syntax for objects:
+  
+```ruby
+p1 = { "x": 1; "y": 2} else 0,         # a two-dimensional point
+p1 = { "x": 3; "y": 2; "z": 4} else 0, # a three-dimensional point
+p = p1+p2,     # Since objects are functions they can be added
+write(p("x")), # 4 
+write(p("y")), # 4
+write(p("z"))  # 4
+```
+
+Propose also syntactic sugars for classes and inheritance. 
 
 Attempt to provide the usual methods for objects and arrays.
 
