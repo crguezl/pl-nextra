@@ -31,7 +31,7 @@ de tipo.
 
 El lenguaje de las expresiones de tipo es la representación
 interna que el compilador tiene de estas declaraciones y depende del
-compilador. El lenguaje de las declaraciones no.
+compilador. 
 
 ![](https://img.brainkart.com/imagebk9/uxduSYs.jpg)
 
@@ -45,7 +45,7 @@ que los compiladores introduzcan modificaciones en el sistema de tipos
 del lenguaje. 
 
 Por ejemplo en Pascal el tipo de un array incluye los
-índices del array). Esto y las reglas de equivalencia de tipos de
+índices del array. Esto y las reglas de equivalencia de tipos de
 Pascal limitaban gravemente la genericidad de las funciones en Pascal. Por
 eso algunos compiladores Pascal permitian en una llamada a función la
 compatibilidad de tipos entre arrays de diferente tamaño y diferentes
@@ -111,7 +111,7 @@ operandos sean enteros, flotantes, etc.
 En algunos lenguajes se permite la sobrecarga de funciones. Así es
 posible tener dos funciones llamadas `min`:
 
-```c
+```c showLineNumbers
   int min(int a, int b) {       string min(string a, string b) {     
        if (a < b) return a;          if (strcmp(a, b) < 0) return a; 
        return b;                     return b;                       
@@ -152,13 +152,17 @@ OCaml, ML, etc).
 
 For example, in the expression `f 3`, OCaml knows that `f` must be a function, because it is applied to something (not because its name is `f`!) and that it takes an `int` as input.  It knows nothing about the output type.  Therefore the type inference mechanism of OCaml would assign `f` the type `int -> 'a`  where `'a`is a **type variable**. 
 
-```ocaml
-# fun f -> f 3;;
-- : (int -> 'a) -> 'a = <fun>
+```ocaml showLineNumbers copy
+    ➜  pl2324-apuntes git:(main) ✗ ocaml
+    OCaml version 5.0.0
+    Enter #help;; for help.
+
+    # fun f -> f 3;;
+    - : (int -> 'a) -> 'a = <fun>
 ```
 Véase como ejemplo de inferencia de tipos la siguiente sesión en Ocaml:
 
-```ocaml
+```ocaml showLineNumbers copy
     pl@nereida:~/src/perl/attributegrammar/Language-AttributeGrammar-0.08/examples$ ocaml
             Objective Caml version 3.09.2
 
@@ -252,6 +256,53 @@ la función puede ser usada con un número arbitrario de tipos, no hemos tenido 
     This expression has type string but is here used with type int
 ```
 
+En los apuntes del profesor en [Análisis de Tipos de Funciones Polimorfas](https://campusvirtual.ull.es/ocw/pluginfile.php/3847/mod_resource/content/0/perlexamples/node314.html) se muestra un pequeño lenguaje que permite el polimorfismo paramétrico.
+Está escrito en Perl usando Eyapp. Esta es la gramática Eyapp basada en la sección **A language with Polymorphic functions** del libro de Aho, Sethi y Ullman, 1986, p. 367:
+
+```js
+  p: d <+ ';'> '{' e <%name EXPS + ';'> '}'
+  ;
+
+  d: id ':' t
+  ;
+
+  t:  INT
+    | STRING
+    | TYPEVAR
+    | LIST '(' t ')'
+    | t '*' t
+    | t '->' t
+    | '(' t ')'
+  ;
+
+  e:  id '(' optargs ')'
+    | id
+  ;
+
+  optargs:
+      /* empty */
+    | args
+  ;
+
+  args: e
+     | args ',' e
+  ;
+
+  id: ID
+  ;
+```
+Y este es un ejemplo de programa conforme a la gramática Eyapp anterior:
+
+```ruby
+pl@nereida:~/doc/casiano/PLBOOK/PLBOOK/code/Aho-Polymorphism/lib/Aho/script$ \
+                                                         cat -n prueba01.ply
+1  first :  list(ALPHA) -> ALPHA;
+2  q : list(list(int))
+3  {
+4    first(first(q))
+5  }
+```
+
 ## Equivalencia de Expresiones de Tipo
 
 La introducción de nombres para las expresiones de tipo introduce una
@@ -282,6 +333,8 @@ Si los nombres no son sustituidos se habla de equivalencia por nombres o de **eq
 
 Si utilizamos la opción de sustituir los nombres por sus definiciones y permitimos en la definición de tipo el uso de nombres de tipo no declarados se pueden producir ciclos en el grafo de tipos.
 
+<Callout type="info" emoji="ℹ️">
+
 El lenguaje C impide la presencia de ciclos en el grafo de tipos usando
 dos reglas:
 
@@ -291,6 +344,7 @@ dos reglas:
 2.  Se usa equivalencia estructural para todos los tipos con la
     excepción de las `struct` para las cuales se usa equivalencia
     nominal
+</Callout>
 
 Por ejemplo, el siguiente programa:
 
@@ -320,7 +374,7 @@ Por ejemplo, el siguiente programa:
 
 Produce el siguiente mensaje de error:
 
-```
+```console showLineNumbers {3}
     nereida:~/src/perl/testing> gcc -fsyntax-only typeequiv.c
     typeequiv.c: En la función 'main':
     typeequiv.c:19: error: tipos incompatibles en la asignación
@@ -343,7 +397,7 @@ El término hace referencia al llamado test del pato: *If it waddles like a duck
 El comprobador de tipos modifica el árbol sintáctico para introducir
 donde sean necesarias. Por ejemplo, si tenemos
 
-```C
+```c
     int i;
     float x;
 
@@ -360,13 +414,13 @@ Una transformación árbol de optimización que entra en este punto es la
 conversión de tipo en tiempo de compilación de las constantes. Por
 ejemplo, dados los dos programas:
 
-```C
-|     float X[N];          |     float X[N];          |
-|     int i;               |     int i;               |
-|                          |                          |
-|     for(i=0; i<N; i++) { |     for(i=0; i<N; i++) { |
-|       X[i] = 1;          |       X[i] = 1.0;        |
-|     }                    |     }                    |
+```c showLineNumbers {5}
+     float X[N];               float X[N];          
+     int i;                    int i;               
+                                                    
+     for(i=0; i<N; i++) {      for(i=0; i<N; i++) { 
+       X[i] = 1;                 X[i] = 1.0;        
+     }                         }                    
 ```
 
 los efectos sobre el rendimiento serán lamentables si el compilador no

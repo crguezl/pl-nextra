@@ -123,3 +123,40 @@ You have to add the code in lines 12-14 to return the curryfied function:
       throw new TypeError(`...`);
   }
 ```
+
+### Examples of currying `4["+", 5](3)`
+
+```ruby showLineNumbers copy filename="examples/curry-multiple-indices.egg"
+➜  eloquentjsegg git:(main) ✗ cat test/examples/curry-multiple-indices.egg
+do(
+    print(4["+", 5](3)),
+    print(4["+", 5, 9](3))
+)
+```
+
+Here is the execution:
+
+```console
+➜  eloquentjsegg git:(main) ✗ bin/egg.js test/examples/curry-multiple-indices.egg
+12
+21
+```
+
+and here is the section of AST corresponding to the sub-expression  `4["+", 5](3)`:
+
+```js showLineNumbers copy filename="campus-virtual/shared/egg/examples/curry-multiple-indices.egg.evm"
+{
+  "type": "apply",
+  "operator": {
+    "type": "property",
+    "operator": { "type": "value",  "value": 4  },
+    "args": [
+      { "type": "value", "value": "+" },
+      { "type": "value", "value": 5   }
+    ]
+  },
+  "args": [
+    { "type": "value", "value": 3 }
+  ]
+}
+```
