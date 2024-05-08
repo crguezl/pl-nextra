@@ -5,11 +5,11 @@ import { SessionProvider } from "next-auth/react"
 import { Link } from 'nextra-theme-docs'
 const config: DocsThemeConfig = {
   banner: {
-    key: 'ENCUESTA_SATISFACCION',
+    key: 'exam20052024',
     text: (<span> 
       <a 
       target="_blank"
-      href="https://lookerstudio.google.com/reporting/ab33ee33-00a2-4b62-a851-3882faf3c1fe/page/NYKjC?params=%7B%22df3%22:%22include%25EE%2580%25801%25EE%2580%2580IN%25EE%2580%2580133746%22,%22df18%22:%22include%25EE%2580%25801%25EE%2580%2580IN%25EE%2580%2580133746%22%7D">Encuesta de satisfacción →
+      href="/clases/may/2024-05-20-examen">Examen 2024/05/20 →
       </a>
     </span>
     )
