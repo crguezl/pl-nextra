@@ -1,6 +1,6 @@
 {
   "index": "Introduction",
-  "clases": "Classes",
+  "clases": "Classes and Exams",
   "labs": "Labs",
   "topics": "Topics",
   "schedules": "Schedules",
@@ -243,7 +243,7 @@
   "type": "menu",
   "items": {
     "Classes": {
-      "title": "Classes",
+      "title": "Classes && Exams",
       "href": "/clases",
       "newWindow": false
     },
