@@ -1,22 +1,23 @@
-# Nextra Docs Template 
+# PROCESADORES DE LENGUAJES NOTES
 
-This is a template for creating documentation with [Nextra](https://nextra.site).
+These are the notes for the suject [Procesadores de Lenguajes](https://www.ull.es/apps/guias/guias/view_guide/36785/) taught at [Grado de Ingeniería Informática](https://www.ull.es/apps/guias/guias/view_degree/Grado%20en%20Ingenier%C3%ADa%20Inform%C3%A1tica/) 
+de la Universidad de La laguna.
 
-[**Live Demo →**](https://nextra-docs-template.vercel.app)
+Feel free to use them, but remember that they are not perfect and may contain errors. If you find any, please let me know.
 
-[![](.github/screenshot.png)](https://nextra-docs-template.vercel.app)
+[**Live Demo →**](https://ull-pl.vercel.app/)
 
-## Quick Start
+[![](/images/pl-home-page.pngg)](https://ull-pl.vercel.app/)
 
-Click the button to clone this repository and deploy it on Vercel:
+## Fork
 
-[![](https://vercel.com/button)](https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2Fshuding%2Fnextra-docs-template&showOptionalTeamCreation=false)
+Fork the repository and deploy it on Vercel
 
 ## Local Development
 
-First, run `pnpm i` to install the dependencies.
+First, run `npm i` to install the dependencies.
 
-Then, run `pnpm dev` to start the development server and visit localhost:3000.
+Then, run `npm dev` to start the development server and visit localhost:3000.
 
 ## License
 
