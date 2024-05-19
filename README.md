@@ -13,7 +13,12 @@ Feel free to use them, but remember that they are not perfect and may contain er
 
 [Fork the repository](https://github.com/crguezl/pl-nextra/fork) and deploy it on Vercel
 
+Follow the lessons in the lesson [Learning and Playing with Nextra](https://ull-pl.vercel.app/nextra-playground) to learn how to use the 
+Nextra framework.
+
 ## Local Development
+
+You need node and npm installed on your machine.
 
 First, run `npm i` to install the dependencies.
 
