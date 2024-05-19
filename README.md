@@ -5,13 +5,13 @@ de la Universidad de La laguna.
 
 Feel free to use them, but remember that they are not perfect and may contain errors. If you find any, please let me know.
 
-[**Live Demo →**](https://ull-pl.vercel.app/)
+[**See the notes →**](https://ull-pl.vercel.app/)
 
 [![](/images/pl-home-page.pngg)](https://ull-pl.vercel.app/)
 
 ## Fork
 
-Fork the repository and deploy it on Vercel
+[Fork the repository](https://github.com/crguezl/pl-nextra/fork) and deploy it on Vercel
 
 ## Local Development
 
