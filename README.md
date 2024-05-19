@@ -10,6 +10,7 @@ Feel free to use them, but remember that they are not perfect and may contain er
 
 ## Fork
 
+Click the button "Use this template" to create or 
 [Fork the repository](https://github.com/crguezl/pl-nextra/fork) and study the lesson [Learning and Playing with Nextra](https://ull-pl.vercel.app/nextra-playground) to learn how to use the Nextra framework.
 
 Modify the configuration files 
