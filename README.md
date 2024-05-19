@@ -11,10 +11,24 @@ Feel free to use them, but remember that they are not perfect and may contain er
 
 ## Fork
 
-[Fork the repository](https://github.com/crguezl/pl-nextra/fork) and deploy it on Vercel
+[Fork the repository](https://github.com/crguezl/pl-nextra/fork) and study the lesson [Learning and Playing with Nextra](https://ull-pl.vercel.app/nextra-playground) to learn how to use the Nextra framework.
 
-Follow the lesson [Learning and Playing with Nextra](https://ull-pl.vercel.app/nextra-playground) to learn how to use the 
-Nextra framework.
+Modify the configuration files 
+
+- middleware.js, 
+- theme.config.tsx, 
+- next.config.js, 
+- package.json, 
+- the components folder, 
+- the scripts folder,
+
+You have to add the corresponding .env files to the root of the project for the secrets
+
+```
+.env.local            .env.netlify.local    .env.production.local .env.vercel.local
+```
+
+Modify the content of the pages directory to adapt the notes to your needs.
 
 ## Local Development
 
