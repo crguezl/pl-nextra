@@ -281,7 +281,7 @@ See section [Importing other grammars](importing-grammars)
 See [examples/calculator/arithmetic-lexer.ne](https://github.com/ULL-ESIT-PL/learning-nearley/blob/main/examples/calculator/arithmetic-lexer.ne)
 
 
-```js
+```js showLineNumbers  filename="examples/calculator/arithmetic-lexer.ne" copy
 # How to Implement Lexical Analysis in Tools with a separated Lexer
 # To use it run: 
 # nearleyc arithmetic-lexer.ne -o grammar.js  && node use-arithmetic.js 'ln (3 + 2*(8/e - sin(pi/5)))'
@@ -370,7 +370,7 @@ LN -> %ln         {% d => Math.log %}
 
 See [examples/calculator/lex.js](https://github.com/ULL-ESIT-PL/learning-nearley/blob/main/examples/calculator/lex.js)
 
-```js
+```js showLineNumbers  filename="examples/calculator/lex.js" copy
 const { makeLexer, moo } = require("moo-ignore");
 
 const Tokens = {
@@ -410,7 +410,7 @@ module.exports = lexer;
 
 See [examples/calculator/use-arithmetic.js](https://github.com/ULL-ESIT-PL/learning-nearley/blob/main/examples/calculator/use-arithmetic.js)
 
-```js
+```js showLineNumbers  filename="examples/calculator/use-arithmetic.js" copy
 const nearley = require("nearley");
 const grammar = require("./grammar.js");
 

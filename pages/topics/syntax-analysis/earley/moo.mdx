@@ -35,7 +35,7 @@ When using a lexer, there are two ways to match tokens:
 
 Here is an example of a simple grammar:
 
-```js filename="ULL-ESIT-PL/learning-nearley/examples/nearley-with-moo-example.ne"
+```js filename="ULL-ESIT-PL/learning-nearley/examples/nearley-with-moo-example.ne" showLineNumbers
 @{%
 const moo = require("moo");
 
@@ -125,7 +125,7 @@ A moo lexer object is a [Generator](https://javascript.info/generators), you can
 
 See moo issue: [no-context/moo/issues/156](https://github.com/no-context/moo/issues/156)
 
-```js 
+```js showLineNumbers filename="ULL-ESIT-PL/moo-examples/skip-spaces.js"
 const moo = require('moo')
 const lex = moo.compile({
   // If one rule is /u then all must be
@@ -238,7 +238,7 @@ Moo-ignore (🐄) is a wrapper around the [moo](https://www.npmjs.com/package/mo
 You can use it in your Nearley.js program and ignore some tokens like white spaces and comments:
 
 
-```js
+```js showLineNumbers filename="https://github.com/ULL-ESIT-PL/moo-ignore/main/test/test-grammar.ne"
 @{%
 const tokens = require("./tokens");
 const { makeLexer } = require("../index.js");
@@ -283,7 +283,7 @@ lexer.ignore("comment");
 
 For sake of completeness, here is the contents of the file `tokens.js` we have used in the former code:
 
-```js
+```js showLineNumbers filename="https://github.com/ULL-ESIT-PL/moo-ignore/blob/main/test/tokens.js"
 const { moo } = require("moo-ignore");
 
 module.exports = {
@@ -306,7 +306,7 @@ module.exports = {
 
 See the [tests](https://github.com/ULL-ESIT-PL/moo-ignore/tree/main/test) folder in this distribution for more examples of use. Here is a program that tests the former example:
 
-```js
+```js showLineNumbers filename="https://github.com/ULL-ESIT-PL/moo-ignore/blob/main/test/ignore.js"
 const nearley = require("nearley");
 const grammar = require("./test-grammar.js");
 
