@@ -1,5 +1,14 @@
 {
     "nearley": {
         "title": "Parsing with Nearley.js"
+    },
+    "algorithm": "The Nearley algorithm",
+    "array-json": {
+        "display": "hidden"
+    },
+    "nearley-comments-charsets": "Other Nearley features",
+    "moo": "The lexer generator Moo",
+    "toby-ho-course": {
+        "display": "hidden"
     }
 }
