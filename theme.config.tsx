@@ -9,7 +9,7 @@ const config: DocsThemeConfig = {
     text: (<span> 
       <a 
       target="_blank"
-      href="/clases/may/2024-05-20-examen">Examen 2024/05/20 →
+      href="/clases/may/2024-06-13-examen">Examen 2024/06/13 →
       </a>
     </span>
     )
