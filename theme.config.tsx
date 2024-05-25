@@ -7,10 +7,7 @@ const config: DocsThemeConfig = {
   banner: {
     key: 'exam20052024',
     text: (<span> 
-      <a 
-      target="_blank"
-      href="/clases/may/2024-06-13-examen">Examen 2024/06/13 →
-      </a>
+      <a href="https://portal.ull.es" target="_blank">Consulta tu calificación de PL en el portal de la ULL</a>
     </span>
     )
   },
