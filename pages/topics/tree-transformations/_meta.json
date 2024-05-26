@@ -12,6 +12,7 @@
         "title": "Master the AST lecture series",
         "display": "hidden"
     },
+    "babel": "",
     "ast-types-standard-description": {
         "title": "Understanding the AST Types API",
         "display": "hidden"
