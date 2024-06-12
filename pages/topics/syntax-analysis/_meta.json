@@ -3,5 +3,6 @@
     "ast": "Abstract Syntax Trees",
     "conflicts": "Solving LR Conflicts",
     "earley": "Earley Parsers",
+    "analisis-descendente-predictivo-recursivo": "Recursive Descent Analysis",
     "teoria": "Gramáticas y Lenguajes"
 }

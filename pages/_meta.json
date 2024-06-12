@@ -181,6 +181,11 @@
     "title": "Tools",
     "type": "menu",
     "items": {
+      "Babel": {
+        "title": "Babel",
+        "href": "https://github.com/ULL-ESIT-PL/babel-learning",
+        "newWindow": true
+      },
       "nearley": {
         "title": "Nearley",
         "href": "https://nearley.js.org/",
