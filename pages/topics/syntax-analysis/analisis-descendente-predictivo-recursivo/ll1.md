@@ -137,7 +137,7 @@ cambie:
 2.  $$Si\ A \rightarrow \alpha B \beta\ entonces$$
     $$FOLLOW(B) =  FOLLOW(B) \cup (FIRST(\beta) - \{\epsilon\})$$
 
-3.  $$Si\ A \rightarrow \alpha B\$$ o $$A \rightarrow \alpha B \beta$$ y $$\epsilon \in FIRST(\beta)$$  entonces
+3.  $$Si\ A \rightarrow \alpha B$$ o $$A \rightarrow \alpha B \beta$$ y $$\epsilon \in FIRST(\beta)$$  entonces
     $$FOLLOW(B) = FOLLOW(B) \cup FOLLOW(A)$$
 
 ### Gramáticas LL(1)
@@ -184,14 +184,18 @@ se asume que los conjuntos $$FIRST(\alpha)$$ no son vacíos.
 -   ¿Que se puede decir de la variable $$A$$ si $$FOLLOW(A) = \emptyset$$?
 
 ### Ambiguedad y LL(1)
+
 ¿Puede una gramática LL(1) ser ambigua?. Razone su respuesta.
 
-  term $$\rightarrow$$ factor '\*' term $$|$$ factor
-  factor $$\rightarrow$$ '(' expression ')' $$|$$ ID $$|$$ NUM $$|$$ STR
-  idlist $$\rightarrow$$ ID ',' idlist $$|$$ ID
-  -----------------------------------------------------------------------------
+<!--
+  term $$\rightarrow$$ factor '\*' term $$|$$ factor 
 
-### Recursión por la Izquierda {#section:recursionizquierda}
+  factor $$\rightarrow$$ '(' expression ')' $$|$$ ID $$|$$ NUM $$|$$ STR
+  
+  idlist $$\rightarrow$$ ID ',' idlist $$|$$ ID
+-->
+
+### Recursión por la Izquierda 
 
 Una gramática es recursiva por la izquierda cuando existe una derivación
 $$A \stackrel{*}{\Longrightarrow} A \alpha$$.
@@ -205,7 +209,7 @@ recursivo descendente predictivo no funciona. En ese caso, el
 procedimiento `A` asociado con $$A$$ ciclaría para siempre sin llegar a
 consumir ningún terminal.
 
-### Eliminación de la Recursión por la Izquierda en la Gramática {#subsection:eliminaleftrec}
+### Eliminación de la Recursión por la Izquierda en la Gramática 
 
 Es posible modificar la gramática para eliminar la recursión por la
 izquierda. En este apartado nos limitaremos al caso de recursión por la
