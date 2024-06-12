@@ -276,6 +276,11 @@
       "title": "References",
       "href": "/references",
       "newWindow": false
+    },
+    "Previous Courses": {
+      "title": "Previous Courses",
+      "href": "/previous-courses",
+      "newWindow": false
     }
   }
 },
