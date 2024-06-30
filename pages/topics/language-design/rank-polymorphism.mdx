@@ -1,0 +1,73 @@
+import { Callout } from 'nextra/components'
+import Videos from '@/components/videos'
+
+# Rank polymorphism 
+
+Rank polymorphism is a concept found in array programming languages like APL, J, the Iverson-inspired language K
+and [ShapeRank](https://github.com/f5devcentral/shapeRank), a new statically typed, purely functional language for industrial use, 
+that extends rank-polymorphism to streams. 
+It refers to the ability of functions (or operators) to operate on arrays of different ranks (dimensions) 
+in a consistent and generalized manner.
+
+Watch "**A Ray of Hope**: Array Programming for the 21st Century"  by Gilad Bracha 2020
+
+<Videos ids={["x1FoTYnJxeY?si=6qV8gAHT52ZtdVxP"]}></Videos>
+
+
+### Key Concepts
+
+1. **Array Rank**: The rank of an array is the number of dimensions it has. For example, a scalar (single value) has rank 0, a vector (1-dimensional array) has rank 1, a matrix (2-dimensional array) has rank 2, and so on.
+
+2. **Function Generalization**: In rank polymorphic languages, functions are designed to operate on arrays of any rank without the need for special-case handling. 
+This means the same function can apply to scalars, vectors, matrices, and higher-dimensional arrays seamlessly.
+
+3. **Implicit Broadcasting**: When functions operate on arrays of different ranks, the language defines rules for broadcasting or extending arrays to match ranks. 
+This is similar to how NumPy in Python handles array operations, where lower-rank arrays are implicitly expanded to match the higher-rank arrays' dimensions.
+
+### Examples in APL/J/K
+
+#### APL Example
+
+In APL, a function can be applied to arrays of varying ranks without changing the function itself.
+
+```apl
++ ⍳ 5  ⍝ Adding a scalar to a vector
+1 2 3 4 5
+```
+
+Here, `+` is rank polymorphic and can be applied to a vector, adding the scalar 1 to each element of the vector `⍳ 5` (which generates `[1, 2, 3, 4, 5]`).
+
+#### J Example
+
+In J, rank polymorphism is also a core concept. Here’s an example of summing along different ranks:
+
+```j
++/"1 1 2 3
+```
+
+In this case, `+/"1` means to sum along the first axis (rows) of the array, and this can apply to any higher-rank array.
+
+#### K Example
+
+K, another array language, also supports rank polymorphism:
+
+```k
++/ 1 2 3  ⍝ Sums the vector, result is 6
++/ 1 2 3 4 5 6  ⍝ Similarly sums the vector, result is 21
+```
+
+### Benefits
+
+1. **Conciseness**: Code can be much more concise because you don't need separate functions for different ranks of arrays.
+2. **Flexibility**: Functions written in a rank-polymorphic style can handle a wide variety of inputs, making them more flexible and reusable.
+3. **Consistency**: Operations are applied in a consistent manner across different ranks, reducing the cognitive load on the programmer.
+
+### Modern Usage
+
+Rank polymorphism is not as prominent in mainstream languages, 
+but the concept influences modern numerical computing libraries like NumPy, TensorFlow, and others, 
+where operations on arrays of different ranks are handled gracefully. 
+These libraries often use broadcasting rules to achieve similar effects.
+
+
+See also section [What is a tensor?](/topics/language-design/what-is-a-tensor)

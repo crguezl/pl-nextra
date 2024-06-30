@@ -1,0 +1,98 @@
+import { Callout } from 'nextra/components'
+import Videos from '@/components/videos'
+
+# What is a Tensor?
+
+In mathematics and physics, a tensor is a geometric entity that generalizes the concepts of scalars, vectors, and matrices. 
+Tensors can be thought of as multi-dimensional arrays of numerical values. 
+They are used to represent data in various dimensions and have applications in areas such as physics, 
+engineering, and computer science.
+
+#### Key Properties of Tensors:
+
+1. **Rank (or Order)**: The number of dimensions (or indices) required to uniquely identify an element within the tensor. For example:
+   - A scalar (single value) is a tensor of rank 0.
+   - A vector (1-dimensional array) is a tensor of rank 1.
+   - A matrix (2-dimensional array) is a tensor of rank 2.
+   - Higher-rank tensors have more dimensions (e.g., a 3D array is a tensor of rank 3).
+
+2. **Shape**: The size of each dimension of the tensor. 
+For example, a matrix with 3 rows and 4 columns has a shape of (3, 4).
+
+3. **Elements**: The individual numerical values within the tensor.
+
+### What is a Tensor in a Programming Context?
+
+In programming, particularly in the context of machine learning and scientific computing, 
+**a tensor is a multi-dimensional array used to store and manipulate data**. 
+Libraries such as TensorFlow, PyTorch, and NumPy provide support for tensors as fundamental data structures for numerical computations.
+
+#### Characteristics of Tensors in Programming:
+
+1. **Multi-dimensional Arrays**: Tensors can have any number of dimensions, making them more flexible than traditional arrays or matrices.
+2. **Data Types**: Tensors can store data of various types, such as integers, floats, or even complex numbers.
+3. **Operations**: Tensors support a wide range of operations, including element-wise arithmetic, linear algebra operations, and more complex mathematical functions.
+4. **Automatic Differentiation**: In machine learning frameworks like TensorFlow and PyTorch, tensors are used for automatic differentiation, which is crucial for training neural networks.
+
+### Examples in Different Libraries
+
+#### NumPy (Python)
+
+NumPy is a fundamental library for numerical computing in Python. Tensors in NumPy are represented as `ndarray` (N-dimensional array).
+
+```python
+import numpy as np
+
+# Creating a rank-1 tensor (vector)
+vector = np.array([1, 2, 3, 4])
+
+# Creating a rank-2 tensor (matrix)
+matrix = np.array([[1, 2, 3], [4, 5, 6]])
+
+# Creating a rank-3 tensor
+tensor_3d = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])
+```
+
+#### TensorFlow (Python)
+
+TensorFlow is a machine learning library developed by Google that heavily uses tensors.
+
+```python
+import tensorflow as tf
+
+# Creating a rank-1 tensor (vector)
+vector = tf.constant([1, 2, 3, 4])
+
+# Creating a rank-2 tensor (matrix)
+matrix = tf.constant([[1, 2, 3], [4, 5, 6]])
+
+# Creating a rank-3 tensor
+tensor_3d = tf.constant([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])
+```
+
+#### PyTorch (Python)
+
+PyTorch is another popular machine learning library that uses tensors.
+
+```python
+import torch
+
+# Creating a rank-1 tensor (vector)
+vector = torch.tensor([1, 2, 3, 4])
+
+# Creating a rank-2 tensor (matrix)
+matrix = torch.tensor([[1, 2, 3], [4, 5, 6]])
+
+# Creating a rank-3 tensor
+tensor_3d = torch.tensor([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])
+```
+
+### Applications of Tensors
+
+1. **Machine Learning**: Tensors are used to store and manipulate the input data, parameters, and intermediate computations in neural networks.
+2. **Scientific Computing**: Tensors are used to represent and compute multi-dimensional data in fields like physics, engineering, and data analysis.
+3. **Graphics**: In computer graphics, tensors can represent transformations, such as rotations and scalings.
+
+### Conclusion
+
+In summary, a tensor is a multi-dimensional array that generalizes the concepts of scalars, vectors, and matrices. In a programming context, tensors are fundamental data structures used in numerical computing and machine learning, enabling efficient storage and manipulation of high-dimensional data. Libraries like NumPy, TensorFlow, and PyTorch provide extensive support for tensor operations, making them indispensable tools in modern computational tasks.

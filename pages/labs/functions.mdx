@@ -75,7 +75,6 @@ video20240306:
 import { Callout } from 'nextra/components'
 import Videos from '@/components/videos'
 
-
 ## Añadiendo funciones a la calculadora
 
 Queremos extender nuestra calculadora para que soporte funciones con una sintáxis como la de este ejemplo:
@@ -382,6 +381,8 @@ will work resulting in an execution like this:
 true
 ```
 
+See section [Rank Polymorphism](/topics/language-design/rank-polymorphism)
+
 ### Arithmetic of Functions and numbers
 
 But we may also want to allow functions to be operated on numbers (by extending a number as the function constant on that number):
@@ -470,6 +471,7 @@ which when executed gives:
 ✗ bin/calc2js.mjs test/data/input/test-fun-add2.calc | node -
 { re: 3, im: 2 }
 ```
+
 
 ### Type Promotion
 
