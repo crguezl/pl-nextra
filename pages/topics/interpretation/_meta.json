@@ -3,5 +3,6 @@
     "repl-interpretation": "",
     "ast-interpretation": "",
     "assignment-interpretation": "",
-    "function-interpretation": ""
+    "function-interpretation": "",
+    "bytecode": "The v8 bytecode"
 }
