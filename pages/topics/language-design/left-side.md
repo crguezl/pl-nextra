@@ -1,9 +1,8 @@
-import { Callout } from 'nextra/components'
+<!--import { Callout } from 'nextra/components'-->
 
 ## Haskell
 
-Haskell and its pattern matching is a language that allows 
-you to define functions with different patterns for different inputs:
+Haskell and its pattern matching allows to **define** functions with different patterns for different inputs:
 
 ```haskell
 func 0 = 1
@@ -12,7 +11,7 @@ func n | n < 0 = otherfunc
 | n > 1 = other n
 ```
 
-but it is a definition, not a modification.
+but it is a **definition**, not a **modification**.
 
 Pattern matching also provides additional features, 
 such as the selection based on the structure of a complex object.
@@ -21,26 +20,22 @@ such as the selection based on the structure of a complex object.
 
 
 C++ and other conventional programming languages,  allow
-defining a function returning a reference to a modifiable memory area._createMdxContent
+defining a function returning a reference to a modifiable memory area.
 
-In C++ you can also overload the  operator `()`being able in this way 
-to implement the same semantics.
+In C++ you can also overload the  operator `()` being able in this way 
+to implement a similar semantic.
 
-For instanceof, in C++ assignment for a function-like object, 
-like a function pointer, a `std::function`, 
-member function and data member pointers is allowed. 
-
-We are not saying that changing the behavior of a callable variable is 
-absolutely possible in a conventional language. The point here is 
-that by providing left-side assignment as a feature we can construct 
-a language in whic objects, arrays and classes are functions. 
+But we are not saying that changing the behavior of a callable variable is 
+not possible in a conventional language. The point is 
+that increase expressivity by providing left-side assignment as a feature we can construct 
+a language in which objects, arrays and classes are functions or callable objects. 
 
 ## Chat GPT on Programming Languages allowing f(3) = 9  for a function f
 
 Follows a chat with GPT-3 on the topic of the existence of programming languages that allow you to assign a value to a function at a specific point, like `f(3) = 9`.
 
 
-## Question
+### Question
 
 In most programming languages you can put on the left side of an assignment a property of an object or an index of an array like:
 
@@ -63,8 +58,9 @@ f(3) = 9;
 **Do you know of any programming language in which you can write something like this?**
 
 ## Chat GPT Answer
-
+{/*
 <Callout type="info">
+*/}
 In most programming languages, functions are treated as first-class citizens, meaning they can be passed around and manipulated like any other data type. **However, the ability to assign a value to the result of a function call directly, as in `f(3) = 9;`, is not a common feature in programming languages**.
 
 However, *there are some languages that allow you to achieve similar behavior using various mechanisms*. One such language is Mathematica.
@@ -85,7 +81,7 @@ f[3]
 In this example, we defined a function `f[x_]` which represents a **linear equation**. Then, we assigned a specific value `9` to `f[3]`. Now, whenever you call `f[3]`, it will return `9`.
 
 Mathematica's pattern-matching rules and symbolic computation capabilities enable this behavior, allowing for a more symbolic and mathematical programming style compared to traditional imperative languages. However, it's important to note that Mathematica operates in a different paradigm compared to most mainstream programming languages, and **direct function value assignment like this is not a common feature in those languages**.
-</Callout>
+{/*</Callout>*/}
 
 ### Comments to Chat GPT answer
 
@@ -95,7 +91,7 @@ Notice the Mathematica example refers to a "linear equation" and not to a "funct
 
 Here follows a Google Gemini answer to the exactly the same question:
 
-<Callout type="info">
+{/* <Callout type="info">*/}
  **While it's not exactly the same syntax as `f(3) = 9`, a few programming paradigms and languages offer features that allow you to achieve a similar effect, treating functions more flexibly:**
 
 **1. Dynamic Languages with Closures:**
@@ -144,11 +140,11 @@ Here follows a Google Gemini answer to the exactly the same question:
 
 - **In symbolic programming languages like Mathematica or SymPy, functions are often treated as symbolic expressions that can be manipulated algebraically.** This might allow for constructs that resemble assigning to function values, but it's a very different paradigm from traditional programming.
 
-</Callout>
+{/*</Callout>*/}
 
-<Callout type="warning">
+{/*<Callout type="warning">*/
 **Remember that these approaches don't directly modify a function's code itself; they create new functions or aliases with altered behavior.** Understanding these nuances is crucial for writing clear and maintainable code.
-</Callout>
+{/*</Callout>*/}
 
 ## Wolfram Mathematica
 
