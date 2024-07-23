@@ -4,11 +4,8 @@ import { Callout } from 'nextra-theme-docs'
 
 The following code snippet shows how to access the configuration object from the `theme.config.js` file.
 
-```
-
-
+```mdx
 import Config from '../../theme.config'
-
 
 ## Accessing project.link
 
@@ -34,19 +31,35 @@ import Config from '../../theme.config'
 
 ## Accessing project.link
 
+```mdx
+{Config.project.link}
+``` 
+
 {Config.project.link}
 
 ## Accessing logo
- 
+
+```mdx
+{Config.logo}
+```
+
 {Config.logo}
 
 ## Accessing chat
 
 ### Accessing chat.link
 
+```mdx
+{Config.chat.link}
+```
+
 {Config.chat.link}
 
 ### Accessing chat.icon
+
+```mdx
+{Config.chat.icon}
+```
 
 {Config.chat.icon}
 
@@ -61,7 +74,7 @@ export const chat = (value) => {
     config.chat.icon = value
 }
 
-Look at the chat icon above! {chat("CHAT")}
+Look at the chat icon on the top right corner! {chat("CHAT")}
 ```
 
 import { useConfig } from 'nextra-theme-docs'
@@ -71,4 +84,4 @@ export const chat = (value) => {
     config.chat.icon = value
 }
 
-Look at the chat icon above! {chat("CHAT")}
+Look at the chat icon on the top right corner! {chat("CHAT")}

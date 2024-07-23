@@ -1,4 +1,4 @@
-## Markdown Import
+## Markdown EXtended Importing
 
 The following mdx code:
 
@@ -7,8 +7,15 @@ import TaskList from '../pl-includes/task-list.mdx'
  
 <TaskList />
 ```
+Where the file `'../pl-includes/task-list.mdx'` contains:
 
-Inserts the markdowm file in `'../pl-includes/task-list.mdx'` into the page:
+```mdx
+- [x] Code
+- [x] Sleep
+- [ ] Eat
+```
+
+Inserts the markdowm file in `'../pl-includes/task-list.mdx'` into the page and looks like this:
 
 import TaskList from '../pl-includes/task-list.mdx'
  

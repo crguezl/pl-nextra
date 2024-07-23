@@ -65,6 +65,11 @@
         "title": "Your Issues ↗",
         "href": "https://github.com/issues/assigned",
         "newWindow": true
+      },
+      "GitHub Community": {
+        "title": "GitHub Community: Education ↗",
+        "href": "https://github.com/orgs/community/discussions/categories/github-education?discussions_q=is%3Aopen+category%3A%22GitHub+Education%22",
+        "newWindow": true
       }
     }
   },
