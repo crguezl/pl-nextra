@@ -29,6 +29,11 @@
     "display": "normal",
     "href": "/labs/egg-interpreter"
   },
+  "pattern-matching": {
+    "title": "Pattern Matching",
+    "display": "normal",
+    "href": "/labs/pattern-matching"
+  },
   "left-side": {
     "title": "Calculator. Funs on the left side. Multiple arguments",
     "display": "normal",
