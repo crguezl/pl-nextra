@@ -64,6 +64,17 @@ It introduces three new concepts to Javascript:
 3. the `is` boolean operator,
     which allows for one-off testing of a value against a matcher pattern,
     potentially also introducing bindings from that test into the local environment.
+    The code below checks the types of the values in the array:
+
+    ```js 
+    var json = {
+      'user': ['Lily', 13]
+    };
+    if( json is {user: [String and let name, Number and let age]} ) { // let name = 'Lily', let age = 13
+      print(`User ${name} is ${age} years old.`);
+    }
+    ```
+
 
 For instance:
 
@@ -93,16 +104,6 @@ match (res) {
 }
 ```
 
-Below is another example usen `is` and checking the type of the values in the array:
-
-```js 
-var json = {
-  'user': ['Lily', 13]
-};
-if( json is {user: [String and let name, Number and let age]} ) {
-  print(`User ${name} is ${age} years old.`);
-}
-```
 
 ## The Babel Plugin for the TC39 Pattern Matching Proposal
 
