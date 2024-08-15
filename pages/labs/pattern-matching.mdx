@@ -8,12 +8,12 @@ published: true
 order: 15
 classroom: "https://classroom.github.com/classrooms/153934884-ull-esit-pl-2324/assignments/functions"
 rubrica:
+  - Implements at least the 0-grammar version of the proposal
   - (Opcional) El paquete está publicado en GitHub Registry
   - (Opcional) Se comprueba que el módulo npm se instala desde el GitHub Registry y funciona
   - (Opcional) Probar que el ejecutable queda correctamente instalado, puede ser ejecutado con el nombre publicado y produce salidas correctas
-  - "Opciones en línea de comandos (-o, -V, -h, etc.)"
   - Los mensajes de error ayudan a la detección de errores
-  - Ha añadido tests suficientes, documentación y cubrimiento
+  - Ha añadido tests suficientes
   - "Se publica la documentación usando un static generator, API docs y Covering" 
   - Se ha añadido el enlace a las GH pages en el "About" del repo
   - Si se han usado herramientas AI se deberá  <b>incluir en el <code>README.md</code> una sección sobre como fueron utilizadas. En caso contrario se debe declarar que no se han usado</b>.
@@ -362,6 +362,12 @@ re-create your own Babel plugin that implements as much as you can of the TC39 p
 }>
 </Videos>
 
+## Rubric
+
+import { frontmatter} from '@/src/frontmatter'
+import Rubric from '@/components/rubric'
+
+<Rubric rubric={frontmatter().rubrica} />
 
 ## References
 
