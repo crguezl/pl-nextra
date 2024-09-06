@@ -86,16 +86,6 @@
         "title": "Vercel Dashboard ↗",
         "href": "https://vercel.com/dashboard",
         "newWindow": true
-      },
-      "netlify deploy": {
-        "title": "Netlify ↗",
-        "href": "https://ull-pl.netlify.app/",
-        "newWindow": true
-      },
-      "netlify dashboard": {
-        "title": "Netlify Dashboard ↗",
-        "href": "https://app.netlify.com/",
-        "newWindow": true
       }
     }
   },
