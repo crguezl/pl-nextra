@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "save2324": "git add . && git commit -m 'Update' && git push -u origin main",
+    "save2324": "git add . && git commit -m 'Update' && git push -u 2324 main",
     "save": "git add . && git commit -m 'Update' && git push -u crguezl main",
     "next_auth_secret": "echo \"NEXTAUTH_SECRET=$(openssl rand -base64 32)\"",
     "deploy": "cp .env.vercel.local .env.production.local && vercel -e NODE_ENV=production --prod; echo 'remember to  promote to production'",
