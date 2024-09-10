@@ -8,6 +8,7 @@
     "expression-evaluation": "Expression Evaluation",
     "file-trees": "File Trees",
     "frontmatter": "frontmatter",
+    "frontmatterjs": "Writing the frontmatter in JS",
     "getPagesUnderRoute": "getPagesUnderRoute",
     "heroicons": "Heroicons",
     "iframe": "iframe",
