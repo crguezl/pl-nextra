@@ -1,0 +1,29 @@
+---js
+{
+ a : 1+3,
+ b : 2
+}
+---
+import { frontmatter} from '@/src/frontmatter'
+
+This is an example of how to write a frontmatter in JavaScript in a MDX file.
+
+This is the whole file:
+
+```mdx
+---js
+{
+ a : 1+3,
+ b : 2
+}
+---
+import { frontmatter} from '@/src/frontmatter'
+
+{ JSON.stringify(frontmatter()) }
+
+This is content
+```
+
+{ JSON.stringify(frontmatter()) }
+
+This is content
