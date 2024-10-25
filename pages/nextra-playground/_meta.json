@@ -8,7 +8,7 @@
     "expression-evaluation": "Expression Evaluation",
     "file-trees": "File Trees",
     "frontmatter": "frontmatter",
-    "frontmatterjs": "Writing the frontmatter in JS",
+    "frontmatterjs": "Accesing the frontmatter in a MDX",
     "getPagesUnderRoute": "getPagesUnderRoute",
     "heroicons": "Heroicons",
     "iframe": "iframe",
