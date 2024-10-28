@@ -7,7 +7,7 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json())
 export default function Teams() {
     const { data, error } = useSWR('/api/getteams', fetcher)
 
-    if (error) return <div>Failed to load</div>
+    if (error) return <div>Failed to load {error}</div>
     if (!data) return <div>Loading...</div>
 
     if (data?.teams?.length) return (
