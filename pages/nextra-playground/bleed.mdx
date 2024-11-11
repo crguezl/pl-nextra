@@ -1,5 +1,7 @@
 # Bleed
 
+##  Example
+
 The following code:
 
 ```jsx
@@ -39,3 +41,55 @@ import { Bleed } from 'nextra-theme-docs'
     title="SWR-States"
   />
 </Bleed>
+
+## Introduction to Bleed
+
+In web design, **"bleed"** typically refers to elements or components that extend beyond 
+their usual layout constraints, often "bleeding" into or past the edges of their parent container, 
+section, or even the viewport itself. The **viewport** refers to the visible area of a web page 
+within a user's browser window or device screen. 
+It defines the portion of a web page that a user can see at any given time, without scrolling.
+
+This concept is borrowed from print design, where *bleed* indicates content that extends beyond the page's trim edge, 
+allowing for a margin of error in cutting the paper.
+
+### In Web Design
+
+In web design, "bleed" can create a visually dynamic effect, making elements appear as if they're "overflowing" into adjacent areas or sections. 
+It’s commonly used for:
+
+- **Full-width banners or [hero sections](/nextra-playground/assets/hero)** that span the entire width of the browser window.
+- **Background images or color sections** that extend to the edge of the screen, even if other content is centered.
+- **Cards or images** that intentionally overlap their containers to add depth or a layered look.
+  
+### What is a "Bleed Component"?
+A **"bleed component"** in web design is a UI component intentionally designed to extend or "bleed" beyond its parent container’s boundaries. This type of component can create a distinct visual hierarchy or draw attention to itself by breaking the flow or box constraints of typical layouts. 
+
+#### Examples of Bleed Components
+1. **Full-width Image or Video Banners**:
+   - A banner that spans the entire width of the page, regardless of the content width.
+
+2. **Edge-to-edge Backgrounds**:
+   - A section or div with a background color or image that bleeds to the edges of the viewport.
+
+3. **Floating Cards or Overlapping Components**:
+   - Cards or elements positioned to overlap adjacent sections, creating a layered or stacked effect.
+
+4. **Side Bleeds for Navigation or Sidebars**:
+   - Navigation menus or sidebars that extend beyond the main content container, creating an asymmetrical design effect.
+
+#### How to Create a Bleed Effect in CSS
+To make a component "bleed" in CSS, you generally use positioning techniques or CSS properties like `position: relative;`, `margin`, `padding`, or `width: 100vw;` (viewport width). Here’s a quick example:
+
+```css
+.bleed-banner {
+  width: 100vw; /* Full viewport width */
+  margin-left: calc(50% - 50vw); /* Centered bleed */
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+```
+
+This `bleed-banner` class forces the element to extend beyond its parent container’s width, creating a full-viewport-width effect commonly seen in bleed components. 
+
+Bleed components can enhance visual appeal by making sections appear more expansive and engaging, especially in minimalist or modern designs.

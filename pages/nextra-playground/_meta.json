@@ -19,5 +19,6 @@
     "steps": "Steps component",
     "teams": "fetch with variable server",
     "useConfig": "useConfig",
-    "using-components": "Using components"
+    "using-components": "Using components",
+    "making-alias-for-the-root-of-the-project": "Making alias for the root of the project in Next.js"
 }
