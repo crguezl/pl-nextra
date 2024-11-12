@@ -2,7 +2,8 @@ import { Callout } from 'nextra-theme-docs'
 
 # Auth.js tutorial for Nextra and Next.js with GitHub
 
-These are my random notes about the tutorial [OAuth tutorial](https://authjs.dev/getting-started/providers/oauth-tutorial) that teaches how setting Auth.js in a web application to be able to log in with GitHub.
+These are my notes about the tutorial [OAuth tutorial](https://authjs.dev/getting-started/providers/oauth-tutorial) that teaches how setting 
+[Auth.js](https://authjs.dev/) in a web application to be able to log in with GitHub.
 
 ## Introduction. The concepts
 
@@ -27,17 +28,35 @@ npm install next-auth
 
 ## Middleware
 
-```js filename="middleware.js"
+Middleware allows you to run code before a request is completed. 
+Then, based on the incoming request, you can modify the response by 
+rewriting, redirecting, modifying the request or response headers, or responding directly.
+
+Use the file `middleware.ts` (or `middleware.js`) in the root of your project to define 
+Middleware. 
+For example, at the same level as `pages` or `app`, or inside `src` if applicable.
+
+```js filename="/middleware.js" showLineNumbers copy
 export { default } from "next-auth/middleware"
-//export const config = { matcher: ["/clases", "/labs"] }
+
+export const config = { matcher: ["/clases", "/labs"] }
 ```
 
-- See the section [Middleware](https://next-auth.js.org/configuration/nextjs#middleware) on the Next.js docs
+When we want to secure certain pages, we export a `config` object with a `matcher` property.
+Now we will still be able to visit every page, but only `/clases` and `/labs` will require authentication
+but I can visit `/topics`.
+
+On platforms like Vercel, Middleware is run at the [Edge](https://nextjs.org/docs/api-reference/edge-runtime).
+
+- See the section [Middleware](https://next-auth.js.org/configuration/nextjs#middleware) on the next-auth.js docs
 - See also https://next-auth.js.org/configuration/nextjs#basic-usage
+- https://nextjs.org/docs/pages/building-your-application/routing/middleware
 
 ## Creating the server config
 
-Create the following [API route](https://nextjs.org/docs/api-routes/dynamic-api-routes#catch-all-api-routes) file. This route contains the necessary configuration for NextAuth.js, as well as the dynamic route handler:
+Create the following 
+[API route](https://nextjs.org/docs/api-routes/dynamic-api-routes#catch-all-api-routes) file `pages/api/auth/[...nextauth].js`. 
+This route contains the necessary configuration for NextAuth.js, as well as the dynamic route handler:
 
 ```js filename="pages/api/auth/[...nextauth].js"
 import NextAuth from "next-auth"
@@ -55,17 +74,65 @@ export default NextAuth({
 
 <Callout type="info">
 
+### pages/api
+
+Any file inside the folder `pages/api` is mapped to 
+`/api/*` and will be treated as an API endpoint instead of a page. 
+They are server-side only bundles. For instance:
+
+```bash
+➜  pl2324-apuntes git:(main) ✗ tree pages/api 
+pages/api
+├── auth
+│   └── [...nextauth].js
+└── getteams.js
+```
+
+A request in a client component like `/components/teams.jsx` executing a code like:
+
+```js 
+const { data, error } = useSWR('/api/getteams', fetcher)
+```
+
+will be handled by the file `pages/api/getteams.js` in the server side.
+</Callout>
+
+<Callout type="warning">
+
+### Brackets in the file name
+
+A file named `pages/api/auth/[id].js` would match any route like 
+`/api/auth/123` or /`api/auth/john`, where `id` would be a dynamic segment.
+</Callout>
+
+<Callout type="error" emoji="💻">
+### dots in the file name
+
+When you add `...` inside brackets (like `[...nextauth]`), 
+it tells Next.js to create a **catch-all** route. 
+This allows the route to match **multiple segments** in the URL after `/api/auth/`.
+In this case, the route `pages/api/auth/[...nextauth].js` would match:
+
+- `/api/auth/` (the base route)
+- `/api/auth/signin`
+- `/api/auth/signout`
+- `/api/auth/callback/google`
+- And so on...
+</Callout>
+
+<Callout type="info">
+
 Behind the scenes, this creates all the relevant OAuth API routes within `/api/auth/*` so that auth API requests to:
 
-- [GET `/api/auth/signin`](https://authjs.dev/reference/rest-api#get--apiauthsignin)
-- [POST `/api/auth/signin/:provider`](https://authjs.dev/reference/rest-api#post--apiauthsigninprovider)
-- [GET/POST `/api/auth/callback/:provider`](https://authjs.dev/reference/rest-api#get--post--apiauthcallbackprovider)
-- [GET `/api/auth/signout`](https://authjs.dev/reference/rest-api#get--apiauthsignout)
-- [POST `/api/auth/signout`](https://authjs.dev/reference/rest-api#post--apiauthsignout)
-- [GET `/api/auth/session`](https://authjs.dev/reference/rest-api#get--apiauthsession)
-- [GET `/api/auth/csrf`](https://authjs.dev/reference/rest-api#get--apiauthcsrf)
+- [GET `/api/auth/signin`](https://next-auth.js.org/getting-started/rest-api#get--apiauthsignin)
+- [POST `/api/auth/signin/:provider`](https://next-auth.js.org/getting-started/rest-api#post--apiauthsigninprovider)
+- [GET/POST `/api/auth/callback/:provider`](https://next-auth.js.org/getting-started/rest-api#get--post--apiauthcallbackprovider)
+- [GET `/api/auth/signout`](https://next-auth.js.org/getting-started/rest-api#get--apiauthsignout)
+- [POST `/api/auth/signout`](https://next-auth.js.org/getting-started/rest-api#post--apiauthsignout)
+- [GET `/api/auth/session`](https://next-auth.js.org/getting-started/rest-api#get--apiauthsession)
+- [GET `/api/auth/csrf`](https://next-auth.js.org/getting-started/rest-api#get--apiauthcsrf)
   - **[CSRF](/nextra-playground/authorization/csrf)** stands for Cross-Site Request Forgery, which is a type of security threat in web applications. It's not directly a part of authorization mechanisms but rather a vulnerability that can occur when proper authorization controls are not in place or are circumvented. 
-- [GET `/api/auth/providers`](https://authjs.dev/reference/rest-api#get--apiauthproviders)
+- [GET `/api/auth/providers`](https://next-auth.js.org/getting-started/rest-api#get--apiauthproviders)
 
 can be handled by NextAuth.js. In this way, NextAuth.js stays in charge of the whole application's authentication request/response flow.
 
@@ -124,7 +191,7 @@ See https://authjs.dev/reference/core/providers/netlify#resources
 The `main` fields defines a React Functional component `React.FC<{ children: React.ReactNode }>`. 
 Here we use the `main` entry to add a `title` and `description` and wrap the children with a `SessionProvider` component:
 
-```jsx  filename="theme.config.tsx" /SessionProvider/ /main/
+```jsx  filename="theme.config.tsx" /SessionProvider/ /main/ showLineNumbers
   main: ({ children }) => { // See https://github.com/shuding/nextra/discussions/1508#discussioncomment-4990229
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const { frontMatter } = useConfig();
@@ -232,7 +299,7 @@ See an example in this repo at page [user.mdx](https://github.com/crguezl/pl-nex
 
 ## Scopes
 
-One of my goals is to get from GitHub additional information aboout the user. Help is needed here.
+One of my goals is to get from GitHub additional information about the user. Help is needed here.
 
 See 
 
