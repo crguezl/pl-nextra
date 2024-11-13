@@ -1,3 +1,5 @@
+import { Callout } from 'nextra/components'
+
 import { useData } from 'nextra/data'
  
 export const getStaticProps = ({ params }) => {
@@ -54,11 +56,25 @@ export const Stars = () => {
 Nextra has <Stars /> stars on GitHub!
 ```
 
+## Version 3 Update
+
+In version 3 of Nextra `useData` was moved to `nextra/hooks`:
+
+```jsx
+import { useData } from 'nextra/hooks'
+```
+
+
 ## getStaticProps
 
 With Next.js, you can pre-render your page using [Static Generation (SSG)](https://nextjs.org/docs/basic-features/pages#static-generation-recommended). Your pages will be generated at build time and statically served to visitors. It can also be cached by a CDN to maximize the performance.
 
 This is supported by Nextra too. See section [Next.js SSG](https://nextra.site/docs/guide/ssg).
+
+<Callout type="info"> 
+If you export a function called `getStaticProps` (Static Site Generation) from a page, 
+Next.js will pre-render this page at build time using the `props` returned by `getStaticProps`.
+</Callout> 
 
 ## See also
 
