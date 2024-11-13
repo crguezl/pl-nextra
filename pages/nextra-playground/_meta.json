@@ -15,7 +15,7 @@
     "markdown-import": "Markdown import",
     "mermaid": "mermaid",
     "references": "References",
-    "stars": "fetch from mdx",
+    "stars": "fetch from mdx using getStaticProps",
     "steps": "Steps component",
     "teams": "fetch with variable server",
     "useConfig": "useConfig",

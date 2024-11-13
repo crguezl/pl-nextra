@@ -1,0 +1,99 @@
+import { Callout } from 'nextra/components'
+
+# Stale While Revalidate (SWR)
+
+**SWR (Stale-While-Revalidate)** is a data-fetching strategy used in web programming that optimizes user experience by serving stale (cached) data instantly while updating it in the background. This approach is popular in frameworks like Next.js to handle data fetching for React components, helping to achieve faster and more responsive applications.
+
+## SWR in Web Programming
+
+In a general web context, **SWR** is a caching and revalidation strategy where:
+- **Stale** data (cached) is served immediately upon request, reducing load times and providing instant feedback to the user.
+- **While revalidating**, a background fetch is triggered to update the cached data if it's outdated or missing. Once updated, the cache refreshes, and the latest data is available for future requests.
+
+<Callout type="info">
+The SWR pattern is common in situations where data does not change frequently or where the initial data doesn't need to be real-time accurate, such as dashboards, profiles, and product listings.
+</Callout>
+
+## SWR in Next.js with the `swr` Library
+
+In Next.js, [SWR](https://swr.vercel.app/) is implemented [via the `swr` library](https://swr.vercel.app/), developed by Vercel (the creators of Next.js). The `swr` library provides an easy way to manage data fetching with React hooks, using the SWR caching strategy under the hood. Here’s how it works in Next.js:
+
+### Installation
+
+```bash
+npm install swr
+```
+
+### Usage
+
+The API of `useSWR` is: 
+
+```js
+const { data, error, isLoading, isValidating, mutate } = useSWR(key, fetcher, options)
+``` 
+
+The `key` param in `useSWR(key, fetcher, options)`  it actually is a **key**. 
+It is a unique string that represents the data that is being fetched. If the key changes, the data will be refetched.
+
+The `fetcher` function is a function that fetches the data. 
+It should return a promise that resolves to the data, that is why we use 
+`fetch(catURL).then((res) => res.json())`. 
+
+[The `options` object is an optional object](https://swr.vercel.app/docs/api#options) that can be used to configure the behavior of the SWR hook.
+Here we set `revalidateOnFocus` to `false` to avoid revalidating the data when the window regains focus.
+
+The **return Values** are:
+
+- `data`: data for the given key resolved by fetcher (or `undefined` if not loaded)
+- `error`: error thrown by fetcher (or `undefined`)
+- `isLoading`: if there's an ongoing request and no "loaded data". Fallback data and previous data are not considered "loaded data"
+- `isValidating`: if there's a request or revalidation loading
+- `mutate(data?, options?)`: function to mutate the cached data ([details](https://swr.vercel.app/docs/mutation))
+
+More information can be found [here](https://swr.vercel.app/docs/advanced/understanding).
+
+
+Benefits of using SWR in Next.js include:
+
+- **Automatic Caching**: Caches the result of each request and uses it for subsequent renders.
+- **Real-time Updates**: Background revalidation keeps data up-to-date without blocking UI.
+- **Error Handling and Loading States**: Handles error and loading states by default, simplifying code.
+
+
+## SWR in Nextra
+
+Here is the code for a `<Teams>` component that shows the GitHub teams in a GitHub organization.
+It relies on an Next.js API route [pages/api/getteams](https://github.com/crguezl/pl-nextra/blob/main/pages/api/getteams.js) to fetch the data.
+
+```jsx 
+import styles from './counters.module.css'
+import useSWR from 'swr'
+import { Link } from 'nextra-theme-docs';
+
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
+
+export default function Teams() {
+    const { data, error } = useSWR('/api/getteams', fetcher)
+
+    if (error) return <div>Failed to load {error}</div>
+    if (!data) return <div>Loading...</div>
+
+    if (data?.teams?.length) return (
+        <div>
+            <p>{data.teams.length} Teams</p>
+            <ul className={styles.uList}>
+                {
+                   data.teams.map(t => (
+                      <li key={t.name}>
+                          <Link href={t.url}>{t.name}</Link>
+                          <span> - </span>
+                          <Link href={t.url+"/repositories"}>Repos</Link>
+                      </li>)
+                )
+                }
+            </ul>
+        </div>
+    )
+    return 'Sign in to see your teams';
+}
+```
