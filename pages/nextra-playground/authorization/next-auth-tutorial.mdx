@@ -22,7 +22,7 @@ Without going into too much detail, the OAuth flow generally has 6 parts:
 
 ## Installing NextAuth.js
 
-```bash npm2yarn
+```bash npm2yarn copy
 npm install next-auth
 ```
 
@@ -58,7 +58,7 @@ Create the following
 [API route](https://nextjs.org/docs/api-routes/dynamic-api-routes#catch-all-api-routes) file `pages/api/auth/[...nextauth].js`. 
 This route contains the necessary configuration for NextAuth.js, as well as the dynamic route handler:
 
-```js filename="pages/api/auth/[...nextauth].js"
+```js filename="pages/api/auth/[...nextauth].js" copy showLineNumbers
 import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 
@@ -72,7 +72,7 @@ export default NextAuth({
 })
 ```
 
-<Callout type="info">
+<Callout type="info" emoji=" ">
 
 ### pages/api
 
@@ -97,7 +97,7 @@ const { data, error } = useSWR('/api/getteams', fetcher)
 will be handled by the file `pages/api/getteams.js` in the server side.
 </Callout>
 
-<Callout type="warning">
+<Callout type="warning" emoji=" ">
 
 ### Brackets in the file name
 
@@ -105,7 +105,7 @@ A file named `pages/api/auth/[id].js` would match any route like
 `/api/auth/123` or /`api/auth/john`, where `id` would be a dynamic segment.
 </Callout>
 
-<Callout type="error" emoji="💻">
+<Callout type="error" emoji=" ">
 ### dots in the file name
 
 When you add `...` inside brackets (like `[...nextauth]`), 
@@ -120,19 +120,21 @@ In this case, the route `pages/api/auth/[...nextauth].js` would match:
 - And so on...
 </Callout>
 
-<Callout type="info">
+<Callout type="info" emoji=" ">
+
+### Routes
 
 Behind the scenes, this creates all the relevant OAuth API routes within `/api/auth/*` so that auth API requests to:
 
-- [GET `/api/auth/signin`](https://next-auth.js.org/getting-started/rest-api#get--apiauthsignin)
-- [POST `/api/auth/signin/:provider`](https://next-auth.js.org/getting-started/rest-api#post--apiauthsigninprovider)
-- [GET/POST `/api/auth/callback/:provider`](https://next-auth.js.org/getting-started/rest-api#get--post--apiauthcallbackprovider)
-- [GET `/api/auth/signout`](https://next-auth.js.org/getting-started/rest-api#get--apiauthsignout)
-- [POST `/api/auth/signout`](https://next-auth.js.org/getting-started/rest-api#post--apiauthsignout)
-- [GET `/api/auth/session`](https://next-auth.js.org/getting-started/rest-api#get--apiauthsession)
-- [GET `/api/auth/csrf`](https://next-auth.js.org/getting-started/rest-api#get--apiauthcsrf)
+- [GET `/api/auth/signin`](https://next-auth.js.org/getting-started/rest-api#get-apiauthsignin)
+- [POST `/api/auth/signin/:provider`](https://next-auth.js.org/getting-started/rest-api#post-apiauthsigninprovider)
+- [GET/POST `/api/auth/callback/:provider`](https://next-auth.js.org/getting-started/rest-api#get-post-apiauthcallbackprovider)
+- [GET `/api/auth/signout`](https://next-auth.js.org/getting-started/rest-api#get-apiauthsignout)
+- [POST `/api/auth/signout`](https://next-auth.js.org/getting-started/rest-api#post-apiauthsignout)
+- [GET `/api/auth/session`](https://next-auth.js.org/getting-started/rest-api#get-apiauthsession)
+- [GET `/api/auth/csrf`](https://next-auth.js.org/getting-started/rest-api#get-apiauthcsrf)
   - **[CSRF](/nextra-playground/authorization/csrf)** stands for Cross-Site Request Forgery, which is a type of security threat in web applications. It's not directly a part of authorization mechanisms but rather a vulnerability that can occur when proper authorization controls are not in place or are circumvented. 
-- [GET `/api/auth/providers`](https://next-auth.js.org/getting-started/rest-api#get--apiauthproviders)
+- [GET `/api/auth/providers`](https://next-auth.js.org/getting-started/rest-api#get-apiauthproviders)
 
 can be handled by NextAuth.js. In this way, NextAuth.js stays in charge of the whole application's authentication request/response flow.
 
@@ -153,7 +155,10 @@ NEXTAUTH_SECRET="This is an example"
 ```
 
 `NEXTAUTH_SECRET` is a random string used by the library to encrypt tokens and email verification hashes,
- and **it's mandatory to keep things secure**! 🔥 🔐 . You can use:
+ and **it's mandatory to keep things secure**! 🔥 🔐 . You can use 
+ [openssl rand -base64 32](https://docs.openssl.org/3.4/man1/openssl-rand/)
+ which generates 32 random bytes using a cryptographically secure pseudo random number generator 
+ (CSPRNG) and performs [base64](https://en.wikipedia.org/wiki/Base64) encoding on the output.
 
 ```bash copy {1}
 openssl rand -base64 32
@@ -162,9 +167,9 @@ openssl rand -base64 32
 or https://generate-secret.vercel.app/32 to generate a random value for it.
 
 
-The source of this section is at  authjs section:  
-https://authjs.dev/getting-started/providers/oauth-tutorial#2-configuring-oauth-provider
-
+The source of this section is at  Auth.js sections
+- [Configuring an OAuth provider](https://authjs.dev/guides/configuring-oauth-providers)
+- [OAuth with GitHub](https://authjs.dev/guides/configuring-github)
 
 ## Adding environment variables: Production. Vercel
 

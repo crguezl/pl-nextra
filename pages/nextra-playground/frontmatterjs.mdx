@@ -30,3 +30,16 @@ This is content
 { JSON.stringify(frontmatter()) }
 
 This is content
+
+The code in [src/frontmatter.js](https://github.com/crguezl/pl-nextra/blob/main/src/frontmatter.js) is:
+
+```js
+import { Link } from 'nextra-theme-docs'
+import { useConfig } from 'nextra-theme-docs'
+
+const frontmatter = () => {
+    return useConfig().frontMatter
+}
+
+export { Link, frontmatter };
+```
