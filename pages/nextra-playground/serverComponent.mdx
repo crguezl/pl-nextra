@@ -1,9 +1,9 @@
-import ServerComponent from '@/components/ServerComponent'
+import ServerComponent from '@/components/serverComponent'
 
 ## Code
 
 ````mdx 
-import ServerComponent from '@/components/ServerComponent'
+import ServerComponent from '@/components/serverComponent'
 
 ## View Page
 
@@ -33,7 +33,7 @@ function DataFetcher() {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    fetchData().then(setData)
+    setData(await fetchData()) //.then(setData)
   }, [])
 
   if (!data) return null
@@ -85,7 +85,7 @@ useEffect(() => {
 
 ### Key points to remember about `useEffect`
 
-- Effects **run after every render** by default. Specifying a dependency array allows you to control when the effect runs.
-- The cleanup function (returned by the effect) runs **before the component unmounts** and before the effect runs again on re-renders.
+- Effects **run after every render** by default. Specifying a **dependency array** allows you to control when the effect runs.
+- The **cleanup function** (returned by the effect) runs **before the component unmounts** and before the effect runs again on re-renders.
 - If you're using an object or function as a dependency, be careful about recreating it on every render, as this can cause unnecessary effect runs.
 - Avoid updating state in an effect without a dependency array, as this can cause infinite loops.
