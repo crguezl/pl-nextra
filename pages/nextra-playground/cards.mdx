@@ -1,4 +1,4 @@
-# Cards
+# Cards 
 
 import { Callout } from 'nextra-theme-docs'
 
@@ -42,7 +42,9 @@ import { CardsIcon, OneIcon, WarningIcon } from '../../components/icons'
 </Cards>
 
 
-Here is the declaration of the `Cards` component at [shuding/nextra/packages/nextra/src/components/cards.tsx](https://github.com/shuding/nextra/blob/main/packages/nextra/src/components/cards.tsx):
+Here is the declaration of the `Cards` component at 
+[https://github.com/shuding/nextra/main/packages/nextra/src/client/components/cards.tsx]
+(https://github.com/shuding/nextra/blob/main/packages/nextra/src/client/components/cards.tsx):
 
 ```ts
 export function Card({
@@ -61,4 +63,19 @@ export function Card({
   arrow?: boolean
   href: string
 }) 
+```
+
+## Nextra3 Update
+
+Substitute `Card` by `Cards.Card` in the code above:
+
+```mdx
+import { Cards } from 'nextra/components'
+import { CardsIcon, OneIcon, WarningIcon } from '@/components/icons'
+ 
+<Cards>
+  <Cards.Card icon={<WarningIcon />} title="Callout" href="https://nextra.site/docs/guide/built-ins/callout" />
+  <Cards.Card icon={<CardsIcon />} title="Tabs" href="https://nextra.site/docs/guide/built-ins/tabs" />
+  <Cards.Card icon={<OneIcon />} title="Steps" href="https://nextra.site/docs/guide/built-ins/steps" />
+</Cards>
 ```

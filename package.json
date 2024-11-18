@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "description": "PL notes in Nextra",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start",
     "saveCourse": "git co -b pl-2425 && git add . && git commit -m 'saved course in branch pl-2425' && git push -u crguezl main",

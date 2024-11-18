@@ -148,6 +148,11 @@ We take the value of `GITHUB_ID` and `GITHUB_SECRET` from the GitHub Developer O
 
 See [Configuring OAuth Provider](https://authjs.dev/getting-started/providers/oauth-tutorial#2-configuring-oauth-provider) section on how to get those.
 
+<Callout type="warning" emoji="💡">
+If you haven’t used OAuth before, you can read the beginners step-by-step guide on 
+[how to setup "Sign in with GitHub" with Auth.js](https://authjs.dev/guides/configuring-github).
+</Callout>
+
 In your project root, create a `.env.local` file and add the `NEXTAUTH_SECRET` environment variable:
 
 ```bash filename=".env.local" copy {1}
@@ -193,96 +198,61 @@ See https://authjs.dev/reference/core/providers/netlify#resources
 
 ## Nextra: Wrapping with SessionProvider
 
-The `main` fields defines a React Functional component `React.FC<{ children: React.ReactNode }>`. 
-Here we use the `main` entry to add a `title` and `description` and wrap the children with a `SessionProvider` component:
+The `theme.config.tsx` configuration file contains a `main` field which 
+has to be a React Functional component `React.FC<{ children: React.ReactNode }>`. 
+Here we use the `main` entry to add a `title` and `description` and wrap the children 
+with an instance of the [SessionProvider](https://next-auth.js.org/getting-started/client#sessionprovider) component
+provided by `next-auth/react` 
 
 ```jsx  filename="theme.config.tsx" /SessionProvider/ /main/ showLineNumbers
+import { useConfig } from 'nextra-theme-docs'
+import { SessionProvider } from "next-auth/react"
+
+export default config: DocsThemeConfig = {
+  banner: { /* ... */ },
+  /* ... */
   main: ({ children }) => { // See https://github.com/shuding/nextra/discussions/1508#discussioncomment-4990229
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { frontMatter } = useConfig();
     return (
       <SessionProvider>
-      <main className="">
-        <h1 className="nx-mt-2 nx-text-4xl nx-font-bold nx-tracking-tight">
-          {frontMatter?.title}
-        </h1>
-        <p>{frontMatter?.description}</p>
-        <div className="">{children}</div>
-      </main>
+        <main className="">
+          <h1 className="nx-mt-2 nx-text-4xl nx-font-bold nx-tracking-tight">
+            {frontMatter?.title}
+          </h1>
+          <p>{frontMatter?.description}</p>
+          <div className="">{children}</div>
+        </main>
       </SessionProvider>
     );
   },
-```
-
-I've got the idea from [this discussion](https://github.com/shuding/nextra/discussions/1508#discussioncomment-4990229) at the Nextra github repo.
-
-Here is the  full code of `theme.config.tsx`:
-
-```ts filename="theme.config.tsx" /SessionProvider/ /main/
-
-const config: DocsThemeConfig = {
-  logo: <span>
-    <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    width="24"
-    fill="none" 
-    viewBox="0 0 24 24" 
-    strokeWidth="1.5" 
-    stroke="currentColor" 
-    className="w-6 h-6">
-      <path 
-        strokeLinecap="round" 
-        strokeLinejoin="round" 
-        d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" 
-      />
-    </svg>
-  </span>,
-  project: {
-    link: 'https://github.com/ULL-ESIT-PL-2324',
-  },
-  chat: {
-    link: 'https://meet.google.com/eha-yfij-zmo',
-    icon: <svg 
-             xmlns="http://www.w3.org/2000/svg" 
-             fill="none" 
-             width="20"
-             viewBox="0 0 24 24" 
-             strokeWidth="1.5" 
-             stroke="currentColor" 
-             className="w-6 h-6">
-             <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z" 
-             />
-          </svg>
-  },
-  docsRepositoryBase: 'https://github.com/ULL-ESIT-PL-2324/pl-nextra/blob/main/',
-  footer: {
-    text: 'Notes for the Computer Science degree ULL 23/24 course on Programming Languages',
-  },
-  main: ({ children }) => { // See https://github.com/shuding/nextra/discussions/1508#discussioncomment-4990229
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { frontMatter } = useConfig();
-    return (
-      <SessionProvider>
-      <main className="">
-        <h1 className="nx-mt-2 nx-text-4xl nx-font-bold nx-tracking-tight">
-          {frontMatter?.title}
-        </h1>
-        <p>{frontMatter?.description}</p>
-        <div className="">{children}</div>
-      </main>
-      </SessionProvider>
-    );
-  },
-  /*
-  components: { // See https://nextra.site/docs/docs-theme/theme-configuration#mdx-components
-    SessionProvider, //????XXXX
-  }
-  */
 }
 ```
+
+The `SessionProvider` component provides a 
+[React Context](https://react.dev/learn/passing-data-deeply-with-context) 
+provider to wrap the web app (`pages/`) to make session data available anywhere.
+
+When used, the session state is automatically synchronized across all open tabs/windows and 
+they are all updated whenever they gain or lose focus
+or the state changes (e.g. a user signs in or out) 
+when [refetchOnWindowFocus](https://next-auth.js.org/getting-started/client#refetch-on-window-focus) is `true`.
+
+<Callout type ="warning">
+`SessionProvider` is for client-side use only and when using [Next.js App Router (`app/`)](https://nextjs.org/blog/next-13-4#nextjs-app-router) you should prefer the `auth()` export.
+</Callout>
+
+See the code of the `SessionProvider` component at file 
+[/nextauthjs/next-auth/packages/next-auth/src/react.tsx)](https://github.com/nextauthjs/next-auth/blob/4b01b466b1d65d36945c07f1ee1d4944b218113d/packages/next-auth/src/react.tsx#L351-L438).
+
+Here is the  full code of [theme.config.tsx](https://github.com/crguezl/pl-nextra/blob/main/theme.config.tsx) for this 
+web site.
+
+## Original idea
+
+I've got the idea for this approach to authentication with Nextra 
+from [this discussion](https://github.com/shuding/nextra/discussions/1508#discussioncomment-4990229) 
+at the Nextra github repo. 
+
 
 ## The signOut() method
 
