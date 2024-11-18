@@ -1,19 +1,19 @@
-import ServerComponent from '@/components/serverComponent'
+import ClientComponent from '@/components/clientComponent'
 
 ## Code
 
 ````mdx 
-import ServerComponent from '@/components/serverComponent'
+import ClientComponent from '@/components/clientComponent'
 
 ## View Page
 
 This is a regular Nextra page with Markdown content.
 
-## Server Component Example
+## Client Component Example
 
-<ServerComponent />
+<ClientComponent />
 ````
-The code of the `ServerComponent` is shown below:
+The code of the `ClientComponent` is shown below:
 
 ```jsx
 'use client'
@@ -41,10 +41,10 @@ function DataFetcher() {
   return <img src={data.url} width={data.width} height={data.height} />
 }
 
-export default function ServerComponent() {
-  return (
+export default function ClientComponent() {
+  return (  
     <div>
-      <h2>Server Component Example</h2>
+      <h2>Client Component Example</h2>
       <DataFetcher />
     </div>
   )
@@ -55,9 +55,9 @@ export default function ServerComponent() {
 
 This is a regular Nextra page with Markdown content.
 
-## Server Component Example
+## Client Component Example
 
-<ServerComponent />
+<ClientComponent />
 
 ## useEffect hook
 
