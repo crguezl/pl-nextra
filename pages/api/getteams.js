@@ -46,59 +46,65 @@ export default async function getTeams(req, res) {
   //const { body, cookies, headers, method, query } = req
   //log(inspect({ body, cookies, method, query }, { depth: 1 })) 
 
-  const session = await getServerSession(req, res, authOptions)
+  try {
+    const session = await getServerSession(req, res, authOptions)
 
-  //console.error("session", session)
-  let email = session?.user?.email;
-  if (email) {
-    let [id, domain] = email.split("@");
-    //console.error(`id=${id} domain=${domain}`)
-
-    const graphqlWithAuth = graphql.defaults({
-      headers: {
-        authorization: `token ${process.env.GITHUB_TOKEN}`,
-      },
-    });
-
-    const r = await graphqlWithAuth(teamsQuery,
-      {
-        organization: ORGANIZATION,
-        //alu: "gcruz174"
+    //console.error("session", session)
+    let email = session?.user?.email;
+    if (email) {
+      let [id, domain] = email.split("@");
+      //console.error(`id=${id} domain=${domain}`)
+  
+      const graphqlWithAuth = graphql.defaults({
+        headers: {
+          authorization: `token ${process.env.GITHUB_TOKEN}`,
+        },
       });
-
-    //res.status(200).json({ message: 'Hello from Next.js!' })
-    //console.error("r\n", JSON.stringify(r, null, 2))
-    let teams = r?.organization?.teams
-    // TODO: check if teams has a value
-    if (email === TEACHEREMAIL) {
-      teams = teams.edges.map(n => n.node)
+  
+      const r = await graphqlWithAuth(teamsQuery,
+        {
+          organization: ORGANIZATION,
+          //alu: "gcruz174"
+        });
+  
+      //res.status(200).json({ message: 'Hello from Next.js!' })
+      if (r) console.error("getTeams. r\n", JSON.stringify(r, null, 2))
+      else console.error("getTeams. r is not true")
+      let teams = r?.organization?.teams
+      // TODO: check if teams has a value
+      if (email === TEACHEREMAIL) {
+        teams = teams.edges.map(n => n.node)
+      }
+      else {
+        teams = teams.edges.filter(n => n?.node?.name?.includes(id)).map(n => n.node)
+        //console.error("alu\n",JSON.stringify(teams, null, 2))
+      }
+      teams = teams.sort((f1,f2) => {
+        let [name1, ape11, ape12, alu1] = f1.name.split("-")
+        let [name2, ape21, ape22, alu2] = f2.name.split("-")
+  
+        if (!alu1) alu1 = ape12
+        if (!alu2) alu2 = ape22
+  
+        if (ape11 < ape21) return -1
+        if (ape11 > ape21) return 1
+        if (ape12 < ape22) return -1
+        if (ape12 > ape22) return 1
+        if (name1 < name2) return -1
+        if (name1 > name2) return 1
+        if (alu1 < alu2) return -1
+        if (alu1 > alu2) return 1
+        return 0
+      })
+      res.status(200).json({
+        totalCount: r?.organization?.teams?.totalCount,
+        teams
+      })
+    } else {
+      res.status(200).json({ error: 'Not authorized. Login first' })
     }
-    else {
-      teams = teams.edges.filter(n => n?.node?.name?.includes(id)).map(n => n.node)
-      //console.error("alu\n",JSON.stringify(teams, null, 2))
-    }
-    teams = teams.sort((f1,f2) => {
-      let [name1, ape11, ape12, alu1] = f1.name.split("-")
-      let [name2, ape21, ape22, alu2] = f2.name.split("-")
-
-      if (!alu1) alu1 = ape12
-      if (!alu2) alu2 = ape22
-
-      if (ape11 < ape21) return -1
-      if (ape11 > ape21) return 1
-      if (ape12 < ape22) return -1
-      if (ape12 > ape22) return 1
-      if (name1 < name2) return -1
-      if (name1 > name2) return 1
-      if (alu1 < alu2) return -1
-      if (alu1 > alu2) return 1
-      return 0
-    })
-    res.status(200).json({
-      totalCount: r?.organization?.teams?.totalCount,
-      teams
-    })
-  } else {
-    res.status(200).json({ error: 'Not authorized. Login first' })
+  } catch (e) {
+    console.error("Error inside getTeams serverless function", e)
+    res.status(500).json({ error: e.message })
   }
 }
