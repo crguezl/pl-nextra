@@ -291,12 +291,14 @@ export default function User() {
   let config = useConfig()
 
   try {
+    
     if (status === "authenticated") {
       console.error("***********Session***********")
       console.error(session)
       //config.chat.icon = (session.user.name)
       let userProfile = profiles.find(p => p.Email === session.user.email)
-      return (<div>
+      
+      return (<div> Hello User!
         <ul className={styles.uList}>
           <li><img src={session.user.image} alt={session.user.name} width="32" height="32" /></li>
           <li>Email: {session.user.email}</li>
@@ -307,8 +309,11 @@ export default function User() {
     }
 
     return <a href="/api/auth/signin" className={styles.button}>Sign in</a>
+    
+
 
   } catch (e) {
     console.error(e)
+    return <div>Something went wrong {e.message}</div>
   }
 }
