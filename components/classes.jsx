@@ -5,8 +5,8 @@ import styles from './counters.module.css'
 export default function Classes( { months }) {
   return (
     <div>
-        { months.map(month => (
-            <div> 
+        { months.map((month, index) => (
+            <div key={index}> 
                 <h2 className={styles.h2}>{month}</h2> 
                 <CollectionPage path={`/clases/${month.toLowerCase()}`}/> 
             </div>)

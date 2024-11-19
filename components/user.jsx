@@ -259,30 +259,30 @@ const profiles = [
 
 function Profile(p) {
   return (<li key={p.Email}>
-  <b>{p["Participant Name"]}</b>:
-  &nbsp; Killer: {p["%Killer"]}, 
-  Socialiser: {p["%Socialiser"]},
-  Achiever: {p["%Achiever"]},
-  Explorer: {p["%Explorer"]},
-  Bartle: <b>{p["Bartle"]}</b> 
+    <b>{p["Participant Name"]}</b>:
+    &nbsp; Killer: {p["%Killer"]},
+    Socialiser: {p["%Socialiser"]},
+    Achiever: {p["%Achiever"]},
+    Explorer: {p["%Explorer"]},
+    Bartle: <b>{p["Bartle"]}</b>
   </li>)
 }
 
 function PlayerProfile(p) {
   return (
-  <li><b>Player Profile:</b><ul> <Profile {...p} /></ul></li>
+    <li><b>Player Profile:</b><ul> <Profile {...p} /></ul></li>
   )
 }
 
 function AllProfiles() {
   return (
     <ul className={styles.uList}>
-    {
-    profiles.map(p => (
-      <Profile {...p} />
-    ))
-  }
-  </ul>
+      {
+        profiles.map(p => (
+          <Profile {...p} />
+        ))
+      }
+    </ul>
   )
 }
 
@@ -290,20 +290,25 @@ export default function User() {
   const { data: session, status } = useSession()
   let config = useConfig()
 
-  if (status === "authenticated") {
-    console.error("***********Session***********")
-    console.error(session)
-    //config.chat.icon = (session.user.name)
-    let userProfile = profiles.find(p => p.Email === session.user.email)
-    return (<div>
-          <ul className={styles.uList}>
-            <li><img src={session.user.image} alt={session.user.name} width="32" height="32" /></li>
-            <li>Email: {session.user.email}</li>
-            <li>Name: {session.user.name}</li>
-          </ul>  
-          <button onClick={() => signOut()} className={styles.button}>Sign out</button>
-        </div>)
-  }
+  try {
+    if (status === "authenticated") {
+      console.error("***********Session***********")
+      console.error(session)
+      //config.chat.icon = (session.user.name)
+      let userProfile = profiles.find(p => p.Email === session.user.email)
+      return (<div>
+        <ul className={styles.uList}>
+          <li><img src={session.user.image} alt={session.user.name} width="32" height="32" /></li>
+          <li>Email: {session.user.email}</li>
+          <li>Name: {session.user.name}</li>
+        </ul>
+        <button onClick={() => signOut()} className={styles.button}>Sign out</button>
+      </div>)
+    }
 
-  return <a href="/api/auth/signin" className={ styles.button}>Sign in</a>
+    return <a href="/api/auth/signin" className={styles.button}>Sign in</a>
+
+  } catch (e) {
+    console.error(e)
+  }
 }
