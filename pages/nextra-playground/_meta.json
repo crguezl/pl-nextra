@@ -16,6 +16,7 @@
     "accessing-configuration": "Accesing Theme Configuration",
     "frontmatter": "frontmatter",
     "frontmatterjs": "Accesing the frontmatter in a MDX",
+    "clientComponent": "Functional Components Life Cycle and useEffect",
     "getPagesUnderRoute": "getPagesUnderRoute",
     "stars": "fetch from mdx using getStaticProps",
     "teams": "SWR: Stale While Revalidating",

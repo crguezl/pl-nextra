@@ -1,6 +1,9 @@
 import ClientComponent from '@/components/clientComponent'
+import { Callout } from 'nextra/components'
 
-## Code
+# Functional Components Life Cycle and the useEffect Hook
+
+## This page code
 
 ````mdx 
 import ClientComponent from '@/components/clientComponent'
@@ -9,10 +12,11 @@ import ClientComponent from '@/components/clientComponent'
 
 This is a regular Nextra page with Markdown content.
 
-## Client Component Example
-
 <ClientComponent />
 ````
+
+### `ClientComponent` code
+
 The code of the `ClientComponent` is shown below:
 
 ```jsx
@@ -44,25 +48,37 @@ function DataFetcher() {
 export default function ClientComponent() {
   return (  
     <div>
-      <h2>Client Component Example</h2>
       <DataFetcher />
     </div>
   )
 }
 ```
 
-## View Page
+--- 
+
+## View of the Former Code 
 
 This is a regular Nextra page with Markdown content.
 
-## Client Component Example
-
 <ClientComponent />
+
+--- 
+
+## Functional Components Life Cycle 
+
+There are 3 phases in the React Component LifeCycle:
+
+<Callout type="info">
+1. Mounting Phase
+2. Updating Phase
+3. Un-Mounting Phase
+</Callout>
 
 ## useEffect hook
 
-`useEffect` is a Hook in React that allows you to perform side effects in function components. 
+The `useEffect` is a Hook in React that allows you to perform side effects in function components. 
 Side effects can include 
+
 - data fetching, 
 - subscriptions, or 
 - manually changing the DOM. 
@@ -82,6 +98,24 @@ useEffect(() => {
 1. The first argument is a function that contains the side effect code.
 2. The return function is for cleanup (optional).
 3. The second argument is an array of dependencies (optional).
+
+### Phases and the useEffect hook
+
+After the component is rendered React will run all `useEffect` hooks defined in that component.
+
+During the **mounting phase**, a functional component is being created and added to the DOM. 
+In this phase, you typically initialise **state** and perform any setup that’s needed when 
+the component is first **rendered**. 
+The `useState` hook allows you to add **state** to your functional components. 
+You can initialise **state** and retrieve the current value and a function to update it.
+
+In the **updating phase**, the functional component is re-rendered due to changes in its props or state. 
+By using the `useEffect` hook without a dependency array, 
+the provided function will run on every render.
+
+In the **unmounting phase**, the functional component is being removed from the DOM. 
+By returning a *cleanup function* from the `useEffect` hook, you can specify 
+cleanup operations to be performed when the component is unmounted.
 
 ### Key points to remember about `useEffect`
 

@@ -26,7 +26,6 @@ function DataFetcher() {
 export default function ServerComponent() {
   return (
     <div>
-      <h2>Server Component Example</h2>
       <DataFetcher />
     </div>
   )
