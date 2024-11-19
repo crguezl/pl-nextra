@@ -293,7 +293,7 @@ export default function User() {
   if (status === "authenticated") {
     console.error("***********Session***********")
     console.error(session)
-    config.chat.icon = (session.user.name)
+    //config.chat.icon = (session.user.name)
     let userProfile = profiles.find(p => p.Email === session.user.email)
     return (<div>
           <ul className={styles.uList}>
